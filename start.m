@@ -1,3 +1,5 @@
 %   add path to this toolbox
-path = pwd; %   get path of active file
-addpath(genpath(path));
+toolbox_path = matlab.desktop.editor.getActiveFilename; %   get path of active file
+addpath(genpath(toolbox_path(1:end-8)));
+
+main();
