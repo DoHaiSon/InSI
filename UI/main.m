@@ -5,6 +5,7 @@ classdef main < matlab.apps.AppBase
         UIFigure         matlab.ui.Figure
         GridLayout       matlab.ui.container.GridLayout
         LeftPanel        matlab.ui.container.Panel
+        UIAxes           matlab.ui.control.UIAxes
         RightPanel       matlab.ui.container.Panel
         GridLayout2      matlab.ui.container.GridLayout
         EditField        matlab.ui.control.NumericEditField
@@ -102,6 +103,14 @@ classdef main < matlab.apps.AppBase
             app.LeftPanel = uipanel(app.GridLayout);
             app.LeftPanel.Layout.Row = 1;
             app.LeftPanel.Layout.Column = 1;
+
+            % Create UIAxes
+            app.UIAxes = uiaxes(app.LeftPanel);
+            title(app.UIAxes, 'Title')
+            xlabel(app.UIAxes, 'X')
+            ylabel(app.UIAxes, 'Y')
+            zlabel(app.UIAxes, 'Z')
+            app.UIAxes.Position = [18 13 407 437];
 
             % Create RightPanel
             app.RightPanel = uipanel(app.GridLayout);
