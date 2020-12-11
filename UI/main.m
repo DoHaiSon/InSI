@@ -13,11 +13,7 @@ classdef main < matlab.apps.AppBase
         AboutMenu        matlab.ui.container.Menu
         GridLayout       matlab.ui.container.GridLayout
         GridLayout2      matlab.ui.container.GridLayout
-        EditField        matlab.ui.control.NumericEditField
-        FrameLabel       matlab.ui.control.Label
         ChannelLabel     matlab.ui.control.Label
-        MonteCarloLabel  matlab.ui.control.Label
-        SensorsLabel     matlab.ui.control.Label
         AlgorithmLabel   matlab.ui.control.Label
         WindowLabel      matlab.ui.control.Label
         ChLengthLabel    matlab.ui.control.Label
@@ -26,11 +22,14 @@ classdef main < matlab.apps.AppBase
         DropDown         matlab.ui.control.DropDown
         DropDown_2       matlab.ui.control.DropDown
         DropDown_3       matlab.ui.control.DropDown
-        EditField_2      matlab.ui.control.NumericEditField
-        EditField_3      matlab.ui.control.NumericEditField
         EditField_4      matlab.ui.control.NumericEditField
         EditField_5      matlab.ui.control.NumericEditField
         EditField_6      matlab.ui.control.NumericEditField
+        DropDown_4       matlab.ui.control.DropDown
+        TypeLabel        matlab.ui.control.Label
+        DataLabel        matlab.ui.control.Label
+        DropDown_5       matlab.ui.control.DropDown
+        ParametersLabel  matlab.ui.control.Label
         UIAxes           matlab.ui.control.UIAxes
     end
 
@@ -56,7 +55,7 @@ classdef main < matlab.apps.AppBase
 
             % Create BlindSystemIdentificationUIFigure and hide until all components are created
             app.BlindSystemIdentificationUIFigure = uifigure('Visible', 'off');
-            app.BlindSystemIdentificationUIFigure.Position = [100 100 640 480];
+            app.BlindSystemIdentificationUIFigure.Position = [100 100 960 720];
             app.BlindSystemIdentificationUIFigure.Name = 'Blind System Identification';
             app.BlindSystemIdentificationUIFigure.Icon = 'main_icon.png';
 
@@ -106,39 +105,12 @@ classdef main < matlab.apps.AppBase
             app.GridLayout2.Layout.Row = 1;
             app.GridLayout2.Layout.Column = 3;
 
-            % Create EditField
-            app.EditField = uieditfield(app.GridLayout2, 'numeric');
-            app.EditField.HorizontalAlignment = 'center';
-            app.EditField.Layout.Row = 3;
-            app.EditField.Layout.Column = [1 2];
-
-            % Create FrameLabel
-            app.FrameLabel = uilabel(app.GridLayout2);
-            app.FrameLabel.HorizontalAlignment = 'center';
-            app.FrameLabel.Layout.Row = 2;
-            app.FrameLabel.Layout.Column = [1 2];
-            app.FrameLabel.Text = 'Frame';
-
             % Create ChannelLabel
             app.ChannelLabel = uilabel(app.GridLayout2);
             app.ChannelLabel.HorizontalAlignment = 'center';
             app.ChannelLabel.Layout.Row = 2;
-            app.ChannelLabel.Layout.Column = [3 4];
+            app.ChannelLabel.Layout.Column = [1 2];
             app.ChannelLabel.Text = 'Channel';
-
-            % Create MonteCarloLabel
-            app.MonteCarloLabel = uilabel(app.GridLayout2);
-            app.MonteCarloLabel.HorizontalAlignment = 'center';
-            app.MonteCarloLabel.Layout.Row = 2;
-            app.MonteCarloLabel.Layout.Column = [5 6];
-            app.MonteCarloLabel.Text = 'Monte Carlo';
-
-            % Create SensorsLabel
-            app.SensorsLabel = uilabel(app.GridLayout2);
-            app.SensorsLabel.HorizontalAlignment = 'center';
-            app.SensorsLabel.Layout.Row = 4;
-            app.SensorsLabel.Layout.Column = [1 2];
-            app.SensorsLabel.Text = 'Sensors';
 
             % Create AlgorithmLabel
             app.AlgorithmLabel = uilabel(app.GridLayout2);
@@ -150,8 +122,8 @@ classdef main < matlab.apps.AppBase
             % Create WindowLabel
             app.WindowLabel = uilabel(app.GridLayout2);
             app.WindowLabel.HorizontalAlignment = 'center';
-            app.WindowLabel.Layout.Row = 4;
-            app.WindowLabel.Layout.Column = [5 6];
+            app.WindowLabel.Layout.Row = 6;
+            app.WindowLabel.Layout.Column = [3 4];
             app.WindowLabel.Text = 'Window';
 
             % Create ChLengthLabel
@@ -164,8 +136,8 @@ classdef main < matlab.apps.AppBase
             % Create ModulationLabel
             app.ModulationLabel = uilabel(app.GridLayout2);
             app.ModulationLabel.HorizontalAlignment = 'center';
-            app.ModulationLabel.Layout.Row = 6;
-            app.ModulationLabel.Layout.Column = [3 4];
+            app.ModulationLabel.Layout.Row = 4;
+            app.ModulationLabel.Layout.Column = [1 2];
             app.ModulationLabel.Text = 'Modulation';
 
             % Create SNRLabel
@@ -177,9 +149,10 @@ classdef main < matlab.apps.AppBase
 
             % Create DropDown
             app.DropDown = uidropdown(app.GridLayout2);
-            app.DropDown.Items = {'Option 1', 'Option 2', 'Option 3'};
+            app.DropDown.Items = {'Time Domain', 'Frequency Domain', 'Specular Domain'};
             app.DropDown.Layout.Row = 3;
-            app.DropDown.Layout.Column = [3 4];
+            app.DropDown.Layout.Column = [1 2];
+            app.DropDown.Value = 'Time Domain';
 
             % Create DropDown_2
             app.DropDown_2 = uidropdown(app.GridLayout2);
@@ -188,26 +161,16 @@ classdef main < matlab.apps.AppBase
 
             % Create DropDown_3
             app.DropDown_3 = uidropdown(app.GridLayout2);
-            app.DropDown_3.Layout.Row = 7;
-            app.DropDown_3.Layout.Column = [3 4];
-
-            % Create EditField_2
-            app.EditField_2 = uieditfield(app.GridLayout2, 'numeric');
-            app.EditField_2.HorizontalAlignment = 'center';
-            app.EditField_2.Layout.Row = 3;
-            app.EditField_2.Layout.Column = [5 6];
-
-            % Create EditField_3
-            app.EditField_3 = uieditfield(app.GridLayout2, 'numeric');
-            app.EditField_3.HorizontalAlignment = 'center';
-            app.EditField_3.Layout.Row = 5;
-            app.EditField_3.Layout.Column = [1 2];
+            app.DropDown_3.Items = {'Gaussian', 'Binary', 'QAM4', 'QAM16', 'MIMO', 'Massive MIMO'};
+            app.DropDown_3.Layout.Row = 5;
+            app.DropDown_3.Layout.Column = [1 2];
+            app.DropDown_3.Value = 'Gaussian';
 
             % Create EditField_4
             app.EditField_4 = uieditfield(app.GridLayout2, 'numeric');
             app.EditField_4.HorizontalAlignment = 'center';
-            app.EditField_4.Layout.Row = 5;
-            app.EditField_4.Layout.Column = [5 6];
+            app.EditField_4.Layout.Row = 7;
+            app.EditField_4.Layout.Column = [3 4];
 
             % Create EditField_5
             app.EditField_5 = uieditfield(app.GridLayout2, 'numeric');
@@ -220,6 +183,44 @@ classdef main < matlab.apps.AppBase
             app.EditField_6.HorizontalAlignment = 'center';
             app.EditField_6.Layout.Row = 7;
             app.EditField_6.Layout.Column = [5 6];
+
+            % Create DropDown_4
+            app.DropDown_4 = uidropdown(app.GridLayout2);
+            app.DropDown_4.Items = {'Pilot', 'Semi-blind', 'Blind'};
+            app.DropDown_4.Layout.Row = 3;
+            app.DropDown_4.Layout.Column = [3 4];
+            app.DropDown_4.Value = 'Pilot';
+
+            % Create TypeLabel
+            app.TypeLabel = uilabel(app.GridLayout2);
+            app.TypeLabel.HorizontalAlignment = 'center';
+            app.TypeLabel.Layout.Row = 2;
+            app.TypeLabel.Layout.Column = [3 4];
+            app.TypeLabel.Text = 'Type';
+
+            % Create DataLabel
+            app.DataLabel = uilabel(app.GridLayout2);
+            app.DataLabel.HorizontalAlignment = 'center';
+            app.DataLabel.Layout.Row = 2;
+            app.DataLabel.Layout.Column = [5 6];
+            app.DataLabel.Text = 'Data';
+
+            % Create DropDown_5
+            app.DropDown_5 = uidropdown(app.GridLayout2);
+            app.DropDown_5.Items = {'Generated', 'Real Data'};
+            app.DropDown_5.Layout.Row = 3;
+            app.DropDown_5.Layout.Column = [5 6];
+            app.DropDown_5.Value = 'Generated';
+
+            % Create ParametersLabel
+            app.ParametersLabel = uilabel(app.GridLayout2);
+            app.ParametersLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.ParametersLabel.HorizontalAlignment = 'center';
+            app.ParametersLabel.FontSize = 14;
+            app.ParametersLabel.FontWeight = 'bold';
+            app.ParametersLabel.Layout.Row = 1;
+            app.ParametersLabel.Layout.Column = [1 6];
+            app.ParametersLabel.Text = 'Parameters';
 
             % Create UIAxes
             app.UIAxes = uiaxes(app.GridLayout);
@@ -240,7 +241,7 @@ classdef main < matlab.apps.AppBase
             app.UIAxes.Layout.Column = [1 2];
 
             % Show the figure after all components are created
-            pause(2);
+            pause(2.5);
             app.BlindSystemIdentificationUIFigure.Visible = 'on';
         end
     end
@@ -251,11 +252,23 @@ classdef main < matlab.apps.AppBase
         % Construct app
         function app = main
 
-            % Create UIFigure and components
-            createComponents(app)
+            runningApp = getRunningApp(app);
 
-            % Register the app with App Designer
-            registerApp(app, app.BlindSystemIdentificationUIFigure)
+            % Check for running singleton app
+            if isempty(runningApp)
+
+                % Create UIFigure and components
+                createComponents(app)
+
+                % Register the app with App Designer
+                registerApp(app, app.BlindSystemIdentificationUIFigure)
+            else
+
+                % Focus the running singleton app
+                figure(runningApp.BlindSystemIdentificationUIFigure)
+
+                app = runningApp;
+            end
 
             if nargout == 0
                 clear app

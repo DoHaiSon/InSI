@@ -5,13 +5,13 @@ function loader
     main();
 
     waitbar(.33,f,'Opening the application');
-    pause(.3)
+    pause(.1)
 
     waitbar(.67,f,'Opening the application');
-    pause(.3)
+    pause(.1)
 
     waitbar(1,f,'Opening the application');
-    pause(.3)
+    pause(.1)
 
     close(f)
 end
