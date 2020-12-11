@@ -2,11 +2,16 @@ classdef main < matlab.apps.AppBase
 
     % Properties that correspond to app components
     properties (Access = public)
-        UIFigure         matlab.ui.Figure
+        BlindSystemIdentificationUIFigure  matlab.ui.Figure
+        FileMenu         matlab.ui.container.Menu
+        OpenMenu         matlab.ui.container.Menu
+        SaveMenu         matlab.ui.container.Menu
+        CloseMenu        matlab.ui.container.Menu
+        WindowMenu       matlab.ui.container.Menu
+        OptionMenu       matlab.ui.container.Menu
+        HelpMenu         matlab.ui.container.Menu
+        AboutMenu        matlab.ui.container.Menu
         GridLayout       matlab.ui.container.GridLayout
-        LeftPanel        matlab.ui.container.Panel
-        UIAxes           matlab.ui.control.UIAxes
-        RightPanel       matlab.ui.container.Panel
         GridLayout2      matlab.ui.container.GridLayout
         EditField        matlab.ui.control.NumericEditField
         FrameLabel       matlab.ui.control.Label
@@ -26,54 +31,20 @@ classdef main < matlab.apps.AppBase
         EditField_4      matlab.ui.control.NumericEditField
         EditField_5      matlab.ui.control.NumericEditField
         EditField_6      matlab.ui.control.NumericEditField
-        FileMenu         matlab.ui.container.Menu
-        OpenMenu         matlab.ui.container.Menu
-        SaveMenu         matlab.ui.container.Menu
-        CloseMenu        matlab.ui.container.Menu
-        WindowMenu       matlab.ui.container.Menu
-        OptionMenu       matlab.ui.container.Menu
-        HelpMenu         matlab.ui.container.Menu
-        AboutMenu        matlab.ui.container.Menu
-    end
-
-    % Properties that correspond to apps with auto-reflow
-    properties (Access = private)
-        onePanelWidth = 576;
+        UIAxes           matlab.ui.control.UIAxes
     end
 
     % Callbacks that handle component events
     methods (Access = private)
 
-        % Callback function
-        function AboutMenuSelected(app, event)
-            
-        end
-
         % Menu selected function: AboutMenu
-        function AboutMenuSelected2(app, event)
-            % Disable Plot Options button while dialog is open
-            % BSI.OptionsButton.Enable = 'off';
-            
-            % Open the options dialog and pass inputs
-            About
+        function AboutMenuSelected(app, event)
+            about;
         end
 
-        % Changes arrangement of the app based on UIFigure width
-        function updateAppLayout(app, event)
-            currentFigureWidth = app.UIFigure.Position(3);
-            if(currentFigureWidth <= app.onePanelWidth)
-                % Change to a 2x1 grid
-                app.GridLayout.RowHeight = {462, 462};
-                app.GridLayout.ColumnWidth = {'1x'};
-                app.RightPanel.Layout.Row = 2;
-                app.RightPanel.Layout.Column = 1;
-            else
-                % Change to a 1x2 grid
-                app.GridLayout.RowHeight = {'1x'};
-                app.GridLayout.ColumnWidth = {443, '1x'};
-                app.RightPanel.Layout.Row = 1;
-                app.RightPanel.Layout.Column = 2;
-            end
+        % Menu selected function: CloseMenu
+        function CloseMenuSelected(app, event)
+            delete(app.BlindSystemIdentificationUIFigure);
         end
     end
 
@@ -83,44 +54,57 @@ classdef main < matlab.apps.AppBase
         % Create UIFigure and components
         function createComponents(app)
 
-            % Create UIFigure and hide until all components are created
-            app.UIFigure = uifigure('Visible', 'off');
-            app.UIFigure.AutoResizeChildren = 'off';
-            app.UIFigure.Position = [100 100 714 462];
-            app.UIFigure.Name = 'MATLAB App';
-            app.UIFigure.SizeChangedFcn = createCallbackFcn(app, @updateAppLayout, true);
+            % Create BlindSystemIdentificationUIFigure and hide until all components are created
+            app.BlindSystemIdentificationUIFigure = uifigure('Visible', 'off');
+            app.BlindSystemIdentificationUIFigure.Position = [100 100 640 480];
+            app.BlindSystemIdentificationUIFigure.Name = 'Blind System Identification';
+            app.BlindSystemIdentificationUIFigure.Icon = 'main_icon.png';
+
+            % Create FileMenu
+            app.FileMenu = uimenu(app.BlindSystemIdentificationUIFigure);
+            app.FileMenu.Text = 'File';
+
+            % Create OpenMenu
+            app.OpenMenu = uimenu(app.FileMenu);
+            app.OpenMenu.Text = 'Open';
+
+            % Create SaveMenu
+            app.SaveMenu = uimenu(app.FileMenu);
+            app.SaveMenu.Text = 'Save';
+
+            % Create CloseMenu
+            app.CloseMenu = uimenu(app.FileMenu);
+            app.CloseMenu.MenuSelectedFcn = createCallbackFcn(app, @CloseMenuSelected, true);
+            app.CloseMenu.Text = 'Close';
+
+            % Create WindowMenu
+            app.WindowMenu = uimenu(app.BlindSystemIdentificationUIFigure);
+            app.WindowMenu.Text = 'Window';
+
+            % Create OptionMenu
+            app.OptionMenu = uimenu(app.BlindSystemIdentificationUIFigure);
+            app.OptionMenu.Text = 'Option';
+
+            % Create HelpMenu
+            app.HelpMenu = uimenu(app.BlindSystemIdentificationUIFigure);
+            app.HelpMenu.Text = 'Help';
+
+            % Create AboutMenu
+            app.AboutMenu = uimenu(app.HelpMenu);
+            app.AboutMenu.MenuSelectedFcn = createCallbackFcn(app, @AboutMenuSelected, true);
+            app.AboutMenu.Text = 'About';
 
             % Create GridLayout
-            app.GridLayout = uigridlayout(app.UIFigure);
-            app.GridLayout.ColumnWidth = {443, '1x'};
+            app.GridLayout = uigridlayout(app.BlindSystemIdentificationUIFigure);
+            app.GridLayout.ColumnWidth = {'1x', '1x', '1x'};
             app.GridLayout.RowHeight = {'1x'};
-            app.GridLayout.ColumnSpacing = 0;
-            app.GridLayout.RowSpacing = 0;
-            app.GridLayout.Padding = [0 0 0 0];
-            app.GridLayout.Scrollable = 'on';
-
-            % Create LeftPanel
-            app.LeftPanel = uipanel(app.GridLayout);
-            app.LeftPanel.Layout.Row = 1;
-            app.LeftPanel.Layout.Column = 1;
-
-            % Create UIAxes
-            app.UIAxes = uiaxes(app.LeftPanel);
-            title(app.UIAxes, 'Title')
-            xlabel(app.UIAxes, 'X')
-            ylabel(app.UIAxes, 'Y')
-            zlabel(app.UIAxes, 'Z')
-            app.UIAxes.Position = [18 13 407 437];
-
-            % Create RightPanel
-            app.RightPanel = uipanel(app.GridLayout);
-            app.RightPanel.Layout.Row = 1;
-            app.RightPanel.Layout.Column = 2;
 
             % Create GridLayout2
-            app.GridLayout2 = uigridlayout(app.RightPanel);
+            app.GridLayout2 = uigridlayout(app.GridLayout);
             app.GridLayout2.ColumnWidth = {'1x', '1x', '1x', '1x', '1x', '1x'};
             app.GridLayout2.RowHeight = {'1x', '1x', '1x', '1x', '1x', '1x', '1x', '1x', '1x', '1x', '1x', '1x', '1x', '1x', '1x'};
+            app.GridLayout2.Layout.Row = 1;
+            app.GridLayout2.Layout.Column = 3;
 
             % Create EditField
             app.EditField = uieditfield(app.GridLayout2, 'numeric');
@@ -237,44 +221,27 @@ classdef main < matlab.apps.AppBase
             app.EditField_6.Layout.Row = 7;
             app.EditField_6.Layout.Column = [5 6];
 
-            % Create FileMenu
-            app.FileMenu = uimenu(app.UIFigure);
-            app.FileMenu.Text = 'File';
-
-            % Create OpenMenu
-            app.OpenMenu = uimenu(app.FileMenu);
-            app.OpenMenu.Separator = 'on';
-            app.OpenMenu.Text = 'Open';
-
-            % Create SaveMenu
-            app.SaveMenu = uimenu(app.FileMenu);
-            app.SaveMenu.Separator = 'on';
-            app.SaveMenu.Text = 'Save';
-
-            % Create CloseMenu
-            app.CloseMenu = uimenu(app.FileMenu);
-            app.CloseMenu.Separator = 'on';
-            app.CloseMenu.Text = 'Close';
-
-            % Create WindowMenu
-            app.WindowMenu = uimenu(app.UIFigure);
-            app.WindowMenu.Text = 'Window';
-
-            % Create OptionMenu
-            app.OptionMenu = uimenu(app.UIFigure);
-            app.OptionMenu.Text = 'Option';
-
-            % Create HelpMenu
-            app.HelpMenu = uimenu(app.UIFigure);
-            app.HelpMenu.Text = 'Help';
-
-            % Create AboutMenu
-            app.AboutMenu = uimenu(app.HelpMenu);
-            app.AboutMenu.MenuSelectedFcn = createCallbackFcn(app, @AboutMenuSelected2, true);
-            app.AboutMenu.Text = 'About';
+            % Create UIAxes
+            app.UIAxes = uiaxes(app.GridLayout);
+            title(app.UIAxes, 'Title')
+            xlabel(app.UIAxes, 'X')
+            ylabel(app.UIAxes, 'Y')
+            zlabel(app.UIAxes, 'Z')
+            app.UIAxes.XScale = 'log';
+            app.UIAxes.XTickLabel = {'10^{-10}'; '10^{0}'};
+            app.UIAxes.XMinorTick = 'on';
+            app.UIAxes.YScale = 'log';
+            app.UIAxes.YTickLabel = {'10^{-10}'; '10^{0}'};
+            app.UIAxes.YMinorTick = 'on';
+            app.UIAxes.XGrid = 'on';
+            app.UIAxes.XMinorGrid = 'on';
+            app.UIAxes.YGrid = 'on';
+            app.UIAxes.Layout.Row = 1;
+            app.UIAxes.Layout.Column = [1 2];
 
             % Show the figure after all components are created
-            app.UIFigure.Visible = 'on';
+            pause(2);
+            app.BlindSystemIdentificationUIFigure.Visible = 'on';
         end
     end
 
@@ -288,7 +255,7 @@ classdef main < matlab.apps.AppBase
             createComponents(app)
 
             % Register the app with App Designer
-            registerApp(app, app.UIFigure)
+            registerApp(app, app.BlindSystemIdentificationUIFigure)
 
             if nargout == 0
                 clear app
@@ -299,7 +266,7 @@ classdef main < matlab.apps.AppBase
         function delete(app)
 
             % Delete UIFigure when app is deleted
-            delete(app.UIFigure)
+            delete(app.BlindSystemIdentificationUIFigure)
         end
     end
 end
