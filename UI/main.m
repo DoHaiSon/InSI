@@ -33,6 +33,13 @@ classdef main < matlab.apps.AppBase
         UIAxes           matlab.ui.control.UIAxes
     end
 
+    
+    properties (Access = private)
+        file % Description
+        path
+    end
+    
+
     % Callbacks that handle component events
     methods (Access = private)
 
@@ -44,6 +51,27 @@ classdef main < matlab.apps.AppBase
         % Menu selected function: CloseMenu
         function CloseMenuSelected(app, event)
             delete(app.BlindSystemIdentificationUIFigure);
+        end
+
+        % Drop down opening function: DropDown_5
+        function DropDown_5Opening(app, event)
+
+        end
+
+        % Menu selected function: OpenMenu
+        function OpenMenuSelected(app, event)
+            [app.file, app.path] = uigetfile({'*.m';'*.slx';'*.mat';'*.*'},...
+                                            'File Selector');
+            if isequal(app.file,0)
+               disp('User selected Cancel');
+            else
+                disp(['User selected ', fullfile(app.path, app.file)]);
+            end
+            drawnow;
+            pause(0.05);
+            figure(app.BlindSystemIdentificationUIFigure);
+            %app.BlindSystemIdentificationUIFigure.Visible = "on";
+            % Do something with this file
         end
     end
 
@@ -65,6 +93,7 @@ classdef main < matlab.apps.AppBase
 
             % Create OpenMenu
             app.OpenMenu = uimenu(app.FileMenu);
+            app.OpenMenu.MenuSelectedFcn = createCallbackFcn(app, @OpenMenuSelected, true);
             app.OpenMenu.Text = 'Open';
 
             % Create SaveMenu
@@ -208,6 +237,7 @@ classdef main < matlab.apps.AppBase
             % Create DropDown_5
             app.DropDown_5 = uidropdown(app.GridLayout2);
             app.DropDown_5.Items = {'Generated', 'Real Data'};
+            app.DropDown_5.DropDownOpeningFcn = createCallbackFcn(app, @DropDown_5Opening, true);
             app.DropDown_5.Layout.Row = 3;
             app.DropDown_5.Layout.Column = [5 6];
             app.DropDown_5.Value = 'Generated';
@@ -241,7 +271,6 @@ classdef main < matlab.apps.AppBase
             app.UIAxes.Layout.Column = [1 2];
 
             % Show the figure after all components are created
-            pause(2.5);
             app.BlindSystemIdentificationUIFigure.Visible = 'on';
         end
     end
