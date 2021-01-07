@@ -26,6 +26,7 @@ function varargout = main(varargin)
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
+TurnOffWarnings;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
                    'gui_OpeningFcn', @main_OpeningFcn, ...
@@ -53,9 +54,9 @@ function main_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   command line arguments to main (see VARARGIN)
 
 jFrame=get(handle(handles.figure1), 'javaframe');
-jicon=javax.swing.ImageIcon('main_icon.png');
+jicon=javax.swing.ImageIcon(fullfile(pwd,'/Resource/Icon/main_icon.png'));
 jFrame.setFigureIcon(jicon);
-TurnOffWarnings;
+
 % Choose default command line output for main
 handles.output = hObject;
 
@@ -114,7 +115,7 @@ function About_Callback(hObject, eventdata, handles)
 [msgicon, iconcmap] = imread('AV.png');
 hm = msgbox({'Blind system identification 1.0.'; 'Copyright 2020 AVITECH.'}, 'About', 'custom', msgicon, iconcmap);
 jframe=get(hm, 'javaframe');
-jIcon=javax.swing.ImageIcon('about.png'); % <- replace with correct filename
+jIcon=javax.swing.ImageIcon(fullfile(pwd, '/Resource/Icon/about.png'));
 jframe.setFigureIcon(jIcon);
 
 
