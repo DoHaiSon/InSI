@@ -4,4 +4,3 @@ function start()
     addpath(genpath(toolbox_path(1:end-8)));
     loader();
     
-    %movegui(app.AboutUIFigure,"center");
