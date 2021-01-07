@@ -26,7 +26,9 @@ function varargout = main(varargin)
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
-TurnOffWarnings;
+global main_path;
+main_path = matlab.desktop.editor.getActiveFilename;
+main_path = main_path(1:end-8);
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
                    'gui_OpeningFcn', @main_OpeningFcn, ...
@@ -40,6 +42,7 @@ end
 if nargout
     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
 else
+    TurnOffWarnings;
     gui_mainfcn(gui_State, varargin{:});
 end
 % End initialization code - DO NOT EDIT
@@ -52,9 +55,9 @@ function main_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to main (see VARARGIN)
-
+global main_path;
 jFrame=get(handle(handles.figure1), 'javaframe');
-jicon=javax.swing.ImageIcon(fullfile(pwd,'/Resource/Icon/main_icon.png'));
+jicon=javax.swing.ImageIcon(fullfile(main_path,'/Resource/Icon/main_icon.png'));
 jFrame.setFigureIcon(jicon);
 
 % Choose default command line output for main
@@ -112,10 +115,11 @@ function About_Callback(hObject, eventdata, handles)
 % hObject    handle to About (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global main_path;
 [msgicon, iconcmap] = imread('AV.png');
 hm = msgbox({'Blind system identification 1.0.'; 'Copyright 2020 AVITECH.'}, 'About', 'custom', msgicon, iconcmap);
 jframe=get(hm, 'javaframe');
-jIcon=javax.swing.ImageIcon(fullfile(pwd, '/Resource/Icon/about.png'));
+jIcon=javax.swing.ImageIcon(fullfile(main_path, '/Resource/Icon/about.png'));
 jframe.setFigureIcon(jIcon);
 
 
