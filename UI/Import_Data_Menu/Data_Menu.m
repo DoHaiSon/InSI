@@ -94,9 +94,9 @@ else
     set(handles.modulation, 'Enable' , 'on');
     set(handles.modulation, 'String', {'Modulation', 'Gaussian', 'Binary', 'QAM4', 'QAM16'});
  
-    % Setup algorithm for Blind Identification
-    set(handles.algorithm, 'Enable' , 'on');
-    set(handles.algorithm, 'String', {'Algorithm', 'CR'});
+%     % Setup algorithm for Blind Identification
+%     set(handles.algorithm, 'Enable' , 'on');
+%     set(handles.algorithm, 'String', {'Algorithm', 'CR'});
     
     % Setup params for Blind Identification
     set(handles.panelparams, 'Visible' , 'on');

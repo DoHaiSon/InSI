@@ -22,7 +22,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 11-Jan-2021 15:20:48
+% Last Modified by GUIDE v2.5 19-Jan-2021 09:47:30
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -178,4 +178,53 @@ function popupmenu1_CreateFcn(hObject, eventdata, handles)
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in model.
+function model_Callback(hObject, eventdata, handles)
+% hObject    handle to model (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+contents = get(handles.popupmenu1,'Value') - 1;
+if contents == 0
+    return;
+end;
+
+if contents == 1
+    disp('Time_Domain');
+elseif contents == 2
+    disp('Freq_Domain');
+else 
+    disp('Specular_Domain');
+end  
+
+
+% --- Executes during object creation, after setting all properties.
+function model_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to model (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in togglebutton1.
+function togglebutton1_Callback(hObject, eventdata, handles)
+% hObject    handle to togglebutton1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+state = get(hObject,'Value');
+if state
+    disp('Switch to Demo');
+    set(handles.togglebutton1, 'String' , 'Switch to Analysis');
+else
+    disp('Switch to Analysis');
+    set(handles.togglebutton1, 'String' , 'Switch to Demo');
 end
