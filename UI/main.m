@@ -22,7 +22,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 19-Jan-2021 09:47:30
+% Last Modified by GUIDE v2.5 19-Jan-2021 15:22:20
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -228,3 +228,13 @@ else
     disp('Switch to Analysis');
     set(handles.togglebutton1, 'String' , 'Switch to Demo');
 end
+
+
+% --- Executes during object creation, after setting all properties.
+function dataaxis_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to dataaxis (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate dataaxis
+plot(1:2, 3:4);
