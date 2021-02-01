@@ -177,6 +177,7 @@ else
     data = mdp16(samp);
 end;
 Export2WS(data);
+handles_main = getappdata(0,'handles_main');
 
 % --- Executes during object creation, after setting all properties.
 function modulation_CreateFcn(hObject, eventdata, handles)

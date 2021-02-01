@@ -28,6 +28,7 @@ function varargout = main(varargin)
 gui_Singleton = 1;
 global main_path;
 global data;
+data = 0;
 main_path = matlab.desktop.editor.getActiveFilename;
 main_path = main_path(1:end-8);
 gui_State = struct('gui_Name',       mfilename, ...
@@ -66,6 +67,7 @@ handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
+setappdata(0,'handles_main', handles)
 
 % UIWAIT makes main wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -201,7 +203,6 @@ else
     disp('Specular_Domain');
 end  
 
-
 % --- Executes during object creation, after setting all properties.
 function model_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to model (see GCBO)
@@ -239,4 +240,8 @@ function dataaxis_CreateFcn(hObject, eventdata, handles)
 
 % Hint: place code in OpeningFcn to populate dataaxis
 global data;
-plot(hObject, data);
+if data == 0
+    return;
+end;
+
+scatter(hObject, data);
