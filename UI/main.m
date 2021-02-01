@@ -22,7 +22,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 01-Feb-2021 20:58:59
+% Last Modified by GUIDE v2.5 01-Feb-2021 23:43:51
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -233,15 +233,15 @@ end
 
 
 % --- Executes during object creation, after setting all properties.
-function dataaxis_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to dataaxis (see GCBO)
+function dataaxes_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to dataaxes (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: place code in OpeningFcn to populate dataaxis
-global data;
-if data == 0
-    return;
-end;
-
-scatter(hObject, data);
+% Hint: place code in OpeningFcn to populate dataaxes
+% global data;
+% if data == 0
+%     return;
+% end;
+% 
+% scatter(hObject, data);

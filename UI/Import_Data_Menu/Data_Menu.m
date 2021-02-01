@@ -178,6 +178,7 @@ else
 end;
 Export2WS(data);
 handles_main = getappdata(0,'handles_main');
+scatter(handles_main.dataaxes, real(data), imag(data));
 
 % --- Executes during object creation, after setting all properties.
 function modulation_CreateFcn(hObject, eventdata, handles)
