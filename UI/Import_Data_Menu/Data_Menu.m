@@ -87,12 +87,13 @@ end;
 
 if contents == 1
     disp('Pilot');
+    % Setup params for Blind Identification
+    set(handles.panelparams, 'Visible' , 'off');
 elseif contents == 2
     disp('Semi-blind');
+    % Setup params for Blind Identification
+    set(handles.panelparams, 'Visible' , 'off');
 else
-    % Set up modulation for Blind Identification
-    set(handles.modulation, 'Enable' , 'on');
-    set(handles.modulation, 'String', {'Modulation', 'Gaussian', 'Binary', 'QAM4', 'QAM16'});
  
 %     % Setup algorithm for Blind Identification
 %     set(handles.algorithm, 'Enable' , 'on');
@@ -127,8 +128,11 @@ if contents == 0
     return;
 end;
 if contents == 1
-    return;
+    % Set up modulation for Blind Identification
+    set(handles.modulation, 'Enable' , 'on');
+    set(handles.modulation, 'String', {'Modulation', 'Gaussian', 'Binary', 'QAM4', 'QAM16'});
 else
+    set(handles.modulation, 'Enable' , 'off');
     path = Openfile();
     disp(path);
 end;
@@ -153,9 +157,26 @@ function modulation_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns modulation contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from modulation
-
+mod = get(hObject,'Value') -1 ;
+if mod == 0
+    return;
+end;
+global data;
+samp = 1000;
+if mod == 1
+    disp('Guass');
+    data = gauss(samp);
+elseif mod == 2
+    disp('Binary');
+    data = mdp2(samp);
+elseif mod == 3
+    disp('QAM4');
+    data = mdp4(samp);
+else
+    disp('QAM16');
+    data = mdp16(samp);
+end;
+Export2WS(data);
 
 % --- Executes during object creation, after setting all properties.
 function modulation_CreateFcn(hObject, eventdata, handles)

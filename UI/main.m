@@ -22,11 +22,12 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 19-Jan-2021 15:22:20
+% Last Modified by GUIDE v2.5 01-Feb-2021 20:58:59
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 global main_path;
+global data;
 main_path = matlab.desktop.editor.getActiveFilename;
 main_path = main_path(1:end-8);
 gui_State = struct('gui_Name',       mfilename, ...
@@ -237,4 +238,5 @@ function dataaxis_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: place code in OpeningFcn to populate dataaxis
-plot(1:2, 3:4);
+global data;
+plot(hObject, data);
