@@ -22,7 +22,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 01-Feb-2021 23:43:51
+% Last Modified by GUIDE v2.5 21-Jun-2021 14:10:23
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -44,6 +44,7 @@ end
 if nargout
     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
 else
+    % Disable the Java-related warnings after 2019b
     TurnOffWarnings;
     gui_mainfcn(gui_State, varargin{:});
 end
@@ -169,6 +170,7 @@ elseif contents == 2
     disp('Freq');
 else 
     disp('Specular');
+    Spec_Data_Menu();
 end    
     
 % --- Executes during object creation, after setting all properties.
@@ -225,10 +227,10 @@ function togglebutton1_Callback(hObject, eventdata, handles)
 state = get(hObject,'Value');
 if state
     disp('Switch to Demo');
-    set(handles.togglebutton1, 'String' , 'Switch to Analysis');
+    set(handles.togglebutton1, 'String' , 'CRB Mode');
 else
-    disp('Switch to Analysis');
-    set(handles.togglebutton1, 'String' , 'Switch to Demo');
+    disp('Switch to CRB');
+    set(handles.togglebutton1, 'String' , 'Demo Mode');
 end
 
 
@@ -239,9 +241,17 @@ function dataaxes_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: place code in OpeningFcn to populate dataaxes
-% global data;
-% if data == 0
-%     return;
-% end;
-% 
-% scatter(hObject, data);
+
+
+% --------------------------------------------------------------------
+function save_fig_ClickedCallback(hObject, eventdata, handles)
+% hObject    handle to save_fig (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    % Save recently axes to .fig file
+    Fig_tmp = figure('Visible','on');
+    copyobj(handles.mainaxes, Fig_tmp);
+    global main_path;
+    output_file = main_path + "\CRB.fig";
+    saveas(Fig_tmp, output_file, 'fig');
+    fprintf("Saved fig to: %s.\n", output_file);

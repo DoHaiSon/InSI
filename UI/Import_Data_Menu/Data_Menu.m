@@ -160,7 +160,7 @@ function modulation_Callback(hObject, eventdata, handles)
 mod = get(hObject,'Value') -1 ;
 if mod == 0
     return;
-end;
+end
 global data;
 samp = 1000;
 if mod == 1
@@ -175,7 +175,7 @@ elseif mod == 3
 else
     disp('QAM16');
     data = mdp16(samp);
-end;
+end
 Export2WS(data);
 handles_main = getappdata(0,'handles_main');
 scatter(handles_main.dataaxes, real(data), imag(data));

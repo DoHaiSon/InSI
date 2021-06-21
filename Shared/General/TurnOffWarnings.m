@@ -29,6 +29,9 @@ try
   % Get rid of warning about wavread() being deprecated:
   % "Warning: figure JavaFrame property will be obsoleted in a future release. For more information see the JavaFrame resource on the MathWorks web site."
   warning('off', 'MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame');
+  warning('off', 'MATLAB:ui:javacomponent:FunctionToBeRemoved');
+  % Force turn off all warning 
+  warning('off');
   
 catch ME
   errorMessage = sprintf('Error in function %s() at line %d.\n\nError Message:\n%s', ...
