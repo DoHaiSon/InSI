@@ -287,10 +287,14 @@ function apply_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-    % Get handes form main window and clear old data
+    % Get handes form main window
     handles_main = getappdata(0,'handles_main');
-    cla(handles_main.mainaxes, 'reset');
     
+    if~(get(handles_main.holdon, 'Value'))
+        %clear old data
+        cla(handles_main.mainaxes, 'reset');
+    end
+        
     Nt = str2double(get(handles.Nt, 'String'));
     Nr = str2double(get(handles.Nr, 'String'));
     L = str2double(get(handles.order, 'String'));
@@ -317,4 +321,4 @@ function apply_Callback(hObject, eventdata, handles)
     ylabel(handles_main.mainaxes, 'Normalized CRB');
     xlabel(handles_main.mainaxes, 'SNR(dB)');
     legend(handles_main.mainaxes, 'normal OP','spec OP','normal SB','spec SB');
-    title(handles_main.mainaxes, ' ');
+    title(handles_main.mainaxes, 'CRB');

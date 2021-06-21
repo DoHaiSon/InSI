@@ -22,13 +22,11 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 21-Jun-2021 14:10:23
+% Last Modified by GUIDE v2.5 21-Jun-2021 17:20:35
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 global main_path;
-global data;
-data = 0;
 main_path = matlab.desktop.editor.getActiveFilename;
 main_path = main_path(1:end-8);
 gui_State = struct('gui_Name',       mfilename, ...
@@ -149,29 +147,6 @@ function Close_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 closereq();
-
-
-% --- Executes on selection change in popupmenu1.
-function popupmenu1_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu1 contents as cell array
-contents = get(hObject,'Value') - 1;
-if contents == 0
-    return;
-end;
-
-if contents == 1
-    disp('Time');
-    Data_Menu();
-elseif contents == 2
-    disp('Freq');
-else 
-    disp('Specular');
-    Spec_Data_Menu();
-end    
     
 % --- Executes during object creation, after setting all properties.
 function popupmenu1_CreateFcn(hObject, eventdata, handles)
@@ -185,25 +160,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-
-% --- Executes on selection change in model.
-function model_Callback(hObject, eventdata, handles)
-% hObject    handle to model (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-contents = get(handles.popupmenu1,'Value') - 1;
-if contents == 0
-    return;
-end;
-
-if contents == 1
-    disp('Time_Domain');
-elseif contents == 2
-    disp('Freq_Domain');
-else 
-    disp('Specular_Domain');
-end  
 
 % --- Executes during object creation, after setting all properties.
 function model_CreateFcn(hObject, eventdata, handles)
@@ -255,3 +211,29 @@ function save_fig_ClickedCallback(hObject, eventdata, handles)
     output_file = main_path + "\CRB.fig";
     saveas(Fig_tmp, output_file, 'fig');
     fprintf("Saved fig to: %s.\n", output_file);
+
+
+% --- Executes on button press in CE.
+function CE_Callback(hObject, eventdata, handles)
+% hObject    handle to CE (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    Data_Menu();
+
+
+% --- Executes on button press in SI.
+function SI_Callback(hObject, eventdata, handles)
+% hObject    handle to SI (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    Spec_Data_Menu();
+
+
+% --- Executes on button press in holdon.
+function holdon_Callback(hObject, eventdata, handles)
+% hObject    handle to holdon (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of holdon
+    

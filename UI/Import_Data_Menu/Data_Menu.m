@@ -22,7 +22,7 @@ function varargout = Data_Menu(varargin)
 
 % Edit the above text to modify the response to help Data_Menu
 
-% Last Modified by GUIDE v2.5 11-Jan-2021 16:40:48
+% Last Modified by GUIDE v2.5 21-Jun-2021 17:19:43
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -49,7 +49,7 @@ function Data_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles    structure with handles and user method (see GUIDATA)
 % varargin   command line arguments to Data_Menu (see VARARGIN)
 
 % Choose default command line output for Data_Menu
@@ -67,41 +67,96 @@ function varargout = Data_Menu_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles    structure with handles and user method (see GUIDATA)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+
+
+% --- Executes on selection change in Domain.
+function Domain_Callback(hObject, eventdata, handles)
+% hObject    handle to Domain (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user method (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns Domain contents as cell array
+    contents = get(hObject, 'Value') - 1;
+    if contents == 0
+        return;
+    end
+    methods = ["Pilot", "Semi-blind", "Blind"];
+    method = get(handles.method, 'Value') - 1;
+    if method == 0
+        if contents == 1
+            disp("CE - Time Domain");
+        else
+            disp("CE - Frequency Domain");
+        end
+    else
+        if contents == 1
+            fprintf("CE - Time Domain - %s\n", methods(method));
+        else
+            fprintf("CE - Frequency Domain - %s\n", methods(method));
+        end
+    end
+
+
+% --- Executes during object creation, after setting all properties.
+function Domain_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Domain (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
 
 
 % --- Executes on selection change in method.
 function method_Callback(hObject, eventdata, handles)
 % hObject    handle to method (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles    structure with handles and user method (see GUIDATA)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns method contents as cell array
-contents = get(hObject,'Value') - 1;
-if contents == 0
-    return;
-end;
+    
+    % Get domain
+    Domain = get(handles.Domain,'Value') - 1;
+    if Domain == 0
+        return;
+    end
+    if Domain == 1
+        Domain = "CE - Time Domain";
+    else
+        Domain = "CE - Frequency Domain";
+    end    
+    
+    
+    contents = get(hObject,'Value') - 1;
+    if contents == 0
+        return;
+    end
 
-if contents == 1
-    disp('Pilot');
-    % Setup params for Blind Identification
-    set(handles.panelparams, 'Visible' , 'off');
-elseif contents == 2
-    disp('Semi-blind');
-    % Setup params for Blind Identification
-    set(handles.panelparams, 'Visible' , 'off');
-else
- 
+    if contents == 1
+        fprintf("%s - Pilot\n", Domain);
+        % Setup params for Blind Identification
+        set(handles.panelparams, 'Visible' , 'off');
+    elseif contents == 2
+        fprintf("%s - Semi-blind\n", Domain);
+        % Setup params for Blind Identification
+        set(handles.panelparams, 'Visible' , 'off');
+    else
+        fprintf("%s - Blind\n", Domain);
 %     % Setup algorithm for Blind Identification
 %     set(handles.algorithm, 'Enable' , 'on');
 %     set(handles.algorithm, 'String', {'Algorithm', 'CR'});
     
-    % Setup params for Blind Identification
-    set(handles.panelparams, 'Visible' , 'on');
-end;
+        % Setup params for Blind Identification
+        set(handles.panelparams, 'Visible' , 'on');
+    end
+
 
 % --- Executes during object creation, after setting all properties.
 function method_CreateFcn(hObject, eventdata, handles)
@@ -116,69 +171,20 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in data.
-function data_Callback(hObject, eventdata, handles)
-% hObject    handle to data (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: contents = cellstr(get(hObject,'String')) returns data contents as cell array
-contents = get(hObject,'Value') -1 ;
-if contents == 0
-    return;
-end;
-if contents == 1
-    % Set up modulation for Blind Identification
-    set(handles.modulation, 'Enable' , 'on');
-    set(handles.modulation, 'String', {'Modulation', 'Gaussian', 'Binary', 'QAM4', 'QAM16'});
-else
-    set(handles.modulation, 'Enable' , 'off');
-    path = Openfile();
-    disp(path);
-end;
-
-
-% --- Executes during object creation, after setting all properties.
-function data_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to data (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
 % --- Executes on selection change in modulation.
 function modulation_Callback(hObject, eventdata, handles)
 % hObject    handle to modulation (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles    structure with handles and user method (see GUIDATA)
 
-mod = get(hObject,'Value') -1 ;
-if mod == 0
-    return;
-end
-global data;
-samp = 1000;
-if mod == 1
-    disp('Guass');
-    data = gauss(samp);
-elseif mod == 2
-    disp('Binary');
-    data = mdp2(samp);
-elseif mod == 3
-    disp('QAM4');
-    data = mdp4(samp);
-else
-    disp('QAM16');
-    data = mdp16(samp);
-end
-Export2WS(data);
-handles_main = getappdata(0,'handles_main');
-scatter(handles_main.dataaxes, real(data), imag(data));
+    mod = get(hObject,'Value') -1 ;
+    if mod == 0
+        return;
+    end
+    
+    disp("OFDM Modulation: 64 sub-carriers");
+%     handles_main = getappdata(0,'handles_main');
+%     scatter(handles_main.dataaxes, real(data), imag(data));
 
 % --- Executes during object creation, after setting all properties.
 function modulation_CreateFcn(hObject, eventdata, handles)
@@ -193,42 +199,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in algorithm.
-function algorithm_Callback(hObject, eventdata, handles)
-% hObject    handle to algorithm (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns algorithm contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from algorithm
+function Nr_Callback(hObject, eventdata, handles)
+% hObject    handle to Nr (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user method (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of Nr as text
+%        str2double(get(hObject,'String')) returns contents of Nr as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function algorithm_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to algorithm (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function monte_Callback(hObject, eventdata, handles)
-% hObject    handle to monte (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of monte as text
-%        str2double(get(hObject,'String')) returns contents of monte as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function monte_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to monte (see GCBO)
+function Nr_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Nr (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -240,18 +223,18 @@ end
 
 
 
-function snr_Callback(hObject, eventdata, handles)
-% hObject    handle to snr (see GCBO)
+function ratio_Callback(hObject, eventdata, handles)
+% hObject    handle to ratio (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles    structure with handles and user method (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of snr as text
-%        str2double(get(hObject,'String')) returns contents of snr as a double
+% Hints: get(hObject,'String') returns contents of ratio as text
+%        str2double(get(hObject,'String')) returns contents of ratio as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function snr_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to snr (see GCBO)
+function ratio_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to ratio (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -263,18 +246,18 @@ end
 
 
 
-function edit12_Callback(hObject, eventdata, handles)
-% hObject    handle to edit12 (see GCBO)
+function multipaths_Callback(hObject, eventdata, handles)
+% hObject    handle to multipaths (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles    structure with handles and user method (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit12 as text
-%        str2double(get(hObject,'String')) returns contents of edit12 as a double
+% Hints: get(hObject,'String') returns contents of multipaths as text
+%        str2double(get(hObject,'String')) returns contents of multipaths as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit12_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit12 (see GCBO)
+function multipaths_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to multipaths (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -286,18 +269,18 @@ end
 
 
 
-function frame_Callback(hObject, eventdata, handles)
-% hObject    handle to frame (see GCBO)
+function Nt_Callback(hObject, eventdata, handles)
+% hObject    handle to Nt (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles    structure with handles and user method (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of frame as text
-%        str2double(get(hObject,'String')) returns contents of frame as a double
+% Hints: get(hObject,'String') returns contents of Nt as text
+%        str2double(get(hObject,'String')) returns contents of Nt as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function frame_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to frame (see GCBO)
+function Nt_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Nt (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -309,18 +292,18 @@ end
 
 
 
-function sensor_Callback(hObject, eventdata, handles)
-% hObject    handle to sensor (see GCBO)
+function order_Callback(hObject, eventdata, handles)
+% hObject    handle to order (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles    structure with handles and user method (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of sensor as text
-%        str2double(get(hObject,'String')) returns contents of sensor as a double
+% Hints: get(hObject,'String') returns contents of order as text
+%        str2double(get(hObject,'String')) returns contents of order as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function sensor_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to sensor (see GCBO)
+function order_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to order (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -332,18 +315,18 @@ end
 
 
 
-function chlength_Callback(hObject, eventdata, handles)
-% hObject    handle to chlength (see GCBO)
+function carriers_Callback(hObject, eventdata, handles)
+% hObject    handle to carriers (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles    structure with handles and user method (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of chlength as text
-%        str2double(get(hObject,'String')) returns contents of chlength as a double
+% Hints: get(hObject,'String') returns contents of carriers as text
+%        str2double(get(hObject,'String')) returns contents of carriers as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function chlength_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to chlength (see GCBO)
+function carriers_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to carriers (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
