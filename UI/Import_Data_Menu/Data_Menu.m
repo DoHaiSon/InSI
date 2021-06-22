@@ -84,19 +84,19 @@ function Domain_Callback(hObject, eventdata, handles)
     if contents == 0
         return;
     end
-    methods = ["Pilot", "Semi-blind", "Blind"];
+    methods = {'Pilot', 'Semi-blind', 'Blind'};
     method = get(handles.method, 'Value') - 1;
     if method == 0
         if contents == 1
-            disp("CE - Time Domain");
+            disp('CE - Time Domain');
         else
-            disp("CE - Frequency Domain");
+            disp('CE - Frequency Domain');
         end
     else
         if contents == 1
-            fprintf("CE - Time Domain - %s\n", methods(method));
+            fprintf('CE - Time Domain - %s\n', char(methods(method)));
         else
-            fprintf("CE - Frequency Domain - %s\n", methods(method));
+            fprintf('CE - Frequency Domain - %s\n', char(methods(method)));
         end
     end
 
@@ -128,9 +128,9 @@ function method_Callback(hObject, eventdata, handles)
         return;
     end
     if Domain == 1
-        Domain = "CE - Time Domain";
+        Domain = 'CE - Time Domain';
     else
-        Domain = "CE - Frequency Domain";
+        Domain = 'CE - Frequency Domain';
     end    
     
     
@@ -140,15 +140,15 @@ function method_Callback(hObject, eventdata, handles)
     end
 
     if contents == 1
-        fprintf("%s - Pilot\n", Domain);
+        fprintf('%s - Pilot\n', Domain);
         % Setup params for Blind Identification
         set(handles.panelparams, 'Visible' , 'off');
     elseif contents == 2
-        fprintf("%s - Semi-blind\n", Domain);
+        fprintf('%s - Semi-blind\n', Domain);
         % Setup params for Blind Identification
         set(handles.panelparams, 'Visible' , 'off');
     else
-        fprintf("%s - Blind\n", Domain);
+        fprintf('%s - Blind\n', Domain);
 %     % Setup algorithm for Blind Identification
 %     set(handles.algorithm, 'Enable' , 'on');
 %     set(handles.algorithm, 'String', {'Algorithm', 'CR'});
@@ -182,7 +182,7 @@ function modulation_Callback(hObject, eventdata, handles)
         return;
     end
     
-    disp("OFDM Modulation: 64 sub-carriers");
+    disp('OFDM Modulation: 64 sub-carriers');
 %     handles_main = getappdata(0,'handles_main');
 %     scatter(handles_main.dataaxes, real(data), imag(data));
 
