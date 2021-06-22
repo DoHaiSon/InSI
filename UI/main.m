@@ -208,7 +208,7 @@ function save_fig_ClickedCallback(hObject, eventdata, handles)
     Fig_tmp = figure('Visible','on');
     copyobj(handles.mainaxes, Fig_tmp);
     global main_path;
-    output_file = main_path + '\CRB.fig';
+    output_file = fullfile(main_path, 'CRB.fig');
     saveas(Fig_tmp, output_file, 'fig');
     fprintf('Saved fig to: %s.\n', output_file);
 
