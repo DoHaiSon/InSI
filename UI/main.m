@@ -248,6 +248,6 @@ function board_CreateFcn(hObject, eventdata, handles)
 
 % Hint: place code in OpeningFcn to populate board
     axesH = hObject;  % Not safe! Better get the handle explicitly!
-    img = imread('AV.png');
+    img = imread('Dashboard.png');
     imshow(img);
     set(axesH, 'Tag', 'board');
