@@ -22,7 +22,7 @@ function varargout = Data_Menu(varargin)
 
 % Edit the above text to modify the response to help Data_Menu
 
-% Last Modified by GUIDE v2.5 22-Jun-2021 14:31:59
+% Last Modified by GUIDE v2.5 22-Jun-2021 18:34:33
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -73,13 +73,13 @@ function varargout = Data_Menu_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 
-% --- Executes on selection change in Domain.
-function Domain_Callback(hObject, eventdata, handles)
-% hObject    handle to Domain (see GCBO)
+% --- Executes on selection change in domain.
+function domain_Callback(hObject, eventdata, handles)
+% hObject    handle to domain (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user method (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns Domain contents as cell array
+% Hints: contents = cellstr(get(hObject,'String')) returns domain contents as cell array
     contents = get(hObject, 'Value') - 1;
     if contents == 0
         return;
@@ -102,8 +102,8 @@ function Domain_Callback(hObject, eventdata, handles)
 
 
 % --- Executes during object creation, after setting all properties.
-function Domain_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to Domain (see GCBO)
+function domain_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to domain (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -123,7 +123,7 @@ function method_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns method contents as cell array
     
     % Get domain
-    Domain = get(handles.Domain,'Value') - 1;
+    Domain = get(handles.domain,'Value') - 1;
     if Domain == 0
         return;
     end
@@ -141,20 +141,11 @@ function method_Callback(hObject, eventdata, handles)
 
     if contents == 1
         fprintf('%s - Pilot\n', Domain);
-        % Setup params for Blind Identification
-        set(handles.panelparams, 'Visible' , 'off');
     elseif contents == 2
         fprintf('%s - Semi-blind\n', Domain);
-        % Setup params for Blind Identification
-        set(handles.panelparams, 'Visible' , 'off');
+
     else
         fprintf('%s - Blind\n', Domain);
-%     % Setup algorithm for Blind Identification
-%     set(handles.algorithm, 'Enable' , 'on');
-%     set(handles.algorithm, 'String', {'Algorithm', 'CR'});
-    
-        % Setup params for Blind Identification
-        set(handles.panelparams, 'Visible' , 'on');
     end
 
 
@@ -315,18 +306,18 @@ end
 
 
 
-function carriers_Callback(hObject, eventdata, handles)
-% hObject    handle to carriers (see GCBO)
+function subcarriers_Callback(hObject, eventdata, handles)
+% hObject    handle to subcarriers (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user method (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of carriers as text
-%        str2double(get(hObject,'String')) returns contents of carriers as a double
+% Hints: get(hObject,'String') returns contents of subcarriers as text
+%        str2double(get(hObject,'String')) returns contents of subcarriers as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function carriers_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to carriers (see GCBO)
+function subcarriers_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to subcarriers (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -342,3 +333,63 @@ function apply_Callback(hObject, eventdata, handles)
 % hObject    handle to apply (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+    % Get handes form main window
+    handles_main = getappdata(0,'handles_main');
+    global legends;
+    
+    if~(get(handles_main.holdon, 'Value'))
+        %clear old method
+        cla(handles_main.mainaxes, 'reset');
+    end
+        
+    Nt = str2double(get(handles.Nt, 'String'));
+    Nr = str2double(get(handles.Nr, 'String'));
+    L = str2double(get(handles.order, 'String'));
+    M = str2double(get(handles.multipaths, 'String'));
+    K = str2double(get(handles.subcarriers, 'String'));
+    ratio = str2double(get(handles.ratio, 'String'));
+    
+    if get(handles.method, 'Value') - 1 == 0
+        return
+    end
+    
+    % Run function:
+    
+    if get(handles.method, 'Value') - 1 == 1
+        loader(.5, 'Processing');
+        [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = ULA(Nt, Nr, L, M, K, ratio, 1, ...
+            get(handles.domain, 'Value') - 1, 1);
+        %GUI to WS
+        GUI2WS(SNR);
+        GUI2WS(CRB_op);
+        %figure
+    
+        cla(handles_main.board,'reset');
+        set(handles_main.board, 'Visible', 'off');     
+        set(handles_main.mainaxes, 'Visible', 'on');
+        
+        semilogy(handles_main.mainaxes, SNR, CRB_op, '-o');
+        legends{end + 1} = 'normal OP';
+        legend(handles_main.mainaxes, legends);
+    else
+        loader(0.0103*(Nt*Nr*L)^2 - 0.5228*(Nt*Nr*L) + 7.1862, 'Processing');
+        [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = ULA(Nt, Nr, L, M, K, ratio, 1, ...
+            get(handles.domain, 'Value') - 1, 2);
+        %GUI to WS
+        GUI2WS(SNR);
+        GUI2WS(CRB_SB);
+        %figure
+    
+        cla(handles_main.board,'reset');
+        set(handles_main.board, 'Visible', 'off');     
+        set(handles_main.mainaxes, 'Visible', 'on');
+        
+        semilogy(handles_main.mainaxes, SNR, CRB_SB,'->');
+        legends{end + 1} = 'normal SB';
+        legend(handles_main.mainaxes, legends);
+    end
+    hold (handles_main.mainaxes, 'on');
+    grid (handles_main.mainaxes, 'on');
+    ylabel(handles_main.mainaxes, 'Normalized CRB');
+    xlabel(handles_main.mainaxes, 'SNR(dB)');
+    title(handles_main.mainaxes, 'CRB');

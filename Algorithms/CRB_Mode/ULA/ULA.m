@@ -1,5 +1,12 @@
-function [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = SEMI_ULA (Nt, Nr, L, M, K, ratio)
+function [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = SEMI_ULA (Nt, Nr, L, M, K, ratio, model, domain, method)
     tic
+    
+    SNR = 0;
+    CRB_op = 0;
+    CRB_op_spec = 0;
+    CRB_SB = 0;
+    CRB_SB_spec = 0;
+    
     Nt = Nt;    % number of transmit antennas
     Nr = Nr;    % number of receive antennas
     L   = L;    % channel order
@@ -97,22 +104,23 @@ function [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = SEMI_ULA (Nt, Nr, L, 
         LAMBDA = [LAMBDA lambda_j];
     end
 
-
-    % Partial derivative of LAMBDA w.r.t. h_i
-    partial_LAMBDA  = cell(1,L);
-    for ll = 1 : L
-        partial_LAMBDA_ll = [];
-        for jj = 1 : Nt
-            lambda_jj =[];
-            for r = 1 : Nr
-                lambda_rj_ll = diag(FL(:,ll));
-                lambda_jj    = [lambda_jj; lambda_rj_ll];
+    if method == 2
+        % Partial derivative of LAMBDA w.r.t. h_i
+        partial_LAMBDA  = cell(1,L);
+        for ll = 1 : L
+            partial_LAMBDA_ll = [];
+            for jj = 1 : Nt
+                lambda_jj =[];
+                for r = 1 : Nr
+                    lambda_rj_ll = diag(FL(:,ll));
+                    lambda_jj    = [lambda_jj; lambda_rj_ll];
+                end
+            partial_LAMBDA_ll = [partial_LAMBDA_ll lambda_jj];
             end
-        partial_LAMBDA_ll = [partial_LAMBDA_ll lambda_jj];
+            partial_LAMBDA{1, ll} =  partial_LAMBDA_ll;
         end
-        partial_LAMBDA{1, ll} =  partial_LAMBDA_ll;
     end
-
+    
     N_total=4;
     N_pilot=2;
     N_data=N_total-N_pilot;
@@ -128,11 +136,19 @@ function [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = SEMI_ULA (Nt, Nr, L, 
         Iop      = X_nga'*X_nga / sigmav2;
         Iop_4p   = 4 * Iop;
         CRB_op(snr_i) = abs(trace(pinv(Iop_4p)));
+        if model  == 1 && method == 1
+            continue
+        end
     %============================================
-    %Only Pilot Specular   
-        %Iop_spec = ((-1)/(sigmav2)^2)*G*G'* X_nga'*sigmav2*eye(Nr*K)*X_nga*G*G';
+    %Only Pilot Specular
         Iop_spec = G*G'*Iop_4p*G*G';
         CRB_op_spec(snr_i) = abs(trace(pinv(Iop_spec)));
+
+        Iop_spec = G*G'*Iop_4p*G*G';
+        CRB_op_spec(snr_i) = abs(trace(pinv(Iop_spec)));
+        if model  == 2 && method == 1
+            continue
+        end
     %============================================
     %SemiBlind
         Cyy      = sigmax2 * LAMBDA * LAMBDA'  + sigmav2 * eye(K*Nr);
@@ -153,6 +169,11 @@ function [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = SEMI_ULA (Nt, Nr, L, 
         I_SB       = N_data*I_D + N_pilot*Iop;
         CRB_SB_i           = pinv(I_SB);
         CRB_SB(snr_i)      = abs(trace(CRB_SB_i));
+        
+        if model == 1
+            clear I_D;
+            continue
+        end
 
     %============================================
     %Semiblind Specular

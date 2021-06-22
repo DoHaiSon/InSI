@@ -1,17 +1,20 @@
-function loader
+function [f] = loader (time, str, varargin)
+    %str = char(str);
     f = waitbar(0,'Please wait...');
     pause(.1)
     
-    waitbar(.33,f,'Opening the application');
+    waitbar(.33, f, str);
     pause(.1)
     
-    waitbar(.67,f,'Opening the application');
-    pause(.1)
+    waitbar(.67, f, str);
+    pause(time)
     
-    main();
-
-    waitbar(1,f,'Opening the application');
-    pause(.1)
+    if nargin == 3
+        eval(varargin{1});
+    end
+    
+    waitbar(1, f, str);
+    pause(0.1)
 
     close(f)
 end

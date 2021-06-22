@@ -25,6 +25,7 @@ function varargout = Spec_Data_Menu(varargin)
 % Last Modified by GUIDE v2.5 22-Jun-2021 14:33:22
 
 % Begin initialization code - DO NOT EDIT
+
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
@@ -244,7 +245,6 @@ function method_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns method contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from method
 
-
 % --- Executes during object creation, after setting all properties.
 function method_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to method (see GCBO)
@@ -286,9 +286,10 @@ function apply_Callback(hObject, eventdata, handles)
 % hObject    handle to apply (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user method (see GUIDATA)
-
+    
     % Get handes form main window
     handles_main = getappdata(0,'handles_main');
+    global legends;
     
     if~(get(handles_main.holdon, 'Value'))
         %clear old method
@@ -301,24 +302,48 @@ function apply_Callback(hObject, eventdata, handles)
     M = str2double(get(handles.multipaths, 'String'));
     K = str2double(get(handles.subcarriers, 'String'));
     ratio = str2double(get(handles.ratio, 'String'));
-    [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = SEMI_ULA(Nt, Nr, L, M, K, ratio);
-    %export to WS
-    Export2WS(SNR);
-    Export2WS(CRB_op);
-    Export2WS(CRB_op_spec);
-    Export2WS(CRB_SB);
-    Export2WS(CRB_SB_spec);
-    %figure
     
-    semilogy(handles_main.mainaxes, SNR,CRB_op,'-b>');
+    if get(handles.method, 'Value') - 1 == 0
+        return
+    end
+    
+    % Run function:
+    
+    if get(handles.method, 'Value') - 1 == 1
+        loader(.5, 'Processing');
+        [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = ULA(Nt, Nr, L, M, K, ratio, 2, ...
+            get(handles.domain, 'Value') - 1, 1);
+        %GUI to WS
+        GUI2WS(SNR);
+        GUI2WS(CRB_op_spec);
+        %figure
+    
+        cla(handles_main.board,'reset');
+        set(handles_main.board, 'Visible', 'off');     
+        set(handles_main.mainaxes, 'Visible', 'on');
+        
+        semilogy(handles_main.mainaxes, SNR,CRB_op_spec,'-+');
+        legends{end + 1} = 'spec OP';
+        legend(handles_main.mainaxes, legends);
+    else
+        loader(0.0103*(Nt*Nr*L)^2 - 0.5228*(Nt*Nr*L) + 7.1862, 'Processing');
+        [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = ULA(Nt, Nr, L, M, K, ratio, 2, ...
+            get(handles.domain, 'Value') - 1, 2);
+        %GUI to WS
+        GUI2WS(SNR);
+        GUI2WS(CRB_SB_spec);
+        %figure
+    
+        cla(handles_main.board,'reset');
+        set(handles_main.board, 'Visible', 'off');     
+        set(handles_main.mainaxes, 'Visible', 'on');
+        
+        semilogy(handles_main.mainaxes, SNR, CRB_SB_spec,'-*');
+        legends{end + 1} = 'spec SB';
+        legend(handles_main.mainaxes, legends);
+    end
     hold (handles_main.mainaxes, 'on');
-    semilogy(handles_main.mainaxes, SNR,CRB_op_spec,'-r+');
-    hold (handles_main.mainaxes, 'on');
-    semilogy(handles_main.mainaxes, SNR,CRB_SB,'-g');
-    hold (handles_main.mainaxes, 'on');
-    semilogy(handles_main.mainaxes, SNR,CRB_SB_spec,'-m');
     grid (handles_main.mainaxes, 'on');
     ylabel(handles_main.mainaxes, 'Normalized CRB');
     xlabel(handles_main.mainaxes, 'SNR(dB)');
-    legend(handles_main.mainaxes, 'normal OP','spec OP','normal SB','spec SB');
     title(handles_main.mainaxes, 'CRB');

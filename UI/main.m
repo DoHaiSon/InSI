@@ -22,13 +22,14 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 21-Jun-2021 17:20:35
+% Last Modified by GUIDE v2.5 22-Jun-2021 15:10:02
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 global main_path;
 main_path = matlab.desktop.editor.getActiveFilename;
 main_path = main_path(1:end-8);
+
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
                    'gui_OpeningFcn', @main_OpeningFcn, ...
@@ -237,3 +238,16 @@ function holdon_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of holdon
     
+
+
+% --- Executes during object creation, after setting all properties.
+function board_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to board (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate board
+    axesH = hObject;  % Not safe! Better get the handle explicitly!
+    img = imread('AV.png');
+    imshow(img);
+    set(axesH, 'Tag', 'board');
