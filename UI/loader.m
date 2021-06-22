@@ -7,14 +7,20 @@ function [f] = loader (time, str, varargin)
     pause(.1)
     
     waitbar(.67, f, str);
-    pause(time)
+    pause(.5)
     
     if nargin == 3
         eval(varargin{1});
     end
     
-    waitbar(1, f, str);
-    pause(0.1)
-
+    waitbar(.8, f, str);
+    t = tic();
+    while toc(t) < 3
+        pause(0.01);
+        drawnow('limitrate');
+    end
+    
+    waitbar(1, f, 'Done!');
+    
     close(f)
 end
