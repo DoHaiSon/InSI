@@ -6,7 +6,7 @@ clc;
 %% Declear
 
 Nt      = 2;         % number of transmit antennas
-Nr_UCA  = 8;         % number of receive antennas of UCA
+Nr_UCA  = 6;         % number of receive antennas of UCA
 Nr_ULA  = 4;         % number of receive antennas of ULA
 L       = 4;         % channel order
 M       = 2;         % Number of multipaths (assumption: M  = L)   
@@ -38,6 +38,7 @@ DOA_Theta   = [0.3,0.4,0.25,0.6;0.7,0.85,0.43,0.66]*pi;
 d_ULA_nor   = 0.5;
 d_UCA_nor   = 0.5;
 R_nor       = 0.5*d_UCA_nor/sin(pi/Nr_UCA);
+rot_nor     = 0.1;
 
 %% Derivative
 
@@ -52,7 +53,7 @@ dev_h_angle_Theta   = [];
 
 for Nr_ULA_index=1:Nr_ULA
     for Nr_UCA_index=1:Nr_UCA
-        rotation = (1 + 0.5*(Nr_ULA_index-1)) * R_nor;
+        rotation = (1 + rot_nor*(Nr_ULA_index-1)) * R_nor;
         
         Br_fading = SEMI_spec_chan_derive_fading_UCyA(fading,delay,DOA_Phi,DOA_Theta,rotation,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
         dev_h_fading=[dev_h_fading; transpose(Br_fading)];
@@ -77,7 +78,7 @@ for ii = 1 : Nt
     X  = [X diag(ZC(:,ii))*FL];
 end
 
-[H, h_true] = gen_chan_specular_rotation(fading,delay,DOA_Phi,DOA_Theta,R_nor,d_ULA_nor,Nr_UCA,Nr_ULA,L,Nt);
+[H, h_true] = gen_chan_specular_rotation(fading,delay,DOA_Phi,DOA_Theta,R_nor,d_ULA_nor,Nr_UCA,Nr_ULA,L,Nt, rot_nor);
 
 
 %% LAMBDA

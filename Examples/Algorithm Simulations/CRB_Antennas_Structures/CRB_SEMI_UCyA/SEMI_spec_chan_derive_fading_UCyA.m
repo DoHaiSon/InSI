@@ -11,18 +11,18 @@ function Br_fading= spec_chan_derive_fading(fading,delay,DOA_Phi,DOA_Theta,R_nor
 %d_nor=1/2;
 %Nr_index=1;
 %Br_fading=zeros()
-Br_fading_tmp = zeros(M,L,Nt);
-for jj = 1 : Nt
-    for mm = 1 : M
-        for l = 1 : L
-            Br_fading_tmp(mm,l,jj)=sinc((l-1)-delay(mm,jj))*exp(-1i*2*pi*R_nor*sin(DOA_Theta(mm,jj))*cos(DOA_Phi(mm,jj)-(Nr_UCA_index-1)*2*pi/Nr_UCA))*exp(-1i*2*pi*d_ULA_nor*(Nr_ULA_index-1)*cos(DOA_Theta(mm,jj))); 
+    Br_fading_tmp = zeros(M,L,Nt);
+    for jj = 1 : Nt
+        for mm = 1 : M
+            for l = 1 : L
+                Br_fading_tmp(mm,l,jj)=sinc((l-1)-delay(mm,jj))*exp(-1i*2*pi*R_nor*sin(DOA_Theta(mm,jj))*cos(DOA_Phi(mm,jj)-(Nr_UCA_index-1)*2*pi/Nr_UCA))*exp(-1i*2*pi*d_ULA_nor*(Nr_ULA_index-1)*cos(DOA_Theta(mm,jj))); 
+            end
         end
     end
-end
-Br_fading_tmp1=cell(1,Nt);
-for jj = 1 : Nt
-Br_fading_tmp1{1,jj}=Br_fading_tmp(:,:,jj);
-end
-Br_fading=blkdiag(Br_fading_tmp1{:});
+    Br_fading_tmp1=cell(1,Nt);
+    for jj = 1 : Nt
+        Br_fading_tmp1{1,jj}=Br_fading_tmp(:,:,jj);
+    end
+    Br_fading=blkdiag(Br_fading_tmp1{:});
 end
 
