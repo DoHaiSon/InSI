@@ -1,4 +1,4 @@
-function Br_delay= spec_chan_derive_delay(fading,delay,DOA_Phi,DOA_Theta,R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt)
+function Br_delay= spec_chan_derive_delay(fading,delay,DOA_Phi,DOA_Theta,position_elements_nor,R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt)
 
 %Nt = 4;    % number of transmit antennas
 %Nr = 4;    % number of receive antennas
@@ -15,7 +15,7 @@ Br_delay_tmp = zeros(M,L,Nt);
 for jj = 1 : Nt
     for mm = 1 : M
         for l = 1 : L
-            Br_delay_tmp(mm,l,jj)=fading(mm,jj)*exp(-1i*2*pi*R_nor*sin(DOA_Theta(mm,jj))*cos(DOA_Phi(mm,jj)-(Nr_UCA_index-1)*2*pi/Nr_UCA))*exp(-1i*2*pi*d_ULA_nor*(Nr_ULA_index-1)*cos(DOA_Theta(mm,jj)))*((sin((l-1)-delay(mm,jj))/(((l-1)-delay(mm,jj))^2))-(cos((l-1)-delay(mm,jj))/((l-1)-delay(mm,jj)))); 
+            Br_delay_tmp(mm,l,jj)=fading(mm,jj)*exp(-1i*2*pi*R_nor*sin(DOA_Theta(mm,jj))*cos(DOA_Phi(mm,jj)-position_elements_nor)*exp(-1i*2*pi*d_ULA_nor*(Nr_ULA_index-1)*cos(DOA_Theta(mm,jj)))*((sin((l-1)-delay(mm,jj))/(((l-1)-delay(mm,jj))^2))-(cos((l-1)-delay(mm,jj))/((l-1)-delay(mm,jj))))); 
         end
     end
 end

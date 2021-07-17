@@ -6,8 +6,8 @@ clc;
 %% Declear
 
 Nt      = 2;         % number of transmit antennas
-Nr_UCA  = 6;         % number of receive antennas of UCA
-Nr_ULA  = 4;         % number of receive antennas of ULA
+Nr_UCA  = 8;         % number of receive antennas of UCA
+Nr_ULA  = 2;         % number of receive antennas of ULA
 L       = 4;         % channel order
 M       = 2;         % Number of multipaths (assumption: M  = L)   
 Pxp     = 0.3;
@@ -39,15 +39,16 @@ d_ULA_nor   = 0.5;
 d_UCA_nor   = 0.5;
 R_nor       = 0.5 * d_UCA_nor/sin(pi/Nr_UCA);
 
-rot_nor     = 6;
+rot_nor     = 0.0;
 
-position_elements_nor = zeros(3, Nr_UCA, Nr_ULA);
+position_elements_nor = zeros(Nr_UCA, Nr_ULA);
 
 for i=1:Nr_ULA
     for j=1:Nr_UCA
-        position_elements_nor(1, j, i) = R_nor * sin((j-1)*(2*pi/Nr_UCA)) ;         % x
-        position_elements_nor(2, j, i) = R_nor * cos((j-1)*(2*pi/Nr_UCA)) ;         % y
-        position_elements_nor(3, j, i) = (i-1) * d_ULA_nor;                         % z
+%         position_elements_nor(1, j, i) = R_nor * sin((j-1)*(2*pi/Nr_UCA)) ;         % x
+%         position_elements_nor(2, j, i) = R_nor * cos((j-1)*(2*pi/Nr_UCA)) ;         % y
+%         position_elements_nor(3, j, i) = (i-1) * d_ULA_nor;                         % z
+        position_elements_nor(j, i) = (1 + rot_nor * (i-1)) * (j-1)*2*pi/Nr_UCA;    % polar axis
     end
 end
 
@@ -63,16 +64,16 @@ dev_h_angle_Theta   = [];
 
 for Nr_ULA_index=1:Nr_ULA
     for Nr_UCA_index=1:Nr_UCA
-        Br_fading         = SEMI_spec_chan_derive_fading_UCyA(fading,delay,DOA_Phi,DOA_Theta,R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
+        Br_fading         = SEMI_spec_chan_derive_fading_UCyA(fading,delay,DOA_Phi,DOA_Theta,position_elements_nor(Nr_UCA_index, Nr_ULA_index),R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
         dev_h_fading      = [dev_h_fading; transpose(Br_fading)];
 
-        Br_delay          = SEMI_spec_chan_derive_delay_UCyA(fading,delay,DOA_Phi,DOA_Theta,R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
+        Br_delay          = SEMI_spec_chan_derive_delay_UCyA(fading,delay,DOA_Phi,DOA_Theta,position_elements_nor(Nr_UCA_index, Nr_ULA_index),R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
         dev_h_delay       = [dev_h_delay; transpose(Br_delay)];
 
-        Br_angle_Phi      = SEMI_spec_chan_derive_angle_Phi_UCyA(fading,delay,DOA_Phi,DOA_Theta,R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
+        Br_angle_Phi      = SEMI_spec_chan_derive_angle_Phi_UCyA(fading,delay,DOA_Phi,DOA_Theta,position_elements_nor(Nr_UCA_index, Nr_ULA_index),R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
         dev_h_angle_Phi   = [dev_h_angle_Phi; transpose(Br_angle_Phi)];
 
-        Br_angle_Theta    = SEMI_spec_chan_derive_angle_Theta_UCyA(fading,delay,DOA_Phi,DOA_Theta,R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
+        Br_angle_Theta    = SEMI_spec_chan_derive_angle_Theta_UCyA(fading,delay,DOA_Phi,DOA_Theta,position_elements_nor(Nr_UCA_index, Nr_ULA_index),R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
         dev_h_angle_Theta = [dev_h_angle_Theta; transpose(Br_angle_Theta)];
     end
 end
@@ -86,7 +87,7 @@ for ii = 1 : Nt
     X  = [X diag(ZC(:,ii))*FL];
 end
 
-[H, h_true] = gen_chan_specular_rotation(fading,delay,DOA_Phi,DOA_Theta,position_elements_nor,R_nor,d_ULA_nor,Nr_UCA,Nr_ULA,L,Nt, rot_nor);
+[H, h_true] = gen_chan_specular_rotation(fading,delay,DOA_Phi,DOA_Theta,position_elements_nor,R_nor,d_ULA_nor,Nr_UCA,Nr_ULA,L,Nt);
 
 
 %% LAMBDA

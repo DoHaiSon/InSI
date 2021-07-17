@@ -1,8 +1,8 @@
-function Br_fading= spec_chan_derive_fading(fading,delay,DOA_Phi,DOA_Theta,R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt)
+function Br_fading= SEMI_spec_chan_derive_fading_UCyA(~,delay,DOA_Phi,DOA_Theta,position_elements_nor,R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,~,L,M,Nt)
 
 %Nt = 4;    % number of transmit antennas
 %Nr = 4;    % number of receive antennas
-%L   = 4;    % channel order
+%L       = 4;    % channel order
 %M   = 2;    % Number of multipaths (assumption: M  = L)   
 %fading = rand(M,Nt)+1i*rand(M,Nt);
 %fading = rand(M,Nt);
@@ -15,7 +15,7 @@ function Br_fading= spec_chan_derive_fading(fading,delay,DOA_Phi,DOA_Theta,R_nor
     for jj = 1 : Nt
         for mm = 1 : M
             for l = 1 : L
-                Br_fading_tmp(mm,l,jj)=sinc((l-1)-delay(mm,jj))*exp(-1i*2*pi*R_nor*sin(DOA_Theta(mm,jj))*cos(DOA_Phi(mm,jj)-(Nr_UCA_index-1)*2*pi/Nr_UCA))*exp(-1i*2*pi*d_ULA_nor*(Nr_ULA_index-1)*cos(DOA_Theta(mm,jj))); 
+                Br_fading_tmp(mm,l,jj)=sinc((l-1)-delay(mm,jj))*exp(-1i*2*pi*R_nor*sin(DOA_Theta(mm,jj))*cos(DOA_Phi(mm,jj)-position_elements_nor))*exp(-1i*2*pi*d_ULA_nor*(Nr_ULA_index-1)*cos(DOA_Theta(mm,jj))); 
             end
         end
     end
