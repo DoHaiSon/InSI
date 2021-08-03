@@ -6,7 +6,7 @@ clc;
 %% Declear
 
 Nt      = 2;         % number of transmit antennas
-Nr      = 64;        % number of receive antennas
+Nr      = 8;        % number of receive antennas
 L       = 4;         % channel order
 M       = 2;         % Number of multipaths 
 Pxp     = 0.3;

@@ -26,9 +26,12 @@ function varargout = main(varargin)
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
+
+% Master timer
+global time;
+
+% Path of start.m file
 global main_path;
-main_path = matlab.desktop.editor.getActiveFilename;
-main_path = main_path(1:end-8);
 
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...

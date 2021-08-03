@@ -1,26 +1,51 @@
-function [f] = loader (time, str, varargin)
-    %str = char(str);
-    f = waitbar(0,'Please wait...');
-    pause(.1)
-    
-    waitbar(.33, f, str);
-    pause(.1)
-    
-    waitbar(.67, f, str);
-    pause(.5)
+function loader (str, varargin)
+%     varargin:
+%     func: name of function
+%     time: declear time to waitbar
+
+    % Master timer
+    global time;
     
     if nargin == 3
+        step = varargin{2} / 10;
+        f = waitbar(0, 'Please wait...', 'Tag', 'loader');
+        pause(step)
+
+        waitbar(.33, f, str);
+        pause(step)
+
+        waitbar(.67, f, str);
+        pause(step * 5)
+
+        % exec function
         eval(varargin{1});
-    end
-    
-    waitbar(.8, f, str);
-    t = tic();
-    while toc(t) < 3
-        pause(0.01);
-        drawnow('limitrate');
-    end
-    
-    waitbar(1, f, 'Done!');
-    
-    close(f)
+
+        waitbar(.8, f, str);
+        
+    elseif nargin == 2
+        f = waitbar(0,'Please wait...', 'Tag', 'loader');
+        pause(.1)
+
+        waitbar(.33, f, str);
+        pause(.1)
+
+        waitbar(.67, f, str);
+        pause(.5)
+
+        % exec function
+        eval(varargin{1});
+
+        waitbar(.8, f, str);
+    else
+        f = waitbar(0, 'Please wait...', 'Tag', 'loader');
+        pause(.1)
+
+        waitbar(.33, f, str);
+        pause(.1)
+
+        waitbar(.67, f, str);
+        pause(.5)
+
+        waitbar(.8, f, str);
+    end   
 end

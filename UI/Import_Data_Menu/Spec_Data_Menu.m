@@ -313,6 +313,7 @@ function apply_Callback(hObject, eventdata, handles)
         loader(.5, 'Processing');
         [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = ULA(Nt, Nr, L, M, K, ratio, 2, ...
             get(handles.domain, 'Value') - 1, 1);
+        
         %GUI to WS
         GUI2WS(SNR);
         GUI2WS(CRB_op_spec);
@@ -329,6 +330,9 @@ function apply_Callback(hObject, eventdata, handles)
         loader(0.0103*(Nt*Nr*L)^2 - 0.5228*(Nt*Nr*L) + 7.1862, 'Processing');
         [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = ULA(Nt, Nr, L, M, K, ratio, 2, ...
             get(handles.domain, 'Value') - 1, 2);
+        F = findall(0,'type','figure','tag','loader');
+        waitbar(1, F, 'Done!');
+        close(F);
         %GUI to WS
         GUI2WS(SNR);
         GUI2WS(CRB_SB_spec);
