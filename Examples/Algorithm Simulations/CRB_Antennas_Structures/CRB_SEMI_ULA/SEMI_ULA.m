@@ -40,11 +40,6 @@ d_nor=1/2;
 %hmod2      = (h*h')^2; 
 %% Derivative
 % w.r.t. fading
-%Br_fading = zeros(Nt,M,L);
-dev_h_fading_tmp=[];
-dev_h_delay_tmp=[];
-dev_h_angle_tmp=[];
-%dev_h_fading_tmp=cell(Nr,1);
 
 dev_h_fading=[];
 dev_h_delay=[];
@@ -163,17 +158,20 @@ for snr_i = 1 : length(SNR)
 end
 
 %figure
-semilogy(SNR,CRB_op,'-b>')
-hold on; semilogy(SNR,CRB_op_spec,'-r+')
+figure
+semilogy(SNR,CRB_op,'-b +');
+hold on;
+semilogy(SNR,CRB_op_spec,'-r *');
 
-semilogy(SNR,CRB_SB,'-g')
-hold on; semilogy(SNR,CRB_SB_spec,'-m')
+semilogy(SNR,CRB_SB,'-g +');
+hold on;
+semilogy(SNR,CRB_SB_spec,'-k *');
 
 
 grid on
 ylabel('Normalized CRB')
 xlabel('SNR(dB)')
-legend('normal OP','spec OP','normal SB','spec SB')
+legend('normal_{OP}','spec_{OP}','normal_{SB}','spec_{SB}');
 %legend('normal_OP','spec_OP','normal_SB','spec_SB')
 title(' ')
 %axis([-10 20 1e-4 1e2])

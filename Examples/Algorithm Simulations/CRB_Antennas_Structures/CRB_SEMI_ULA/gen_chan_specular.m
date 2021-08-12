@@ -11,7 +11,7 @@ for r = 1 : N_r
         for ll = 1 : L
             h = 0;
             for m = 1 : M 
-                h = h + fading(m,jj) * sinc(ll-delay(m,jj)) * exp(-1i*pi*(r-1)*sin(DOA(m,jj)));
+                h = h + fading(m,jj) * sinc((ll-1)-delay(m,jj)) * exp(-1i*pi*(r-1)*sin(DOA(m,jj)));
             end
             H(r,ll,jj) = h;
             h_vec      = [h_vec; h];

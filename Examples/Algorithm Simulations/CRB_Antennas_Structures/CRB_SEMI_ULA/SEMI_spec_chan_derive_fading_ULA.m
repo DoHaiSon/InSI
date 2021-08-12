@@ -21,7 +21,7 @@ for jj = 1 : Nt
 end
 Br_fading_tmp1=cell(1,Nt);
 for jj = 1 : Nt
-Br_fading_tmp1{1,jj}=Br_fading_tmp(:,:,jj);
+    Br_fading_tmp1{1,jj}=Br_fading_tmp(:,:,jj);
 end
 Br_fading=blkdiag(Br_fading_tmp1{:});
 end
