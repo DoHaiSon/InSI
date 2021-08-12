@@ -31,10 +31,10 @@ end
 %% Channel generation 
 % Fading, delay, DOA matrix of size(M,Nt), M - the number of multipath
 
-fading      = [0.8,0.6,0.4,0.2;0.9,0.7,0.5,0.3];
-delay       = [0.1,0.2,0.3,0.4;0.2,0.3,0.4,0.5]*0.001;
-DOA_Phi     = [pi/2,pi/4,pi/6,pi/8;pi/3,pi/5,pi/7,pi/9];
-DOA_Theta   = [0.3, 0.4, 0.25, 0.6; 0.7, 0.85, 0.43, 0.66] * pi;
+fading      = [0.8, 0.6, 0.4, 0.2; 0.9, 0.7, 0.5, 0.3];
+delay       = [1, 2, 3, 4; 2, 3, 4, 5]*10^(-9);
+DOA_Phi     = [0.3, 0.4, 0.25, 0.6; 0.7, 0.85, 0.43, 0.66] * pi;
+DOA_Theta   = [pi/2, pi/4, pi/6, pi/8; pi/3, pi/5, pi/7, pi/9];
 d_ULA_nor   = 0.5;
 d_UCA_nor   = 0.5;
 R_nor       = 0.5 * d_UCA_nor/sin(pi/Nr_UCA);
@@ -46,21 +46,17 @@ for rotation = 1:length(step)
     fprintf('\n--------------------------------------------------\nWorking at rotation: %f.\n\n', rot_nor);
     
     ULA_nor = zeros(Nr_ULA, Nr_UCA);
-
+    position_elements_nor = zeros(3, Nr_ULA, Nr_UCA);
     for Nr_ULA_index=1:Nr_ULA
         for Nr_UCA_index=1:Nr_UCA
-    %         position_elements_nor(1, j, i) = R_nor * sin((j-1)*(2*pi/Nr_UCA)) ;         % x
-    %         position_elements_nor(2, j, i) = R_nor * cos((j-1)*(2*pi/Nr_UCA)) ;         % y
-    %         position_elements_nor(3, j, i) = (i-1) * d_ULA_nor;                         % z
-            ULA_nor(Nr_ULA_index, Nr_UCA_index) = (Nr_UCA_index-1)*2*pi/Nr_UCA + rot_nor * (Nr_ULA_index-1)*2*pi/Nr_UCA;    % polar axis
+            position_elements_nor(1, Nr_ULA_index, Nr_UCA_index) = R_nor * sin((Nr_UCA_index-1)*(2*pi/Nr_UCA) + rot_nor * (2*pi/Nr_UCA)) ;         % x
+            position_elements_nor(2, Nr_ULA_index, Nr_UCA_index) = R_nor * cos((Nr_UCA_index-1)*(2*pi/Nr_UCA) + rot_nor * (2*pi/Nr_UCA)) ;         % y
+            position_elements_nor(3, Nr_ULA_index, Nr_UCA_index) = (Nr_ULA_index-1) * d_ULA_nor;                         % z
         end
     end
 
     %% Derivative
 
-    dev_h_fading_tmp    = [];
-    dev_h_delay_tmp     = [];
-    dev_h_angle_tmp     = [];
     dev_h_fading        = [];
     dev_h_delay         = [];
     dev_h_angle_Phi     = [];
@@ -68,22 +64,22 @@ for rotation = 1:length(step)
 
     for Nr_ULA_index=1:Nr_ULA
         for Nr_UCA_index=1:Nr_UCA
-            Br_fading         = SEMI_spec_chan_derive_fading_UCyA(fading,delay,DOA_Phi,DOA_Theta,ULA_nor(Nr_ULA_index, Nr_UCA_index),R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
+            Br_fading         = SEMI_spec_chan_derive_fading_UCyA(fading,delay,DOA_Phi,DOA_Theta, position_elements_nor(:, Nr_ULA_index, Nr_UCA_index),d_UCA_nor,L,M,Nt);
             dev_h_fading      = [dev_h_fading; transpose(Br_fading)];
-
-            Br_delay          = SEMI_spec_chan_derive_delay_UCyA(fading,delay,DOA_Phi,DOA_Theta,ULA_nor(Nr_ULA_index, Nr_UCA_index),R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
+            
+            Br_delay          = SEMI_spec_chan_derive_delay_UCyA(fading,delay,DOA_Phi,DOA_Theta,position_elements_nor(:, Nr_ULA_index, Nr_UCA_index),d_UCA_nor,L,M,Nt);
             dev_h_delay       = [dev_h_delay; transpose(Br_delay)];
-
-            Br_angle_Phi      = SEMI_spec_chan_derive_angle_Phi_UCyA(fading,delay,DOA_Phi,DOA_Theta,ULA_nor(Nr_ULA_index, Nr_UCA_index),R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
+            
+            Br_angle_Phi      = SEMI_spec_chan_derive_angle_Phi_UCyA(fading,delay,DOA_Phi,DOA_Theta,position_elements_nor(:, Nr_ULA_index, Nr_UCA_index),d_UCA_nor,L,M,Nt);
             dev_h_angle_Phi   = [dev_h_angle_Phi; transpose(Br_angle_Phi)];
-
-            Br_angle_Theta    = SEMI_spec_chan_derive_angle_Theta_UCyA(fading,delay,DOA_Phi,DOA_Theta,ULA_nor(Nr_ULA_index, Nr_UCA_index),R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
+            
+            Br_angle_Theta    = SEMI_spec_chan_derive_angle_Theta_UCyA(fading,delay,DOA_Phi,DOA_Theta,position_elements_nor(:, Nr_ULA_index, Nr_UCA_index),d_UCA_nor,L,M,Nt);
             dev_h_angle_Theta = [dev_h_angle_Theta; transpose(Br_angle_Theta)];
         end
     end
 
     %% Derivation of $h$ w.r.t. (bar{h},tau,alpha) %% channel specular parameters
-    G = [dev_h_fading,dev_h_delay,dev_h_angle_Phi,dev_h_angle_Theta]; 
+    G = [dev_h_fading, dev_h_delay, dev_h_angle_Theta, dev_h_angle_Phi]; 
     %% ------------------------------------------------------------------------
 
     X = [];
@@ -91,7 +87,7 @@ for rotation = 1:length(step)
         X  = [X diag(ZC(:,ii))*FL];
     end
 
-    [H, h_true] = gen_chan_specular_rotation(fading,delay,DOA_Phi,DOA_Theta,ULA_nor,R_nor,d_ULA_nor,Nr_UCA,Nr_ULA,L,Nt);
+    [H, h_true] = gen_chan_specular_rotation(fading,delay,DOA_Phi,DOA_Theta,position_elements_nor, d_UCA_nor,Nr_UCA,Nr_ULA,L,Nt);
 
 
     %% LAMBDA

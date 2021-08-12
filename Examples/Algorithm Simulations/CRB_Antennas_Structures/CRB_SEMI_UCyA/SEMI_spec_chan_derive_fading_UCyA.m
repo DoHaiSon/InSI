@@ -1,4 +1,4 @@
-function Br_fading= SEMI_spec_chan_derive_fading_UCyA(~,delay,DOA_Phi,DOA_Theta,position_elements_nor,lambda,L,M,Nt)
+function Br_fading= SEMI_spec_chan_derive_fading_UCyA(~,delay,DOA_Phi,DOA_Theta,position_elements_nor,d_UCA_nor,L,M,Nt)
 
 %Nt = 4;    % number of transmit antennas
 %Nr = 4;    % number of receive antennas
@@ -18,7 +18,7 @@ function Br_fading= SEMI_spec_chan_derive_fading_UCyA(~,delay,DOA_Phi,DOA_Theta,
                 r_x = sin(DOA_Theta(mm,jj)) * cos(DOA_Phi(mm,jj));
                 r_y = sin(DOA_Theta(mm,jj)) * sin(DOA_Phi(mm,jj));
                 r_z = cos(DOA_Theta(mm,jj));
-                Br_fading_tmp(mm,l,jj)= sinc((l-1)-delay(mm,jj))*exp(-1i*2*pi/lambda* ...
+                Br_fading_tmp(mm,l,jj)= sinc((l-1)-delay(mm,jj))*exp(-1i*pi* (1/d_UCA_nor)* ...
                     (position_elements_nor(1)*r_x + position_elements_nor(2)*r_y + position_elements_nor(3)*r_z));
 %                 Br_fading_tmp(mm,l,jj)=sinc((l-1)-delay(mm,jj))*exp(-1i*2*pi*R_nor*sin(DOA_Theta(mm,jj))*cos(DOA_Phi(mm,jj)-ULA_nor))*exp(-1i*2*pi*d_ULA_nor*(Nr_ULA_index-1)*cos(DOA_Theta(mm,jj))); 
             end
