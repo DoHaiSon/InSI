@@ -22,7 +22,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 22-Jun-2021 15:10:02
+% Last Modified by GUIDE v2.5 04-Aug-2021 14:58:41
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -217,20 +217,20 @@ function save_fig_ClickedCallback(hObject, eventdata, handles)
     fprintf('Saved fig to: %s.\n', output_file);
 
 
-% --- Executes on button press in CE.
-function CE_Callback(hObject, eventdata, handles)
-% hObject    handle to CE (see GCBO)
+% --- Executes on button press in Pilotbutton.
+function Pilotbutton_Callback(hObject, eventdata, handles)
+% hObject    handle to Pilotbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    Data_Menu();
+    None_Blind_Menu();
 
 
-% --- Executes on button press in SI.
-function SI_Callback(hObject, eventdata, handles)
-% hObject    handle to SI (see GCBO)
+% --- Executes on button press in SBbutton.
+function SBbutton_Callback(hObject, eventdata, handles)
+% hObject    handle to SBbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    Spec_Data_Menu();
+    Semi_Blind_Menu();
 
 
 % --- Executes on button press in holdon.
@@ -250,7 +250,15 @@ function board_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: place code in OpeningFcn to populate board
+    global main_path;
     axesH = hObject;  % Not safe! Better get the handle explicitly!
-    img = imread('Dashboard.png');
+    img = imread(fullfile(main_path, '/Resource/Dashboard/Dashboard.png'));
     imshow(img);
     set(axesH, 'Tag', 'board');
+
+
+% --- Executes on button press in Blindbutton.
+function Blindbutton_Callback(hObject, eventdata, handles)
+% hObject    handle to Blindbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)

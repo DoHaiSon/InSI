@@ -6,8 +6,8 @@ clc;
 %% Declear
 
 Nt      = 2;         % number of transmit antennas
-Nr_UCA  = 8;         % number of receive antennas of UCA
-Nr_ULA  = 8;         % number of receive antennas of ULA
+Nr_UCA  = 4;         % number of receive antennas of UCA
+Nr_ULA  = 2;         % number of receive antennas of ULA
 L       = 4;         % channel order
 M       = 2;         % Number of multipaths (assumption: M  = L)   
 Pxp     = 0.3;

@@ -1,35 +1,42 @@
-function varargout = Data_Menu(varargin)
-% DATA_MENU MATLAB code for Data_Menu.fig
-%      DATA_MENU, by itself, creates a new DATA_MENU or raises the existing
+function varargout = Semi_Blind_Menu(varargin)
+% SEMI_BLIND_MENU MATLAB code for Semi_Blind_Menu.fig
+%      SEMI_BLIND_MENU, by itself, creates a new SEMI_BLIND_MENU or raises the existing
 %      singleton*.
 %
-%      H = DATA_MENU returns the handle to a new DATA_MENU or the handle to
+%      H = SEMI_BLIND_MENU returns the handle to a new SEMI_BLIND_MENU or the handle to
 %      the existing singleton*.
 %
-%      DATA_MENU('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in DATA_MENU.M with the given input arguments.
+%      SEMI_BLIND_MENU('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in SEMI_BLIND_MENU.M with the given input arguments.
 %
-%      DATA_MENU('Property','Value',...) creates a new DATA_MENU or raises the
+%      SEMI_BLIND_MENU('Property','Value',...) creates a new SEMI_BLIND_MENU or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before Data_Menu_OpeningFcn gets called.  An
+%      applied to the GUI before Semi_Blind_Menu_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to Data_Menu_OpeningFcn via varargin.
+%      stop.  All inputs are passed to Semi_Blind_Menu_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help Data_Menu
+% Edit the above text to modify the response to help Semi_Blind_Menu
 
-% Last Modified by GUIDE v2.5 22-Jun-2021 18:34:33
+% Last Modified by GUIDE v2.5 06-Aug-2021 10:15:43
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
+
+% Master timer
+global time;
+
+% Path of start.m file
+global main_path;
+
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @Data_Menu_OpeningFcn, ...
-                   'gui_OutputFcn',  @Data_Menu_OutputFcn, ...
+                   'gui_OpeningFcn', @Semi_Blind_Menu_OpeningFcn, ...
+                   'gui_OutputFcn',  @Semi_Blind_Menu_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -44,26 +51,36 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before Data_Menu is made visible.
-function Data_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before Semi_Blind_Menu is made visible.
+function Semi_Blind_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user method (see GUIDATA)
-% varargin   command line arguments to Data_Menu (see VARARGIN)
+% varargin   command line arguments to Semi_Blind_Menu (see VARARGIN)
 
-% Choose default command line output for Data_Menu
+global main_path;
+jFrame=get(handle(handles.figure1), 'javaframe');
+jicon=javax.swing.ImageIcon(fullfile(main_path,'/Resource/Icon/menu_icon.png'));
+jFrame.setFigureIcon(jicon);
+
+handles_main = getappdata(0,'handles_main');
+axesH = handles_main.board;  % Not safe! Better get the handle explicitly!
+img = imread(fullfile(main_path, '/Resource/Dashboard/nonblind_model.png'));
+imshow(img, 'Parent', axesH);
+
+% Choose default command line output for Semi_Blind_Menu
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes Data_Menu wait for user response (see UIRESUME)
+% UIWAIT makes Semi_Blind_Menu wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = Data_Menu_OutputFcn(hObject, eventdata, handles) 
+function varargout = Semi_Blind_Menu_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -84,20 +101,10 @@ function domain_Callback(hObject, eventdata, handles)
     if contents == 0
         return;
     end
-    methods = {'Pilot', 'Semi-blind', 'Blind'};
-    method = get(handles.method, 'Value') - 1;
-    if method == 0
-        if contents == 1
-            disp('CE - Time Domain');
-        else
-            disp('CE - Frequency Domain');
-        end
+    if contents == 1
+        disp('None Blind - Time Domain');
     else
-        if contents == 1
-            fprintf('CE - Time Domain - %s\n', char(methods(method)));
-        else
-            fprintf('CE - Frequency Domain - %s\n', char(methods(method)));
-        end
+        disp('None Blind - Frequency Domain');
     end
 
 
@@ -112,41 +119,6 @@ function domain_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
-
-% --- Executes on selection change in method.
-function method_Callback(hObject, eventdata, handles)
-% hObject    handle to method (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user method (see GUIDATA)
-
-% Hints: contents = cellstr(get(hObject,'String')) returns method contents as cell array
-    
-    % Get domain
-    Domain = get(handles.domain,'Value') - 1;
-    if Domain == 0
-        return;
-    end
-    if Domain == 1
-        Domain = 'CE - Time Domain';
-    else
-        Domain = 'CE - Frequency Domain';
-    end    
-    
-    
-    contents = get(hObject,'Value') - 1;
-    if contents == 0
-        return;
-    end
-
-    if contents == 1
-        fprintf('%s - Pilot\n', Domain);
-    elseif contents == 2
-        fprintf('%s - Semi-blind\n', Domain);
-
-    else
-        fprintf('%s - Blind\n', Domain);
-    end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -342,48 +314,50 @@ function apply_Callback(hObject, eventdata, handles)
         cla(handles_main.mainaxes, 'reset');
     end
         
-    Nt = str2double(get(handles.Nt, 'String'));
-    Nr = str2double(get(handles.Nr, 'String'));
-    L = str2double(get(handles.order, 'String'));
-    M = str2double(get(handles.multipaths, 'String'));
-    K = str2double(get(handles.subcarriers, 'String'));
+    Nt    = str2double(get(handles.Nt, 'String'));
+    Nr    = str2double(get(handles.Nr, 'String'));
+    L     = str2double(get(handles.order, 'String'));
+    M     = str2double(get(handles.multipaths, 'String'));
+    K     = str2double(get(handles.subcarriers, 'String'));
     ratio = str2double(get(handles.ratio, 'String'));
     
-    if get(handles.method, 'Value') - 1 == 0
-        return
+    if (get(handles.methods, 'Value') - 1 == 0)
+        return;
     end
     
-    % Run function:
-    
-    if get(handles.method, 'Value') - 1 == 1
-        loader('Processing');
-        [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = ULA(Nt, Nr, L, M, K, ratio, 1, ...
-            get(handles.domain, 'Value') - 1, 1);
-        try
-            F = findall(0, 'type', 'figure', 'tag', 'loader');
-            waitbar(1, F, 'Done!');
-            close(F);
-        catch ME
-            disp(ME);
-        end
-        
-        %GUI to WS
-        GUI2WS(SNR);
-        GUI2WS(CRB_op);
-        %figure
-    
-        cla(handles_main.board,'reset');
-        set(handles_main.board, 'Visible', 'off');     
-        set(handles_main.mainaxes, 'Visible', 'on');
-        
-        semilogy(handles_main.mainaxes, SNR, CRB_op, '-o');
-        legends{end + 1} = 'normal OP';
-        legend(handles_main.mainaxes, legends);
-    else
-        % Note: Processing time: 0.0103*(Nt*Nr*L)^2 - 0.5228*(Nt*Nr*L) + 6.1862
+    % Exec function:
+    if (get(handles.methods, 'Value') - 1 == 1)
         loader('Processing');
         [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = ULA(Nt, Nr, L, M, K, ratio, 1, ...
             get(handles.domain, 'Value') - 1, 2);
+
+        % Close loader window
+        try
+            F = findall(0, 'type', 'figure', 'tag', 'loader');
+            waitbar(1, F, 'Done!');
+            close(F);
+        catch ME
+            disp(ME);
+        end
+
+        % GUI to WS
+        GUI2WS(SNR);
+        GUI2WS(CRB_SB);
+
+        % figure
+
+        cla(handles_main.board,'reset');
+        set(handles_main.board, 'Visible', 'off');
+        set(handles_main.mainaxes, 'Visible', 'on');
+
+        semilogy(handles_main.mainaxes, SNR, CRB_SB, '-o');
+        legends{end + 1} = 'normal SB';
+        legend(handles_main.mainaxes, legends);
+    elseif (get(handles.methods, 'Value') - 1 == 2)
+        loader('Processing');
+        [SNR, CRB_op, CRB_op_spec, CRB_SB, CRB_SB_spec] = ULA(Nt, Nr, L, M, K, ratio, 2, ...
+            get(handles.domain, 'Value') - 1, 2);
+        % Close loader window
         try
             F = findall(0, 'type', 'figure', 'tag', 'loader');
             waitbar(1, F, 'Done!');
@@ -394,19 +368,45 @@ function apply_Callback(hObject, eventdata, handles)
         
         %GUI to WS
         GUI2WS(SNR);
-        GUI2WS(CRB_SB);
+        GUI2WS(CRB_SB_spec);
         %figure
-    
+        
         cla(handles_main.board,'reset');
-        set(handles_main.board, 'Visible', 'off');     
+        set(handles_main.board, 'Visible', 'off');
         set(handles_main.mainaxes, 'Visible', 'on');
         
-        semilogy(handles_main.mainaxes, SNR, CRB_SB,'->');
-        legends{end + 1} = 'normal SB';
+        semilogy(handles_main.mainaxes, SNR, CRB_SB_spec,'-*');
+        legends{end + 1} = 'spec SB';
         legend(handles_main.mainaxes, legends);
     end
+    
     hold (handles_main.mainaxes, 'on');
     grid (handles_main.mainaxes, 'on');
     ylabel(handles_main.mainaxes, 'Normalized CRB');
     xlabel(handles_main.mainaxes, 'SNR(dB)');
     title(handles_main.mainaxes, 'CRB');
+
+
+% --- Executes on selection change in methods.
+function methods_Callback(hObject, eventdata, handles)
+% hObject    handle to methods (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns methods contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from methods
+
+
+% --- Executes during object creation, after setting all properties.
+function methods_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to methods (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+    
+    set(hObject, 'String', {'            Select method', '                    Data', '                 Specular'})
