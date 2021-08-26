@@ -22,7 +22,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 04-Aug-2021 14:58:41
+% Last Modified by GUIDE v2.5 26-Aug-2021 23:59:04
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -204,17 +204,17 @@ function dataaxes_CreateFcn(hObject, eventdata, handles)
 
 
 % --------------------------------------------------------------------
-function save_fig_ClickedCallback(hObject, eventdata, handles)
-% hObject    handle to save_fig (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-    % Save recently axes to .fig file
-    Fig_tmp = figure('Visible','on');
-    copyobj(handles.mainaxes, Fig_tmp);
-    global main_path;
-    output_file = fullfile(main_path, 'CRB.fig');
-    saveas(Fig_tmp, output_file, 'fig');
-    fprintf('Saved fig to: %s.\n', output_file);
+% function save_fig_ClickedCallback(hObject, eventdata, handles)
+% % hObject    handle to save_fig (see GCBO)
+% % eventdata  reserved - to be defined in a future version of MATLAB
+% % handles    structure with handles and user data (see GUIDATA)
+%     % Save recently axes to .fig file
+%     Fig_tmp = figure('Visible','on');
+%     copyobj(handles.mainaxes, Fig_tmp);
+%     global main_path;
+%     output_file = fullfile(main_path, 'CRB.fig');
+%     saveas(Fig_tmp, output_file, 'fig');
+%     fprintf('Saved fig to: %s.\n', output_file);
 
 
 % --- Executes on button press in Pilotbutton.
@@ -262,3 +262,12 @@ function Blindbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Blindbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in sub_fig.
+function sub_fig_Callback(hObject, eventdata, handles)
+% hObject    handle to sub_fig (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of sub_fig

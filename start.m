@@ -13,6 +13,10 @@ function start()
 %%  Declear global vars
     global legends;
     legends = {};
+    output = figure('Name', 'CRB', 'Tag', 'output1');
+    output.Visible = 'off';
+    global output_axes;
+    output_axes = axes;
     
 %%  Load main GUI
     loader('Opening the application', 'main');
