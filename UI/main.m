@@ -22,7 +22,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 26-Aug-2021 23:59:04
+% Last Modified by GUIDE v2.5 27-Aug-2021 11:06:03
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -71,6 +71,9 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 setappdata(0,'handles_main', handles)
+
+% Set position for this GUI
+movegui(hObject, 'center');
 
 % UIWAIT makes main wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -240,7 +243,11 @@ function holdon_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of holdon
-    
+    holdon_state = get(hObject,'Value');
+    sub_fig_state= get(handles.sub_fig, 'Value');
+    if holdon_state && sub_fig_state
+        set(handles.sub_fig, 'Value', 0);
+    end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -271,3 +278,8 @@ function sub_fig_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of sub_fig
+    holdon_state = get(hObject,'Value');
+    sub_fig_state= get(handles.sub_fig, 'Value');
+    if holdon_state && sub_fig_state
+        set(handles.holdon, 'Value', 0);
+    end

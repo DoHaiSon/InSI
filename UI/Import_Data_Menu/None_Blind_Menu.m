@@ -22,7 +22,7 @@ function varargout = None_Blind_Menu(varargin)
 
 % Edit the above text to modify the response to help None_Blind_Menu
 
-% Last Modified by GUIDE v2.5 20-Aug-2021 12:52:13
+% Last Modified by GUIDE v2.5 09-Sep-2021 15:55:16
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -69,7 +69,15 @@ axesH = handles_main.board;  % Not safe! Better get the handle explicitly!
 img = imread(fullfile(main_path, '/Resource/Dashboard/nonblind_model.png'));
 imshow(img, 'Parent', axesH);
 
-set(handles.Nt,'TooltipString','somewhat longer formula here')
+set(handles.Nt,'TooltipString','The number of transmit antennas');
+set(handles.Nr,'TooltipString','The number of receive antennas');
+set(handles.order,'TooltipString','Channel order');
+set(handles.multipaths,'TooltipString','The number of multi paths');
+set(handles.subcarriers,'TooltipString','K-point FFT');
+set(handles.ratio,'TooltipString','The ratio of power between 1 symbol Pilot/Data');
+
+% Set position for this GUI
+movegui(hObject, 'west');
 
 % Choose default command line output for None_Blind_Menu
 handles.output = hObject;
@@ -164,30 +172,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-
-function Nr_Callback(hObject, eventdata, handles)
-% hObject    handle to Nr (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user method (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of Nr as text
-%        str2double(get(hObject,'String')) returns contents of Nr as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function Nr_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to Nr (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
 function ratio_Callback(hObject, eventdata, handles)
 % hObject    handle to ratio (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -231,17 +215,7 @@ function multipaths_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
-
-
-function Nt_Callback(hObject, eventdata, handles)
-% hObject    handle to Nt (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user method (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of Nt as text
-%        str2double(get(hObject,'String')) returns contents of Nt as a double
-  
+    
 
 % --- Executes during object creation, after setting all properties.
 function Nt_CreateFcn(hObject, eventdata, handles)
@@ -254,8 +228,29 @@ function Nt_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+    params_Nt = Params;
+    params_Nt.position = [5 290 60 60];
+    params_Nt.linewidth = 2;
+    params_Nt.color = 'r';
+    set(hObject,'ButtonDownFcn',{@params2sysmodel, params_Nt});
 
+% --- Executes during object creation, after setting all properties.
+function Nr_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Nr (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
 
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end    
+    params_Nr = Params;
+    params_Nr.position = [1025 620 60 60];
+    params_Nr.linewidth = 2;
+    params_Nr.color = 'b';
+    set(hObject,'ButtonDownFcn',{@params2sysmodel, params_Nr});
+    
 
 function order_Callback(hObject, eventdata, handles)
 % hObject    handle to order (see GCBO)
@@ -310,11 +305,6 @@ function apply_Callback(hObject, eventdata, handles)
     % Get handes form main window
     handles_main = getappdata(0,'handles_main');
     global legends;
-    
-    if~(get(handles_main.holdon, 'Value'))
-        %clear old method
-        cla(handles_main.mainaxes, 'reset');
-    end
         
     Nt    = str2double(get(handles.Nt, 'String'));
     Nr    = str2double(get(handles.Nr, 'String'));
@@ -346,8 +336,14 @@ function apply_Callback(hObject, eventdata, handles)
         GUI2WS(SNR);
         GUI2WS(CRB_op);
         output = findall(0, 'Name', 'CRB', 'type', 'figure', 'Tag', 'output1');
+        
         global output_axes;
+        if~(get(handles_main.holdon, 'Value'))
+            %clear old method
+            cla(output_axes, 'reset');
+        end
         set(output, 'Visible', 'on');
+        
         % figure
         semilogy(output_axes, SNR, CRB_op, '-o');
         legends{end + 1} = 'normal OP';
@@ -382,14 +378,3 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
     
     set(hObject, 'String', {'            Select method', '                     Pilot', '                 Specular'})
-
-
-% --- Executes on key press with focus on Nt and none of its controls.
-function Nt_KeyPressFcn(hObject, eventdata, handles)
-% hObject    handle to Nt (see GCBO)
-% eventdata  structure with the following fields (see MATLAB.UI.CONTROL.UICONTROL)
-%	Key: name of the key that was pressed, in lower case
-%	Character: character interpretation of the key(s) that was pressed
-%	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
-% handles    structure with handles and user data (see GUIDATA)
-    disp('Son')

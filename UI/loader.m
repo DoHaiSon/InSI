@@ -6,7 +6,7 @@ function loader (str, varargin)
     % Master timer
     global time;
     
-    if nargin == 2
+    if nargin == 2 && ~isempty(varargin{1})
         f = waitbar(0, 'Please wait...', 'Tag', 'loader');
         pause(.2)
 
