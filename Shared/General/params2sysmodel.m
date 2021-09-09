@@ -9,6 +9,7 @@ function params2sysmodel(hobject, event, Params)
     
     hold (handles_main.board, 'on');
     Params.rect = rectangle('Position', Params.position, 'LineWidth', Params.linewidth, 'EdgeColor', Params.color);   % Start point (x, y) and (hight, width)
-    set(gca,'XColor', 'none','YColor','none')
+    set(gca,'XColor', 'none','YColor','none');
     set(hobject, 'Enable', 'on');
     uicontrol(hobject);
+end

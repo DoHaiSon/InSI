@@ -4,9 +4,9 @@ classdef Params
     
     properties
         trigger = false 
-        position 
+        position = [1 1 60 60]
         linewidth = 1
-        color
+        color = 'k'
         rect
     end
     
