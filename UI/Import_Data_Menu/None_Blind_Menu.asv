@@ -22,7 +22,7 @@ function varargout = None_Blind_Menu(varargin)
 
 % Edit the above text to modify the response to help None_Blind_Menu
 
-% Last Modified by GUIDE v2.5 09-Sep-2021 15:55:16
+% Last Modified by GUIDE v2.5 10-Sep-2021 02:05:45
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -73,9 +73,8 @@ set(handles.ratio,'TooltipString','The ratio of power between 1 symbol Pilot/Dat
 % Set position for this GUI
 movegui(hObject, 'west');
 
-menusize = Menusize;
-menusize.main = hObject.Position;
-set(hObject,'WindowButtonDownFcn',{@params2sysmodel, handles});
+% Release system model when cursor not in any UIClass
+set(hObject,'WindowButtonDownFcn',{@releasesysmodel});
 
 % Choose default command line output for None_Blind_Menu
 handles.output = hObject;
@@ -213,42 +212,6 @@ function multipaths_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-    
-
-% --- Executes during object creation, after setting all properties.
-function Nt_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to Nt (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-%     params_Nt = Params;
-%     params_Nt.position = [5 290 60 60];
-%     params_Nt.linewidth = 2;
-%     params_Nt.color = 'r';
-%     set(hObject,'ButtonDownFcn',{@params2sysmodel, params_Nt});
-
-% --- Executes during object creation, after setting all properties.
-function Nr_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to Nr (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end    
-%     params_Nr = Params;
-%     params_Nr.position = [1025 620 60 60];
-%     params_Nr.linewidth = 2;
-%     params_Nr.color = 'b';
-%     set(hObject,'ButtonDownFcn',{@params2sysmodel, params_Nr});
-    
 
 function order_Callback(hObject, eventdata, handles)
 % hObject    handle to order (see GCBO)
@@ -330,28 +293,46 @@ function apply_Callback(hObject, eventdata, handles)
             disp(ME);
         end
 
+        global results;         % Be careful 
+        
         % GUI to WS
         GUI2WS(SNR);
         GUI2WS(CRB_op);
-        output = findall(0, 'Name', 'CRB', 'type', 'figure', 'Tag', 'output1');
         
-        global output_axes;
-        if~(get(handles_main.holdon, 'Value'))
-            %clear old method
-            cla(output_axes, 'reset');
-        end
-        set(output, 'Visible', 'on');
-        
-        % figure
-        semilogy(output_axes, SNR, CRB_op, '-o');
-        legends{end + 1} = 'normal OP';
-        legend(output_axes, legends);
+        results.figparams.count = results.figparams.count + 1;
+        results.figparams.data(results.figparams.count).x = SNR;
+        results.figparams.data(results.figparams.count).y = CRB_op;
+        results.figparams.title = 'CRB';
+        results.figparams.xlabel = 'SNR(dB)';
+        results.figparams.ylabel = 'Normalized CRB';
+        results.figparams.gridmode = 'on';
+        results.figparams.marker = 'o';
+        results.figparams.legends{end + 1} = 'normal OP';
     end
-    hold (output_axes, 'on');
-    grid (output_axes, 'on');
-    ylabel(output_axes, 'Normalized CRB');
-    xlabel(output_axes, 'SNR(dB)');
-    title(output_axes, 'CRB');
+    % Check figure mode: Clear/hold on/subfigure
+    mode = Checkfigmode(handles_main);
+    switch(mode)
+        case 1
+            %clear old figure
+            cla(results.figaxes, 'reset');
+        case 2
+
+        case 3
+        otherwise
+    end
+
+    set(results.fig, 'Visible', 'on');
+
+    % figure
+    semilogy(results.figaxes, SNR, CRB_op, '-o');
+    
+    legend(results.figaxes, legends);
+
+    hold (results.figaxes, 'on');
+    grid (results.figaxes, 'on');
+    ylabel(results.figaxes, 'Normalized CRB');
+    xlabel(results.figaxes, 'SNR(dB)');
+    title(results.figaxes, 'CRB');
 
 % --- Executes on selection change in methods.
 function methods_Callback(hObject, eventdata, handles)
@@ -376,3 +357,31 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
     
     set(hObject, 'String', {'            Select method', '                     Pilot', '                 Specular'})
+
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over Nt.
+function Nt_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to Nt (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    set(handles.Nr, 'Enable', 'inactive');
+    params_Nt = Params;
+    params_Nt.position = [5 290 60 60];
+    params_Nt.linewidth = 2;
+    params_Nt.color = 'r';
+    
+    params2sysmodel(hObject, eventdata, params_Nt);
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over Nr.
+function Nr_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to Nr (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    set(handles.Nt, 'Enable', 'inactive');
+    params_Nr = Params;
+    params_Nr.position = [1025 620 60 60];
+    params_Nr.linewidth = 2;
+    params_Nr.color = 'b';
+    params2sysmodel(hObject, eventdata, params_Nr);

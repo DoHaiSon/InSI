@@ -73,6 +73,9 @@ set(handles.ratio,'TooltipString','The ratio of power between 1 symbol Pilot/Dat
 % Set position for this GUI
 movegui(hObject, 'west');
 
+% Release system model when cursor not in any UIClass
+set(hObject,'WindowButtonDownFcn',{@releasesysmodel});
+
 % Choose default command line output for None_Blind_Menu
 handles.output = hObject;
 
@@ -290,28 +293,47 @@ function apply_Callback(hObject, eventdata, handles)
             disp(ME);
         end
 
+        global results;         % Be careful 
+        
         % GUI to WS
         GUI2WS(SNR);
         GUI2WS(CRB_op);
-        output = findall(0, 'Name', 'CRB', 'type', 'figure', 'Tag', 'output1');
         
-        global output_axes;
-        if~(get(handles_main.holdon, 'Value'))
-            %clear old method
-            cla(output_axes, 'reset');
-        end
-        set(output, 'Visible', 'on');
-        
-        % figure
-        semilogy(output_axes, SNR, CRB_op, '-o');
-        legends{end + 1} = 'normal OP';
-        legend(output_axes, legends);
+        % Define Figure params
+        results.figparams.count = results.figparams.count + 1;
+        results.figparams.data(results.figparams.count).x = SNR;
+        results.figparams.data(results.figparams.count).y = CRB_op;
+        results.figparams.title = 'CRB';
+        results.figparams.xlabel = 'SNR(dB)';
+        results.figparams.ylabel = 'Normalized CRB';
+        results.figparams.gridmode = 'on';
+        results.figparams.marker = '-o';
+        results.figparams.legends{end + 1} = 'normal OP';
     end
-    hold (output_axes, 'on');
-    grid (output_axes, 'on');
-    ylabel(output_axes, 'Normalized CRB');
-    xlabel(output_axes, 'SNR(dB)');
-    title(output_axes, 'CRB');
+    % Check empty figure
+    if ~ishandle(results.fig)
+        output = figure('Name', 'CRB', 'Tag', 'outputCRB');
+        results.fig = output;
+        results.figaxes = axes;
+    end
+    
+    % Check figure mode: Clear/hold on/subfigure
+    mode = Checkfigmode(handles_main);
+    switch(mode)
+        case 1
+            %clear old figure
+            cla(results.figaxes, 'reset');
+            results.figparams.count = 0;
+            results.mode = 1;
+            dispfig(results);
+        case 2
+            results.mode = 2;
+            dispfig(results);
+        case 3
+            results.mode = 3;
+            dispfig(results);
+        otherwise
+    end
 
 % --- Executes on selection change in methods.
 function methods_Callback(hObject, eventdata, handles)
