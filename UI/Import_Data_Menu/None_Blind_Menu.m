@@ -334,6 +334,13 @@ function apply_Callback(hObject, eventdata, handles)
             dispfig(results);
         otherwise
     end
+    
+    %% Export data to Toolbox Workspace
+    global toolboxws;
+    toolboxws = [toolboxws; [{true, 'CRB', matrix2char(results.figparams.data(results.figparams.count).x), ...
+        matrix2char(results.figparams.data(results.figparams.count).y), ...
+        10000}]];
+    set(handles_main.toolbox_ws, 'Data', toolboxws);
 
 % --- Executes on selection change in methods.
 function methods_Callback(hObject, eventdata, handles)

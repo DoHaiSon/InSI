@@ -22,7 +22,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 27-Aug-2021 11:06:03
+% Last Modified by GUIDE v2.5 16-Sep-2021 16:02:25
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -283,3 +283,15 @@ function sub_fig_Callback(hObject, eventdata, handles)
     if holdon_state && sub_fig_state
         set(handles.holdon, 'Value', 0);
     end
+
+
+% --- Executes during object creation, after setting all properties.
+function toolbox_ws_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to toolbox_ws (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+%     set(hObject, 'ColumnName', {'Plot', 'Name', '$E_b$ / $N_o$ (dB)', 'BER', '# of Bits'});
+    global toolboxws;
+    toolboxws = {};
+    set(hObject, 'Data', toolboxws);
+    
