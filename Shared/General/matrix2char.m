@@ -1,15 +1,19 @@
-function char = matrix2char( matrix )
+function chr = matrix2char( matrix )
     shape = size(matrix);
     row   = shape(1);
     col   = shape(2);
-    strmatrix = string(matrix);
+    strmatrix = num2str(matrix);
+    strmatrix = strsplit(strmatrix, {' '});
     if row == 1 || col == 1
         str = '[';
         for i=1:length(strmatrix)
-          str = str + strmatrix(i) + ' ';
+          if i == length(strmatrix)
+              str = strcat(str, strmatrix(i));
+          else
+              str = strcat(str, strmatrix(i), {' '});
+          end
         end
-        str  = strip(str);
-        str  = str + ']'; 
-        char = convertStringsToChars(str);
+        str  = strcat(str, ']');
+        chr  = char(str);
     end
 end
