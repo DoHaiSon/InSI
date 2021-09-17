@@ -1,36 +1,36 @@
-function varargout = None_Blind_Menu(varargin)
-% NONE_BLIND_MENU MATLAB code for None_Blind_Menu.fig
-%      NONE_BLIND_MENU, by itself, creates a new NONE_BLIND_MENU or raises the existing
+function varargout = Blind_Menu(varargin)
+% BLIND_MENU MATLAB code for Blind_Menu.fig
+%      BLIND_MENU, by itself, creates a new BLIND_MENU or raises the existing
 %      singleton*.
 %
-%      H = NONE_BLIND_MENU returns the handle to a new NONE_BLIND_MENU or the handle to
+%      H = BLIND_MENU returns the handle to a new BLIND_MENU or the handle to
 %      the existing singleton*.
 %
-%      NONE_BLIND_MENU('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in NONE_BLIND_MENU.M with the given input arguments.
+%      BLIND_MENU('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in BLIND_MENU.M with the given input arguments.
 %
-%      NONE_BLIND_MENU('Property','Value',...) creates a new NONE_BLIND_MENU or raises the
+%      BLIND_MENU('Property','Value',...) creates a new BLIND_MENU or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before None_Blind_Menu_OpeningFcn gets called.  An
+%      applied to the GUI before Blind_Menu_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to None_Blind_Menu_OpeningFcn via varargin.
+%      stop.  All inputs are passed to Blind_Menu_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help None_Blind_Menu
+% Edit the above text to modify the response to help Blind_Menu
 
-% Last Modified by GUIDE v2.5 10-Sep-2021 02:05:45
+% Last Modified by GUIDE v2.5 17-Sep-2021 10:24:36
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @None_Blind_Menu_OpeningFcn, ...
-                   'gui_OutputFcn',  @None_Blind_Menu_OutputFcn, ...
+                   'gui_OpeningFcn', @Blind_Menu_OpeningFcn, ...
+                   'gui_OutputFcn',  @Blind_Menu_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -45,13 +45,13 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before None_Blind_Menu is made visible.
-function None_Blind_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before Blind_Menu is made visible.
+function Blind_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user method (see GUIDATA)
-% varargin   command line arguments to None_Blind_Menu (see VARARGIN)
+% varargin   command line arguments to Blind_Menu (see VARARGIN)
 
 global main_path;
 jFrame=get(handle(handles.figure1), 'javaframe');
@@ -76,18 +76,18 @@ movegui(hObject, 'west');
 % Release system model when cursor not in any UIClass
 set(hObject,'WindowButtonDownFcn',{@releasesysmodel});
 
-% Choose default command line output for None_Blind_Menu
+% Choose default command line output for Blind_Menu
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes None_Blind_Menu wait for user response (see UIRESUME)
+% UIWAIT makes Blind_Menu wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = None_Blind_Menu_OutputFcn(hObject, eventdata, handles) 
+function varargout = Blind_Menu_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -139,7 +139,7 @@ function method_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
+    
 
 % --- Executes on selection change in modulation.
 function modulation_Callback(hObject, eventdata, handles)
@@ -304,6 +304,7 @@ function apply_Callback(hObject, eventdata, handles)
         results.figparams.data(results.figparams.count).x = SNR;
         results.figparams.data(results.figparams.count).y = CRB_op;
         results.figparams.title = 'CRB';
+        results.figparams.name  = 'CRB_Nt_2_Nr_16_L_2_M_4_K_64_P_0.3';
         results.figparams.xlabel = 'SNR(dB)';
         results.figparams.ylabel = 'Normalized CRB';
         results.figparams.gridmode = 'on';
@@ -318,7 +319,7 @@ function apply_Callback(hObject, eventdata, handles)
     end
     
     % Check figure mode: Clear/hold on/subfigure
-    mode = Checkfigmode(handles_main);
+    mode = checkfigmode(handles_main);
     switch(mode)
         case 1
             %clear old figure
@@ -337,7 +338,8 @@ function apply_Callback(hObject, eventdata, handles)
     
     %% Export data to Toolbox Workspace
     global toolboxws;
-    toolboxws = [toolboxws; [{true, 'CRB', matrix2char(results.figparams.data(results.figparams.count).x), ...
+    toolboxws = [toolboxws; [{true, results.figparams.name, ...
+        matrix2char(results.figparams.data(results.figparams.count).x), ...
         matrix2char(results.figparams.data(results.figparams.count).y), ...
         10000}]];
     set(handles_main.toolbox_ws, 'Data', toolboxws);
@@ -364,8 +366,9 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
     
-    set(hObject, 'String', {'            Select method', '                     Pilot', '                 Specular'})
-
+    default = get(hObject, 'String');
+    menu = load_methods(default, 'Blind');
+    set(hObject, 'String', menu);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Nt.
@@ -393,3 +396,26 @@ function Nr_ButtonDownFcn(hObject, eventdata, handles)
     params_Nr.linewidth = 2;
     params_Nr.color = 'b';
     params2sysmodel(hObject, eventdata, params_Nr);
+
+
+% --- Executes on selection change in version.
+function version_Callback(hObject, eventdata, handles)
+% hObject    handle to version (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns version contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from version
+
+
+% --- Executes during object creation, after setting all properties.
+function version_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to version (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end

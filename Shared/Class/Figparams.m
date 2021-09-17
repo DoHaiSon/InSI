@@ -5,6 +5,7 @@ classdef Figparams
     properties
         axes
         legends
+        name 
         title
         xlabel
         ylabel

@@ -22,7 +22,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 16-Sep-2021 16:02:25
+% Last Modified by GUIDE v2.5 17-Sep-2021 10:32:35
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -124,12 +124,12 @@ function About_Callback(hObject, eventdata, handles)
 % hObject    handle to About (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global main_path;
-[msgicon, iconcmap] = imread('AV.png');
-hm = msgbox({'Blind system identification 1.0.'; 'Copyright 2020 AVITECH.'}, 'About', 'custom', msgicon, iconcmap);
-jframe=get(hm, 'javaframe');
-jIcon=javax.swing.ImageIcon(fullfile(main_path, '/Resource/Icon/about.png'));
-jframe.setFigureIcon(jIcon);
+    global main_path;
+    [msgicon, iconcmap] = imread('AV.png');
+    hm = msgbox({'Blind system identification 1.0.'; 'Copyright 2020 AVITECH.'}, 'About', 'custom', msgicon, iconcmap);
+    jframe=get(hm, 'javaframe');
+    jIcon=javax.swing.ImageIcon(fullfile(main_path, '/Resource/Icon/about.png'));
+    jframe.setFigureIcon(jIcon);
 
 
 % --------------------------------------------------------------------
@@ -137,8 +137,8 @@ function Open_Callback(hObject, eventdata, handles)
 % hObject    handle to Open (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-path = Openfile();
-disp(path);
+    path = openfile();
+    disp(path);
 
 
 % --------------------------------------------------------------------
@@ -153,19 +153,7 @@ function Close_Callback(hObject, eventdata, handles)
 % hObject    handle to Close (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-closereq();
-    
-% --- Executes during object creation, after setting all properties.
-function popupmenu1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
+    closereq();
 
 
 % --- Executes during object creation, after setting all properties.
@@ -225,7 +213,7 @@ function Pilotbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Pilotbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    None_Blind_Menu();
+    Non_Blind_Menu();
 
 
 % --- Executes on button press in SBbutton.
@@ -269,7 +257,7 @@ function Blindbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Blindbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+    Blind_Menu();
 
 % --- Executes on button press in sub_fig.
 function sub_fig_Callback(hObject, eventdata, handles)

@@ -1,4 +1,4 @@
-function mode = Checkfigmode( handles )
+function mode = checkfigmode( handles )
 %Checkfigmode Summary of this function goes here
 %   Input: handles of main GUI
 %   Output: 1: Clear; 2: Hold on; 3: Subfigure
