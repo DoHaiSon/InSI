@@ -1,3 +1,5 @@
+function [] = CMA_adap()
+
 %BLIND CHANNEL USING CMA ALGORITHM
 % Ref: J. Treichler and B. Agee, "A new approach to multipath correction of constant modulus signals,"
 % in IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 31, no. 2, pp. 459-472, 1983.
@@ -91,3 +93,4 @@ else
     Errs    = sum(data(1:end+lag) == X_demod(1-lag:end));
 end
 fprintf('Symbol error rate after shifted symbols: %f.\n', Errs / length(X_demod));
+end

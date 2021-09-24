@@ -99,8 +99,8 @@ end
     % Set default menu to escape error when temp of menu is stored
     default = '            Select method';
     set(hObject, 'String', default);
-    menu = load_methods(default, 'Blind');
-    set(hObject, 'String', menu);
+    methods = load_methods(default, 'Blind');
+    set(hObject, 'String', methods);
 
 % --- Executes on selection change in methods.
 function methods_Callback(hObject, eventdata, handles)
@@ -110,8 +110,21 @@ function methods_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns methods contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from methods
-
-
+    method = get(hObject, 'Value');
+    methods = get(hObject, 'String');
+    if method == 1
+        % Feedback turn off param panel
+        vers = get(handles.version, 'String');
+        set(handles.version, 'String', vers{1});
+        set(handles.version, 'Value', 1);
+        
+        set(handles.panelparams, 'Visible', 'off');
+        % set(handles
+        return;
+    end
+    default = '            Select version';
+    vers = load_versions('Blind', default, methods{method});
+    set(handles.version, 'String', vers);
     
 % --- Executes during object creation, after setting all properties.
 function version_CreateFcn(hObject, eventdata, handles)
@@ -133,7 +146,14 @@ function version_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns version contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from version
-
+    ver = get(hObject, 'Value');
+    vers = get(hObject, 'String');
+    if ver == 1
+        % Feedback turn off param panel
+        set(handles.panelparams, 'Visible', 'off');
+        return;
+    end
+    load_params(hObject, eventdata, handles, 'Blind', vers{ver});
 
 % --- Executes during object creation, after setting all properties.
 function panelparams_CreateFcn(hObject, eventdata, handles)
