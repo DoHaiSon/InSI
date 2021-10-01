@@ -25,7 +25,7 @@ function load_params( hObject, eventdata, handles, method, algo )
         set(eval(strcat('handles.Text_', num2str(i))), 'String', params.params{i});
     end
     
-    % Set UIClass foro used params
+    % Set UIClass for used params
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
         %                        button      = 3
@@ -33,11 +33,12 @@ function load_params( hObject, eventdata, handles, method, algo )
         switch (params.params_type(i))
             case 1
                 set(eval(strcat('handles.Op_', num2str(i))), 'Style', 'edit');
+                set(eval(strcat('handles.Op_', num2str(i))), 'Enable', 'on');
             case 2
                 set(eval(strcat('handles.Op_', num2str(i))), 'Style', 'popupmenu');
                 % Scale droplist box
-                old_pos = get(eval(strcat('handles.Op_', num2str(i))), 'Position');
-                new_pos   = old_pos;
+                old_pos    = get(eval(strcat('handles.Op_', num2str(i))), 'Position');
+                new_pos    = old_pos;
                 new_pos(1) = old_pos(1) - old_pos(3)/2;
                 new_pos(3) = old_pos(3) * 2;
                 set(eval(strcat('handles.Op_', num2str(i))), 'Position', new_pos);
@@ -52,4 +53,23 @@ function load_params( hObject, eventdata, handles, method, algo )
         set(eval(strcat('handles.Op_', num2str(i))), 'Value', params.default_values{i});
     end
     
+    % Loader system model
+    global main_path;
+    handles_main = getappdata(0,'handles_main');
+    axesH        = handles_main.board;  % Not safe! Better get the handle explicitly!
+    img          = imread(fullfile(main_path, '/Resource/Dashboard', params.sys_model));
+    imshow(img, 'Parent', axesH);
+    
+    % Load interactiveness
+    j = 1;
+    for i=1:params.num_params
+        if params.has_inter(i)
+            set(eval(strcat('handles.Op_', num2str(i))), 'Enable', 'inactive');
+            params.rect_position = [1025 620 60 60];
+            params.rect_linewidth = 2;
+            params.rect_color = 'b';
+            params2sysmodel(hObject, eventdata, params);
+            j = j + 1;
+        end
+    end
 end

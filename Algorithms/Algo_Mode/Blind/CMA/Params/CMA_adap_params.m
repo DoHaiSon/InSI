@@ -15,14 +15,16 @@ classdef CMA_adap_params
         default_values = {10000, 2, 2, 3, 0.01, 50}
         
         % Figure
-        sys_model = ''
-        trigger = false 
+        sys_model = 'nonblind_model.png'
+        trigger   = false 
         position
         linewidth = 1
-        color = 'k'
+        color     = 'k'
         rect
         
         % Triggers/Flags
+        has_inter     = [true, true, false, false, false, false]
+        
         trigger_scale = false
     end
     
