@@ -22,7 +22,7 @@ function varargout = Blind_Menu(varargin)
 
 % Edit the above text to modify the response to help Blind_Menu
 
-% Last Modified by GUIDE v2.5 23-Sep-2021 14:32:00
+% Last Modified by GUIDE v2.5 08-Oct-2021 12:41:46
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -382,6 +382,27 @@ function Op_10_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of Op_10 as text
 %        str2double(get(hObject,'String')) returns contents of Op_10 as a double
 
+% --- Executes during object creation, after setting all properties.
+function Monte_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Monte (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+function Monte_Callback(hObject, eventdata, handles)
+% hObject    handle to Monte (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of Monte as text
+%        str2double(get(hObject,'String')) returns contents of Monte as a double
+
 
 
 % --- Executes during object creation, after setting all properties.
@@ -414,3 +435,33 @@ function apply_Callback(hObject, eventdata, handles)
     % Get handes form main window
     handles_main = getappdata(0,'handles_main');
 
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over Op_1.
+function Op_1_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to Op_1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    ver = get(handles.version, 'Value');
+    vers = get(handles.version, 'String');
+    if ver == 1
+        % Feedback turn off param panel
+        set(handles.panelparams, 'Visible', 'off');
+        return;
+    end
+    load_reactive(hObject, eventdata, handles, 'Blind', vers{ver});
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over Op_2.
+function Op_2_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to Op_2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    ver = get(handles.version, 'Value');
+    vers = get(handles.version, 'String');
+    if ver == 1
+        % Feedback turn off param panel
+        set(handles.panelparams, 'Visible', 'off');
+        return;
+    end
+    load_reactive(hObject, eventdata, handles, 'Blind', vers{ver});

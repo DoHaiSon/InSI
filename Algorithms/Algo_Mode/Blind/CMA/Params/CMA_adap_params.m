@@ -20,10 +20,13 @@ classdef CMA_adap_params
         position
         linewidth = 1
         color     = 'k'
-        rect
         
         % Triggers/Flags
         has_inter     = [true, true, false, false, false, false]
+        rect = {}
+        rect_position = {[5 290 60 60], [1025 620 60 60], 0, 0, 0, 0}
+        rect_linewidth = {2, 2, 0, 0, 0, 0}
+        rect_color     = {'b', 'r', 'b', 'b', 'b', 'b'}
         
         trigger_scale = false
     end

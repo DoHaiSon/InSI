@@ -1,4 +1,4 @@
-function load_params( hObject, eventdata, handles, method, algo )
+function load_params(hObject, eventdata, handles, method, algo )
 %load_params Summary of this function goes here
 %   Detailed explanation goes here
 %     param_file_name = strcat(algo, '_params.m');
@@ -61,15 +61,9 @@ function load_params( hObject, eventdata, handles, method, algo )
     imshow(img, 'Parent', axesH);
     
     % Load interactiveness
-    j = 1;
     for i=1:params.num_params
         if params.has_inter(i)
             set(eval(strcat('handles.Op_', num2str(i))), 'Enable', 'inactive');
-            params.rect_position = [1025 620 60 60];
-            params.rect_linewidth = 2;
-            params.rect_color = 'b';
-            params2sysmodel(hObject, eventdata, params);
-            j = j + 1;
         end
     end
 end
