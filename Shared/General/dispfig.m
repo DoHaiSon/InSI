@@ -6,7 +6,7 @@ function dispfig(results)
             semilogy(results.figaxes, results.figparams.data(end).x, results.figparams.data(end).y ...
                 , results.figparams.marker);
             hold (results.figaxes, 'on');
-            legend(results.figaxes, results.figparams.legends);
+            legend(results.figaxes, results.figparams.legends, 'Interpreter', 'None');
             grid (results.figaxes, results.figparams.gridmode);
             ylabel(results.figaxes, results.figparams.ylabel);
             xlabel(results.figaxes, results.figparams.xlabel);
@@ -18,7 +18,7 @@ function dispfig(results)
                 hold (results.figaxes, 'on');
             end
 
-            legend(results.figaxes, results.figparams.legends);
+            legend(results.figaxes, results.figparams.legends, 'Interpreter', 'None');
             grid (results.figaxes, results.figparams.gridmode);
             ylabel(results.figaxes, results.figparams.ylabel);
             xlabel(results.figaxes, results.figparams.xlabel);
@@ -29,7 +29,7 @@ function dispfig(results)
                 subfig = subplot(1, num, i, 'Parent', results.fig); 
                 semilogy(subfig, results.figparams.data(i).x, results.figparams.data(i).y ...
                     , results.figparams.marker);
-                legend(subfig, results.figparams.legends);
+                legend(subfig, results.figparams.legends, 'Interpreter', 'None');
                 grid (subfig, results.figparams.gridmode);
                 ylabel(subfig, results.figparams.ylabel);
                 xlabel(subfig, results.figparams.xlabel);

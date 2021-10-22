@@ -66,4 +66,17 @@ function load_params(hObject, eventdata, handles, method, algo )
             set(eval(strcat('handles.Op_', num2str(i))), 'Enable', 'inactive');
         end
     end
+    
+    % Load output panel
+    set(handles.btngroup, 'Visible', 'on');
+    if length(params.outputs) ~= 3
+       for i=1:3
+           if any(params.outputs(:) == i)
+               set(eval(strcat('handles.output', num2str(i))), 'Enable', 'on');
+           else
+               set(eval(strcat('handles.output', num2str(i))), 'Enable', 'off');
+           end
+       end
+    end
+    set(eval(strcat('handles.output', num2str(params.default_output))), 'Value', 1);
 end

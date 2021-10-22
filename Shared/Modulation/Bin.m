@@ -2,7 +2,9 @@
 %
 % T = number of samples to generate     
 %
-function sig= Binary(T)
+function [sig, data]= Bin(T)
 
-sig= sign(rand(T,1)-0.5);
+data = ones(T, 1);
+sig  = sign(rand(T,1)-0.5);
 
+data = data == sig;

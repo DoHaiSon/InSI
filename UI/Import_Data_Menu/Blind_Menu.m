@@ -63,6 +63,7 @@ movegui(hObject, 'west');
 
 % Release system model when cursor not in any UIClass
 set(hObject,'WindowButtonDownFcn',{@releasesysmodel});
+% TODO: set interactive again
 
 % Choose default command line output for Blind_Menu
 handles.output = hObject;
@@ -115,11 +116,13 @@ function methods_Callback(hObject, eventdata, handles)
     if method == 1
         % Feedback turn off param panel
         vers = get(handles.version, 'String');
-        set(handles.version, 'String', vers{1});
+        if iscell(vers)
+            set(handles.version, 'String', vers{1});
+        end
         set(handles.version, 'Value', 1);
         
         set(handles.panelparams, 'Visible', 'off');
-        % set(handles
+        set(handles.btngroup, 'Visible', 'off');
         return;
     end
     default = '            Select version';
@@ -149,10 +152,17 @@ function version_Callback(hObject, eventdata, handles)
     ver = get(hObject, 'Value');
     vers = get(hObject, 'String');
     if ver == 1
+        vers = get(hObject, 'String');
+        if iscell(vers)
+            set(hObject, 'String', vers{1});
+        end
+        
         % Feedback turn off param panel
         set(handles.panelparams, 'Visible', 'off');
+        set(handles.btngroup, 'Visible', 'off');
         return;
     end
+    % TODO: Version is lost when choose default but method is not default
     load_params(hObject, eventdata, handles, 'Blind', vers{ver});
 
 % --- Executes during object creation, after setting all properties.
@@ -434,7 +444,18 @@ function apply_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     % Get handes form main window
     handles_main = getappdata(0,'handles_main');
-
+    
+    % Try catch
+    if get(handles.methods, 'Value') == 1 || get(handles.version, 'Value') == 1
+        return;
+    end
+    
+    % Load all params to function exec
+    vers    = get(handles.version, 'String');
+    algo    = vers{get(handles.version, 'Value')};
+    
+    load_funcs(hObject, eventdata, handles, 'Blind', algo);
+    
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_1.

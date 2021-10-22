@@ -11,8 +11,15 @@ classdef CMA_adap_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 2, 2, 1, 1]
-        values = {10000, 2, {'Real', 'Complex', 'Specular', 'Input'}, {'Gauss', 'Bin', 'QAM4', 'QAM16'}, 0.01, 50}
-        default_values = {10000, 2, 2, 3, 0.01, 50}
+        values = {10000, 2, {'Real', 'Complex', 'Specular', 'Input'}, {'Bin', 'QPSK', 'QAM4'}, 0.01, 50}
+        default_values = {10000, 2, 2, 2, 0.01, 20}
+        
+        % Output
+%         Type of the outputs: MSE Sig = 1
+%                              MSE Ch  = 2
+%                              Err rate= 3
+        outputs = [1]
+        default_output = 1
         
         % Figure
         sys_model = 'nonblind_model.png'

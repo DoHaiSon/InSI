@@ -1,6 +1,6 @@
 function init_results()
     global results;
-    output = figure('Name', 'CRB', 'Tag', 'outputCRB');
+    output = figure('Name', 'CE', 'Tag', 'channel_estimation');
     results.fig = output;
     output.Visible = 'off';
     results.figaxes = axes;
