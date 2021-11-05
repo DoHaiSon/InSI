@@ -22,7 +22,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 17-Sep-2021 10:32:35
+% Last Modified by GUIDE v2.5 05-Nov-2021 12:31:19
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -271,8 +271,7 @@ function sub_fig_Callback(hObject, eventdata, handles)
     if holdon_state && sub_fig_state
         set(handles.holdon, 'Value', 0);
     end
-
-
+    
 % --- Executes during object creation, after setting all properties.
 function toolbox_ws_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to toolbox_ws (see GCBO)
@@ -282,4 +281,23 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
     global toolboxws;
     toolboxws = {};
     set(hObject, 'Data', toolboxws);
-    
+
+
+% --- Executes when entered data in editable cell(s) in toolbox_ws.
+function toolbox_ws_CellEditCallback(hObject, eventdata, handles)
+% hObject    handle to toolbox_ws (see GCBO)
+% eventdata  structure with the following fields (see MATLAB.UI.CONTROL.TABLE)
+%	Indices: row and column indices of the cell(s) edited
+%	PreviousData: previous data for the cell(s) edited
+%	EditData: string(s) entered by the user
+%	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
+%	Error: error string when failed to convert EditData to appropriate value for Data
+% handles    structure with handles and user data (see GUIDATA)
+    plot_op = get(hObject, 'Data');
+    plot_op = [plot_op{:, 1}];
+    scan_on = [];
+    for i = 1:length(plot_op)
+        if plot_op(i) == 1
+            scan_on = [scan_on i]
+        end
+    end

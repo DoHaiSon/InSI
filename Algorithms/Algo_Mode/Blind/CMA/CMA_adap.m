@@ -56,7 +56,7 @@ SER_f = [];
 for Monte_i = 1:Monte
     [sig, data]  = eval(strcat(modulation{Mod_type}, '(N)'));
 
-    Ch         = Generate_channel(ChL, Ch_type);
+    Ch         = Generate_channel(1, ChL, Ch_type);
     x          = filter(Ch, 1, sig);
     
     SER_SNR    = [];
