@@ -12,7 +12,7 @@ function dispfig(results)
             xlabel(results.figaxes, results.figparams.xlabel);
             title(results.figaxes, results.figparams.title);
         case 2
-            for i=1:results.figparams.count
+            for i=results.figparams.count:results.figparams.count % Just plot the latest data per times.
                 semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
                     , results.figparams.marker);
                 hold (results.figaxes, 'on');
