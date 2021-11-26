@@ -6,11 +6,11 @@ function dispfig(results)
             semilogy(results.figaxes, results.figparams.data(end).x, results.figparams.data(end).y ...
                 , results.figparams.marker);
             hold (results.figaxes, 'on');
-            legend(results.figaxes, results.figparams.legends, 'Interpreter', 'None');
+            legend(results.figaxes, results.figparams.legends, 'Interpreter', 'latex');
             grid (results.figaxes, results.figparams.gridmode);
-            ylabel(results.figaxes, results.figparams.ylabel);
-            xlabel(results.figaxes, results.figparams.xlabel);
-            title(results.figaxes, results.figparams.title);
+            ylabel(results.figaxes, results.figparams.ylabel, 'Interpreter', 'latex');
+            xlabel(results.figaxes, results.figparams.xlabel, 'Interpreter', 'latex');
+            title(results.figaxes, results.figparams.title, 'Interpreter', 'latex');
         case 2
             for i=results.figparams.count:results.figparams.count % Just plot the latest data per times.
                 semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
@@ -18,22 +18,22 @@ function dispfig(results)
                 hold (results.figaxes, 'on');
             end
 
-            legend(results.figaxes, results.figparams.legends, 'Interpreter', 'None');
+            legend(results.figaxes, results.figparams.legends, 'Interpreter', 'latex');
             grid (results.figaxes, results.figparams.gridmode);
-            ylabel(results.figaxes, results.figparams.ylabel);
-            xlabel(results.figaxes, results.figparams.xlabel);
-            title(results.figaxes, results.figparams.title);
+            ylabel(results.figaxes, results.figparams.ylabel, 'Interpreter', 'latex');
+            xlabel(results.figaxes, results.figparams.xlabel, 'Interpreter', 'latex');
+            title(results.figaxes, results.figparams.title, 'Interpreter', 'latex');
         case 3
             num = results.figparams.count;
             for i=1:num
                 subfig = subplot(1, num, i, 'Parent', results.fig); 
                 semilogy(subfig, results.figparams.data(i).x, results.figparams.data(i).y ...
                     , results.figparams.marker);
-                legend(subfig, results.figparams.legends, 'Interpreter', 'None');
+                legend(subfig, results.figparams.legends, 'Interpreter', 'latex');
                 grid (subfig, results.figparams.gridmode);
-                ylabel(subfig, results.figparams.ylabel);
-                xlabel(subfig, results.figparams.xlabel);
-                title(subfig, results.figparams.title);
+                ylabel(subfig, results.figparams.ylabel, 'Interpreter', 'latex');
+                xlabel(subfig, results.figparams.xlabel, 'Interpreter', 'latex');
+                title(subfig, results.figparams.title, 'Interpreter', 'latex');
             end
         otherwise
     end

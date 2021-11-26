@@ -7,7 +7,7 @@ function hidden_line(hObject, eventdata, handles)
             plot_op = [plot_op{:, 1}];
 
             % TODO: Find figure obj (fixed by number, not oke)
-            fig = findall(0, 'Number', 2, 'Name', 'CE', 'Tag', 'channel_estimation');
+            fig = findall(0, 'Number', 1, 'Name', 'CE', 'Tag', 'channel_estimation');
             lines = get(get(fig, 'Children'), 'Children');
             lines = lines(2);
             lines = lines{1};
