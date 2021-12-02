@@ -4,9 +4,11 @@ function start()
     main_path = matlab.desktop.editor.getActiveFilename; %   get path of active file
     main_path = main_path(1:end-8);
     addpath(genpath(main_path));
+    
     % Clear auto save file of matlab
     clear_asv_files();
     
+    % TODO: Close all BSI toolbox windows
 
 %%  format master clock
     format shortg;

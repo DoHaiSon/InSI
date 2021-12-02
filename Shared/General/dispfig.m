@@ -3,7 +3,7 @@ function dispfig(font)
     
     % Check empty figure
     if ~ishandle(results.fig)
-        output = figure('Name', 'CE', 'Tag', 'channel_estimation');
+        output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);

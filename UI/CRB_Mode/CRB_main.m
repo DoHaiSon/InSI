@@ -22,7 +22,7 @@ function varargout = CRB_main(varargin)
 
 % Edit the above text to modify the response to help CRB_main
 
-% Last Modified by GUIDE v2.5 02-Dec-2021 13:12:45
+% Last Modified by GUIDE v2.5 02-Dec-2021 17:02:46
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -46,8 +46,6 @@ end
 if nargout
     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
 else
-    % Disable the Java-related warnings after 2019b
-    TurnOffWarnings;
     gui_mainfcn(gui_State, varargin{:});
 end
 % End initialization code - DO NOT EDIT
@@ -106,13 +104,6 @@ function Options_Callback(hObject, eventdata, handles)
 
 
 % --------------------------------------------------------------------
-function Window_Callback(hObject, eventdata, handles)
-% hObject    handle to Window (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
-% --------------------------------------------------------------------
 function Help_Callback(hObject, eventdata, handles)
 % hObject    handle to Help (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -156,33 +147,25 @@ function Close_Callback(hObject, eventdata, handles)
     closereq();
 
 
-% --- Executes during object creation, after setting all properties.
-function model_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to model (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-% --- Executes on button press in togglebutton1.
-function togglebutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to togglebutton1 (see GCBO)
+% --- Executes on button press in mode.
+function mode_Callback(hObject, eventdata, handles)
+% hObject    handle to mode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
-state = get(hObject,'Value');
-if state
-    disp('Switch to Demo');
-    set(handles.togglebutton1, 'String' , 'CRB Mode');
-else
-    disp('Switch to CRB');
-    set(handles.togglebutton1, 'String' , 'Demo Mode');
-end
+    global switch_mode;
+    switch_mode = switch_mode + 1;
+    state = mod(switch_mode, 3);
+    switch (state)
+        case 1 % Switch to CRB
+            disp('Switch to CRB');
+            set(handles.mode, 'String' , 'Algo Mode');
+        case 2 % Switch to Algo
+            disp('Switch to Algo');
+            set(handles.mode, 'String' , 'Demo Mode');
+        case 0 % Switch to Demo
+            disp('Switch to Demo');
+            set(handles.mode, 'String' , 'CRB Mode');
+    end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -193,27 +176,12 @@ function dataaxes_CreateFcn(hObject, eventdata, handles)
 
 % Hint: place code in OpeningFcn to populate dataaxes
 
-
-% --------------------------------------------------------------------
-% function save_fig_ClickedCallback(hObject, eventdata, handles)
-% % hObject    handle to save_fig (see GCBO)
-% % eventdata  reserved - to be defined in a future version of MATLAB
-% % handles    structure with handles and user data (see GUIDATA)
-%     % Save recently axes to .fig file
-%     Fig_tmp = figure('Visible','on');
-%     copyobj(handles.mainaxes, Fig_tmp);
-%     global main_path;
-%     output_file = fullfile(main_path, 'CRB.fig');
-%     saveas(Fig_tmp, output_file, 'fig');
-%     fprintf('Saved fig to: %s.\n', output_file);
-
-
-% --- Executes on button press in Pilotbutton.
-function Pilotbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to Pilotbutton (see GCBO)
+% --- Executes on button press in Blindbutton.
+function Blindbutton_Callback(hObject, eventdata, handles)
+% hObject    handle to Blindbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    Non_Blind_Menu();
+    Algo_Blind_Menu();
 
 
 % --- Executes on button press in SBbutton.
@@ -221,8 +189,17 @@ function SBbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to SBbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    Semi_Blind_Menu();
+%     Not support yet
+%     Semi_Blind_Menu();
 
+    
+% --- Executes on button press in Pilotbutton.
+function Pilotbutton_Callback(hObject, eventdata, handles)
+% hObject    handle to Pilotbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+%     Not support yet
+%     Non_Blind_Menu();
 
 % --- Executes on button press in holdon.
 function holdon_Callback(hObject, eventdata, handles)
@@ -251,13 +228,6 @@ function board_CreateFcn(hObject, eventdata, handles)
     imshow(img);
     set(axesH, 'Tag', 'board');
 
-
-% --- Executes on button press in Blindbutton.
-function Blindbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to Blindbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-    Blind_Menu();
 
 % --- Executes on button press in sub_fig.
 function sub_fig_Callback(hObject, eventdata, handles)
@@ -314,7 +284,7 @@ function inter_latex_Callback(hObject, eventdata, handles)
     if ~results.inter
         % TODO: remove data instead of close recent figure
         close(results.fig);
-        output = figure('Name', 'CE', 'Tag', 'channel_estimation');
+        output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);
@@ -329,10 +299,11 @@ function inter_non_latex_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     global results;
+    % TODO: check first time run
     if results.inter
         % TODO: remove data instead of close recent figure
         close(results.fig);
-        output = figure('Name', 'CE', 'Tag', 'channel_estimation');
+        output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);

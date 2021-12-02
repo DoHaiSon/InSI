@@ -46,8 +46,6 @@ end
 if nargout
     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
 else
-    % Disable the Java-related warnings after 2019b
-    TurnOffWarnings;
     gui_mainfcn(gui_State, varargin{:});
 end
 % End initialization code - DO NOT EDIT
@@ -101,13 +99,6 @@ function File_Callback(hObject, eventdata, handles)
 % --------------------------------------------------------------------
 function Options_Callback(hObject, eventdata, handles)
 % hObject    handle to Options (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
-% --------------------------------------------------------------------
-function Window_Callback(hObject, eventdata, handles)
-% hObject    handle to Window (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -292,7 +283,7 @@ function inter_latex_Callback(hObject, eventdata, handles)
     if ~results.inter
         % TODO: remove data instead of close recent figure
         close(results.fig);
-        output = figure('Name', 'CE', 'Tag', 'channel_estimation');
+        output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);
@@ -311,7 +302,7 @@ function inter_non_latex_Callback(hObject, eventdata, handles)
     if results.inter
         % TODO: remove data instead of close recent figure
         close(results.fig);
-        output = figure('Name', 'CE', 'Tag', 'channel_estimation');
+        output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);
