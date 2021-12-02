@@ -19,7 +19,7 @@ function start()
     init_results();
     
 %%  Load main GUI
-    loader('Opening the application', 'main');
+    loader('Opening the application', 'mode');
     try
         F = findall(0, 'type', 'figure', 'tag', 'loader');
         waitbar(1, F, 'Done!');

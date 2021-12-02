@@ -49,14 +49,7 @@ function load_funcs(hObject, eventdata, handles, method, algo )
     results.figparams.ylabel = 'SER';
     results.figparams.gridmode = 'on';
     results.figparams.marker = '-o';
-    results.figparams.legends{end + 1} = algo;
-    
-    % Check empty figure
-    if ~ishandle(results.fig)
-        output = figure('Name', 'CE', 'Tag', 'channel_estimation');
-        results.fig = output;
-        results.figaxes = axes;
-    end
+    results.figparams.legends{end + 1} = parseleg(algo);
     
     % Check figure mode: Clear/hold on/subfigure
     mode = checkfigmode(handles_main);
@@ -66,15 +59,14 @@ function load_funcs(hObject, eventdata, handles, method, algo )
             cla(results.figaxes, 'reset');
             results.figparams.count = 0;
             results.mode = 1;
-            dispfig(results);
         case 2
             results.mode = 2;
-            dispfig(results);
         case 3
             results.mode = 3;
-            dispfig(results);
         otherwise
     end
+    %% Display figure
+    dispfig(true);
     
     %% Export data to Toolbox Workspace
     global toolboxws;

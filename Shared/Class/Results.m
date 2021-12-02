@@ -8,6 +8,8 @@ classdef Results
         figparams
         mode
         pos
+        trigger=true
+        inter=true
     end
     
     methods
