@@ -1,28 +1,28 @@
-function varargout = Algo_main(varargin)
-% Algo_main MATLAB code for Algo_main.fig
-%      Algo_main, by itself, creates a new Algo_main or raises the existing
+function varargout = CRB_main(varargin)
+% CRB_main MATLAB code for CRB_main.fig
+%      CRB_main, by itself, creates a new CRB_main or raises the existing
 %      singleton*.
 %
-%      H = Algo_main returns the handle to a new Algo_main or the handle to
+%      H = CRB_main returns the handle to a new CRB_main or the handle to
 %      the existing singleton*.
 %
-%      Algo_main('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in Algo_main.M with the given input arguments.
+%      CRB_main('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in CRB_main.M with the given input arguments.
 %
-%      Algo_main('Property','Value',...) creates a new Algo_main or raises the
+%      CRB_main('Property','Value',...) creates a new CRB_main or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before Algo_main_OpeningFcn gets called.  An
+%      applied to the GUI before CRB_main_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to Algo_main_OpeningFcn via varargin.
+%      stop.  All inputs are passed to CRB_main_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help Algo_main
+% Edit the above text to modify the response to help CRB_main
 
-% Last Modified by GUIDE v2.5 02-Dec-2021 13:32:14
+% Last Modified by GUIDE v2.5 02-Dec-2021 13:12:45
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -35,8 +35,8 @@ global main_path;
 
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @Algo_main_OpeningFcn, ...
-                   'gui_OutputFcn',  @Algo_main_OutputFcn, ...
+                   'gui_OpeningFcn', @CRB_main_OpeningFcn, ...
+                   'gui_OutputFcn',  @CRB_main_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -53,19 +53,19 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before Algo_main is made visible.
-function Algo_main_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before CRB_main is made visible.
+function CRB_main_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to Algo_main (see VARARGIN)
+% varargin   command line arguments to CRB_main (see VARARGIN)
 global main_path;
 jFrame=get(handle(handles.figure1), 'javaframe');
 jicon=javax.swing.ImageIcon(fullfile(main_path,'/Resource/Icon/main_icon.png'));
 jFrame.setFigureIcon(jicon);
 
-% Choose default command line output for Algo_main
+% Choose default command line output for CRB_main
 handles.output = hObject;
 
 % Update handles structure
@@ -75,12 +75,12 @@ setappdata(0,'handles_main', handles)
 % Set position for this GUI
 movegui(hObject, 'center');
 
-% UIWAIT makes Algo_main wait for user response (see UIRESUME)
+% UIWAIT makes CRB_main wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = Algo_main_OutputFcn(hObject, eventdata, handles) 
+function varargout = CRB_main_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -156,25 +156,33 @@ function Close_Callback(hObject, eventdata, handles)
     closereq();
 
 
-% --- Executes on button press in mode.
-function mode_Callback(hObject, eventdata, handles)
-% hObject    handle to mode (see GCBO)
+% --- Executes during object creation, after setting all properties.
+function model_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to model (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in togglebutton1.
+function togglebutton1_Callback(hObject, eventdata, handles)
+% hObject    handle to togglebutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    global switch_mode;
-    switch_mode = switch_mode + 1;
-    state = mod(switch_mode, 3);
-    switch (state)
-        case 1 % Switch to CRB
-            disp('Switch to CRB');
-            set(handles.mode, 'String' , 'Algo Mode');
-        case 2 % Switch to Algo
-            disp('Switch to Algo');
-            set(handles.mode, 'String' , 'Demo Mode');
-        case 0 % Switch to Demo
-            disp('Switch to Demo');
-            set(handles.mode, 'String' , 'CRB Mode');
-    end
+
+state = get(hObject,'Value');
+if state
+    disp('Switch to Demo');
+    set(handles.togglebutton1, 'String' , 'CRB Mode');
+else
+    disp('Switch to CRB');
+    set(handles.togglebutton1, 'String' , 'Demo Mode');
+end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -184,6 +192,20 @@ function dataaxes_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: place code in OpeningFcn to populate dataaxes
+
+
+% --------------------------------------------------------------------
+% function save_fig_ClickedCallback(hObject, eventdata, handles)
+% % hObject    handle to save_fig (see GCBO)
+% % eventdata  reserved - to be defined in a future version of MATLAB
+% % handles    structure with handles and user data (see GUIDATA)
+%     % Save recently axes to .fig file
+%     Fig_tmp = figure('Visible','on');
+%     copyobj(handles.mainaxes, Fig_tmp);
+%     global main_path;
+%     output_file = fullfile(main_path, 'CRB.fig');
+%     saveas(Fig_tmp, output_file, 'fig');
+%     fprintf('Saved fig to: %s.\n', output_file);
 
 
 % --- Executes on button press in Pilotbutton.
@@ -307,7 +329,6 @@ function inter_non_latex_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     global results;
-    % TODO: check first time run
     if results.inter
         % TODO: remove data instead of close recent figure
         close(results.fig);

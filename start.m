@@ -18,7 +18,7 @@ function start()
     results = Results;
     init_results();
     
-%%  Load main GUI
+%%  Load MODE GUI
     loader('Opening the application', 'mode');
     try
         F = findall(0, 'type', 'figure', 'tag', 'loader');

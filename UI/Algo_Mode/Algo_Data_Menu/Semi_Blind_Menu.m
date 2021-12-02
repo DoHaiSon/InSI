@@ -69,6 +69,9 @@ axesH = handles_main.board;  % Not safe! Better get the handle explicitly!
 img = imread(fullfile(main_path, '/Resource/Dashboard/nonblind_model.png'));
 imshow(img, 'Parent', axesH);
 
+% Set position for this GUI
+movegui(hObject, 'west');
+
 % Choose default command line output for Semi_Blind_Menu
 handles.output = hObject;
 

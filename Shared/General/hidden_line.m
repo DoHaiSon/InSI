@@ -2,6 +2,7 @@ function hidden_line(hObject, eventdata, handles)
     mode = checkfigmode(handles);
     switch (mode)
         case 1
+            % TODO: interactiveness with single figure mode
         case 2
             plot_op = get(hObject, 'Data');
             plot_op = [plot_op{:, 1}];

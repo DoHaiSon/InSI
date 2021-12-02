@@ -23,13 +23,13 @@ function dispfig(font)
         case 1
             semilogy(results.figaxes, results.figparams.data(end).x, results.figparams.data(end).y ...
                 , results.figparams.marker);
-            hold (results.figaxes, 'on');
+%             hold (results.figaxes, 'on');
             legend(results.figaxes, results.figparams.legends, 'Interpreter', interpreter);
             grid (results.figaxes, results.figparams.gridmode);
             ylabel(results.figaxes, results.figparams.ylabel, 'Interpreter', interpreter);
             xlabel(results.figaxes, results.figparams.xlabel, 'Interpreter', interpreter);
             title(results.figaxes, results.figparams.title, 'Interpreter', interpreter, 'fontweight','bold','fontsize', 16);
-            set(results.figaxes ,'TickLabelInterpreter',interpreter);
+            set(results.figaxes ,'TickLabelInterpreter', interpreter);
         case 2
             if results.trigger
                 i=results.figparams.count; % Just plot the latest data per times.
@@ -61,7 +61,8 @@ function dispfig(font)
                 ylabel(subfig, results.figparams.ylabel, 'Interpreter', interpreter);
                 xlabel(subfig, results.figparams.xlabel, 'Interpreter', interpreter);
                 title(subfig, results.figparams.title, 'Interpreter', interpreter, 'fontweight','bold','fontsize', 16);
-                set(results.figaxes ,'TickLabelInterpreter',interpreter);
+                % TODO: set TickLabelInterpreter latex
+%                 set(results.figaxes ,'TickLabelInterpreter', interpreter);
             end
         otherwise
     end

@@ -8,8 +8,8 @@ classdef Results
         figparams
         mode
         pos
-        trigger=true
-        inter=true
+        trigger=true            % for re-plot all lines
+        inter=true              % for check currently inter-mode
     end
     
     methods
