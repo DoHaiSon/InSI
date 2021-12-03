@@ -1,5 +1,5 @@
 function start()
-%%  add path to this toolbox
+%%  TODO: Do not add everything 
     global main_path;
     main_path = matlab.desktop.editor.getActiveFilename; %   get path of active file
     main_path = main_path(1:end-8);

@@ -78,25 +78,15 @@ function varargout = mode_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
-
-% --- Executes on button press in demo_mode.
-function demo_mode_Callback(hObject, eventdata, handles)
-% hObject    handle to demo_mode (see GCBO)
+% --- Executes on button press in crb_mode.
+function crb_mode_Callback(hObject, eventdata, handles)
+% hObject    handle to crb_mode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     % TODO: not yet support
     global switch_mode;
     switch_mode = 1;
-
-% --- Executes on button press in algo_mode.
-function algo_mode_Callback(hObject, eventdata, handles)
-% hObject    handle to algo_mode (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-    %%  Load main GUI
-    global switch_mode;
-    switch_mode = 2;
-    loader('Opening the application', 'Algo_main');
+    loader('Opening the Performance mode', 'CRB_main');
     try
         F = findall(0, 'type', 'figure', 'tag', 'loader');
         waitbar(1, F, 'Done!');
@@ -106,13 +96,30 @@ function algo_mode_Callback(hObject, eventdata, handles)
     end
     closereq(); 
 
-% --- Executes on button press in crb_mode.
-function crb_mode_Callback(hObject, eventdata, handles)
-% hObject    handle to crb_mode (see GCBO)
+% --- Executes on button press in algo_mode.
+function algo_mode_Callback(hObject, eventdata, handles)
+% hObject    handle to algo_mode (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    %%  Load main GUI
+    global switch_mode;
+    switch_mode = 2;
+    loader('Opening the Algorithms mode', 'Algo_main');
+    try
+        F = findall(0, 'type', 'figure', 'tag', 'loader');
+        waitbar(1, F, 'Done!');
+        close(F);
+    catch ME
+        disp(ME);
+    end
+    closereq(); 
+
+    
+% --- Executes on button press in demo_mode.
+function demo_mode_Callback(hObject, eventdata, handles)
+% hObject    handle to demo_mode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     % TODO: not yet support
     global switch_mode;
     switch_mode = 3;
-%     CRB_main();
-%     closereq(); 

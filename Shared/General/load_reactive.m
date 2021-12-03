@@ -1,11 +1,10 @@
-function load_reactive(hObject, eventdata, handles, method, algo )
+function load_reactive(hObject, eventdata, handles, mode, model, algo )
 %load_reactive Summary of this function goes here
 %   Detailed explanation goes here
-%     param_file_name = strcat(algo, '_params.m');
-%     global main_path;
-%     param_file = fullfile(main_path, '/Algorithms/Algo_Mode/', method, param_file_name);
+    global main_path;
     param_file_name = strcat(algo, '_params');
     params = eval(param_file_name);
+    
     if params.num_params == 0
         return
     end

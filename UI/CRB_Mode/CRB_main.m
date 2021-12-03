@@ -181,7 +181,8 @@ function Blindbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Blindbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    Algo_Blind_Menu();
+%     Not support yet
+%     CRB_Blind_Menu();
 
 
 % --- Executes on button press in SBbutton.
@@ -189,8 +190,7 @@ function SBbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to SBbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%     Not support yet
-%     Semi_Blind_Menu();
+    CRB_Semi_Blind_Menu();
 
     
 % --- Executes on button press in Pilotbutton.
@@ -198,8 +198,7 @@ function Pilotbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Pilotbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%     Not support yet
-%     Non_Blind_Menu();
+    CRB_Non_Blind_Menu();
 
 % --- Executes on button press in holdon.
 function holdon_Callback(hObject, eventdata, handles)

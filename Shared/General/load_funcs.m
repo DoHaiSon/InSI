@@ -1,30 +1,54 @@
-function load_funcs(hObject, eventdata, handles, method, algo )
-
-    % Get handes form main window
-    handles_main = getappdata(0,'handles_main');
-    
+function load_funcs(hObject, eventdata, handles, mode, method, algo )
+%load_funcs Summary of this function goes here
+%   Detailed explanation goes here
+    global main_path;
     param_file_name = strcat(algo, '_params');
     params = eval(param_file_name);
+    
     if params.num_params == 0
         return
     end
     
     Monte   = str2num(get(handles.Monte, 'String'));
     SNR     = str2num(get(handles.SNR, 'String'));
-    for i=1:3
-        if get(eval(strcat('handles.output', num2str(i))), 'Value') == 1 
-            Output_type  = i;
-            break;
-        end
+    
+    % Load output panel
+    switch (mode)
+        case 'Algo_Mode'
+            for i=1:3
+                if get(eval(strcat('handles.output', num2str(i))), 'Value') == 1 
+                    Output_type  = i;
+                    break;
+                end
+            end
+        case 'CRB_Mode'
+        case 'Demo_Mode'
     end
+    
+    % Get UIClass and value of params
+        % Type of the UIControl: edit_text   = 1
+        %                        popup_menu  = 2
+        %                        button      = 3
     Op = {};
     for i = 1:params.num_params
-        Op{end + 1} = get(eval(strcat('handles.Op_', num2str(i))), 'Value');
+        switch (params.params_type(i))
+            case 1
+                Op{end + 1} = str2num(get(eval(strcat('handles.Op_', num2str(i))), 'String'));
+            case 2
+                Op{end + 1} = get(eval(strcat('handles.Op_', num2str(i))), 'Value');
+            case 3
+        end
     end
     
     %% Exec algorithm
     loader('Execute function');
-    [SNR, Err] = eval(strcat(algo, '(Op, Monte, SNR, Output_type)'));
+    switch (mode)
+        case 'Algo_Mode'
+            [SNR, Err] = eval(strcat(algo, '(Op, Monte, SNR, Output_type)'));
+        case 'CRB_Mode'
+            [SNR, Err] = eval(strcat(algo, '(Op, Monte, SNR)'));
+        case 'Demo_Mode'
+    end
     try
         F = findall(0, 'type', 'figure', 'tag', 'loader');
         waitbar(1, F, 'Done!');
@@ -32,7 +56,7 @@ function load_funcs(hObject, eventdata, handles, method, algo )
     catch ME
         disp(ME);
     end
-
+            
     %% Figure result
     global results;         % Be careful 
         
@@ -52,6 +76,9 @@ function load_funcs(hObject, eventdata, handles, method, algo )
     results.figparams.legends{end + 1} = parseleg(algo);
     
     % Check figure mode: Clear/hold on/subfigure
+    % Loader system model
+    handles_main = getappdata(0,'handles_main');
+    
     mode = checkfigmode(handles_main);
     switch(mode)
         case 1

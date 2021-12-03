@@ -1,36 +1,36 @@
-function varargout = Algo_Blind_Menu(varargin)
-% ALGO_BLIND_MENU MATLAB code for Algo_Blind_Menu.fig
-%      ALGO_BLIND_MENU, by itself, creates a new ALGO_BLIND_MENU or raises the existing
+function varargout = CRB_Non_Blind_Menu(varargin)
+% CRB_NON_BLIND_MENU MATLAB code for CRB_Non_Blind_Menu.fig
+%      CRB_NON_BLIND_MENU, by itself, creates a new CRB_NON_BLIND_MENU or raises the existing
 %      singleton*.
 %
-%      H = ALGO_BLIND_MENU returns the handle to a new ALGO_BLIND_MENU or the handle to
+%      H = CRB_NON_BLIND_MENU returns the handle to a new CRB_NON_BLIND_MENU or the handle to
 %      the existing singleton*.
 %
-%      ALGO_BLIND_MENU('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in ALGO_BLIND_MENU.M with the given input arguments.
+%      CRB_NON_BLIND_MENU('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in CRB_NON_BLIND_MENU.M with the given input arguments.
 %
-%      ALGO_BLIND_MENU('Property','Value',...) creates a new ALGO_BLIND_MENU or raises the
+%      CRB_NON_BLIND_MENU('Property','Value',...) creates a new CRB_NON_BLIND_MENU or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before Algo_Blind_Menu_OpeningFcn gets called.  An
+%      applied to the GUI before CRB_Non_Blind_Menu_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to Algo_Blind_Menu_OpeningFcn via varargin.
+%      stop.  All inputs are passed to CRB_Non_Blind_Menu_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help Algo_Blind_Menu
+% Edit the above text to modify the response to help CRB_Non_Blind_Menu
 
-% Last Modified by GUIDE v2.5 02-Dec-2021 17:04:40
+% Last Modified by GUIDE v2.5 03-Dec-2021 17:09:39
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @Algo_Blind_Menu_OpeningFcn, ...
-                   'gui_OutputFcn',  @Algo_Blind_Menu_OutputFcn, ...
+                   'gui_OpeningFcn', @CRB_Non_Blind_Menu_OpeningFcn, ...
+                   'gui_OutputFcn',  @CRB_Non_Blind_Menu_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -45,13 +45,13 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before Algo_Blind_Menu is made visible.
-function Algo_Blind_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before CRB_Non_Blind_Menu is made visible.
+function CRB_Non_Blind_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user method (see GUIDATA)
-% varargin   command line arguments to Algo_Blind_Menu (see VARARGIN)
+% varargin   command line arguments to CRB_Non_Blind_Menu (see VARARGIN)
 
 global main_path;
 jFrame=get(handle(handles.figure1), 'javaframe');
@@ -65,18 +65,18 @@ movegui(hObject, 'west');
 set(hObject,'WindowButtonDownFcn',{@releasesysmodel});
 % TODO: set interactive again
 
-% Choose default command line output for Algo_Blind_Menu
+% Choose default command line output for CRB_Non_Blind_Menu
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes Algo_Blind_Menu wait for user response (see UIRESUME)
+% UIWAIT makes CRB_Non_Blind_Menu wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = Algo_Blind_Menu_OutputFcn(hObject, eventdata, handles) 
+function varargout = CRB_Non_Blind_Menu_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -100,7 +100,7 @@ end
     % Set default menu to escape error when temp of menu is stored
     default = '            Select method';
     set(hObject, 'String', default);
-    methods = load_methods(default, 'Algo_Mode', 'Blind');
+    methods = load_methods(default, 'CRB_Mode', 'Non-blind');
     set(hObject, 'String', methods);
 
 % --- Executes on selection change in methods.
@@ -115,56 +115,13 @@ function methods_Callback(hObject, eventdata, handles)
     methods = get(hObject, 'String');
     if method == 1
         % Feedback turn off param panel
-        vers = get(handles.version, 'String');
-        if iscell(vers)
-            set(handles.version, 'String', vers{1});
-        end
-        set(handles.version, 'Value', 1);
-        
         set(handles.panelparams, 'Visible', 'off');
-        set(handles.btngroup, 'Visible', 'off');
-        return;
-    end
-    default = '            Select version';
-    vers = load_versions('Blind', default, methods{method});
-    set(handles.version, 'String', vers);
-    
-% --- Executes during object creation, after setting all properties.
-function version_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to version (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-% --- Executes on selection change in version.
-function version_Callback(hObject, eventdata, handles)
-% hObject    handle to version (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: contents = cellstr(get(hObject,'String')) returns version contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from version
-    ver = get(hObject, 'Value');
-    vers = get(hObject, 'String');
-    
-    if ver == 1
-        vers = get(hObject, 'String');
-        if iscell(vers)
-            set(hObject, 'String', vers{1});
-        end
-        
-        % Feedback turn off param panel
-        set(handles.panelparams, 'Visible', 'off');
-        set(handles.btngroup, 'Visible', 'off');
         return;
     end
     % TODO: Version is lost when choose default but method is not default
-    load_params(hObject, eventdata, handles, 'Algo_Mode', 'Blind', vers{ver});
+    algo = strcat('NB_', methods{method});
+    load_params(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+
 
 % --- Executes during object creation, after setting all properties.
 function panelparams_CreateFcn(hObject, eventdata, handles)
@@ -443,18 +400,17 @@ function apply_Callback(hObject, eventdata, handles)
 % hObject    handle to apply (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+    method = get(handles.methods, 'Value');
+    methods = get(handles.methods, 'String');
+    
     % Try catch
-    if get(handles.methods, 'Value') == 1 || get(handles.version, 'Value') == 1
+    if get(handles.methods, 'Value') == 1
         return;
     end
     
     % Load all params to function exec
-   
-    vers    = get(handles.version, 'String');
-    algo    = vers{get(handles.version, 'Value')};
-    
-    load_funcs(hObject, eventdata, handles, 'Algo_Mode', 'Blind', algo);
+    algo = strcat('NB_', methods{method});
+    load_funcs(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
     
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
@@ -463,14 +419,16 @@ function Op_1_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to Op_1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    vers = get(handles.version, 'String');
-    algo = vers{get(handles.version, 'Value')};
-    if ver == 1
+    method = get(handles.methods, 'Value');
+    methods = get(handles.methods, 'String');
+    if method == 1
         % Feedback turn off param panel
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Blind', algo);
+    algo = strcat('NB_', methods{method});
+    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_2.
@@ -478,11 +436,12 @@ function Op_2_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to Op_2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    vers = get(handles.version, 'String');
-    algo = vers{get(handles.version, 'Value')};
-    if ver == 1
+    method = get(handles.methods, 'Value');
+    methods = get(handles.methods, 'String');
+    if method == 1
         % Feedback turn off param panel
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Blind', algo);
+    algo = strcat('NB_', methods{method});
+    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);

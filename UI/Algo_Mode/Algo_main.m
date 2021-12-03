@@ -177,12 +177,12 @@ function dataaxes_CreateFcn(hObject, eventdata, handles)
 % Hint: place code in OpeningFcn to populate dataaxes
 
 
-% --- Executes on button press in Pilotbutton.
-function Pilotbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to Pilotbutton (see GCBO)
+% --- Executes on button press in Blindbutton.
+function Blindbutton_Callback(hObject, eventdata, handles)
+% hObject    handle to Blindbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    Non_Blind_Menu();
+    Algo_Blind_Menu();
 
 
 % --- Executes on button press in SBbutton.
@@ -190,9 +190,19 @@ function SBbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to SBbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    Semi_Blind_Menu();
+%     Not support yet
+%     Algo_Semi_Blind_Menu();
 
 
+% --- Executes on button press in Pilotbutton.
+function Pilotbutton_Callback(hObject, eventdata, handles)
+% hObject    handle to Pilotbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+%     Not support yet
+%     Algo_Non_Blind_Menu();
+    
+    
 % --- Executes on button press in holdon.
 function holdon_Callback(hObject, eventdata, handles)
 % hObject    handle to holdon (see GCBO)
@@ -220,14 +230,7 @@ function board_CreateFcn(hObject, eventdata, handles)
     imshow(img);
     set(axesH, 'Tag', 'board');
 
-
-% --- Executes on button press in Blindbutton.
-function Blindbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to Blindbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-    Blind_Menu();
-
+    
 % --- Executes on button press in sub_fig.
 function sub_fig_Callback(hObject, eventdata, handles)
 % hObject    handle to sub_fig (see GCBO)

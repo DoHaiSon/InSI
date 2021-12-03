@@ -1,5 +1,6 @@
 function dispfig(font)
     global results;
+    % TODO: load WS option before re-plot all data
     
     % Check empty figure
     if ~ishandle(results.fig)
@@ -61,8 +62,7 @@ function dispfig(font)
                 ylabel(subfig, results.figparams.ylabel, 'Interpreter', interpreter);
                 xlabel(subfig, results.figparams.xlabel, 'Interpreter', interpreter);
                 title(subfig, results.figparams.title, 'Interpreter', interpreter, 'fontweight','bold','fontsize', 16);
-                % TODO: set TickLabelInterpreter latex
-%                 set(results.figaxes ,'TickLabelInterpreter', interpreter);
+                set(subfig , 'TickLabelInterpreter', interpreter);
             end
         otherwise
     end
