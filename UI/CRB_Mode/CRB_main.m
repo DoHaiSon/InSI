@@ -283,7 +283,8 @@ function inter_latex_Callback(hObject, eventdata, handles)
     if ~results.inter
         % TODO: remove data instead of close recent figure
         close(results.fig);
-        output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
+%         output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
+        output = figure('Tag', 'channel_estimation', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);
@@ -302,7 +303,8 @@ function inter_non_latex_Callback(hObject, eventdata, handles)
     if results.inter
         % TODO: remove data instead of close recent figure
         close(results.fig);
-        output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
+%         output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
+        output = figure('Tag', 'channel_estimation', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);

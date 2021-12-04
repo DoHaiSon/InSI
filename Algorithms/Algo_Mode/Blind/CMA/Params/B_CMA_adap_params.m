@@ -22,18 +22,18 @@ classdef B_CMA_adap_params
         default_output = 1
         
         % Figure
-        sys_model = 'nonblind_model.png'
+        sys_model = 'Algo_B_CMA.png'
         trigger   = false 
         position
         linewidth = 1
         color     = 'k'
         
         % Triggers/Flags
-        has_inter     = [true, true, false, false, false, false]
+        has_inter     = [true, false, false, false, true, true]
         rect = {}
-        rect_position = {[5 290 60 60], [1025 620 60 60], 0, 0, 0, 0}
-        rect_linewidth = {2, 2, 0, 0, 0, 0}
-        rect_color     = {'b', 'r', 'b', 'b', 'b', 'b'}
+        rect_position = {[1 193 105 65], 0, 0, 0, [810 645 30 30], [405 355 45 45]}
+        rect_linewidth = {2, 0, 0, 0, 2, 2}
+        rect_color     = {'b', 'b', 'b', 'b', 'r', 'g'}
         
         trigger_scale = false
     end

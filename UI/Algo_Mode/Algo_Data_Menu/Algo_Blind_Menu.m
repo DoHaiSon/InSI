@@ -22,7 +22,7 @@ function varargout = Algo_Blind_Menu(varargin)
 
 % Edit the above text to modify the response to help Algo_Blind_Menu
 
-% Last Modified by GUIDE v2.5 02-Dec-2021 17:04:40
+% Last Modified by GUIDE v2.5 04-Dec-2021 15:31:33
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -464,7 +464,8 @@ function Op_1_ButtonDownFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     vers = get(handles.version, 'String');
-    algo = vers{get(handles.version, 'Value')};
+    ver  = get(handles.version, 'Value');
+    algo = vers{ver};
     if ver == 1
         % Feedback turn off param panel
         set(handles.panelparams, 'Visible', 'off');
@@ -479,7 +480,41 @@ function Op_2_ButtonDownFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     vers = get(handles.version, 'String');
-    algo = vers{get(handles.version, 'Value')};
+    ver  = get(handles.version, 'Value');
+    algo = vers{ver};
+    if ver == 1
+        % Feedback turn off param panel
+        set(handles.panelparams, 'Visible', 'off');
+        return;
+    end
+    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Blind', algo);
+
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over Op_5.
+function Op_5_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to Op_5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    vers = get(handles.version, 'String');
+    ver  = get(handles.version, 'Value');
+    algo = vers{ver};
+    if ver == 1
+        % Feedback turn off param panel
+        set(handles.panelparams, 'Visible', 'off');
+        return;
+    end
+    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Blind', algo);
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over Op_6.
+function Op_6_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to Op_6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    vers = get(handles.version, 'String');
+    ver  = get(handles.version, 'Value');
+    algo = vers{ver};
     if ver == 1
         % Feedback turn off param panel
         set(handles.panelparams, 'Visible', 'off');

@@ -1,6 +1,7 @@
 function init_results()
     global results;
-    output = figure('Name', 'CE', 'Tag', 'channel_estimation');
+%     output = figure('Name', 'CE', 'Tag', 'channel_estimation');
+    output = figure('Tag', 'channel_estimation');
     results.fig = output;
     output.Visible = 'off';
     results.figaxes = axes;
