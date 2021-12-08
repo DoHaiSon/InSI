@@ -68,9 +68,16 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     results.figparams.count = results.figparams.count + 1;
     results.figparams.data(results.figparams.count).x = SNR;
     results.figparams.data(results.figparams.count).y = Err;
-    results.figparams.title = 'Channel estimation';
+%     TODO: Dynamic load these params
+    switch mode
+        case 'CRB_Mode'
+            results.figparams.title = 'Performance bound';
+            results.figparams.ylabel = 'trace(CRB)';
+        otherwise
+            results.figparams.title = 'Channel estimation';
+            results.figparams.ylabel = 'BER';
+    end
     results.figparams.xlabel = 'SNR(dB)';
-    results.figparams.ylabel = 'SER';
     results.figparams.gridmode = 'on';
     results.figparams.marker = '-o';
     results.figparams.legends{end + 1} = parseleg(mode, algo);
@@ -79,8 +86,8 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     % Loader system model
     handles_main = getappdata(0,'handles_main');
     
-    mode = checkfigmode(handles_main);
-    switch(mode)
+    fig_mode = checkfigmode(handles_main);
+    switch(fig_mode)
         % TODO: switch from mode 3 to 1 is error in cla func: multi subfig
         case 1
             %clear old figure
@@ -103,15 +110,21 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
         title_toolboxes = strcat(title_toolboxes, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
             '_', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));
     end
-    switch(mode)
+    switch(fig_mode)
         case 1
             toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(1).x), ...
                 matrix2char(results.figparams.data(1).y), ...
                 Op{1}}]];
         otherwise
-            toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(results.figparams.count).x), ...
-                matrix2char(results.figparams.data(results.figparams.count).y), ...
-                Op{1}}]];
+            switch mode
+                case 'CRB_Mode'
+                    toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(results.figparams.count).x), ...
+                        matrix2char(results.figparams.data(results.figparams.count).y)}]];
+                otherwise
+                    toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(results.figparams.count).x), ...
+                        matrix2char(results.figparams.data(results.figparams.count).y), ...
+                        Op{1}}]];
+            end
     end
     set(handles_main.toolbox_ws, 'Data', toolboxws);
 end
