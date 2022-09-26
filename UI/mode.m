@@ -64,6 +64,9 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
+% Set position for this GUI
+movegui(hObject, 'center');
+
 % UIWAIT makes mode wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
