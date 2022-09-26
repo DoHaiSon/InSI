@@ -223,9 +223,35 @@ function board_CreateFcn(hObject, eventdata, handles)
 % Hint: place code in OpeningFcn to populate board
     global main_path;
     axesH = hObject;  % Not safe! Better get the handle explicitly!
-    img = imread(fullfile(main_path, '/Resource/Dashboard/Dashboard.png'));
-    imshow(img);
+    axis off;
+    Position = hObject.Position;
+    x_0 = Position(1);
+    y_0 = Position(2);
+    width = Position(3);
+    height = Position(4);
     set(axesH, 'Tag', 'board');
+
+    [AVITECH_sample, ~, AVITECH_sample_alpha] = imread(fullfile(main_path, '/Resource/Icon/AVITECH.png'));
+    [Orleans_sample, ~, Orleans_sample_alpha] = imread(fullfile(main_path, '/Resource/Icon/Orleans.png'));
+    [Nafosted_sample, ~, Nafosted_sample_alpha] = imread(fullfile(main_path, '/Resource/Icon/Nafosted.png'));
+
+    ax1 = subplot(3, 4, 1);
+    text(0, 0, 0, "InfoSysID Toolbox", 'Color', 'blue','FontSize', 20);
+    ax1.Position = [x_0 + width / 3, y_0 + height/1.2, width / 5, height / 5];
+    axis off;
+
+    ax2 = subplot(3, 4, 5);
+    image(AVITECH_sample, 'AlphaData', AVITECH_sample_alpha);
+    ax2.Position = [x_0 + width / 25, y_0, width / 3.2, height / 3.2];
+    axis off;
+    ax3 = subplot(3, 4, 6);
+    image(Orleans_sample, 'AlphaData', Orleans_sample_alpha);
+    ax3.Position = [width / 2.4, y_0 + height / 15, width / 5, height / 5];
+    axis off;
+    ax4 = subplot(3, 4, 7);
+    ax4.Position = [width / 1.5, y_0, width / 3, height / 3];
+    image(Nafosted_sample, 'AlphaData', Nafosted_sample_alpha);
+    axis off;
 
 
 % --- Executes on button press in sub_fig.
