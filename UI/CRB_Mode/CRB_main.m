@@ -231,12 +231,18 @@ function board_CreateFcn(hObject, eventdata, handles)
     height = Position(4);
     set(axesH, 'Tag', 'board');
 
+    %get the GUI handles
+    board = gcf;
+
+    hfig = figure();
+    set(hfig,'position', Position);
+
     [AVITECH_sample, ~, AVITECH_sample_alpha] = imread(fullfile(main_path, '/Resource/Icon/AVITECH.png'));
     [Orleans_sample, ~, Orleans_sample_alpha] = imread(fullfile(main_path, '/Resource/Icon/Orleans.png'));
     [Nafosted_sample, ~, Nafosted_sample_alpha] = imread(fullfile(main_path, '/Resource/Icon/Nafosted.png'));
 
     ax1 = subplot(3, 4, 1);
-    text(0, 0, 0, "InfoSysID Toolbox", 'Color', 'blue','FontSize', 20);
+    text(0, 0, 0, 'InfoSysID Toolbox', 'Color', 'blue','FontSize', 20);
     ax1.Position = [x_0 + width / 3, y_0 + height/1.2, width / 5, height / 5];
     axis off;
 
@@ -252,6 +258,11 @@ function board_CreateFcn(hObject, eventdata, handles)
     ax4.Position = [width / 1.5, y_0, width / 3, height / 3];
     image(Nafosted_sample, 'AlphaData', Nafosted_sample_alpha);
     axis off;
+    
+    ax = get(hfig,'children');
+    %copy plotted subplots to the gui  
+    copyobj(ax, board);
+    close(hfig) % close the temporary figure
 
 
 % --- Executes on button press in sub_fig.

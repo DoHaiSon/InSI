@@ -59,9 +59,12 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
 %         set(eval(strcat('handles.Op_', num2str(i))), 'Value', params.default_values{i});
 %     end
     
-    % Loader system model
-    handles_main = getappdata(0,'handles_main');
+    % Load system model
+    handles_main = getappdata(0, 'handles_main');
     axesH        = handles_main.board;  % Not safe! Better get the handle explicitly!
+
+    releasesysmodel();
+
     img          = imread(fullfile(main_path, '/Resource/Dashboard', params.sys_model));
     imshow(img, 'Parent', axesH);
     
