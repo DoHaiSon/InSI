@@ -5,13 +5,21 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
     param_file_name = strcat(algo, '_params');
     params = eval(param_file_name);
     
+    global pre_algo;
+    if ( ~ strncmp(pre_algo, param_file_name, length(param_file_name)) )
+        trigger_scale = true;
+        pre_algo = param_file_name;
+    else
+        trigger_scale = false;
+    end
+
     if params.num_params == 0
         return
     end
     
     set(handles.panelparams, 'Visible', 'on');
     
-    % Turn off unused params
+    % Turn off unuse params
     if params.num_params < 10
         for i=10:-1:params.num_params + 1
             set(eval(strcat('handles.Text_', num2str(i))), 'Visible', 'off');
@@ -19,12 +27,12 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
         end
     end
     
-    % Set texts for used params
+    % Set texts for using params
     for i=1:params.num_params
         set(eval(strcat('handles.Text_', num2str(i))), 'String', params.params{i});
     end
     
-    % Set UIClass and default value for used params
+    % Set UIClass and default value for using params
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
         %                        button      = 3
@@ -34,26 +42,28 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
                 set(eval(strcat('handles.Op_', num2str(i))), 'Style', 'edit');
                 set(eval(strcat('handles.Op_', num2str(i))), 'Enable', 'on');
                 
-                % Set default values for used params
+                % Set default values for using params
                 set(eval(strcat('handles.Op_', num2str(i))), 'String', params.default_values{i});
             case 2
                 set(eval(strcat('handles.Op_', num2str(i))), 'Style', 'popupmenu');
                 % Scale droplist box
-                old_pos    = get(eval(strcat('handles.Op_', num2str(i))), 'Position');
-                new_pos    = old_pos;
-                new_pos(1) = old_pos(1) - old_pos(3)/2;
-                new_pos(3) = old_pos(3) * 2;
-                set(eval(strcat('handles.Op_', num2str(i))), 'Position', new_pos);
-                
-                % Set default values for used params
+                if (trigger_scale)
+                    old_pos    = get(eval(strcat('handles.Op_', num2str(i))), 'Position');
+                    new_pos    = old_pos;
+                    new_pos(1) = old_pos(1) - old_pos(3)/2;
+                    new_pos(3) = old_pos(3) * 2;
+                    set(eval(strcat('handles.Op_', num2str(i))), 'Position', new_pos);
+                end
+
+                % Set default values for using params
                 set(eval(strcat('handles.Op_', num2str(i))), 'String', params.values{i});
                 set(eval(strcat('handles.Op_', num2str(i))), 'Value', params.default_values{i});
             case 3
                 set(eval(strcat('handles.Op_', num2str(i))), 'Style', 'pushbutton');
         end
     end
-    
-%     % Set default values for used params
+
+%     % Set default values for using params
 %     for i=1:params.num_params
 %         set(eval(strcat('handles.Op_', num2str(i))), 'String', params.values{i});
 %         set(eval(strcat('handles.Op_', num2str(i))), 'Value', params.default_values{i});
