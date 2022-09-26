@@ -153,6 +153,9 @@ function mode_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     if (mode_questdlg())
+        global results;
+        results = Results;
+        init_results();
         closereq(); 
         other_wins = findall(0);
         if (~ isempty(other_wins(1, 1).CurrentFigure))

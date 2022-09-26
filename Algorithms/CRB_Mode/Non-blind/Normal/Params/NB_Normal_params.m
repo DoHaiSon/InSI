@@ -14,6 +14,10 @@ classdef NB_Normal_params
         values = {2, 16, 4, 2, 64, 0.3}
         default_values = {2, 16, 4, 2, 64, 0.3}
         
+        % Default SNR and Monte
+        default_Monte = 10
+        default_SNR = '-10:5:20'
+
         % Output
 %         Type of the outputs: MSE Sig = 1
 %                              MSE Ch  = 2
@@ -34,8 +38,6 @@ classdef NB_Normal_params
         rect_position = {[5 290 60 60], [1025 620 60 60], 0, 0, 0, 0}
         rect_linewidth = {2, 2, 0, 0, 0, 0}
         rect_color     = {'b', 'r', 'b', 'b', 'b', 'b'}
-        
-        trigger_scale = false
     end
     
     methods (Access = private)
