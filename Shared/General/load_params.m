@@ -63,11 +63,9 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
         end
     end
 
-%     % Set default values for using params
-%     for i=1:params.num_params
-%         set(eval(strcat('handles.Op_', num2str(i))), 'String', params.values{i});
-%         set(eval(strcat('handles.Op_', num2str(i))), 'Value', params.default_values{i});
-%     end
+    % Load default SNR range and the number of monte
+    set(handles.Monte, 'String', params.default_Monte);
+    set(handles.SNR, 'String', params.default_SNR);
     
     % Load system model
     handles_main = getappdata(0, 'handles_main');

@@ -65,6 +65,10 @@ movegui(hObject, 'west');
 set(hObject,'WindowButtonDownFcn',{@releasesysmodel});
 % TODO: set interactive again
 
+% Reset this trigger
+global pre_algo;
+pre_algo = '';
+
 % Choose default command line output for CRB_Non_Blind_Menu
 handles.output = hObject;
 

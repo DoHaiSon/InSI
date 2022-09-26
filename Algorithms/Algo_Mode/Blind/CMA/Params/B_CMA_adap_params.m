@@ -14,10 +14,14 @@ classdef B_CMA_adap_params
         values = {10000, 2, {'Real', 'Complex', 'Specular', 'Input'}, {'Bin', 'QPSK', 'QAM4'}, 0.01, 50}
         default_values = {10000, 1, 2, 2, 0.01, 20}
         
+        % Default SNR and Monte
+        default_Monte = 10
+        default_SNR = '-10:5:20'
+
         % Output
-%         Type of the outputs: MSE Sig = 1
-%                              MSE Ch  = 2
-%                              Err rate= 3
+        % Type of the outputs: MSE Sig = 1
+        %                      MSE Ch  = 2
+        %                      Err rate= 3
         outputs = [1]
         default_output = 1
         
