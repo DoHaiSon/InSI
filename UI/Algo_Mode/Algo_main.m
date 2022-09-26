@@ -234,6 +234,8 @@ function board_CreateFcn(hObject, eventdata, handles)
 
     %get the GUI handles
     board = gcf;
+    set(board, 'MenuBar', 'none');
+    set(board, 'ToolBar', 'none');
 
     hfig = figure();
     set(hfig,'position', Position);
