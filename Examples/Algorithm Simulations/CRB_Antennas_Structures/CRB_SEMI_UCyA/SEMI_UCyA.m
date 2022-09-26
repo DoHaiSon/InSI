@@ -7,10 +7,10 @@ clc;
 
 Nt      = 2;         % number of transmit antennas
 Nr_UCA  = 8;         % number of receive antennas of UCA
-Nr_ULA  = 4;         % number of receive antennas of ULA
+Nr_ULA  = 2;         % number of receive antennas of ULA
 L       = 4;         % channel order
 M       = 2;         % Number of multipaths (assumption: M  = L)   
-Pxp     = 0.3;
+Pxp     = 1;
 K       = 64;        % OFDM subcarriers
 F       = dftmtx(K);
 FL      = F(:,1:L);
@@ -31,21 +31,19 @@ end
 %% Channel generation 
 % Fading, delay, DOA matrix of size(M,Nt), M - the number of multipath
 
-fading      = [0.8,0.6,0.4,0.2;0.9,0.7,0.5,0.3];
-delay       = [0.1,0.2,0.3,0.4;0.2,0.3,0.4,0.5]*0.001;
-DOA_Phi     = [pi/2,pi/4,pi/6,pi/8;pi/3,pi/5,pi/7,pi/9];
-DOA_Theta   = [0.3,0.4,0.25,0.6;0.7,0.85,0.43,0.66]*pi;
+fading      = 1/sqrt(2)*(rand(M, Nt)  + 1i*rand(M, Nt));
+delay       = rand(M,Nt); 
+DOA_Phi     = rand(M,Nt) * 2*pi;       % -pi/2 => pi/2
+DOA_Theta   = rand(M,Nt) * 2*pi;                % 0     => pi/2
+
 d_ULA_nor   = 0.5;
 d_UCA_nor   = 0.5;
 R_nor       = 0.5*d_UCA_nor/sin(pi/Nr_UCA);
 
 %% Derivative
 
-dev_h_fading_tmp    =[];
-dev_h_delay_tmp     =[];
-dev_h_angle_tmp     =[];
-
 dev_h_fading        =[];
+dev_h_fading_conj   =[];
 dev_h_delay         =[];
 dev_h_angle_Phi     =[];
 dev_h_angle_Theta   =[];
@@ -54,6 +52,9 @@ for Nr_ULA_index=1:Nr_ULA
     for Nr_UCA_index=1:Nr_UCA
         Br_fading = SEMI_spec_chan_derive_fading_UCyA(fading,delay,DOA_Phi,DOA_Theta,R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
         dev_h_fading=[dev_h_fading; transpose(Br_fading)];
+        
+        Br_fading_conj = SEMI_spec_chan_derive_fading_conj_UCyA(fading,delay,DOA_Phi,DOA_Theta,R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
+        dev_h_fading_conj=[dev_h_fading_conj; transpose(Br_fading_conj)];
 
         Br_delay = SEMI_spec_chan_derive_delay_UCyA(fading,delay,DOA_Phi,DOA_Theta,R_nor,d_ULA_nor,Nr_UCA_index,Nr_ULA_index,Nr_UCA,Nr_ULA,L,M,Nt);
         dev_h_delay=[dev_h_delay; transpose(Br_delay)];
@@ -67,7 +68,7 @@ for Nr_ULA_index=1:Nr_ULA
 end
 
 %% Derivation of $h$ w.r.t. (bar{h},tau,alpha) %% channel specular parameters
-G = [dev_h_fading,dev_h_delay,dev_h_angle_Phi,dev_h_angle_Theta]; 
+G = [dev_h_fading, dev_h_fading_conj, dev_h_delay,dev_h_angle_Phi,dev_h_angle_Theta]; 
 %% ------------------------------------------------------------------------
  
 X = [];
@@ -106,11 +107,11 @@ for ll = 1 : L
     partial_LAMBDA{1,ll} = partial_LAMBDA_ll;
 end
 
-N_total = 4;
-N_pilot = 2;
+N_total = 64;
+N_pilot = 64/4;
 N_data  = N_total-N_pilot;
 %============================================
-SNR = -10:5:30;
+SNR = -10:5:20;
 for snr_i = 1 : length(SNR)
     tic
     fprintf('Working at SNR: %d dB.\n', SNR(snr_i));
@@ -121,12 +122,13 @@ for snr_i = 1 : length(SNR)
     X_nga=kron(eye(Nr_ULA*Nr_UCA),X);
 %============================================
     Iop           = X_nga'*X_nga / sigmav2;
-    Iop_full      = N_total * Iop;
+    Iop_full      = N_pilot * Iop;
     CRB_op(snr_i) = abs(trace(pinv(Iop_full)));
 %============================================
     %Only Pilot Specular   
     Iop_spec = G*G'*Iop_full*G*G';
     CRB_op_spec(snr_i) = abs(trace(pinv(Iop_spec)));
+    continue
 %============================================
 %% SemiBlind
     Cyy      = sigmax2 * LAMBDA * LAMBDA'  + sigmav2 * eye(K*Nr_ULA*Nr_UCA);
@@ -162,9 +164,9 @@ semilogy(SNR,CRB_op,'-b +');
 hold on;
 semilogy(SNR,CRB_op_spec,'-r *');
 
-semilogy(SNR,CRB_SB,'-g +');
-hold on;
-semilogy(SNR,CRB_SB_spec,'-k *');
+% semilogy(SNR,CRB_SB,'-g +');
+% hold on;
+% semilogy(SNR,CRB_SB_spec,'-k *');
 
 grid on;
 ylabel('Normalized CRB');

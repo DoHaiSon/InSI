@@ -15,7 +15,7 @@ Br_fading_tmp = zeros(M,L,Nt);
 for jj = 1 : Nt
     for mm = 1 : M
         for l = 1 : L
-            Br_fading_tmp(mm,l,jj)=1/2 * (1-1i) * sinc((l-1)-delay(mm,jj))*exp(-1i*2*pi*R_nor*sin(DOA_Theta(mm,jj))*cos(DOA_Phi(mm,jj)-(Nr_UCA_index-1)*2*pi/Nr_UCA))*exp(-1i*2*pi*d_ULA_nor*(Nr_ULA_index-1)*cos(DOA_Theta(mm,jj))); 
+            Br_fading_tmp(mm,l,jj)=1/2 * (1 + 1i) * sinc((l-1)-delay(mm,jj))*exp(-1i*2*pi*R_nor*sin(DOA_Theta(mm,jj))*cos(DOA_Phi(mm,jj)-(Nr_UCA_index-1)*2*pi/Nr_UCA))*exp(-1i*2*pi*d_ULA_nor*(Nr_ULA_index-1)*cos(DOA_Theta(mm,jj))); 
         end
     end
 end
