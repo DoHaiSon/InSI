@@ -64,7 +64,7 @@ for Monte_i = 1:Monte
         X       = awgn(x, SNR(SNR_i));              % received noisy signal
         
         %% CMA estimator
-        CM      = abs(sig(1));                        % constant modulous of QAM4 symbols
+        CM      = abs(sig(1));                      % constant modulous of QAM4 symbols
         W       = zeros(L, 1);                      % init filter coeff
         W(1)    = 1;
         Y       = [];

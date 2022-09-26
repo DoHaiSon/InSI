@@ -152,20 +152,11 @@ function mode_Callback(hObject, eventdata, handles)
 % hObject    handle to mode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    global switch_mode;
-    switch_mode = switch_mode + 1;
-    state = mod(switch_mode, 3);
-    switch (state)
-        case 1 % Switch to CRB
-            disp('Switch to CRB');
-            set(handles.mode, 'String' , 'Algo Mode');
-        case 2 % Switch to Algo
-            disp('Switch to Algo');
-            set(handles.mode, 'String' , 'Demo Mode');
-        case 0 % Switch to Demo
-            disp('Switch to Demo');
-            set(handles.mode, 'String' , 'CRB Mode');
+    if (mode_questdlg())
+       closereq(); 
+       mode();
     end
+             
 
 
 % --- Executes during object creation, after setting all properties.
