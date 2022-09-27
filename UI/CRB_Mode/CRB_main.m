@@ -325,7 +325,7 @@ function inter_latex_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     global results;
-    if ~results.inter
+    if ~results.inter && results.figparams.count ~= 0
         % TODO: remove data instead of close recent figure
         close(results.fig);
 %         output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
@@ -345,7 +345,7 @@ function inter_non_latex_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     global results;
     % TODO: check first time run
-    if results.inter
+    if results.inter && results.figparams.count ~= 0
         % TODO: remove data instead of close recent figure
         close(results.fig);
 %         output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
