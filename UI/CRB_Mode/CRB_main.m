@@ -286,6 +286,15 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
     global toolboxws;
     toolboxws = {};
     set(hObject, 'Data', toolboxws);
+    set(hObject, 'units','pixels');
+%     Set columns width when init main window
+    Postion = hObject.Position;
+    x_total = Postion(3);
+    x_plot = x_total / 20;
+    x_name = x_total / 3;
+    x_snr  = x_total / 4;
+    x_err  = x_total / 3.1;
+    set(hObject, 'ColumnWidth', {x_plot, x_name, x_snr, x_err});
 
 
 % --- Executes when entered data in editable cell(s) in toolbox_ws.
