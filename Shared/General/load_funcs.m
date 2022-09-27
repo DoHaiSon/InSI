@@ -83,7 +83,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     results.figparams.legends{end + 1} = parseleg(mode, algo);
     
     % Check figure mode: Clear/hold on/subfigure
-    % Loader system model
+    % Load system model
     handles_main = getappdata(0,'handles_main');
     
     fig_mode = checkfigmode(handles_main);
@@ -91,7 +91,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
         % TODO: switch from mode 3 to 1 is error in cla func: multi subfig
         case 1
             %clear old figure
-            cla(results.figaxes, 'reset');
+%             cla(results.figaxes, 'reset');
             results.figparams.count = 0;
             results.mode = 1;
         case 2

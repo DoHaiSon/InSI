@@ -49,7 +49,7 @@ SNR     = SNR;
 Output_type = Output_type;
 
 % Generate input signal
-modulation = {'Bin', 'QPSK', '4QAM'};
+modulation = {'Bin', 'QPSK', 'QAM4'};
 
 % CMA algorithm
 SER_f = [];
