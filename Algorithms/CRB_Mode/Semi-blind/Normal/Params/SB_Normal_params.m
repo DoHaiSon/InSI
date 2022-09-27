@@ -1,4 +1,4 @@
-classdef SB_Misspecified_params
+classdef SB_Normal_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     

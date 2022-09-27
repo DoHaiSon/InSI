@@ -41,10 +41,11 @@ function dispfig(font)
             else
                 % Reset the output figure before re-plot all data
                 delete(results.fig);
-                output = figure('Tag', 'channel_estimation');
+                output = figure('Tag', 'channel_estimation', 'visible','off');
                 results.fig = output;
                 results.figaxes = axes;
                 movegui(results.figaxes, results.pos);
+                set(results.fig, 'Visible', 'on');
 
                 for i=1:results.figparams.count % Plot all data.
                     semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
