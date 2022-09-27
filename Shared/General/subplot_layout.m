@@ -17,7 +17,7 @@ function [p,n] = subplot_layout(n)
 %
 %
 % Example: neatly lay out 13 sub-plots
-% >> p=numSubplots(13)
+% >> p=subplot_layout(13)
 % p = 
 %     3   5
 % for i=1:13; subplot(p(1),p(2),i), pcolor(rand(10)), end 
@@ -55,7 +55,7 @@ end
 %square design 
 while p(2)/p(1)>2.5
     N=n+1;
-    [p,n]=numSubplots(N); %Recursive!
+    [p,n]=subplot_layout(N); %Recursive!
 end
 
 
