@@ -1,4 +1,7 @@
 function start()
+%%  For testing, we close everything when the program startup
+    close all hidden;
+
 %%  TODO: Do not add everything 
     global main_path;
     main_path = matlab.desktop.editor.getActiveFilename; %   get path of active file

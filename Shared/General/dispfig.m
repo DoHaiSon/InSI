@@ -33,12 +33,19 @@ function dispfig(font)
             title(results.figaxes, results.figparams.title, 'Interpreter', interpreter, 'fontweight','bold','fontsize', 16);
             set(results.figaxes ,'TickLabelInterpreter', interpreter);
         case 2
-            if results.trigger
+            if results.trigger && results.pre_mode == results.mode
                 i=results.figparams.count; % Just plot the latest data per times.
                 semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
                     , results.figparams.marker);
                 hold (results.figaxes, 'on');
             else
+                % Reset the output figure before re-plot all data
+                delete(results.fig);
+                output = figure('Tag', 'channel_estimation');
+                results.fig = output;
+                results.figaxes = axes;
+                movegui(results.figaxes, results.pos);
+
                 for i=1:results.figparams.count % Plot all data.
                     semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
                         , results.figparams.marker);
@@ -54,8 +61,9 @@ function dispfig(font)
             set(results.figaxes ,'TickLabelInterpreter',interpreter);
         case 3
             num = results.figparams.count;
+            [p, n] = subplot_layout(num);
             for i=1:num
-                subfig = subplot(1, num, i, 'Parent', results.fig); 
+                subfig = subplot(p(1), p(2), i, 'Parent', results.fig); 
                 semilogy(subfig, results.figparams.data(i).x, results.figparams.data(i).y ...
                     , results.figparams.marker);
                 legend(subfig, results.figparams.legends, 'Interpreter', interpreter);
@@ -67,5 +75,5 @@ function dispfig(font)
             end
         otherwise
     end
-    
+    results.pre_mode = results.mode;
 end

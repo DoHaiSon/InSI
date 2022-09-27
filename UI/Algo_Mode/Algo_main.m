@@ -265,7 +265,7 @@ function board_CreateFcn(hObject, eventdata, handles)
     ax = get(hfig,'children');
     %copy plotted subplots to the gui  
     copyobj(ax, board);
-    close(hfig) % close the temporary figure
+    close(hfig); % close the temporary figure
 
 % --- Executes on button press in sub_fig.
 function sub_fig_Callback(hObject, eventdata, handles)

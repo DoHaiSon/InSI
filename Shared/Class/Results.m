@@ -7,6 +7,7 @@ classdef Results
         figaxes
         figparams
         mode
+        pre_mode = 0
         pos
         trigger=true            % for re-plot all lines
         inter=true              % for check currently inter-mode
