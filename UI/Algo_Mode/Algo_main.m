@@ -214,6 +214,22 @@ function holdon_Callback(hObject, eventdata, handles)
         set(handles.sub_fig, 'Value', 0);
     end
 
+    if holdon_state
+        global results;
+        if(results.pre_mode ~= 2 && results.pre_mode ~= 0)
+            results.mode = 2;
+            dispfig(results.inter);
+        end
+    end
+
+    if ~holdon_state && ~sub_fig_state
+        global results;
+        if(results.pre_mode ~= 1 && results.pre_mode ~= 0)
+            results.mode = 1;
+            dispfig(results.inter);
+        end
+    end
+
 
 % --- Executes during object creation, after setting all properties.
 function board_CreateFcn(hObject, eventdata, handles)
@@ -279,6 +295,22 @@ function sub_fig_Callback(hObject, eventdata, handles)
     if holdon_state && sub_fig_state
         set(handles.holdon, 'Value', 0);
     end
+
+    if sub_fig_state
+        global results;
+        if(results.pre_mode ~= 3 && results.pre_mode ~= 0)
+            results.mode = 3;
+            dispfig(results.inter);
+        end
+    end
+
+    if ~holdon_state && ~sub_fig_state
+        global results;
+        if(results.pre_mode ~= 1 && results.pre_mode ~= 0)
+            results.mode = 1;
+            dispfig(results.inter);
+        end
+    end
     
 % --- Executes during object creation, after setting all properties.
 function toolbox_ws_CreateFcn(hObject, eventdata, handles)
@@ -332,7 +364,7 @@ function inter_latex_Callback(hObject, eventdata, handles)
     if ~results.inter && results.figparams.count ~= 0
         % TODO: remove data instead of close recent figure
         close(results.fig);
-        output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
+        output = figure('Tag', 'channel_estimation', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);
@@ -347,11 +379,10 @@ function inter_non_latex_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     global results;
-    % TODO: check first time run
     if results.inter && results.figparams.count ~= 0
         % TODO: remove data instead of close recent figure
         close(results.fig);
-        output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
+        output = figure('Tag', 'channel_estimation', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);

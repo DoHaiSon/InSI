@@ -23,9 +23,17 @@ function dispfig(font)
     % figure
     switch (results.mode)
         case 1
+            % Reset the output figure before re-plot all data
+            delete(results.fig);
+            output = figure('Tag', 'channel_estimation', 'visible','off');
+            results.fig = output;
+            results.figaxes = axes;
+            movegui(results.figaxes, results.pos);
+            set(results.fig, 'Visible', 'on');
+
             semilogy(results.figaxes, results.figparams.data(end).x, results.figparams.data(end).y ...
                 , results.figparams.marker);
-%             hold (results.figaxes, 'on');
+
             legend(results.figaxes, results.figparams.legends, 'Interpreter', interpreter);
             grid (results.figaxes, results.figparams.gridmode);
             ylabel(results.figaxes, results.figparams.ylabel, 'Interpreter', interpreter);
