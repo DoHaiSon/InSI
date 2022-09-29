@@ -198,7 +198,7 @@ function Pilotbutton_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 %     Not support yet
-%     Algo_Non_Blind_Menu();
+    Algo_Non_Blind_Menu();
     
     
 % --- Executes on button press in holdon.

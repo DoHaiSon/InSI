@@ -8,9 +8,23 @@ function vers = load_versions( model, default, name )
     algos = {default};
     for i=1:length(sub)
         if ~sub(i).isdir
-            if strcmp(sub(i).name(1:6), 'B_CMA_')
-                algos{end+1} = sub(i).name(1:end-2);
+            switch (model)
+                case 'Blind'
+                    if strcmp(sub(i).name(1:2), 'B_')
+                        algos{end+1} = sub(i).name(1:end-2);
+                    end
+                case 'Non-blind'
+                    if strcmp(sub(i).name(1:3), 'NB_')
+                        algos{end+1} = sub(i).name(1:end-2);
+                    end
+                case 'Semi-blind'
+                    if strcmp(sub(i).name(1:3), 'SB_')
+                        algos{end+1} = sub(i).name(1:end-2);
+                    end
+                otherwise
+                    disp('The mode is not supported.')
             end
+            
         end
     end
     vers = algos;
