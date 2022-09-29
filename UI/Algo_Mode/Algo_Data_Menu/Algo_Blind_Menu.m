@@ -157,9 +157,8 @@ function version_Callback(hObject, eventdata, handles)
     vers = get(hObject, 'String');
     
     if ver == 1
-        vers = get(hObject, 'String');
         if iscell(vers)
-            set(hObject, 'String', vers{1});
+            set(hObject, 'String', vers);
         end
         
         % Feedback turn off param panel
@@ -167,7 +166,6 @@ function version_Callback(hObject, eventdata, handles)
         set(handles.btngroup, 'Visible', 'off');
         return;
     end
-    % TODO: Version is lost when choose default but method is not default
     load_params(hObject, eventdata, handles, 'Algo_Mode', 'Blind', vers{ver});
 
 % --- Executes during object creation, after setting all properties.

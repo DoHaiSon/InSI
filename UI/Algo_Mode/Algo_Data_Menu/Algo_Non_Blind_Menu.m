@@ -157,9 +157,8 @@ function version_Callback(hObject, eventdata, handles)
     vers = get(hObject, 'String');
     
     if ver == 1
-        vers = get(hObject, 'String');
         if iscell(vers)
-            set(hObject, 'String', vers{1});
+            set(hObject, 'String', vers);
         end
         
         % Feedback turn off param panel
@@ -167,7 +166,6 @@ function version_Callback(hObject, eventdata, handles)
         set(handles.btngroup, 'Visible', 'off');
         return;
     end
-    % TODO: Version is lost when choose default but method is not default
     load_params(hObject, eventdata, handles, 'Algo_Mode', 'Blind', vers{ver});
 
 % --- Executes during object creation, after setting all properties.
@@ -476,7 +474,6 @@ function Op_1_ButtonDownFcn(hObject, eventdata, handles)
         return;
     end
     load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
-    set(hObject, 'Enable', 'on');
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_2.
@@ -493,7 +490,6 @@ function Op_2_ButtonDownFcn(hObject, eventdata, handles)
         return;
     end
     load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
-    set(hObject, 'Enable', 'on');
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_5.
@@ -510,7 +506,6 @@ function Op_5_ButtonDownFcn(hObject, eventdata, handles)
         return;
     end
     load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
-    set(hObject, 'Enable', 'on');
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_6.
@@ -527,4 +522,3 @@ function Op_6_ButtonDownFcn(hObject, eventdata, handles)
         return;
     end
     load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
-    set(hObject, 'Enable', 'on');

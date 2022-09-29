@@ -18,4 +18,6 @@ function load_reactive(hObject, eventdata, handles, mode, model, algo )
     if params.has_inter(i)
         params2sysmodel(hObject, eventdata, handles, params, i);
     end
+
+    set(hObject, 'Enable', 'on');
 end
