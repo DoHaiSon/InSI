@@ -1,14 +1,13 @@
 function [SNR, Err] = NB_ZF(Op, Monte, SNR, Output_type)
 
 % Zero forcing
-% Ref: 
+% Ref: https://www.sharetechnote.com/html/Communication_ChannelModel_ZF.html
 %% Input:
     % N: number of sample data
+    % Pilot_L: number of pilot symbols
     % ChL: length of the channel
     % Ch_type: type of the channel (real, complex, specular, user' input
     % Mod_type: type of modulation (Bin, QPSK, 4-QAM)
-    % mu: step size
-    % L: length of the CMA filter
     % Monte: simulation times
     % SNR: range of the SNR
     % Ouput_type: MSE Sig, MSE Ch, Error rate
@@ -19,19 +18,14 @@ function [SNR, Err] = NB_ZF(Op, Monte, SNR, Output_type)
     % Step 1: Initialize variables
     % Step 2: Generate input signal
     %     X <= h^T * s + n
-    % Step 3: Initialize CMA FIR
-    %     W <= randn(L, 1)
-	%	  W <= W/norm(W)
-    % Step 4: CMA algorithm
-    %     repeat
-    %         y(k)   <= x^T(k) * W(k)
-    %         W(k+1) <= W(k) - mu * (|y(k)|^2 - 1)* y_k * conj(x(k))
-    %         Y      <= [Y y(k)]
-    %     util end of the input
+    % Step 3: Estimate channel
+    %     H_est <= Y_pilot ./ X_pilot
+    % Step 4: Equalization
+    %     X <= Y ./ H_est
     % Step 5: Compute Symbol Error rate
     %     Demodulate Y
     %     Compate elements in two array init data and Demodulated signal
-    % Step 7: Return 
+    % Step 6: Return 
 %% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
 %% Last Modified by Son 29-Sept-2022 12:52:13 
 
