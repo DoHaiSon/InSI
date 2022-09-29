@@ -72,7 +72,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     switch mode
         case 'CRB_Mode'
             results.figparams.title = 'Performance bound';
-            results.figparams.ylabel = 'trace(CRB)';
+            results.figparams.ylabel = 'CRB';
         otherwise
             results.figparams.title = 'Channel estimation';
             results.figparams.ylabel = 'BER';

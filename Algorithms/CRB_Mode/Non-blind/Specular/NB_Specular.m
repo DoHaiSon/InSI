@@ -1,4 +1,4 @@
-function [SNR, Err] = SB_Normal (Op, Monte, SNR)
+function [SNR, Err] = NB_Specular (Op, Monte, SNR)
 
 % Initialize variables
 Nt  = Op{1};    % number of transmit antennas
@@ -31,7 +31,38 @@ end
 fading = rand(M,Nt)+1i*rand(M,Nt);
 delay  = 0.1+(0.15-0.1)*rand(M,Nt)*0.01;
 DOA    = (-0.5+(0.5-(-0.5))*rand(M,Nt))*pi;
+d_nor=1/2;
 
+%H      = spec_chan(fading,delay,DOA,Nr,L,Nt);  % H(Nr,L,Nt)
+
+%h=[];
+%for ii = 1 : Nt
+%    h              = [h reshape(transpose(H(:,:,ii)),1,Nr*L)];
+%end
+
+%hmod2      = (h*h')^2; 
+%% Derivative
+% w.r.t. fading
+
+dev_h_fading=[];
+dev_h_delay=[];
+dev_h_angle=[];
+
+for Nr_index=1:Nr
+    Br_fading = SEMI_spec_chan_derive_fading_ULA(fading,delay,DOA,d_nor,Nr_index,L,M,Nt);
+    dev_h_fading=[dev_h_fading; transpose(Br_fading)];
+
+    Br_delay = SEMI_spec_chan_derive_delay_ULA(fading,delay,DOA,d_nor,Nr_index,L,M,Nt);
+    dev_h_delay=[dev_h_delay; transpose(Br_delay)];
+
+    Br_angle = SEMI_spec_chan_derive_angle_ULA(fading,delay,DOA,d_nor,Nr_index,L,M,Nt);
+    dev_h_angle=[dev_h_angle; transpose(Br_angle)];
+
+end
+
+%% Derivation of $h$ w.r.t. (bar{h},tau,alpha) %% channel specular parameters
+
+G = [dev_h_fading,dev_h_delay,dev_h_angle]; 
 %% ------------------------------------------------------------------------
 
 X = [];
@@ -88,26 +119,11 @@ for snr_i = 1 : length(SNR)
 %============================================
     %Only Pilot Normal
     Iop      = X_nga'*X_nga / sigmav2;
+    Iop_fp   = N_total * Iop;
 
-%SemiBlind
-    Cyy      = sigmax2 * LAMBDA * LAMBDA'  + sigmav2 * eye(K*Nr);
-    Cyy_inv  = pinv(Cyy);
+% ============================================
+    %Only Pilot Specular
 
-    for ii = 1 : L
-        partial_Cyy_hii = sigmax2 * LAMBDA * partial_LAMBDA{1,ii}';
-        for jj = 1 : L   
-            partial_Cyy_hjj = sigmax2 * LAMBDA * partial_LAMBDA{1,jj}';
-            % Slepian-Bangs Formula
-            I_D(ii,jj) = trace(Cyy_inv * partial_Cyy_hii * Cyy_inv * partial_Cyy_hjj);
-            I_D(ii,jj) = I_D(ii,jj)';
-        end
-    end
-    I_D = triu(repmat(I_D, Nr*Nt, Nr*Nt));
-%============================================
-%Semiblind Normal
-    I_SB       = N_data*I_D + N_pilot*Iop;
-    CRB_SB_i   = pinv(I_SB);
-    Err(snr_i) = abs(trace(CRB_SB_i));
-
-   clear I_D;
+    Iop_spec = G*G'*Iop_fp*G*G';
+    Err(snr_i) = abs(trace(pinv(Iop_spec)));
 end
