@@ -322,9 +322,12 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
     toolboxws = {};
     set(hObject, 'Data', toolboxws);
     set(hObject, 'units','pixels');
+    set(hObject.Parent, 'units','pixels');
+    Position_p = hObject.Parent.Position;
+    set(hObject, 'Position', [0, 0, Position_p(3), Position_p(4)/4]);
 %     Set columns width when init main window
-    Postion = hObject.Position;
-    x_total = Postion(3);
+    Position = hObject.Position;
+    x_total = Position(3);
     x_plot = x_total / 20;
     x_name = x_total / 3;
     x_snr  = x_total / 4;
