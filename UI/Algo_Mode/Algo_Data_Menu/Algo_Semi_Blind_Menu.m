@@ -1,36 +1,36 @@
-function varargout = Algo_Non_Blind_Menu(varargin)
-% ALGO_NON_BLIND_MENU MATLAB code for Algo_Non_Blind_Menu.fig
-%      ALGO_NON_BLIND_MENU, by itself, creates a new ALGO_NON_BLIND_MENU or raises the existing
+function varargout = Algo_Semi_Blind_Menu(varargin)
+% ALGO_SEMI_BLIND_MENU MATLAB code for Algo_Semi_Blind_Menu.fig
+%      ALGO_SEMI_BLIND_MENU, by itself, creates a new ALGO_SEMI_BLIND_MENU or raises the existing
 %      singleton*.
 %
-%      H = ALGO_NON_BLIND_MENU returns the handle to a new ALGO_NON_BLIND_MENU or the handle to
+%      H = ALGO_SEMI_BLIND_MENU returns the handle to a new ALGO_SEMI_BLIND_MENU or the handle to
 %      the existing singleton*.
 %
-%      ALGO_NON_BLIND_MENU('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in ALGO_NON_BLIND_MENU.M with the given input arguments.
+%      ALGO_SEMI_BLIND_MENU('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in ALGO_SEMI_BLIND_MENU.M with the given input arguments.
 %
-%      ALGO_NON_BLIND_MENU('Property','Value',...) creates a new ALGO_NON_BLIND_MENU or raises the
+%      ALGO_SEMI_BLIND_MENU('Property','Value',...) creates a new ALGO_SEMI_BLIND_MENU or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before Algo_Non_Blind_Menu_OpeningFcn gets called.  An
+%      applied to the GUI before Algo_Semi_Blind_Menu_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to Algo_Non_Blind_Menu_OpeningFcn via varargin.
+%      stop.  All inputs are passed to Algo_Semi_Blind_Menu_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help Algo_Non_Blind_Menu
+% Edit the above text to modify the response to help Algo_Semi_Blind_Menu
 
-% Last Modified by GUIDE v2.5 30-Sep-2022 12:26:56
+% Last Modified by GUIDE v2.5 30-Sep-2022 12:30:50
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @Algo_Non_Blind_Menu_OpeningFcn, ...
-                   'gui_OutputFcn',  @Algo_Non_Blind_Menu_OutputFcn, ...
+                   'gui_OpeningFcn', @Algo_Semi_Blind_Menu_OpeningFcn, ...
+                   'gui_OutputFcn',  @Algo_Semi_Blind_Menu_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -45,13 +45,13 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before Algo_Non_Blind_Menu is made visible.
-function Algo_Non_Blind_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before Algo_Semi_Blind_Menu is made visible.
+function Algo_Semi_Blind_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user method (see GUIDATA)
-% varargin   command line arguments to Algo_Non_Blind_Menu (see VARARGIN)
+% varargin   command line arguments to Algo_Semi_Blind_Menu (see VARARGIN)
 
 global main_path;
 jFrame=get(handle(handles.figure1), 'javaframe');
@@ -69,18 +69,18 @@ set(hObject,'WindowButtonDownFcn',{@releasesysmodel});
 global pre_algo;
 pre_algo = '';
 
-% Choose default command line output for Algo_Non_Blind_Menu
+% Choose default command line output for Algo_Semi_Blind_Menu
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes Algo_Non_Blind_Menu wait for user response (see UIRESUME)
+% UIWAIT makes Algo_Semi_Blind_Menu wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = Algo_Non_Blind_Menu_OutputFcn(hObject, eventdata, handles) 
+function varargout = Algo_Semi_Blind_Menu_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -104,7 +104,7 @@ end
     % Set default menu to escape error when temp of menu is stored
     default = '            Select method';
     set(hObject, 'String', default);
-    methods = load_methods(default, 'Algo_Mode', 'Non-blind');
+    methods = load_methods(default, 'Algo_Mode', 'Semi-blind');
     set(hObject, 'String', methods);
 
 % --- Executes on selection change in methods.
@@ -130,7 +130,7 @@ function methods_Callback(hObject, eventdata, handles)
         return;
     end
     default = '            Select version';
-    vers = load_versions('Non-blind', default, methods{method});
+    vers = load_versions('Semi-blind', default, methods{method});
     set(handles.version, 'String', vers);
     
 % --- Executes during object creation, after setting all properties.
@@ -166,7 +166,7 @@ function version_Callback(hObject, eventdata, handles)
         set(handles.btngroup, 'Visible', 'off');
         return;
     end
-    load_params(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', vers{ver});
+    load_params(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', vers{ver});
 
 % --- Executes during object creation, after setting all properties.
 function panelparams_CreateFcn(hObject, eventdata, handles)
@@ -456,7 +456,7 @@ function apply_Callback(hObject, eventdata, handles)
     vers    = get(handles.version, 'String');
     algo    = vers{get(handles.version, 'Value')};
     
-    load_funcs(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
+    load_funcs(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', algo);
     
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
@@ -473,7 +473,7 @@ function Op_1_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
+    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_2.
@@ -489,7 +489,7 @@ function Op_2_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
+    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_5.
@@ -505,7 +505,7 @@ function Op_5_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
+    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_6.
@@ -521,7 +521,7 @@ function Op_6_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
+    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', algo);
 
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
@@ -538,7 +538,7 @@ function Op_9_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
+    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_10.
@@ -554,7 +554,7 @@ function Op_10_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
+    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', algo);
 
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
@@ -571,7 +571,7 @@ function Op_7_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
+    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', algo);
 
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
@@ -588,7 +588,7 @@ function Op_8_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
+    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_3.
@@ -604,7 +604,7 @@ function Op_3_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
+    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_4.
@@ -620,4 +620,4 @@ function Op_4_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Non-blind', algo);
+    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', algo);

@@ -33,11 +33,11 @@ classdef NB_ZF_params
         color     = 'k'
         
         % Triggers/Flags
-        has_inter     = [false, false, false, false, false, false]
+        has_inter     = [false, false, false, false, false]
         rect = {}
-        rect_position = {0, 0, 0, 0, 0, 0}
-        rect_linewidth = {0, 0, 0, 0, 0, 0}
-        rect_color     = {'b', 'b', 'b', 'b', 'b', 'b'}        
+        rect_position = {0, 0, 0, 0, 0}
+        rect_linewidth = {0, 0, 0, 0, 0}
+        rect_color     = {'b', 'b', 'b', 'b', 'b'}        
     end
     
     methods (Access = private)

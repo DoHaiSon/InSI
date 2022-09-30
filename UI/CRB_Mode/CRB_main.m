@@ -179,7 +179,7 @@ function Blindbutton_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 %     Not support yet
-%     CRB_Blind_Menu();
+    CRB_Blind_Menu();
 
 
 % --- Executes on button press in SBbutton.
