@@ -1,36 +1,36 @@
-function varargout = CRB_Non_Blind_Menu(varargin)
-% CRB_NON_BLIND_MENU MATLAB code for CRB_Non_Blind_Menu.fig
-%      CRB_NON_BLIND_MENU, by itself, creates a new CRB_NON_BLIND_MENU or raises the existing
+function varargout = CRB_Blind_Menu(varargin)
+% CRB_BLIND_MENU MATLAB code for CRB_Blind_Menu.fig
+%      CRB_BLIND_MENU, by itself, creates a new CRB_BLIND_MENU or raises the existing
 %      singleton*.
 %
-%      H = CRB_NON_BLIND_MENU returns the handle to a new CRB_NON_BLIND_MENU or the handle to
+%      H = CRB_BLIND_MENU returns the handle to a new CRB_BLIND_MENU or the handle to
 %      the existing singleton*.
 %
-%      CRB_NON_BLIND_MENU('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in CRB_NON_BLIND_MENU.M with the given input arguments.
+%      CRB_BLIND_MENU('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in CRB_BLIND_MENU.M with the given input arguments.
 %
-%      CRB_NON_BLIND_MENU('Property','Value',...) creates a new CRB_NON_BLIND_MENU or raises the
+%      CRB_BLIND_MENU('Property','Value',...) creates a new CRB_BLIND_MENU or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before CRB_Non_Blind_Menu_OpeningFcn gets called.  An
+%      applied to the GUI before CRB_Blind_Menu_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to CRB_Non_Blind_Menu_OpeningFcn via varargin.
+%      stop.  All inputs are passed to CRB_Blind_Menu_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help CRB_Non_Blind_Menu
+% Edit the above text to modify the response to help CRB_Blind_Menu
 
-% Last Modified by GUIDE v2.5 30-Sep-2022 12:50:28
+% Last Modified by GUIDE v2.5 30-Sep-2022 12:47:24
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @CRB_Non_Blind_Menu_OpeningFcn, ...
-                   'gui_OutputFcn',  @CRB_Non_Blind_Menu_OutputFcn, ...
+                   'gui_OpeningFcn', @CRB_Blind_Menu_OpeningFcn, ...
+                   'gui_OutputFcn',  @CRB_Blind_Menu_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -45,13 +45,13 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before CRB_Non_Blind_Menu is made visible.
-function CRB_Non_Blind_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before CRB_Blind_Menu is made visible.
+function CRB_Blind_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user method (see GUIDATA)
-% varargin   command line arguments to CRB_Non_Blind_Menu (see VARARGIN)
+% varargin   command line arguments to CRB_Blind_Menu (see VARARGIN)
 
 global main_path;
 jFrame=get(handle(handles.figure1), 'javaframe');
@@ -69,18 +69,18 @@ set(hObject,'WindowButtonDownFcn',{@releasesysmodel});
 global pre_algo;
 pre_algo = '';
 
-% Choose default command line output for CRB_Non_Blind_Menu
+% Choose default command line output for CRB_Blind_Menu
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes CRB_Non_Blind_Menu wait for user response (see UIRESUME)
+% UIWAIT makes CRB_Blind_Menu wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = CRB_Non_Blind_Menu_OutputFcn(hObject, eventdata, handles) 
+function varargout = CRB_Blind_Menu_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -104,7 +104,7 @@ end
     % Set default menu to escape error when temp of menu is stored
     default = '            Select method';
     set(hObject, 'String', default);
-    methods = load_methods(default, 'CRB_Mode', 'Non-blind');
+    methods = load_methods(default, 'CRB_Mode', 'Blind');
     set(hObject, 'String', methods);
 
 % --- Executes on selection change in methods.
@@ -123,8 +123,8 @@ function methods_Callback(hObject, eventdata, handles)
         return;
     end
     % TODO: Version is lost when choose default but method is not default
-    algo = strcat('NB_', methods{method});
-    load_params(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+    algo = strcat('B_', methods{method});
+    load_params(hObject, eventdata, handles, 'CRB_Mode', 'Blind', algo);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -413,8 +413,8 @@ function apply_Callback(hObject, eventdata, handles)
     end
     
     % Load all params to function exec
-    algo = strcat('NB_', methods{method});
-    load_funcs(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+    algo = strcat('B_', methods{method});
+    load_funcs(hObject, eventdata, handles, 'CRB_Mode', 'Blind', algo);
     
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
@@ -430,8 +430,8 @@ function Op_1_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    algo = strcat('NB_', methods{method});
-    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+    algo = strcat('B_', methods{method});
+    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Blind', algo);
 
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
@@ -447,8 +447,8 @@ function Op_2_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    algo = strcat('NB_', methods{method});
-    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+    algo = strcat('B_', methods{method});
+    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Blind', algo);
 
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
@@ -464,8 +464,8 @@ function Op_3_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    algo = strcat('NB_', methods{method});
-    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+    algo = strcat('B_', methods{method});
+    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_4.
@@ -480,8 +480,8 @@ function Op_4_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    algo = strcat('NB_', methods{method});
-    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+    algo = strcat('B_', methods{method});
+    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_5.
@@ -496,8 +496,8 @@ function Op_5_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    algo = strcat('NB_', methods{method});
-    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+    algo = strcat('B_', methods{method});
+    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_6.
@@ -512,8 +512,8 @@ function Op_6_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    algo = strcat('NB_', methods{method});
-    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+    algo = strcat('B_', methods{method});
+    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_7.
@@ -528,8 +528,8 @@ function Op_7_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    algo = strcat('NB_', methods{method});
-    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+    algo = strcat('B_', methods{method});
+    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_8.
@@ -544,8 +544,8 @@ function Op_8_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    algo = strcat('NB_', methods{method});
-    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+    algo = strcat('B_', methods{method});
+    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_9.
@@ -560,8 +560,8 @@ function Op_9_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    algo = strcat('NB_', methods{method});
-    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+    algo = strcat('B_', methods{method});
+    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Blind', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_10.
@@ -576,5 +576,5 @@ function Op_10_ButtonDownFcn(hObject, eventdata, handles)
         set(handles.panelparams, 'Visible', 'off');
         return;
     end
-    algo = strcat('NB_', methods{method});
-    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
+    algo = strcat('B_', methods{method});
+    load_reactive(hObject, eventdata, handles, 'CRB_Mode', 'Blind', algo);
