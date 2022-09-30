@@ -222,6 +222,17 @@ function holdon_Callback(hObject, eventdata, handles)
         global results;
         if(results.pre_mode ~= 1 && results.pre_mode ~= 0)
             results.mode = 1;
+            % Set WS values
+            % Get plot options
+            ws_op = get(handles.toolbox_ws, 'Data');
+            plot_op = [ws_op{:, 1}];
+            last_true_i = find(plot_op, true, 'last');
+            plot_op_new = false(1, length(plot_op));
+            plot_op_new(1, last_true_i) = true;
+            for i=1:length(plot_op_new)
+                handles.toolbox_ws.Data{i, 1} = [plot_op_new(i)];
+            end
+            
             dispfig(results.inter);
         end
     end

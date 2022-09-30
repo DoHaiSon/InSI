@@ -33,10 +33,12 @@ function dispfig(font)
             
             % Get the last one visible instead of the last value
             index = find(results.figparams.fig_visible, true, 'last');
-            semilogy(results.figaxes, results.figparams.data(index).x, results.figparams.data(index).y ...
-                , results.figparams.marker);
-
-            legend(results.figaxes, results.figparams.legends(index), 'Interpreter', interpreter);
+            if (index ~= 0)
+                semilogy(results.figaxes, results.figparams.data(index).x, results.figparams.data(index).y ...
+                    , results.figparams.marker);
+                legend(results.figaxes, results.figparams.legends(index), 'Interpreter', interpreter);
+            end
+            
             grid (results.figaxes, results.figparams.gridmode);
             ylabel(results.figaxes, results.figparams.ylabel, 'Interpreter', interpreter);
             xlabel(results.figaxes, results.figparams.xlabel, 'Interpreter', interpreter);
