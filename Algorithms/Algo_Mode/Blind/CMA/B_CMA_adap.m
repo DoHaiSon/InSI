@@ -51,7 +51,6 @@ Output_type = Output_type;
 % Generate input signal
 modulation = {'Bin', 'QPSK', 'QAM4'};
 
-% CMA algorithm
 SER_f = [];
 for Monte_i = 1:Monte
     [sig, data]  = eval(strcat(modulation{Mod_type}, '(N)'));
