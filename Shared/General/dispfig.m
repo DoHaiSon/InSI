@@ -75,7 +75,7 @@ function dispfig(font)
                 subfig = subplot(p(1), p(2), i, 'Parent', results.fig); 
                 semilogy(subfig, results.figparams.data(i).x, results.figparams.data(i).y ...
                     , results.figparams.marker);
-                legend(subfig, results.figparams.legends, 'Interpreter', interpreter);
+                legend(subfig, results.figparams.legends(i), 'Interpreter', interpreter);
                 grid (subfig, results.figparams.gridmode);
                 ylabel(subfig, results.figparams.ylabel, 'Interpreter', interpreter);
                 xlabel(subfig, results.figparams.xlabel, 'Interpreter', interpreter);
