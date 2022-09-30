@@ -85,4 +85,8 @@ function dispfig(font)
         otherwise
     end
     results.pre_mode = results.mode;
+
+    % Push fig windows on top
+    set(results.fig,'WindowStyle','modal');
+    set(results.fig,'WindowStyle','normal');
 end
