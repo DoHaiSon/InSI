@@ -1,4 +1,4 @@
-classdef NB_MLE_params
+classdef SB_Misspecified_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     

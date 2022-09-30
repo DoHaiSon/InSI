@@ -7,10 +7,11 @@ L_tr = Op{3};    % True Channel Order
 L_pt = Op{4};    % Misspecified Channel Order
 K    = Op{5};    % Number of Unknown data Blocks
 N    = 30;
-SIGMA  = 10.^(-[0:0.2:2]);
 
 Monte   = Monte;
 SNR     = SNR;
+
+SIGMA  = 10.^(-(SNR / 10));
 
 %% Generate system 
 [H_matrix,h,y_p,X_Matrix_Pilot] = Generate_System(L_tr,N_r,N_t,N,K);

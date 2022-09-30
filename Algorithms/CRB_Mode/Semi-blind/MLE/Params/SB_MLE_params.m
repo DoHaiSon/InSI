@@ -1,4 +1,4 @@
-classdef NB_MLE_params
+classdef SB_MLE_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     
