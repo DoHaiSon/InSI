@@ -90,7 +90,6 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     fig_mode = checkfigmode(handles_main);
     switch(fig_mode)
         case 1
-%             results.figparams.count = 0;
             results.mode = 1;
         case 2
             results.mode = 2;
@@ -101,6 +100,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     %% Display figure
     dispfig(true);
     
+    % TODO: pre-load WS op instead of release all to true
     %% Export data to Toolbox Workspace
     global toolboxws;
     title_toolboxes = algo;

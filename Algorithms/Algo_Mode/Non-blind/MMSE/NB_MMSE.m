@@ -1,9 +1,9 @@
-function [SNR, Err] = NB_ZF(Op, Monte, SNR, Output_type)
+function [SNR, Err] = NB_MMSE(Op, Monte, SNR, Output_type)
 
-% Zero forcing
-% Ref: https://www.sharetechnote.com/html/Communication_ChannelModel_ZF.html
+% MMSE (Minimum Mean Square Error)
+% Ref: https://www.sharetechnote.com/html/Communication_ChannelModel_MMSE.html
 %% Input:
-    % Nfft: number of Occ carriers
+    % N: number of sample data
     % Pilot_L: number of pilot symbols
     % ChL: length of the channel
     % Ch_type: type of the channel (real, complex, specular, user' input
@@ -13,7 +13,7 @@ function [SNR, Err] = NB_ZF(Op, Monte, SNR, Output_type)
     % Ouput_type: MSE Sig, MSE Ch, Error rate
 %% Output:
     % SNR: range of the SNR
-    % SER: Symbol error rate / MSE H_est
+    % SER: Symbol error rate
 %% Algorithm:
     % Step 1: Initialize variables
     % Step 2: Generate input signal
@@ -86,7 +86,7 @@ for Monte_i = 1:Monte
         Y_d    = fft(y_d); % FFT
         
         %% Estimate H
-        H_est  = LS_CE(Y_p, Pilot, P_loc, Pilot_L, Nfft);
+        H_est  = MMSE_CE(Y_p, Pilot, P_loc, Nfft, Nps, Ch, SNR_i);
         H_est_power_dB = 10*log10(abs(H_est.*conj(H_est)));
         h_est  = ifft(H_est);
         
