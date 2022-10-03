@@ -104,6 +104,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     % TODO: pre-load WS op instead of release all to true
     %% Export data to Toolbox Workspace
     global toolboxws;
+
     title_toolboxes = algo;
     for i = 1:params.num_params
         title_toolboxes = strcat(title_toolboxes, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
@@ -111,9 +112,16 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     end
     switch(fig_mode)
         case 1
-            toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(1).x), ...
-                matrix2char(results.figparams.data(1).y), ...
-                Op{1}}]];
+            results.figparams.fig_visible(end - 1) = false;
+            switch mode
+                case 'CRB_Mode'
+                   toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(end).x), ...
+                        matrix2char(results.figparams.data(end).y)}]];
+                otherwise
+                    toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(end).x), ...
+                        matrix2char(results.figparams.data(end).y), ...
+                        Op{1}}]];
+            end
         otherwise
             switch mode
                 case 'CRB_Mode'
@@ -124,6 +132,12 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
                         matrix2char(results.figparams.data(results.figparams.count).y), ...
                         Op{1}}]];
             end
+    end
+    % Modify toolboxws option here
+    if (results.figparams.count ~= 1)
+        for i = 1:length(results.figparams.fig_visible)
+            toolboxws{i, 1} = [logical(results.figparams.fig_visible(i))];
+        end
     end
     set(handles_main.toolbox_ws, 'Data', toolboxws);
 end

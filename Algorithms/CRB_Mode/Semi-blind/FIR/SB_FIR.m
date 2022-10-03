@@ -1,4 +1,4 @@
-function [SNR, Err] = SB_Normal (Op, Monte, SNR)
+function [SNR, Err] = SB_FIR (Op, Monte, SNR)
 
 % Initialize variables
 Nt  = Op{1};    % number of transmit antennas

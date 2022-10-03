@@ -1,4 +1,4 @@
-classdef NB_Normal_params
+classdef SB_FIR_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     

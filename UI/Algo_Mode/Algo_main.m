@@ -237,6 +237,7 @@ function holdon_Callback(hObject, eventdata, handles)
                 handles.toolbox_ws.Data{i, 1} = [plot_op_new(i)];
             end
             
+            results.figparams.fig_visible = plot_op_new;
             dispfig(results.inter);
         end
     end
@@ -330,6 +331,7 @@ function sub_fig_Callback(hObject, eventdata, handles)
                 handles.toolbox_ws.Data{i, 1} = [plot_op_new(i)];
             end
             
+            results.figparams.fig_visible = plot_op_new;
             dispfig(results.inter);
         end
     end
