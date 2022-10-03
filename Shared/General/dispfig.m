@@ -60,12 +60,16 @@ function dispfig(font)
                 movegui(results.figaxes, results.pos);
                 set(results.fig, 'Visible', 'on');
                 
-                for i=results.figparams.count:-1:1 % Plot all data.
+                for i=1:results.figparams.count % Plot all data.
                     if (results.figparams.fig_visible(i))
                         semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
                             , results.figparams.marker);
                         hold (results.figaxes, 'on');
-                    else
+                    end
+                end
+
+                for i=results.figparams.count:-1:1 % Plot all data.
+                    if (~results.figparams.fig_visible(i))
                         % Drop invisible data legend
                         legends(i) = [];
                     end

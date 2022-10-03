@@ -75,7 +75,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
             results.figparams.ylabel = 'CRB';
         otherwise
             results.figparams.title = 'Channel estimation';
-            results.figparams.ylabel = 'BER';
+            results.figparams.ylabel = 'SER';
     end
     results.figparams.xlabel = 'SNR(dB)';
     results.figparams.gridmode = 'on';
@@ -92,6 +92,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
         case 1
             results.mode = 1;
         case 2
+            results.trigger = true;
             results.mode = 2;
         case 3
             results.mode = 3;

@@ -10,7 +10,7 @@ classdef NB_MMSE_params
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
         %                        button      = 3
-        params_type = [1, 1, 1, 1, 2]
+        params_type = [1, 1, 1, 2, 2]
         values = {48, 48, 2, {'Real', 'Complex', 'Specular', 'Input'}, {'Bin', 'QPSK', 'QAM4'}}
         default_values = {48, 48, 2, 2, 2}
         
