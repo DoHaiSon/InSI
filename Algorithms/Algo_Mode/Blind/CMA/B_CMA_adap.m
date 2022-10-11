@@ -55,7 +55,12 @@ SER_f = [];
 for Monte_i = 1:Monte
     [sig, data]  = eval(strcat(modulation{Mod_type}, '(N)'));
 
-    Ch         = Generate_channel(1, ChL, Ch_type);
+    if (strcmp(Ch_type(1), {'Trigger_input'}))
+        Ch     = cell2mat(Ch_type(2));
+    else
+        Ch     = Generate_channel(1, ChL, Ch_type);
+    end
+
     x          = filter(Ch, 1, sig);
     
     SER_SNR    = [];

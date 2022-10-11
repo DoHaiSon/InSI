@@ -17,7 +17,7 @@ end
     stru      = load(file_path);
     stru_name = fieldnames(stru);
     data = eval(strcat('stru.',stru_name{1}));
-
+    data = {'Trigger_input', data};
     global input_data;
     eval(strcat('input_data.', name, '= data;'));
 end
