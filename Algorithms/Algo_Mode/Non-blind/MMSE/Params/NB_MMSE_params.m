@@ -19,14 +19,17 @@ classdef NB_MMSE_params
         default_SNR = '-10:5:20'
 
         % Output
-        % Type of the outputs: MSE Sig = 1
-        %                      MSE Ch  = 2
-        %                      Err rate= 3
+        % Type of the outputs: SER Sig = 1
+        %                      BER Sig = 2
+        %                      MSE Cha = 3
         outputs = [1, 3]
         default_output = 1
         
         % Figure
         sys_model = 'Algo_B_CMA.png'
+        title     = {'NB-MMSE'}
+        xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
+        ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Channel (dB)'}
         trigger   = false 
         position
         linewidth = 1

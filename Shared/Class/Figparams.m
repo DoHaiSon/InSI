@@ -6,9 +6,9 @@ classdef Figparams
         axes
         legends
         name 
-        title
-        xlabel
-        ylabel
+        title  = {}
+        xlabel = {}
+        ylabel = {}
         gridmode
         marker
         count = 0

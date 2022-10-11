@@ -19,14 +19,17 @@ classdef NB_Misspecified_params
         default_SNR = '-10:5:20'
 
         % Output
-%         Type of the outputs: MSE Sig = 1
-%                              MSE Ch  = 2
-%                              Err rate= 3
+        % Type of the outputs: SER Sig = 1
+        %                      BER Sig = 2
+        %                      MSE Cha = 3
 %         outputs = [1]
 %         default_output = 1
         
         % Figure
         sys_model = 'nonblind_model.png'
+        title     = {'NB-Misspecified'}
+        xlabel    = {'SNR (dB)'}
+        ylabel    = {'CRB (dB)'}
         trigger   = false 
         position
         linewidth = 1

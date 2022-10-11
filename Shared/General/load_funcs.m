@@ -71,13 +71,14 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
 %     TODO: Dynamic load these params
     switch mode
         case 'CRB_Mode'
-            results.figparams.title = 'Performance bound';
-            results.figparams.ylabel = 'CRB';
+            results.figparams.title{end+1}  = params.title;
+            results.figparams.xlabel{end+1} = params.xlabel;
+            results.figparams.ylabel{end+1} = params.ylabel;
         otherwise
-            results.figparams.title = 'Channel estimation';
-            results.figparams.ylabel = 'SER';
+            results.figparams.title{end+1}  = params.title;
+            results.figparams.xlabel{end+1} = params.xlabel(Output_type);
+            results.figparams.ylabel{end+1} = params.ylabel(Output_type);
     end
-    results.figparams.xlabel = 'SNR(dB)';
     results.figparams.gridmode = 'on';
     results.figparams.marker = '-o';
     results.figparams.legends{end + 1} = parseleg(mode, algo);

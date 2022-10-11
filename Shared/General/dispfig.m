@@ -40,9 +40,9 @@ function dispfig(font)
             end
             
             grid (results.figaxes, results.figparams.gridmode);
-            ylabel(results.figaxes, results.figparams.ylabel, 'Interpreter', interpreter);
-            xlabel(results.figaxes, results.figparams.xlabel, 'Interpreter', interpreter);
-            title(results.figaxes, results.figparams.title, 'Interpreter', interpreter, 'fontweight','bold','fontsize', 16);
+            ylabel(results.figaxes, results.figparams.ylabel{index}, 'Interpreter', interpreter);
+            xlabel(results.figaxes, results.figparams.xlabel{index}, 'Interpreter', interpreter);
+            title(results.figaxes, results.figparams.title{index}, 'Interpreter', interpreter, 'fontweight','bold','fontsize', 16);
             set(results.figaxes ,'TickLabelInterpreter', interpreter);
         case 2
             legends = results.figparams.legends;
@@ -79,9 +79,9 @@ function dispfig(font)
             legend(results.figaxes, legends, 'Interpreter', interpreter);
 
             grid (results.figaxes, results.figparams.gridmode);
-            ylabel(results.figaxes, results.figparams.ylabel, 'Interpreter', interpreter);
-            xlabel(results.figaxes, results.figparams.xlabel, 'Interpreter', interpreter);
-            title(results.figaxes, results.figparams.title, 'Interpreter', interpreter, 'fontweight','bold','fontsize', 16);
+            ylabel(results.figaxes, results.figparams.ylabel{end}, 'Interpreter', interpreter);
+            xlabel(results.figaxes, results.figparams.xlabel{end}, 'Interpreter', interpreter);
+%             title(results.figaxes, results.figparams.title{end}, 'Interpreter', interpreter, 'fontweight','bold','fontsize', 16);
             set(results.figaxes ,'TickLabelInterpreter',interpreter);
         case 3
             num = sum(results.figparams.fig_visible(:) == true);
@@ -94,9 +94,9 @@ function dispfig(font)
                         , results.figparams.marker);
                     legend(subfig, results.figparams.legends(j), 'Interpreter', interpreter);
                     grid (subfig, results.figparams.gridmode);
-                    ylabel(subfig, results.figparams.ylabel, 'Interpreter', interpreter);
-                    xlabel(subfig, results.figparams.xlabel, 'Interpreter', interpreter);
-                    title(subfig, results.figparams.title, 'Interpreter', interpreter, 'fontweight','bold','fontsize', 16);
+                    ylabel(subfig, results.figparams.ylabel{j}, 'Interpreter', interpreter);
+                    xlabel(subfig, results.figparams.xlabel{j}, 'Interpreter', interpreter);
+                    title(subfig, results.figparams.title{j}, 'Interpreter', interpreter, 'fontweight','bold','fontsize', 16);
                     set(subfig , 'TickLabelInterpreter', interpreter);
                     index = index + 1;
                 end
