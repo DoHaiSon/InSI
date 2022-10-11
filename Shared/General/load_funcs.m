@@ -37,6 +37,10 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
                 Op{end + 1} = str2num(get(eval(strcat('handles.Op_', num2str(i))), 'String'));
             case 2
                 Op{end + 1} = get(eval(strcat('handles.Op_', num2str(i))), 'Value');
+                
+                % Check input case:
+%                 list_op     = get(eval(strcat('handles.Op_', num2str(i))), 'String');
+                
             case 3
         end
     end
@@ -69,7 +73,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     results.figparams.count = results.figparams.count + 1;
     results.figparams.data(results.figparams.count).x = SNR;
     results.figparams.data(results.figparams.count).y = Err;
-%     TODO: Dynamic load these params
+
     switch mode
         case 'CRB_Mode'
             results.figparams.title{end+1}  = params.title;
@@ -115,7 +119,6 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     %% Store pre output mode
     results.pre_output = Output_type;
     
-    % TODO: pre-load WS op instead of release all to true
     %% Export data to Toolbox Workspace
     global toolboxws;
 

@@ -1,6 +1,5 @@
 function dispfig(font)
     global results;
-    % TODO: load WS option before re-plot all data
     
     % Check empty figure
     if ~ishandle(results.fig)

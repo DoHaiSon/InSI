@@ -389,7 +389,6 @@ function inter_latex_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     global results;
     if ~results.inter && results.figparams.count ~= 0
-        % TODO: remove data instead of close recent figure
         close(results.fig);
         output = figure('Tag', 'channel_estimation', 'visible','off');
         results.fig = output;
@@ -407,7 +406,6 @@ function inter_non_latex_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     global results;
     if results.inter && results.figparams.count ~= 0
-        % TODO: remove data instead of close recent figure
         close(results.fig);
         output = figure('Tag', 'channel_estimation', 'visible','off');
         results.fig = output;

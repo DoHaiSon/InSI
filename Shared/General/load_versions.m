@@ -1,7 +1,6 @@
 function vers = load_versions( model, default, name )
 %load_versions Summary of this function goes here
 %   Detailed explanation goes here
-%   TODO: Dynamic load version
     global main_path;
     path  = fullfile(main_path, '/Algorithms/Algo_Mode/', model, name);
     sub   = dir(path);

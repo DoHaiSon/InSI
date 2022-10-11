@@ -3,6 +3,7 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
 %   Detailed explanation goes here
     global main_path;
     param_file_name = strcat(algo, '_params');
+    global params;
     params = eval(param_file_name);
     
     global pre_algo;

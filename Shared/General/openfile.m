@@ -1,4 +1,4 @@
-function [file_path] = openfile()
+function [data] = openfile(name)
 
 [file,file_path, indx] = uigetfile( ...
 {'*.m;*.mlx;*.fig;*.mat;*.slx;*.mdl',...
@@ -13,5 +13,11 @@ if isequal(file,0)
    disp('User selected Cancel');
    return;
 end
-    file_path = fullfile(file_path,file);
+    file_path = fullfile(file_path, file);
+    stru      = load(file_path);
+    stru_name = fieldnames(stru);
+    data = eval(strcat('stru.',stru_name{1}));
+
+    global input_data;
+    eval(strcat('input_data.', name, '= data;'));
 end

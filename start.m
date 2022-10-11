@@ -24,6 +24,8 @@ function start()
     init_results();
     global pre_algo;
     pre_algo = '';
+    global input_data;
+    input_data = {};
     
 %%  Load MODE GUI
     loader('Opening the application', 'mode');
