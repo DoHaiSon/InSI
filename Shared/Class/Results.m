@@ -8,6 +8,7 @@ classdef Results
         figparams
         mode
         pre_mode = 0
+        pre_output = 1
         pos
         trigger=true            % for re-plot all lines
         inter=true              % for check currently inter-mode

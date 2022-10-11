@@ -22,6 +22,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
                 end
             end
         case 'CRB_Mode'
+            Output_type = 1;
         case 'Demo_Mode'
     end
     
@@ -99,8 +100,20 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
             results.mode = 3;
         otherwise
     end
+    
+    % If user changed the output type, we force change the fig mode to
+    % subfig
+    if (results.pre_output ~= Output_type)
+        set(handles_main.holdon, 'Value', 0);
+        set(handles_main.sub_fig, 'Value', 1);
+        results.mode = 3;
+    end
+
     %% Display figure
     dispfig(true);
+
+    %% Store pre output mode
+    results.pre_output = Output_type;
     
     % TODO: pre-load WS op instead of release all to true
     %% Export data to Toolbox Workspace
