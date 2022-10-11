@@ -4,8 +4,8 @@ function start()
 
 %%  TODO: Do not add everything 
     global main_path;
-    main_path = matlab.desktop.editor.getActiveFilename; %   get path of active file
-    main_path = main_path(1:end-8);
+    main_path = mfilename('fullpath'); %   get path of active file
+    main_path = main_path(1:end-6);
     addpath(genpath(main_path));
     
     % Clear auto save file of matlab
