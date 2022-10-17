@@ -63,7 +63,7 @@ for Monte_i = 1:Monte
     end
     
     
-    [H, h_true]        = gen_chan_specular(fading,delay,DOA,Nr,L,Nt);
+    H = Generate_channel(0, L, 3, Nt, Nr, fading, delay, DOA);
     
     
     %% CRB 

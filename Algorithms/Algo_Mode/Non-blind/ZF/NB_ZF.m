@@ -63,11 +63,7 @@ for Monte_i = 1:Monte
     x_d        = ifft(sig, Nfft);
     xt_d       = [x_d(Nfft-Ng+1:Nfft); x_d]; % IFFT and add CP
     
-    if (strcmp(Ch_type(1), {'Trigger_input'}))
-        Ch     = cell2mat(Ch_type(2));
-    else
-        Ch     = Generate_channel(1, ChL, Ch_type);
-    end
+    Ch     = Generate_channel(1, ChL, Ch_type);
     
     H          = fft(Ch, Nfft);
     ch_length  =length(Ch); % True channel and its length

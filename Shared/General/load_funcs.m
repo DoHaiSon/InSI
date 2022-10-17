@@ -36,15 +36,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
             case 1
                 Op{end + 1} = str2num(get(eval(strcat('handles.Op_', num2str(i))), 'String'));
             case 2
-                % Check input case:
-                list_ops    = get(eval(strcat('handles.Op_', num2str(i))), 'String');
-                selected    = get(eval(strcat('handles.Op_', num2str(i))), 'value');
-                if (strcmp(list_ops(selected), 'Input'))
-                    global input_data
-                    Op{end + 1} = eval(cell2mat(strcat('input_data.', params.params(i))));
-                else
-                    Op{end + 1} = get(eval(strcat('handles.Op_', num2str(i))), 'Value');
-                end
+                Op{end + 1} = get(eval(strcat('handles.Op_', num2str(i))), 'Value');
             case 3
         end
     end

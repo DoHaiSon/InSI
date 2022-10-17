@@ -53,17 +53,13 @@ modulation = {'Bin', 'QPSK', 'QAM4'};
 
 SER_f = [];
 for Monte_i = 1:Monte
-    [sig, data]  = eval(strcat(modulation{Mod_type}, '(N)'));
+    [sig, data] = eval(strcat(modulation{Mod_type}, '(N)'));
 
-    if (strcmp(Ch_type(1), {'Trigger_input'}))
-        Ch     = cell2mat(Ch_type(2));
-    else
-        Ch     = Generate_channel(1, ChL, Ch_type);
-    end
+    Ch          = Generate_channel(1, ChL, Ch_type);
 
-    x          = filter(Ch, 1, sig);
+    x           = filter(Ch, 1, sig);
     
-    SER_SNR    = [];
+    SER_SNR     = [];
     for SNR_i   = 1:length(SNR)
         X       = awgn(x, SNR(SNR_i));              % received noisy signal
         
