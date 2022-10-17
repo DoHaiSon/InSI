@@ -5,7 +5,7 @@ classdef B_CMA_Grad_Unidimensional_params
     properties
         % Parameters
         num_params = 6
-        params = {'N', 'Sensors' 'ChL', 'ChType', 'Modulation', 'CMA length'}
+        params = {'N', 'Sensors' 'ChL', 'ChType', 'Modulation', 'Window length'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2

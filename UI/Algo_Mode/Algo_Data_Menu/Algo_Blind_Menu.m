@@ -147,6 +147,8 @@ function version_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+%% TODO: width of algorithms exceed the parent.
+%     set(hObject, 'FontSize', 10);
 
 % --- Executes on selection change in version.
 function version_Callback(hObject, eventdata, handles)

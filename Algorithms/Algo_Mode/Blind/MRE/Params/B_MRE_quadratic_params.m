@@ -5,7 +5,7 @@ classdef B_MRE_quadratic_params
     properties
         % Parameters
         num_params = 6
-        params = {'N_bits', 'Sensors', 'ChL', 'ChType', 'Modulation', 'MRE length'}
+        params = {'N_bits', 'Sensors', 'ChL', 'ChType', 'Modulation', 'Window length'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2

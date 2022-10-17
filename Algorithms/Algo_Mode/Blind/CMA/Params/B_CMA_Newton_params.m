@@ -5,7 +5,7 @@ classdef B_CMA_Newton_params
     properties
         % Parameters
         num_params = 7
-        params = {'N', 'Sensors' 'ChL', 'ChType', 'Modulation', 'mu', 'CMA length'}
+        params = {'N', 'Sensors' 'ChL', 'ChType', 'Modulation', 'mu', 'Window length'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
