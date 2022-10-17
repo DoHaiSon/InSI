@@ -1,18 +1,18 @@
-classdef B_CMA_adap_params
+classdef B_CMA_Grad_block_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     
     properties
         % Parameters
-        num_params = 6
-        params = {'N', 'ChL', 'ChType', 'Modulation', 'mu', 'CMA length'}
+        num_params = 7
+        params = {'N', 'Sensors' 'ChL', 'ChType', 'Modulation', 'mu', 'CMA length'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
         %                        button      = 3
-        params_type = [1, 1, 2, 2, 1, 1]
-        values = {10000, 2, {'Real', 'Complex', 'Specular', 'Input'}, {'Bin', 'QPSK', 'QAM4'}, 0.01, 50}
-        default_values = {10000, 1, 2, 2, 0.01, 20}
+        params_type = [1, 1, 1, 2, 2, 1, 1]
+        values = {10000,  4, 4, {'Real', 'Complex', 'Specular', 'Input'}, {'Bin', 'QPSK', 'QAM4'}, 0.000001, 20}
+        default_values = {10000, 4, 4, 2, 2, 0.000001, 20}
         
         % Default SNR and Monte
         default_Monte = 10
@@ -36,11 +36,11 @@ classdef B_CMA_adap_params
         color     = 'k'
         
         % Triggers/Flags
-        has_inter     = [true, false, false, false, true, true]
+        has_inter     = [true, false, false, false, false, true, true]
         rect = {}
-        rect_position = {[1 193 105 65], 0, 0, 0, [810 645 30 30], [405 355 45 45]}
-        rect_linewidth = {2, 0, 0, 0, 2, 2}
-        rect_color     = {'b', 'b', 'b', 'b', 'r', 'g'}        
+        rect_position = {[1 193 105 65], 0, 0, 0, 0, [810 645 30 30], [405 355 45 45]}
+        rect_linewidth = {2, 0, 0, 0, 0, 2, 2}
+        rect_color     = {'b', 'b', 'b', 'b', 'r', 'g', 'g'}        
     end
     
     methods (Access = private)

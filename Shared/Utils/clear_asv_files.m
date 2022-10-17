@@ -3,9 +3,11 @@ function clear_asv_files(folder)
     rehash path % Refresh file system path caches
     if (nargin < 1)
         folder = '';
+        % Find the folders
+        folders = genpath([pwd filesep folder]);
+    else
+        folders = genpath(folder);
     end
-    % Find the folders
-    folders = genpath([pwd filesep folder]);
     folders = regexp(folders, ';', 'split');
     % Find the asv files in the found folders
     asvFiles = cell(0);

@@ -22,6 +22,10 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
     
     % Turn off unuse params
     if params.num_params < 10
+        for i=1:params.num_params
+            set(eval(strcat('handles.Text_', num2str(i))), 'Visible', 'on');
+            set(eval(strcat('handles.Op_', num2str(i))), 'Visible', 'on');
+        end
         for i=10:-1:params.num_params + 1
             set(eval(strcat('handles.Text_', num2str(i))), 'Visible', 'off');
             set(eval(strcat('handles.Op_', num2str(i))), 'Visible', 'off');
@@ -42,6 +46,18 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
             case 1
                 set(eval(strcat('handles.Op_', num2str(i))), 'Style', 'edit');
                 set(eval(strcat('handles.Op_', num2str(i))), 'Enable', 'on');
+
+                % TODO: Scale edit box
+%                 if (trigger_scale)
+%                     set(eval(strcat('handles.Op_', num2str(i))), 'units','pixels');
+%                     old_pos    = get(eval(strcat('handles.Op_', num2str(i))), 'Position');
+%                     if (old_pos(3) >= 60)
+%                         new_pos    = old_pos;
+%                         new_pos(1) = old_pos(1) * 2.8473282443;
+%                         new_pos(3) = old_pos(3) / 2;
+%                         set(eval(strcat('handles.Op_', num2str(i))), 'Position', new_pos);
+%                     end
+%                 end
                 
                 % Set default values for using params
                 set(eval(strcat('handles.Op_', num2str(i))), 'String', params.default_values{i});

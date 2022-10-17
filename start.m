@@ -9,7 +9,7 @@ function start()
     addpath(genpath(main_path));
     
     % Clear auto save file of matlab
-    clear_asv_files();
+    clear_asv_files(main_path);
     
     % TODO: Close all BSI toolbox windows
 

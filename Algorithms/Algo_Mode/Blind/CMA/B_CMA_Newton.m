@@ -1,4 +1,4 @@
-function [SNR, Err] = B_CMA_adap(Op, Monte, SNR, Output_type)
+function [SNR, Err] = B_CMA_Newton(Op, Monte, SNR, Output_type)
 
 %BLIND CHANNEL USING CMA ALGORITHM
 % Ref: J. Treichler and B. Agee, "A new approach to multipath correction of constant modulus signals,"
@@ -39,11 +39,12 @@ function [SNR, Err] = B_CMA_adap(Op, Monte, SNR, Output_type)
 
 % Initialize variables
 N       = Op{1};         % number of sample data
-ChL     = Op{2};         % length of the channel
-Ch_type = Op{3};         % complex
-Mod_type= Op{4};
-mu      = Op{5};
-L       = Op{6};
+Num_Ch  = Op{2};         % number of channels
+ChL     = Op{3};         % length of the channel
+Ch_type = Op{4};         % complex
+Mod_type= Op{5};
+mu      = Op{6};         % Step size
+L       = Op{7};         % Window length
 Monte   = Monte;
 SNR     = SNR;
 Output_type = Output_type;
@@ -55,38 +56,67 @@ SER_f = [];
 for Monte_i = 1:Monte
     [sig, data] = eval(strcat(modulation{Mod_type}, '(N)'));
 
-    Ch          = Generate_channel(1, ChL, Ch_type);
+    H           = Generate_channel(Num_Ch, ChL, Ch_type);
 
-    x           = filter(Ch, 1, sig);
+    sig_rec = [];
+        for l = 1:Num_Ch
+            sig_rec(:, l) = conv( H(l,:).', sig ) ;
+        end
+    x           = sig_rec(ChL+1:N + ChL, :);
     
     SER_SNR     = [];
     for SNR_i   = 1:length(SNR)
         X       = awgn(x, SNR(SNR_i));              % received noisy signal
         
-        %% CMA estimator
-        CM      = abs(sig(1));                      % constant modulous of QAM4 symbols
-        W       = zeros(L, 1);                      % init filter coeff
-        W(1)    = 1;
-        Y       = [];
-        Y_k     = 0;
-        
-        for k=L:N
-            %% y(k) = x.^T(k) * W(k)
-            X_k     = X(k: -1:k-L+1);
-            Y_k     = transpose(X_k) * W;
-            
-            %% W(k+1) = W(k) - mu * (|y(k)|^2 - CM)* y_k * conj(x(k))
-            ep      = (abs(Y_k)^2 - CM)* Y_k;
-            W       = W - mu * ep * conj(X_k);
-
-            Y       = [Y; Y_k];                     %L->end
+        Xn=[];
+        for i   = L:N
+            x1  = X(i:-1:(i-L+1),:);
+            Zn  = x1(:);
+            Xn  = [Xn Zn];
         end
         
+        %% CMA estimator
+        CM      = abs(sig(1));
+        d       = floor(L*Num_Ch/2);
+        W       = [zeros(d, 1); 1 ; zeros(L*Num_Ch-d-1,1)];
+        
+        jj      = 1;
+        while (jj < 500)
+            Y   = W'*Xn;
+            EP  = (CM - abs(Y).^2).*conj(Y);
+            G   = Xn*EP.';
+
+            %calcule de la Hessienne
+            K   = (CM - 3*(abs(Y).^2));
+            [ll,cc] = size(Xn);
+            F   = Xn.*(ones(ll,1)*K);
+            H   = F*Xn';
+            Hs  = inv(H);
+
+            W2  = W-(mu*Hs*G);
+            
+            Y2  = W2'*Xn;
+            C1  = (CM -abs(Y).^2).^2;
+            C2  = (CM -abs(Y2).^2).^2;
+
+            Crit1 = sum(C1);
+            Crit2 = sum(C2);
+
+            if Crit2 <= Crit1
+                jj = jj+1;
+                W  = W2;
+            else
+                mu = 0.5*mu;
+            end
+        end
+
+        est_src_b       = conj(Xn'*W);
+        
         % Compute Symbol Error rate
-        sig_src_b   = sig(L:end);                           % Remove padding (FIR length)
-        est_src_b   = Y' * sig_src_b * Y;                   % remove the inherent scalar indeterminacy related to the blind processing
-        data_src    = data(L:end);  
-        SER_SNR(end+1)     = SER_func(data_src, est_src_b, Mod_type);
+        sig_src_b       = sig(L:end);                                       % Remove padding (FIR length)                 
+        est_src_b       = est_src_b' * sig_src_b * est_src_b;               % remove the inherent scalar indeterminacy related to the blind processing
+        data_src        = data(L:end);  
+        SER_SNR(end+1)  = SER_func(data_src, est_src_b, Mod_type);
     end
     SER_f = [SER_f; SER_SNR];
 end
