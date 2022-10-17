@@ -97,7 +97,7 @@ for Monte_i = 1:Monte
         Y   = Y_d ./ H_est(1:Nfft).';
         
         % Compute Symbol Error rate
-        SER_SNR(end + 1) = SER_func(Y, data, 1, Mod_type);
+        SER_SNR(end + 1) = SER_func(data, Y, Mod_type);
     end
     SER_f   = [SER_f; SER_SNR];
     MSE_H_f = [MSE_H_f; MSE_H];

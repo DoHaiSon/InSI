@@ -132,6 +132,9 @@ function methods_Callback(hObject, eventdata, handles)
     default = '            Select version';
     vers = load_versions('Semi-blind', default, methods{method});
     set(handles.version, 'String', vers);
+    set(handles.version, 'Value', 1);
+    set(handles.panelparams, 'Visible', 'off');
+    set(handles.btngroup, 'Visible', 'off');
     
 % --- Executes during object creation, after setting all properties.
 function version_CreateFcn(hObject, eventdata, handles)

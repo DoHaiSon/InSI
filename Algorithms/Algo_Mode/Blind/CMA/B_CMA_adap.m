@@ -1,4 +1,4 @@
-function [SNR, Err] = CMA_adap(Op, Monte, SNR, Output_type)
+function [SNR, Err] = B_CMA_adap(Op, Monte, SNR, Output_type)
 
 %BLIND CHANNEL USING CMA ALGORITHM
 % Ref: J. Treichler and B. Agee, "A new approach to multipath correction of constant modulus signals,"
@@ -83,7 +83,10 @@ for Monte_i = 1:Monte
         end
         
         % Compute Symbol Error rate
-        SER_SNR(end + 1) = SER_func(Y, data, L, Mod_type);
+        sig_src_b   = sig(L:end);                           % Remove padding (FIR length)
+        est_src_b   = Y' * sig_src_b * Y;                   % remove the inherent scalar indeterminacy related to the blind processing
+        data_src    = data(L:end);  
+        SER_SNR(end+1)     = SER_func(data_src, est_src_b, Mod_type);
     end
     SER_f = [SER_f; SER_SNR];
 end

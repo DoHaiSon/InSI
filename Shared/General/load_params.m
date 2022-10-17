@@ -49,11 +49,14 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
                 set(eval(strcat('handles.Op_', num2str(i))), 'Style', 'popupmenu');
                 % Scale droplist box
                 if (trigger_scale)
+                    set(eval(strcat('handles.Op_', num2str(i))), 'units','pixels');
                     old_pos    = get(eval(strcat('handles.Op_', num2str(i))), 'Position');
-                    new_pos    = old_pos;
-                    new_pos(1) = old_pos(1) - old_pos(3)/2;
-                    new_pos(3) = old_pos(3) * 2;
-                    set(eval(strcat('handles.Op_', num2str(i))), 'Position', new_pos);
+                    if (old_pos(3) <= 60)
+                        new_pos    = old_pos;
+                        new_pos(1) = old_pos(1) - old_pos(3)/2;
+                        new_pos(3) = old_pos(3) * 2;
+                        set(eval(strcat('handles.Op_', num2str(i))), 'Position', new_pos);
+                    end
                 end
 
                 % Set default values for using params

@@ -8,3 +8,4 @@ function [sig, data]= Bin(T)
     sig  = sign(rand(T,1)-0.5);
     
     data = data == sig;
+end
