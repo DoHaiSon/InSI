@@ -36,7 +36,7 @@ modulation = {'Bin', 'QPSK', 'QAM4'};
 
 SER_f = [];
 for Monte_i = 1:Monte
-    [sig, data] = eval(strcat(modulation{Mod_type}, '(N)'));
+    [sig, data] = eval(strcat(modulation{Mod_type}, '(N + ChL)'));
 
     H           = Generate_channel(Num_Ch, ChL, Ch_type);
 
@@ -135,10 +135,13 @@ for Monte_i = 1:Monte
         est_src_b       = tmp.';
         
         % Compute Symbol Error rate
-        sig_src_b       = sig(L:end);                                       % Remove padding (FIR length)                 
-        est_src_b       = est_src_b' * sig_src_b * est_src_b;               % remove the inherent scalar indeterminacy related to the blind processing
-        data_src        = data(L:end);  
-        SER_SNR(end+1)  = SER_func(data_src, est_src_b, Mod_type);
+        for win=1:ChL+L
+            sig_src_b       = sig(win:N+win-L);                                                   
+            est_src_tmp     = est_src_b' * sig_src_b * est_src_b;           % remove the inherent scalar indeterminacy related to the blind processing
+            data_src        = data(win:N+win-L);  
+            Err_tmp(win)    = SER_func(data_src, est_src_tmp, Mod_type);
+        end
+        SER_SNR(end+1)  = min(Err_tmp);
     end
     SER_f = [SER_f; SER_SNR];
 end
