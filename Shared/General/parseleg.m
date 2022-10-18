@@ -8,13 +8,17 @@ function leg_parse = parseleg( mode, leg )
             if leg(idx) == '_'; leg = leg(idx+1:end); end 
 
             % Remove charactor "_"
-            idx = find(ismember(leg,'_'), 1, 'last');
-            if leg(idx) == '_'; leg(idx) = ' '; end 
+            idx = strfind(leg, '_');
+            for i=1:length(idx)
+                if leg(idx(i)) == '_'; leg(idx(i)) = ' '; end
+            end
             leg_parse = leg;
         case 'CRB_Mode'
             % Remove charactor "_"
-            idx = find(ismember(leg,'_'), 1, 'last');
-            if leg(idx) == '_'; leg(idx) = ' '; end 
+            idx = strfind(leg, '_');
+            for i=1:length(idx)
+                if leg(idx(i)) == '_'; leg(idx(i)) = ' '; end
+            end
             leg_parse = leg;
         case 'Demo_Mode'
     end
