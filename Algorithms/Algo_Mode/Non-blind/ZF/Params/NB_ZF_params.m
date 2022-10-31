@@ -26,7 +26,7 @@ classdef NB_ZF_params
         default_output = 1
         
         % Figure
-        sys_model = 'Algo_B_CMA.png'
+        sys_model = 'OFDM_trx.png'
         title     = {'NB-ZF'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Channel (dB)'}

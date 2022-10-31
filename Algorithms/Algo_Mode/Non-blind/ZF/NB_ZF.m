@@ -63,11 +63,9 @@ for Monte_i = 1:Monte
     x_d        = ifft(sig, Nfft);
     xt_d       = [x_d(Nfft-Ng+1:Nfft); x_d]; % IFFT and add CP
     
-    Ch     = Generate_channel(1, ChL, Ch_type);
+    Ch         = Generate_channel(1, ChL, Ch_type);
     
     H          = fft(Ch, Nfft);
-    ch_length  =length(Ch); % True channel and its length
-    H_power_dB = 10*log10(abs(H.*conj(H))); % True channel power in dB
 
     %% Channel path (convolution)
     x_pilot    = conv(xt_p, Ch); 
@@ -88,13 +86,11 @@ for Monte_i = 1:Monte
         
         %% Estimate H
         H_est  = LS_CE(Y_p, Pilot, P_loc, Pilot_L, Nfft);
-        H_est_power_dB = 10*log10(abs(H_est.*conj(H_est)));
-        h_est  = ifft(H_est);
         
         %% MSE H
-        MSE_H      = [MSE_H, (H-H_est)*(H-H_est)'];
+        MSE_H  = [MSE_H, (H-H_est)*(H-H_est)'];
 
-        Y   = Y_d ./ H_est(1:Nfft).';
+        Y      = Y_d ./ H_est(1:Nfft).';
         
         % Compute Symbol Error rate
         SER_SNR(end + 1) = SER_func(data, Y, Mod_type);

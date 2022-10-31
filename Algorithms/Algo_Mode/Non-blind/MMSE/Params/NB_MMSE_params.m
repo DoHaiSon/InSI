@@ -26,7 +26,7 @@ classdef NB_MMSE_params
         default_output = 1
         
         % Figure
-        sys_model = 'Algo_B_CMA.png'
+        sys_model = 'OFDM_trx.png'
         title     = {'NB-MMSE'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Channel (dB)'}
