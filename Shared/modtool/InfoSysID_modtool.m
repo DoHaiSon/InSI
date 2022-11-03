@@ -1,7 +1,7 @@
 function InfoSysID_modtool(mode, model, name, num_params, params, params_type, values, default_values, outputs)
 %InfoSysID_modtool Summary of this function goes here
-
-% Input 
+%
+%Input 
 % mode  (int): CRB / Algo / DEMO
 % model (str): Blind / Semi-blind / Non-blind
 % name  (str): name of the new algorithm
@@ -12,8 +12,9 @@ function InfoSysID_modtool(mode, model, name, num_params, params, params_type, v
 % default_values (cell): default value of input params
 % outputs(array): SER / BER / MSE H 
 % 
-% Output:
+%Output:
 % New module in the InfoSysID toolbox
+%
 %% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
 %% Last Modified by Son 2-Nov-2022 12:52:13 
     
