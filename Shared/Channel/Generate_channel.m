@@ -1,7 +1,7 @@
 function channel = Generate_channel(L, chL, type, N_t, N_r, fading, delay, DOA)
 % Generate channel models
 %   L: number of channels (sensors)
-%   chL: length of the channel
+%   chL: length of the channels
 %   type: [1, real], [2, complex], [3, specular], [4, input_channel]
 
     switch(type)
