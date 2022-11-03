@@ -34,7 +34,7 @@ Output_type = Output_type;
 % Generate input signal
 modulation = {'Bin', 'QPSK', 'QAM4'};
 
-SER_f = [];
+ER_f = [];
 for Monte_i = 1:Monte
     [sig, data] = eval(strcat(modulation{Mod_type}, '(N + ChL)'));
 
@@ -46,7 +46,7 @@ for Monte_i = 1:Monte
         end
     x           = sig_rec(ChL+1:N + ChL, :);
     
-    SER_SNR     = [];
+    ER_SNR     = [];
     for SNR_i   = 1:length(SNR)
         X       = awgn(x, SNR(SNR_i));              % received noisy signal
         
@@ -137,18 +137,17 @@ for Monte_i = 1:Monte
         % Compute Symbol Error rate
         for win=1:ChL+L
             sig_src_b       = sig(win:N+win-L);                                                   
-            est_src_tmp     = est_src_b' * sig_src_b * est_src_b;           % remove the inherent scalar indeterminacy related to the blind processing
             data_src        = data(win:N+win-L);  
-            Err_tmp(win)    = SER_func(data_src, est_src_tmp, Mod_type);
+            Err_tmp(win)    = ER_func(data_src, est_src_b, Mod_type, Output_type, sig_src_b);
         end
-        SER_SNR(end+1)  = min(Err_tmp);
+        ER_SNR(end+1)  = min(Err_tmp);
     end
-    SER_f = [SER_f; SER_SNR];
+    ER_f = [ER_f; ER_SNR];
 end
 
 % Return
 if Monte ~= 1
-    Err = mean(SER_f);
+    Err = mean(ER_f);
 else
-    Err = SER_f;
+    Err = ER_f;
 end

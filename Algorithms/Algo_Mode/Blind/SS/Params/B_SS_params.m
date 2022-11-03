@@ -27,7 +27,7 @@ classdef B_SS_params
         
         % Figure
         sys_model = 'Algo_B_CMA.png'
-        title     = {'Blind-MRE'}
+        title     = {'Blind-SS'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Channel (dB)'}
         trigger   = false 

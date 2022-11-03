@@ -91,12 +91,11 @@ for monte = 1:Monte
         
         % Equalization
         sig_src_b   = sig_src(M+N:num_sq+M);
-        est_src_b   = est_src_b' * sig_src_b * est_src_b;                   % remove the inherent scalar indeterminacy related to the blind processing
         data_src    = data(M+N:num_sq+M);  
-        SER_SNR     = SER_func(data_src, est_src_b, Mod_type);
+        ER_SNR      = ER_func(data_src, est_src_b, Mod_type, Output_type, sig_src_b);
 
         %% Compare to src signals
-        err_b   = [err_b , SER_SNR];
+        err_b   = [err_b , ER_SNR];
     end
     
     res_b   = [res_b;  err_b];

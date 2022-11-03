@@ -49,7 +49,7 @@ Output_type = Output_type;
 modulation = {'Bin', 'QPSK', 'QAM4'};
 
 % ZF algorithm
-SER_f   = [];
+ER_f   = [];
 MSE_H_f = [];
 for Monte_i = 1:Monte
     %% Data Bit generation
@@ -71,7 +71,7 @@ for Monte_i = 1:Monte
     x_pilot    = conv(xt_p, Ch); 
     x          = conv(xt_d, Ch);
     
-    SER_SNR    = [];
+    ER_SNR    = [];
     MSE_H      = [];
     for SNR_i  = 1:length(SNR)
         X_pilot= awgn(x_pilot, SNR(SNR_i));        % received noisy pilot
@@ -92,17 +92,17 @@ for Monte_i = 1:Monte
 
         Y   = Y_d ./ H_est(1:Nfft).';
         
-        % Compute Symbol Error rate
-        SER_SNR(end + 1) = SER_func(data, Y, Mod_type);
+        % Compute Error rate
+        ER_SNR(end + 1) = ER_func(data, Y, Mod_type, Output_type);
     end
-    SER_f   = [SER_f; SER_SNR];
+    ER_f   = [ER_f; ER_SNR];
     MSE_H_f = [MSE_H_f; MSE_H];
 end
 
 % Return
 if Monte ~= 1
     if Output_type == 1
-        Err = mean(SER_f);
+        Err = mean(ER_f);
     else
         if Output_type == 3
             Err = mean(MSE_H_f);
@@ -110,7 +110,7 @@ if Monte ~= 1
     end
 else
     if Output_type == 1
-        Err = SER_f;
+        Err = ER_f;
     else
         if Output_type == 3
             Err = MSE_H_f;

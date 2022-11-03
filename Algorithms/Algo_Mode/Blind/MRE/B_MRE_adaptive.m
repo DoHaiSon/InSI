@@ -6,6 +6,7 @@ M         = Op{3};     % length of the channel
 Ch_type   = Op{4};     % complex
 Mod_type  = Op{5};     
 N         = Op{6};     % number of measurements
+mu        = Op{7};     % Step size
 K         = M + N;     % rank of H
 Monte     = Monte;
 SNR       = SNR;       % Signal to noise ratio (dB)
@@ -48,7 +49,6 @@ for monte = 1:Monte
         
         %% ----------------------------------------------------------------
         %% MRE Adaptive implementation
-        mu      = 0.001;
         V_b     = ones(L*N, K);
     
         for i = 1:num_sq - N
@@ -75,12 +75,11 @@ for monte = 1:Monte
         % Equalization
         est_src_b   = conj(X' * V_b(:, ind_b));
         sig_src_b   = sig_src(K-ind_b+1:num_sq+M-ind_b+1);
-        est_src_b   = est_src_b' * sig_src_b * est_src_b;                   % remove the inherent scalar indeterminacy related to the blind processing
         data_src    = data(K-ind_b+1:num_sq+M-ind_b+1);  
-        SER_SNR     = SER_func(data_src, est_src_b, Mod_type);
+        ER_SNR      = ER_func(data_src, est_src_b, Mod_type, Output_type, sig_src_b);
 
         %% Compare to src signals
-        err_b   = [err_b , SER_SNR];
+        err_b   = [err_b , ER_SNR];
     end
     
     res_b   = [res_b;  err_b];
