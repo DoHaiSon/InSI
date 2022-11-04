@@ -9,7 +9,7 @@ classdef function_params
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
-        %                        button      = 3
+        %                        toggle      = 3
         params_type = 
         values = 
         default_values = 

@@ -40,7 +40,7 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
     % Set UIClass and default value for using params
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
-        %                        button      = 3
+        %                        toggle      = 3
     for i=1:params.num_params
         switch (params.params_type(i))
             case 1
@@ -79,7 +79,9 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
                 set(eval(strcat('handles.Op_', num2str(i))), 'String', params.values{i});
                 set(eval(strcat('handles.Op_', num2str(i))), 'Value', params.default_values{i});
             case 3
-                set(eval(strcat('handles.Op_', num2str(i))), 'Style', 'pushbutton');
+                set(eval(strcat('handles.Op_', num2str(i))), 'Style', 'togglebutton');
+                set(eval(strcat('handles.Op_', num2str(i))), 'String', 'Toggle');
+                set(eval(strcat('handles.Op_', num2str(i))), 'Value', params.default_values{i});
         end
     end
 

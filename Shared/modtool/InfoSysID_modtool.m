@@ -1,4 +1,4 @@
-function InfoSysID_modtool(mode, model, name, num_params, params, params_type, values, default_values, outputs)
+function [function_dir, function_params_dir] = InfoSysID_modtool(mode, model, name, num_params, params, params_type, values, default_values, outputs)
 %InfoSysID_modtool Summary of this function goes here
 %
 %Input 
@@ -13,6 +13,8 @@ function InfoSysID_modtool(mode, model, name, num_params, params, params_type, v
 % outputs(array): SER / BER / MSE H 
 % 
 %Output:
+% function_dir: location of main function file of the new module
+% function_params_dir: location of params class file of the new module
 % New module in the InfoSysID toolbox
 %
 %% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
@@ -23,9 +25,9 @@ function InfoSysID_modtool(mode, model, name, num_params, params, params_type, v
     model_key   = {'Blind', 'Semi-blind', 'Non-blind'};
     model_dict  = containers.Map(model_key, model_value);
 
-    params_value  = [5, 13, 16, 13, 9, 14, 9, 17, 10, 8, 12, 16, 17, 13];
+    params_value  = [5, 13, 16, 13, 9, 14, 9, 17, 10, 17, 8, 12, 16, 17, 13];
     params_key    = {'flag', 'function_main', 'function_params', 'num_params', 'params', 'params_type', 'values', 'default_values', ...
-        'outputs', 'title', 'has_inter', 'rect_position', 'rect_linewidth', 'rect_color'};
+        'outputs', 'default_output', 'title', 'has_inter', 'rect_position', 'rect_linewidth', 'rect_color'};
     params_set    = containers.Map(params_key, params_value);
 
     global main_path;
@@ -159,12 +161,14 @@ function InfoSysID_modtool(mode, model, name, num_params, params, params_type, v
 
             %% Save module to des_dir
             f_name = strcat(model_dict(model), '_', name, '.m');
-            f_main = fopen(fullfile(func_main_dir, f_name), 'w');
+            function_dir = fullfile(func_main_dir, f_name);
+            f_main = fopen(function_dir, 'w');
             fwrite(f_main, function_main);
             fclose(f_main);
 
             f_p_name = strcat(model_dict(model), '_', name, '_params', '.m');
-            f_params = fopen(fullfile(func_params_dir, f_p_name), 'w');
+            function_params_dir = fullfile(func_params_dir, f_p_name);
+            f_params = fopen(function_params_dir, 'w');
             fwrite(f_params, function_params);
             fclose(f_params);
         case 2  %% Algo Mode
@@ -241,6 +245,12 @@ function InfoSysID_modtool(mode, model, name, num_params, params, params_type, v
             tmp                  = arr2char(outputs);
             function_params      = strcat(function_params_tmp1, tmp, function_params_tmp2);
 
+            % default_output
+            ind = strfind(function_params, 'default_output');
+            function_params_tmp1 = function_params(1:ind + params_set('default_output'));
+            function_params_tmp2 = function_params(ind + params_set('default_output'):end);
+            function_params      = strcat(function_params_tmp1, num2str(outputs(1)), function_params_tmp2);
+
             % title
             ind = strfind(function_params, 'title');
             function_params_tmp1 = function_params(1:ind + params_set('title'));
@@ -303,12 +313,14 @@ function InfoSysID_modtool(mode, model, name, num_params, params, params_type, v
 
             %% Save module to des_dir
             f_name = strcat(model_dict(model), '_', name, '.m');
-            f_main = fopen(fullfile(func_main_dir, f_name), 'w');
+            function_dir = fullfile(func_main_dir, f_name);
+            f_main = fopen(function_dir, 'w');
             fwrite(f_main, function_main);
             fclose(f_main);
 
             f_p_name = strcat(model_dict(model), '_', name, '_params', '.m');
-            f_params = fopen(fullfile(func_params_dir, f_p_name), 'w');
+            function_params_dir = fullfile(func_params_dir, f_p_name);
+            f_params = fopen(function_params_dir, 'w');
             fwrite(f_params, function_params);
             fclose(f_params);
         case 3  %% DEMO Mode

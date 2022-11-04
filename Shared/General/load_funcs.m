@@ -29,7 +29,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     % Get UIClass and value of params
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
-        %                        button      = 3
+        %                        toggle      = 3
     Op = {};
     for i = 1:params.num_params
         switch (params.params_type(i))
@@ -38,6 +38,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
             case 2
                 Op{end + 1} = get(eval(strcat('handles.Op_', num2str(i))), 'Value');
             case 3
+                Op{end + 1} = get(eval(strcat('handles.Op_', num2str(i))), 'Value');
         end
     end
     

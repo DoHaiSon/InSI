@@ -15,8 +15,8 @@ function chr = cell2char ( cell_ )
     end
     
     tmp = cell_(length(cell_));
-    if sum(size(tmp{:}) == 1) == 2 || ischar(cell_i{:})
-        if isnumeric(cell_i{:})
+    if sum(size(tmp{:}) == 1) == 2 || ischar(tmp{:})
+        if isnumeric(tmp{:})
             chr = strcat(chr, num2str(tmp{:}), '}');
         else
             chr = strcat(chr, '''', char(tmp{:}), '''}');

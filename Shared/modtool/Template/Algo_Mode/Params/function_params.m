@@ -9,7 +9,7 @@ classdef function_params
         tooltips = {} 
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
-        %                        button      = 3
+        %                        toggle      = 3
         params_type = 
         values = 
         default_values = 
@@ -23,7 +23,7 @@ classdef function_params
         %                      BER Sig = 2
         %                      MSE Cha = 3
         outputs = 
-        default_output = 1
+        default_output =
         
         % Figure
         sys_model = 'Default.png'

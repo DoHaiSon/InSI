@@ -22,7 +22,7 @@ function varargout = modtool(varargin)
 
 % Edit the above text to modify the response to help modtool
 
-% Last Modified by GUIDE v2.5 04-Nov-2022 10:46:52
+% Last Modified by GUIDE v2.5 04-Nov-2022 14:18:26
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -71,3 +71,407 @@ function varargout = modtool_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+
+
+% --- Executes on button press in next_button.
+function next_button_Callback(hObject, eventdata, handles)
+% hObject    handle to next_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    
+    global modtool_inputs;
+    global main_path;
+
+    if (modtool_inputs.state == 0)  % General information
+        %% Get all general values 
+        % mode
+        modtool_inputs.mode = get(handles.select_mode, 'Value');
+    
+        % model
+        models = get(handles.select_model, 'String');
+        modtool_inputs.model = models{ get(handles.select_model, 'Value') };
+    
+        % name
+        tmp = get(handles.name, 'String');
+        modtool_inputs.name = tmp(find(~isspace(tmp)));
+    
+        % num_params
+        modtool_inputs.num_params = get(handles.num_params, 'Value');
+    
+        % outputs
+        switch modtool_inputs.mode
+            case 1  % CRB
+            case 2  % Algo
+                ser_mode  = get(handles.output_type_ser,  'Value'); 
+                ber_mode  = get(handles.output_type_ber,  'Value');
+                mses_mode = get(handles.output_type_mses, 'Value');
+                mseh_mode = get(handles.output_type_mseh, 'Value');
+                if ser_mode
+                    modtool_inputs.outputs(end+1) = 1;
+                end
+                if ber_mode
+                    modtool_inputs.outputs(end+1) = 2;
+                end
+                if mses_mode
+                    modtool_inputs.outputs(end+1) = 3;
+                end
+                if mseh_mode
+                    modtool_inputs.outputs(end+1) = 4;
+                end
+            case 3  % DEMO
+        end
+    
+        % Turn off all step 1 components
+        set(handles.name, 'Visible', 'off');
+        set(handles.name_text, 'Visible', 'off');
+        set(handles.select_mode_text, 'Visible', 'off');
+        set(handles.select_mode, 'Visible', 'off');
+        set(handles.select_model_text, 'Visible', 'off');
+        set(handles.select_model, 'Visible', 'off');
+        set(handles.num_params_text, 'Visible', 'off');
+        set(handles.num_params, 'Visible', 'off');
+        set(handles.output_type_panel, 'Visible', 'off');
+        set(handles.step1_panel, 'BorderType', 'none');
+        set(handles.step1_panel, 'Title', '');
+    
+        set(handles.param_panel, 'Visible', 'on');
+
+        modtool_inputs.state = 1;
+
+    else  % Switch to the next param
+        %% Get all interface setup
+        % name
+        modtool_inputs.params{end+1} = get(handles.param_name, 'String');
+
+        % input_type 
+        edit_type   = get(handles.input_type_edit,   'Value');
+        popup_type  = get(handles.input_type_popup,  'Value');
+        toggle_type = get(handles.input_type_toggle, 'Value');
+        
+        if edit_type
+            modtool_inputs.params_type(end+1) = 1;
+            modtool_inputs.values{end+1} = str2num(get(handles.input_default, 'String'));
+            modtool_inputs.default_values{end+1} = str2num(get(handles.input_default, 'String'));
+        end
+
+        if popup_type
+            modtool_inputs.params_type(end+1) = 2;
+            modtool_inputs.default_values{end+1} = 1;
+            user_input = get(handles.input_value, 'String');
+            user_input_default = get(handles.input_default, 'String');
+            ind = strfind(user_input, ',');
+            if sum(ind) ~= 0
+                % Parse string to cell
+                split = strsplit(user_input, ',');
+                for i=1:length(split)
+                    split{i} = strtrim(split{i});
+                    if strcmp (user_input_default, split{i})
+                        modtool_inputs.values{end} = i;
+                    end
+                end
+                modtool_inputs.values{end+1} = split;
+            else
+                modtool_inputs.values{end+1} = user_input;
+            end
+            
+        end
+
+        if toggle_type
+            modtool_inputs.params_type(end+1) = 3; 
+            modtool_inputs.values{end+1} = 1;
+            modtool_inputs.default_values{end+1} = 1;
+            user_input = get(handles.input_default, 'String');
+            if (strcmp(user_input, 'off'))
+                modtool_inputs.values{end} = 0;
+                modtool_inputs.default_values{end} = 0;
+            end
+        end
+
+        modtool_inputs.state = modtool_inputs.state + 1;
+        %% Pass params to InfoSysID_modtool func
+        if (modtool_inputs.finish)
+            [function_dir, function_params_dir] = InfoSysID_modtool(modtool_inputs.mode, modtool_inputs.model, modtool_inputs.name, ...
+                modtool_inputs.num_params, modtool_inputs.params, modtool_inputs.params_type, ...
+                modtool_inputs.values, modtool_inputs.default_values, modtool_inputs.outputs);
+            fprintf('-------------------------------------------------------------------\n');
+            fprintf('Finshed. Please modify the below files:\n');
+            fprintf('%s\n', function_dir);
+            fprintf('%s\n', function_params_dir);
+            fprintf('Copyright 2022 AVITECH.\n');
+            fprintf('-------------------------------------------------------------------\n');
+
+            [msgicon, iconcmap] = imread('AV.png');
+            hm = msgbox({'Please modify the below files:'; function_dir; function_params_dir; 'Copyright 2022 AVITECH.'}, 'Finished', 'custom', msgicon, iconcmap);
+            jframe=get(hm, 'javaframe');
+            jIcon=javax.swing.ImageIcon(fullfile(main_path, '/Resource/Icon/about.png'));
+            jframe.setFigureIcon(jIcon);
+            
+            closereq(); 
+            return
+        end
+        
+        %% Renew all params
+        % panel title
+        param_panel_tile = ['Interface: Parameter ' num2str(modtool_inputs.state)];
+        set(handles.param_panel, 'Title', param_panel_tile);
+
+        % name
+        set(handles.param_name, 'String', 'edit');
+
+        % input_type
+        set(handles.input_type_edit, 'Value', 1);
+
+        % input_value panel
+        set(handles.input_value_panel, 'Visible', 'off');
+
+        % input_value
+        set(handles.input_value, 'Visible', 'off');
+        set(handles.input_value, 'String', 'edit');
+
+        % input_default
+        set(handles.input_default, 'String', 'edit');
+    end
+    if (modtool_inputs.state == modtool_inputs.num_params)
+        set(hObject, 'String', 'Finish');
+        modtool_inputs.finish = true;
+    end
+    
+
+% --- Executes on button press in back_button.
+function back_button_Callback(hObject, eventdata, handles)
+% hObject    handle to back_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on selection change in select_mode.
+function select_mode_Callback(hObject, eventdata, handles)
+% hObject    handle to select_mode (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns select_mode contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from select_mode
+    mode = get(hObject, 'Value');
+    switch mode
+        case 1  % CRB
+        case 2  % Algo
+            set(handles.output_type_panel, 'Visible', 'on');
+        case 3  % DEMO
+    end
+
+% --- Executes during object creation, after setting all properties.
+function select_mode_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to select_mode (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in select_model.
+function select_model_Callback(hObject, eventdata, handles)
+% hObject    handle to select_model (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns select_model contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from select_model
+
+
+% --- Executes during object creation, after setting all properties.
+function select_model_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to select_model (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function name_Callback(hObject, eventdata, handles)
+% hObject    handle to name (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of name as text
+%        str2double(get(hObject,'String')) returns contents of name as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function name_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to name (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in num_params.
+function num_params_Callback(hObject, eventdata, handles)
+% hObject    handle to num_params (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns num_params contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from num_params
+
+
+% --- Executes during object creation, after setting all properties.
+function num_params_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to num_params (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+% --- Executes on button press in output_type_ser.
+function output_type_ser_Callback(hObject, eventdata, handles)
+% hObject    handle to output_type_ser (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of output_type_ser
+
+
+% --- Executes on button press in output_type_ber.
+function output_type_ber_Callback(hObject, eventdata, handles)
+% hObject    handle to output_type_ber (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of output_type_ber
+
+
+% --- Executes on button press in output_type_mses.
+function output_type_mses_Callback(hObject, eventdata, handles)
+% hObject    handle to output_type_mses (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of output_type_mses
+
+
+% --- Executes on button press in output_type_mseh.
+function output_type_mseh_Callback(hObject, eventdata, handles)
+% hObject    handle to output_type_mseh (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of output_type_mseh
+
+
+
+function param_name_Callback(hObject, eventdata, handles)
+% hObject    handle to param_name (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of param_name as text
+%        str2double(get(hObject,'String')) returns contents of param_name as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function param_name_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to param_name (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function input_value_Callback(hObject, eventdata, handles)
+% hObject    handle to input_value (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of input_value as text
+%        str2double(get(hObject,'String')) returns contents of input_value as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function input_value_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to input_value (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function input_default_Callback(hObject, eventdata, handles)
+% hObject    handle to input_default (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of input_default as text
+%        str2double(get(hObject,'String')) returns contents of input_default as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function input_default_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to input_default (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in input_type_edit.
+function input_type_edit_Callback(hObject, eventdata, handles)
+% hObject    handle to input_type_edit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of input_type_edit
+    set(handles.input_value_panel, 'Visible', 'off');
+
+% --- Executes on button press in input_type_popup.
+function input_type_popup_Callback(hObject, eventdata, handles)
+% hObject    handle to input_type_popup (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of input_type_popup
+    set(handles.input_value_panel, 'Visible', 'on');
+    set(handles.input_value, 'Visible', 'on');
+
+% --- Executes on button press in input_type_toggle.
+function input_type_toggle_Callback(hObject, eventdata, handles)
+% hObject    handle to input_type_toggle (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of input_type_toggle
+    set(handles.input_value_panel, 'Visible', 'off');
