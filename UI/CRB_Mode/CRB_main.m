@@ -22,7 +22,7 @@ function varargout = CRB_main(varargin)
 
 % Edit the above text to modify the response to help CRB_main
 
-% Last Modified by GUIDE v2.5 02-Dec-2021 17:02:46
+% Last Modified by GUIDE v2.5 04-Nov-2022 15:56:11
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -415,3 +415,12 @@ function inter_non_latex_Callback(hObject, eventdata, handles)
         dispfig(false);
         results.inter = false;
     end
+
+
+% --------------------------------------------------------------------
+function modtool_nav_Callback(hObject, eventdata, handles)
+% hObject    handle to modtool_nav (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    modtool();
+    closereq();
