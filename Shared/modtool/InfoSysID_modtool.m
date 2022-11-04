@@ -4,7 +4,7 @@ function InfoSysID_modtool(mode, model, name, num_params, params, params_type, v
 %Input 
 % mode  (int): CRB / Algo / DEMO
 % model (str): Blind / Semi-blind / Non-blind
-% name  (str): name of the new algorithm
+% name  (str): name of the new module
 % num_params (int): number of input params
 % params (cell): names of input params 
 % params_type (array): interface types of input params
@@ -51,7 +51,7 @@ function InfoSysID_modtool(mode, model, name, num_params, params, params_type, v
             function_main_tmp2   = function_main(ind + params_set('flag'):end);
             tmp = ['' newline];
             for i=1:num_params
-                tmp = [tmp strcat('var_', num2str(i), '= Op{', num2str(i), '};') newline];
+                tmp = [tmp strcat('var_', num2str(i), ' = Op{', num2str(i), '};') ' % ' params{i} newline];
             end
             function_main      = [function_main_tmp1 ' ' tmp function_main_tmp2];
 
@@ -188,7 +188,7 @@ function InfoSysID_modtool(mode, model, name, num_params, params, params_type, v
             function_main_tmp2   = function_main(ind + params_set('flag'):end);
             tmp = ['' newline];
             for i=1:num_params
-                tmp = [tmp strcat('var_', num2str(i), '= Op{', num2str(i), '};') newline];
+                tmp = [tmp strcat('var_', num2str(i), ' = Op{', num2str(i), '};') ' % ' params{i} newline];
             end
             function_main      = [function_main_tmp1 ' ' tmp function_main_tmp2];
 
