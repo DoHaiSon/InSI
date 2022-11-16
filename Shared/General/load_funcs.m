@@ -15,7 +15,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     % Load output panel
     switch (mode)
         case 'Algo_Mode'
-            for i=1:3
+            for i=1:4
                 if get(eval(strcat('handles.output', num2str(i))), 'Value') == 1 
                     Output_type  = i;
                     break;

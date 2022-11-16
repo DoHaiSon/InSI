@@ -109,8 +109,8 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
     switch (mode)
         case 'Algo_Mode'
             set(handles.btngroup, 'Visible', 'on');
-            if length(params.outputs) ~= 3
-               for i=1:3
+            if length(params.outputs) ~= 4
+               for i=1:4
                    if any(params.outputs(:) == i)
                        set(eval(strcat('handles.output', num2str(i))), 'Enable', 'on');
                    else

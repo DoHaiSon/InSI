@@ -11,7 +11,7 @@ classdef B_MRE_quadratic_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 1, 2, 2, 1]
-        values = {1000, 4, 4, {'Real', 'Complex', 'Specular', 'Input'}, {'Bin', 'QPSK', 'QAM4', 'QAM16'}, 2, 10}
+        values = {1000, 4, 4, {'Real', 'Complex', 'Specular', 'Input'}, {'Bin', 'QPSK', 'QAM4', 'QAM16'}, 10}
         default_values = {1000, 4, 4, 2, 2, 10}
         
         % Default SNR and Monte

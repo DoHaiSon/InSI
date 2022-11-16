@@ -21,7 +21,8 @@ classdef function_params
         % Output
         % Type of the outputs: SER Sig = 1
         %                      BER Sig = 2
-        %                      MSE Cha = 3
+        %                      MSE Sig = 3
+        %                      MSE Cha = 4
         
         % Figure
         sys_model = 'Default.png'
