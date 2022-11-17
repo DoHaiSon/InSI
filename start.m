@@ -27,7 +27,7 @@ function start()
     global input_data;
     input_data = {};
 
-    init_modtool()
+    init_modtool();
     
 %%  Load MODE GUI
     loader('Opening the application', 'mode');

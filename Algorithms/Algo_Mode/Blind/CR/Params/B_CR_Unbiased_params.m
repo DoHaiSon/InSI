@@ -1,4 +1,4 @@
-classdef B_CR_params
+classdef B_CR_Unbiased_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     

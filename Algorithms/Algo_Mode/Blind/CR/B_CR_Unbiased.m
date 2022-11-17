@@ -1,10 +1,10 @@
-function [SNR, Err] = B_CR(Op, Monte, SNR, Output_type)
+function [SNR, Err] = B_CR_Unbiased(Op, Monte, SNR, Output_type)
 
-% SYNTAXE: est_can=fcr(sig_cap,M);
+% SYNTAXE: est_can=fmncr(sig_cap,M);
 %
 % est_can : estimateur du canal de transmission
 %
-% sig_cap: observations T x q
+% sig_capteur: tableau des observations T x q
 % M : degres des filtres
 
 num_sq    = Op{1};     % number of sig sequences
@@ -43,13 +43,15 @@ for monte = 1:Monte
 %         fprintf('Working at SNR: %d dB\n', snr_i);
         sig_rec = awgn(sig_rec, snr_i);
 
-        %% Algorithm CR
-        [Q,Y]   = cal_Y(sig_rec, M);
+        %% Algorithm CR unbiased
+        [T,q]   = size(sig_rec);
+        % Calcul de la forme quadratique Q
+        Q       = cal_YUMCR(sig_rec, M);
 
-        [u,v]   = eig(Q);
-        [k,ord] = sort(diag(v));
-        h       = u(:,ord(1));
-        h_est   = h*exp(-1i*angle(h(1)));
+        [u,s,v] = svd(Q);
+        h1      = u(:, q*(M+1));  %% for Y2
+        h       = h1 * exp(-1i*angle(h1(1)));
+        h_est   = h  / norm(h,'fro');
 
         ER_SNR  = ER_func(H, h_est, Mod_type, Output_type);
 

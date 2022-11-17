@@ -83,6 +83,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     end
     results.figparams.gridmode = 'on';
     results.figparams.marker = '-o';
+    results.Output_type = Output_type;
     results.figparams.legends{end + 1} = parseleg(mode, algo);
     results.figparams.fig_visible(end + 1) = true;
     

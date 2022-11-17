@@ -19,6 +19,8 @@ function dispfig(font)
         interpreter = 'none';
     end
     
+    %% TODO: Force keep subfig_mode when users swapped Output_type
+
     % figure
     switch (results.mode)
         case 1
@@ -33,8 +35,13 @@ function dispfig(font)
             % Get the last one visible instead of the last value
             index = find(results.figparams.fig_visible, true, 'last');
             if (index ~= 0)
-                semilogy(results.figaxes, results.figparams.data(index).x, results.figparams.data(index).y ...
-                    , results.figparams.marker);
+                if (results.Output_type == 1 || results.Output_type == 2)
+                    semilogy(results.figaxes, results.figparams.data(index).x, results.figparams.data(index).y ...
+                        , results.figparams.marker);
+                else
+                    plot(results.figaxes, results.figparams.data(index).x, results.figparams.data(index).y ...
+                        , results.figparams.marker);
+                end
                 legend(results.figaxes, results.figparams.legends(index), 'Interpreter', interpreter);
             end
             
@@ -47,8 +54,14 @@ function dispfig(font)
             legends = results.figparams.legends;
             if results.trigger && results.pre_mode == results.mode
                 i=results.figparams.count; % Just plot the latest data per times.
-                semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
-                    , results.figparams.marker);
+
+                if (results.Output_type == 1 || results.Output_type == 2)
+                    semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
+                        , results.figparams.marker);
+                else
+                    plot(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
+                        , results.figparams.marker);
+                end
                 hold (results.figaxes, 'on');
             else
                 % Reset the output figure before re-plot all data
@@ -61,8 +74,13 @@ function dispfig(font)
                 
                 for i=1:results.figparams.count % Plot all data.
                     if (results.figparams.fig_visible(i))
-                        semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
-                            , results.figparams.marker);
+                        if (results.Output_type == 1 || results.Output_type == 2)
+                            semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
+                                , results.figparams.marker);
+                        else
+                            plot(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
+                                , results.figparams.marker);
+                        end
                         hold (results.figaxes, 'on');
                     end
                 end
@@ -89,8 +107,13 @@ function dispfig(font)
             for j=1:results.figparams.count
                 if (results.figparams.fig_visible(j))
                     subfig = subplot(p(1), p(2), index, 'Parent', results.fig); 
-                    semilogy(subfig, results.figparams.data(j).x, results.figparams.data(j).y ...
+                    if (results.Output_type == 1 || results.Output_type == 2)
+                        semilogy(subfig, results.figparams.data(j).x, results.figparams.data(j).y ...
+                            , results.figparams.marker);
+                    else
+                        plot(subfig, results.figparams.data(j).x, results.figparams.data(j).y ...
                         , results.figparams.marker);
+                    end
                     legend(subfig, results.figparams.legends(j), 'Interpreter', interpreter);
                     grid (subfig, results.figparams.gridmode);
                     ylabel(subfig, results.figparams.ylabel{j}, 'Interpreter', interpreter);
