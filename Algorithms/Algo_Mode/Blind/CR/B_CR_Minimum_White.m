@@ -53,6 +53,7 @@ for monte = 1:Monte
         h       = h1* exp(-sqrt(-1)*angle(h1(1)));
         h_est   = h / norm(h,'fro');
 
+        % Compute MSE Channel
         ER_SNR  = ER_func(H, h_est, Mod_type, Output_type);
 
         err_b   = [err_b, ER_SNR];

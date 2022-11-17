@@ -1,3 +1,4 @@
+function [R,Y]= EstimateCov(X, N, Num_Ch, L)
 %
 % script EstimeCov.m: estimation de la matrice de covariance
 % spatio-temporelle avec 0 decalage temporels
@@ -10,8 +11,6 @@
 % Sorties
 %         R = matrice de covariance spatio-temporelle (dimension LN x LN)
 %
-function [R,Y]= EstimateCov(X, N, Num_Ch, L)
-
     %
     %... verification inputs
     %
