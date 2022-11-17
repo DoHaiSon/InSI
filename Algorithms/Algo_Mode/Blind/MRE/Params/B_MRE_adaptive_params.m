@@ -21,15 +21,16 @@ classdef B_MRE_adaptive_params
         % Output
         % Type of the outputs: SER Sig = 1
         %                      BER Sig = 2
-        %                      MSE Cha = 3
+        %                      MSE Sig = 3
+        %                      MSE Cha = 4
         outputs = [1, 2]
         default_output = 1
         
         % Figure
-        sys_model = 'Algo_B_CMA.png'
+        sys_model = 'Default.png'
         title     = {'Blind-MRE'}
-        xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
-        ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Channel (dB)'}
+        xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
+        ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 
         position
         linewidth = 1

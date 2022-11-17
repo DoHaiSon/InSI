@@ -21,7 +21,8 @@ classdef B_CR_Unbiased_params
         % Output
         % Type of the outputs: SER Sig = 1
         %                      BER Sig = 2
-        %                      MSE Cha = 3
+        %                      MSE Sig = 3
+        %                      MSE Cha = 4
         outputs = [4]
         default_output = 4
         

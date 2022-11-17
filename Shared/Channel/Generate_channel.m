@@ -9,7 +9,7 @@ function channel = Generate_channel(L, chL, type, N_t, N_r, fading, delay, DOA)
             channel = randn(L, chL + 1);
 
         case 2                  % Complex channel
-            channel = (randn(L, chL + 1) + 1j*randn(L, chL + 1));        
+            channel = (randn(L, chL + 1) + 1i*randn(L, chL + 1));        
             channel = channel / sqrt(2);
         case 3                  % Sepcular channel
             % fading, delay, DOA of size (M,Nt)
