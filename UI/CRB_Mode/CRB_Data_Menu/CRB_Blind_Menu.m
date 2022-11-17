@@ -22,7 +22,7 @@ function varargout = CRB_Blind_Menu(varargin)
 
 % Edit the above text to modify the response to help CRB_Blind_Menu
 
-% Last Modified by GUIDE v2.5 30-Sep-2022 15:39:13
+% Last Modified by GUIDE v2.5 17-Nov-2022 18:01:22
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -102,7 +102,7 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
     % Set default menu to escape error when temp of menu is stored
-    default = '            Select method';
+    default = '            Select model';
     set(hObject, 'String', default);
     methods = load_methods(default, 'CRB_Mode', 'Blind');
     set(hObject, 'String', methods);
