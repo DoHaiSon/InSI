@@ -90,6 +90,11 @@ function ER = ER_func(varargin)
             h      = h.';
             h      = h(:);
             
+            if (nargin == 6)
+                ER = 10*log10(norm(h-h_est)^2);
+                return
+            end
+
             h_tmp  = h * exp(-1i*angle(h(1)));
             alpha  = h_est' * h_tmp / norm(h_est)^2;
             h_est  = alpha * h_est;
