@@ -1,5 +1,5 @@
+function [Q,Y] = cal_Y(sig_src,M)
 % calcul de la forme quadratique associe au critere cr.
-%
 %
 % SYNTAXE: Q = cal_Y(sig_src,M);
 %
@@ -7,8 +7,6 @@
 %
 % M: degres des canaux
 % sig_src: observations T x q
-
-function [Q,Y] = cal_Y(sig_src,M)
 
 [T,q]   = size(sig_src);
 
