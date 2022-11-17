@@ -134,7 +134,7 @@ for Monte_i = 1:Monte
         tmp             = S(1,:);
         est_src_b       = tmp.';
         
-        % Compute Symbol Error rate
+        % Compute Error rate / MSE Signal
         for win=1:ChL+L
             sig_src_b       = sig(win:N+win-L);                                                   
             data_src        = data(win:N+win-L);  

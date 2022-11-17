@@ -23,7 +23,7 @@ classdef NB_MMSE_params
         %                      BER Sig = 2
         %                      MSE Sig = 3
         %                      MSE Cha = 4
-        outputs = [1, 3]
+        outputs = [1, 2, 3, 4]
         default_output = 1
         
         % Figure

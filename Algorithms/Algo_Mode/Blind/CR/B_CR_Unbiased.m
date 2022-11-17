@@ -55,7 +55,6 @@ for monte = 1:Monte
 
         ER_SNR  = ER_func(H, h_est, Mod_type, Output_type);
 
-        %% Compare to src signals
         err_b   = [err_b, ER_SNR];
     end
     

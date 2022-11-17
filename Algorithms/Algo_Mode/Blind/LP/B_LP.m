@@ -87,14 +87,14 @@ for monte = 1:Monte
         h           = exp(-1i*angle(u1(1,ord1(L))))*real(k1(L))^(-1/2)*u1(:,ord1(L));
         g           = h'*G;
         
+        % Equalization
         est_src_b   = (g*Y).';
         
-        % Equalization
+        % Compute Error rate / MSE Signal
         sig_src_b   = sig_src(M+N:num_sq+M);
         data_src    = data(M+N:num_sq+M);  
         ER_SNR      = ER_func(data_src, est_src_b, Mod_type, Output_type, sig_src_b);
 
-        %% Compare to src signals
         err_b   = [err_b , ER_SNR];
     end
     

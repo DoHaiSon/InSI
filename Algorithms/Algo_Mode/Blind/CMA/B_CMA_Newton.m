@@ -112,7 +112,7 @@ for Monte_i = 1:Monte
 
         est_src_b       = conj(Xn'*W);
         
-        % Compute Error rate
+        % Compute Error rate / MSE Signal
         for win=1:ChL+L
             sig_src_b       = sig(win:N+win-L);                                                   
             data_src        = data(win:N+win-L);  

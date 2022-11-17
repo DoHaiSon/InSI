@@ -89,9 +89,10 @@ for monte = 1:Monte
         est_src_b   = conj(X' * V_b(:, ind_b));
         sig_src_b   = sig_src(K-ind_b+1:num_sq+M-ind_b+1);
         data_src    = data(K-ind_b+1:num_sq+M-ind_b+1);  
+
+        % Compute Error rate / MSE Signal
         ER_SNR      = ER_func(data_src, est_src_b, Mod_type, Output_type, sig_src_b);
 
-        %% Compare to src signals
         err_b   = [err_b , ER_SNR];
     end
     

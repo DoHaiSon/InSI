@@ -77,14 +77,15 @@ for monte = 1:Monte
         V       = conj(V);
         
         [u1,s1,v1] = svd(V);
+
+         % Equalization
         est_src_b  =  u1(:, num_sq+M);
         
-        % Equalization
+        % Compute Error rate / MSE Signal
         sig_src_b   = sig_src;
         data_src    = data;  
         ER_SNR      = ER_func(data_src, est_src_b, Mod_type, Output_type, sig_src_b);
 
-        %% Compare to src signals
         err_b   = [err_b , ER_SNR];
     end
     

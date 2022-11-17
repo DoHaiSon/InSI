@@ -23,7 +23,7 @@ classdef B_CMA_Grad_Unidimensional_params
         %                      BER Sig = 2
         %                      MSE Sig = 3
         %                      MSE Cha = 4
-        outputs = [1]
+        outputs = [1, 2, 3]
         default_output = 1
         
         % Figure

@@ -50,7 +50,6 @@ modulation = {'Bin', 'QPSK', 'QAM4'};
 
 % ZF algorithm
 ER_f    = [];
-MSE_H_f = [];
 for Monte_i = 1:Monte
     %% Data Bit generation
     [sig, data]= eval(strcat(modulation{Mod_type}, '(Nfft)'));
@@ -72,7 +71,6 @@ for Monte_i = 1:Monte
     x          = conv(xt_d, Ch);
     
     ER_SNR     = [];
-    MSE_H      = [];
     for SNR_i  = 1:length(SNR)
         X_pilot= awgn(x_pilot, SNR(SNR_i));        % received noisy pilot
         X      = awgn(x, SNR(SNR_i));              % received noisy signal
@@ -87,33 +85,22 @@ for Monte_i = 1:Monte
         %% Estimate H
         H_est  = LS_CE(Y_p, Pilot, P_loc, Pilot_L, Nfft);
         
-        %% MSE H
-        MSE_H  = [MSE_H, (H-H_est)*(H-H_est)'];
-
-        Y      = Y_d ./ H_est(1:Nfft).';
+        % Equalization
+        Y   = Y_d ./ H_est(1:Nfft).';
         
-        % Compute Error rate
-        ER_SNR(end + 1) = ER_func(data, Y, Mod_type, Output_type);
+        % Compute Error rate / MSE Signal
+        if Output_type ~= 4
+            ER_SNR(end + 1) = ER_func(data, Y, Mod_type, Output_type, sig);
+        else
+            ER_SNR(end + 1) = ER_func(H, H_est.', Mod_type, Output_type);
+        end
     end
     ER_f   = [ER_f; ER_SNR];
-    MSE_H_f = [MSE_H_f; MSE_H];
 end
 
 % Return
 if Monte ~= 1
-    if Output_type == 1
-        Err = mean(ER_f);
-    else
-        if Output_type == 3
-            Err = mean(MSE_H_f);
-        end
-    end
+    Err = mean(ER_f);
 else
-    if Output_type == 1
-        Err = ER_f;
-    else
-        if Output_type == 3
-            Err = MSE_H_f;
-        end
-    end
+    Err = ER_f;
 end

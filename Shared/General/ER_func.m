@@ -79,8 +79,9 @@ function ER = ER_func(varargin)
             ER = sum(bin_est ~= bin_src) / length(bin_src);
         
         case 3  % MSE Signal
-            roo= abs(est_src' * sig_src) / (norm(est_src,'fro')*norm(sig_src,'fro'));
-            ER = 1 - (roo^2);
+            roo    = abs(est_src' * sig_src) / (norm(est_src,'fro')*norm(sig_src,'fro'));
+            ER     = 1 - (roo^2);
+            ER     = 10*log10(ER);
 
         case 4  % MSE Channel
             h      = varargin{1};       % Generated channel

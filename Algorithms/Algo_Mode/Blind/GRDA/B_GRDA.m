@@ -85,9 +85,10 @@ for monte = 1:Monte
         % Equalization
         sig_src_b   = sig_src(1:num_sq-N+1);
         data_src    = data(1:num_sq-N+1);  
+
+        % Compute Error rate / MSE Signal
         ER_SNR      = ER_func(data_src, est_src_b, Mod_type, Output_type, sig_src_b);
 
-        %% Compare to src signals
         err_b   = [err_b , ER_SNR];
     end
     
