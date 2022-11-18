@@ -8,4 +8,6 @@ function init_modtool()
     modtool_inputs.outputs = [];
     modtool_inputs.state = 0;
     modtool_inputs.finish = false;
+    modtool_inputs.trigger = false;
+    modtool_inputs.trigger_1 = false;
 end

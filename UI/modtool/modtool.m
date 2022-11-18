@@ -23,6 +23,8 @@ function varargout = modtool(varargin)
 % Edit the above text to modify the response to help modtool
 
 % Last Modified by GUIDE v2.5 04-Nov-2022 14:18:26
+%% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+%% Last Modified by Son 04-Nov-2022 14:18:26
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -81,8 +83,28 @@ function next_button_Callback(hObject, eventdata, handles)
     
     global modtool_inputs;
     global main_path;
+    
+    if modtool_inputs.state == 0
+        % Turn off all step 1 components
+        set(handles.name, 'Visible', 'off');
+        set(handles.name_text, 'Visible', 'off');
+        set(handles.select_mode_text, 'Visible', 'off');
+        set(handles.select_mode, 'Visible', 'off');
+        set(handles.select_model_text, 'Visible', 'off');
+        set(handles.select_model, 'Visible', 'off');
+        set(handles.num_params_text, 'Visible', 'off');
+        set(handles.num_params, 'Visible', 'off');
+        set(handles.output_type_panel, 'Visible', 'off');
+        set(handles.step1_panel, 'BorderType', 'none');
+        set(handles.step1_panel, 'Title', '');
+    
+        set(handles.param_panel, 'Visible', 'on');
+        set(handles.back_button, 'Visible', 'on');
+    end
+    state       = modtool_inputs.state;
+    current_len = length(modtool_inputs.params);
 
-    if (modtool_inputs.state == 0)  % General information
+    if (~modtool_inputs.trigger)  % General information
         %% Get all general values 
         % mode
         modtool_inputs.mode = get(handles.select_mode, 'Value');
@@ -99,6 +121,7 @@ function next_button_Callback(hObject, eventdata, handles)
         modtool_inputs.num_params = get(handles.num_params, 'Value');
     
         % outputs
+        modtool_inputs.outputs = [];
         switch modtool_inputs.mode
             case 1  % CRB
             case 2  % Algo
@@ -136,34 +159,37 @@ function next_button_Callback(hObject, eventdata, handles)
     
         set(handles.param_panel, 'Visible', 'on');
         set(handles.back_button, 'Visible', 'on');
-
+        
+        modtool_inputs.trigger = true;
         modtool_inputs.state = 1;
+    end
 
-    else  % Switch to the next param
+    % Switch to the next param
+    if state ~= 0
         %% Get all interface setup
         % name
-        modtool_inputs.params{end+1} = get(handles.param_name, 'String');
+        modtool_inputs.params{state} = get(handles.param_name, 'String');
 
-        % input_type 
+        % input_type
         edit_type   = get(handles.input_type_edit,   'Value');
         popup_type  = get(handles.input_type_popup,  'Value');
         toggle_type = get(handles.input_type_toggle, 'Value');
-        
+
         if edit_type
-            modtool_inputs.params_type(end+1) = 1;
+            modtool_inputs.params_type(state) = 1;
             tmp     = get(handles.input_default, 'String');
             if isnumeric(tmp)
-                modtool_inputs.values{end+1} = str2num(tmp);
+                modtool_inputs.values{state} = str2num(tmp);
                 modtool_inputs.default_values{end+1} = str2num(tmp);
             else
-                modtool_inputs.values{end+1} = tmp;
-                modtool_inputs.default_values{end+1} = tmp;
+                modtool_inputs.values{state} = tmp;
+                modtool_inputs.default_values{state} = tmp;
             end
         end
 
         if popup_type
-            modtool_inputs.params_type(end+1) = 2;
-            modtool_inputs.default_values{end+1} = 1;
+            modtool_inputs.params_type(state) = 2;
+            modtool_inputs.default_values{state} = 1;
             user_input = get(handles.input_value, 'String');
             user_input_default = get(handles.input_default, 'String');
             ind = strfind(user_input, ',');
@@ -173,28 +199,29 @@ function next_button_Callback(hObject, eventdata, handles)
                 for i=1:length(split)
                     split{i} = strtrim(split{i});
                     if strcmp (user_input_default, split{i})
-                        modtool_inputs.values{end} = i;
+                        modtool_inputs.default_values{state} = i;
                     end
                 end
-                modtool_inputs.values{end+1} = split;
+                modtool_inputs.values{state} = split;
             else
-                modtool_inputs.values{end+1} = user_input;
+                modtool_inputs.values{state} = user_input;
             end
-            
+
         end
 
         if toggle_type
-            modtool_inputs.params_type(end+1) = 3; 
-            modtool_inputs.values{end+1} = 1;
-            modtool_inputs.default_values{end+1} = 1;
+            modtool_inputs.params_type(state) = 3;
+            modtool_inputs.values{state} = 1;
+            modtool_inputs.default_values{state} = 1;
             user_input = get(handles.input_default, 'String');
             if (strcmp(user_input, 'off'))
-                modtool_inputs.values{end} = 0;
-                modtool_inputs.default_values{end} = 0;
+                modtool_inputs.values{state} = 0;
+                modtool_inputs.default_values{state} = 0;
             end
         end
-
         modtool_inputs.state = modtool_inputs.state + 1;
+        state                = modtool_inputs.state;
+
         %% Pass params to InfoSysID_modtool func
         if (modtool_inputs.finish)
             [function_dir, function_params_dir] = InfoSysID_modtool(modtool_inputs.mode, modtool_inputs.model, modtool_inputs.name, ...
@@ -212,33 +239,100 @@ function next_button_Callback(hObject, eventdata, handles)
             jframe=get(hm, 'javaframe');
             jIcon=javax.swing.ImageIcon(fullfile(main_path, '/Resource/Icon/about.png'));
             jframe.setFigureIcon(jIcon);
-            
-            closereq(); 
+
+            closereq();
             return
         end
-        
+
         %% Renew all params
+        release_params(handles, modtool_inputs);
+
+        if (modtool_inputs.state >= modtool_inputs.num_params)
+            set(hObject, 'String', 'Finish');
+            modtool_inputs.finish = true;
+        end
+
+    else
+        modtool_inputs.state = 1;
+        state                = modtool_inputs.state;
+    end
+
+    %% Set value if user used back_button
+    if (state <= current_len && state <= modtool_inputs.num_params)
         % panel title
-        param_panel_tile = ['Interface: Parameter ' num2str(modtool_inputs.state)];
+        param_panel_tile = ['Interface: Parameter ' num2str(state)];
         set(handles.param_panel, 'Title', param_panel_tile);
 
         % name
-        set(handles.param_name, 'String', 'edit');
+        set(handles.param_name, 'String', modtool_inputs.params{state});
 
-        % input_type
-        set(handles.input_type_edit, 'Value', 1);
+        % Input type
+        edit_type  = false;
+        popup_type = false;
+        toggle_type= false;
+        switch modtool_inputs.params_type(state)
+            case 1
+                set(handles.input_type_edit,  'Value', 1);
+                edit_type = true;
+            case 2
+                set(handles.input_type_popup, 'Value', 1);
+                popup_type = true;
+            case 3
+                set(handles.input_type_toggle,'Value', 1);
+                toggle_type= true;
+        end
 
-        % input_value panel
-        set(handles.input_value_panel, 'Visible', 'off');
+        if edit_type
+            set(handles.input_value_panel, 'Visible', 'off');
+            if isnumeric(modtool_inputs.values{state})
+                set(handles.input_default, 'String', num2str(modtool_inputs.values{state}));
+            else
+                set(handles.input_default, 'String', modtool_inputs.values{state});
+            end
+        end
 
-        % input_value
-        set(handles.input_value, 'Visible', 'off');
-        set(handles.input_value, 'String', 'edit');
+        if popup_type
+            set(handles.input_value_panel, 'Visible', 'on');
+            set(handles.input_value, 'Visible', 'on');
+            values = modtool_inputs.values{state};
+            if iscell(values)
+                set(handles.input_default, 'String', values{modtool_inputs.default_values{state}});
+                values = cell2char(values);
+                values = regexprep(values, '[\{\}'''']', '');
+            else
+                set(handles.input_default, 'String', values);
+            end
+            set(handles.input_value, 'String', values);
+        end
 
-        % input_default
-        set(handles.input_default, 'String', 'edit');
+        if toggle_type
+            set(handles.input_value_panel, 'Visible', 'off');
+            value = modtool_inputs.values{state};
+            if (value == 1)
+                set(handles.input_default, 'String', 'on');
+            else
+                set(handles.input_default, 'String', 'off');
+            end
+        end
+
+        if modtool_inputs.state > current_len || modtool_inputs.state >= modtool_inputs.num_params
+            modtool_inputs.trigger_1 = true;
+            if (modtool_inputs.state == modtool_inputs.num_params)
+                set(hObject, 'String', 'Finish');
+                modtool_inputs.finish = true;
+            end
+        end
+        return
+    else
+        if modtool_inputs.trigger_1
+            %% Renew all params
+            release_params(handles, modtool_inputs);
+            modtool_inputs.trigger_1 = false;
+            return
+        end
     end
-    if (modtool_inputs.state == modtool_inputs.num_params)
+
+    if (modtool_inputs.state >= modtool_inputs.num_params)
         set(hObject, 'String', 'Finish');
         modtool_inputs.finish = true;
     end
@@ -250,8 +344,65 @@ function back_button_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     global modtool_inputs;
-    global main_path;
-    if (modtool_inputs.state == 1)
+    set(handles.next_button, 'String', 'Next');
+    modtool_inputs.finish = false;
+    
+    state = modtool_inputs.state;
+    %% Get all interface setup
+    % name
+    modtool_inputs.params{state} = get(handles.param_name, 'String');
+
+    % input_type 
+    edit_type   = get(handles.input_type_edit,   'Value');
+    popup_type  = get(handles.input_type_popup,  'Value');
+    toggle_type = get(handles.input_type_toggle, 'Value');
+    
+    if edit_type
+        modtool_inputs.params_type(state) = 1;
+        tmp     = get(handles.input_default, 'String');
+        if isnumeric(tmp)
+            modtool_inputs.values{state} = str2num(tmp);
+            modtool_inputs.default_values{end+1} = str2num(tmp);
+        else
+            modtool_inputs.values{state} = tmp;
+            modtool_inputs.default_values{state} = tmp;
+        end
+    end
+
+    if popup_type
+        modtool_inputs.params_type(state) = 2;
+        modtool_inputs.default_values{state} = 1;
+        user_input = get(handles.input_value, 'String');
+        user_input_default = get(handles.input_default, 'String');
+        ind = strfind(user_input, ',');
+        if sum(ind) ~= 0
+            % Parse string to cell
+            split = strsplit(user_input, ',');
+            for i=1:length(split)
+                split{i} = strtrim(split{i});
+                if strcmp (user_input_default, split{i})
+                    modtool_inputs.default_values{state} = i;
+                end
+            end
+            modtool_inputs.values{state} = split;
+        else
+            modtool_inputs.values{state} = user_input;
+        end
+        
+    end
+
+    if toggle_type
+        modtool_inputs.params_type(state) = 3; 
+        modtool_inputs.values{state} = 1;
+        modtool_inputs.default_values{state} = 1;
+        user_input = get(handles.input_default, 'String');
+        if (strcmp(user_input, 'off'))
+            modtool_inputs.values{state} = 0;
+            modtool_inputs.default_values{state} = 0;
+        end
+    end
+
+    if (state == 1)
         % Turn on all step 1 components
         set(handles.name, 'Visible', 'on');
         set(handles.name_text, 'Visible', 'on');
@@ -267,9 +418,6 @@ function back_button_Callback(hObject, eventdata, handles)
     
         set(handles.param_panel, 'Visible', 'off');
         set(handles.back_button, 'Visible', 'off');
-
-        set(handles.next_button, 'String', 'Next');
-        modtool_inputs.finish = false;
 
         %% Set all general values 
         % mode
@@ -309,10 +457,17 @@ function back_button_Callback(hObject, eventdata, handles)
             case 3  % DEMO
                 set(handles.output_type_panel, 'Visible', 'off');
         end
+        modtool_inputs.trigger = false;
         modtool_inputs.state = modtool_inputs.state - 1;
     else
         %% Set all interface setup
-        state = modtool_inputs.state - 1;
+        modtool_inputs.state = modtool_inputs.state - 1;
+        state = modtool_inputs.state;
+
+        % panel title
+        param_panel_tile = ['Interface: Parameter ' num2str(state)];
+        set(handles.param_panel, 'Title', param_panel_tile);
+
         % name
         set(handles.param_name, 'String', modtool_inputs.params{state});
 
@@ -333,6 +488,7 @@ function back_button_Callback(hObject, eventdata, handles)
         end
         
         if edit_type
+            set(handles.input_value_panel, 'Visible', 'off');
             if isnumeric(modtool_inputs.values{state})
                 set(handles.input_default, 'String', num2str(modtool_inputs.values{state}));
             else
@@ -341,29 +497,27 @@ function back_button_Callback(hObject, eventdata, handles)
         end
 
         if popup_type
-            modtool_inputs.params_type(end+1) = 2;
-            modtool_inputs.default_values{end+1} = 1;
-            user_input = get(handles.input_value, 'String');
-            user_input_default = get(handles.input_default, 'String');
-            ind = strfind(user_input, ',');
-            if sum(ind) ~= 0
-                % Parse string to cell
-                split = strsplit(user_input, ',');
-                for i=1:length(split)
-                    split{i} = strtrim(split{i});
-                    if strcmp (user_input_default, split{i})
-                        modtool_inputs.values{end} = i;
-                    end
-                end
-                modtool_inputs.values{end+1} = split;
+            set(handles.input_value_panel, 'Visible', 'on');
+            set(handles.input_value, 'Visible', 'on');
+            values = modtool_inputs.values{state};
+            if iscell(values)
+                set(handles.input_default, 'String', values{modtool_inputs.default_values{state}});
+                values = cell2char(values);
+                values = regexprep(values, '[\{\}'''']', '');
             else
-                modtool_inputs.values{end+1} = user_input;
+                set(handles.input_default, 'String', values);
             end
-            
+            set(handles.input_value, 'String', values);
         end
 
         if toggle_type
-            set(handles.input_default, 'String', modtool_inputs.values{state});
+            set(handles.input_value_panel, 'Visible', 'off');
+            value = modtool_inputs.values{state};
+            if (value == 1)
+                set(handles.input_default, 'String', 'on');
+            else
+                set(handles.input_default, 'String', 'off');
+            end
         end
     end
 
@@ -376,11 +530,16 @@ function select_mode_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns select_mode contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from select_mode
     mode = get(hObject, 'Value');
+    global modtool_inputs;
     switch mode
         case 1  % CRB
+            set(handles.output_type_panel, 'Visible', 'off');
+            modtool_inputs.outputs = [];
         case 2  % Algo
             set(handles.output_type_panel, 'Visible', 'on');
         case 3  % DEMO
+            set(handles.output_type_panel, 'Visible', 'off');
+            modtool_inputs.outputs = [];
     end
 
 % --- Executes during object creation, after setting all properties.
@@ -598,3 +757,4 @@ function input_type_toggle_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of input_type_toggle
     set(handles.input_value_panel, 'Visible', 'off');
+    set(handles.input_default, 'String', 'on');

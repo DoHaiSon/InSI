@@ -117,7 +117,7 @@ function About_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     global main_path;
     [msgicon, iconcmap] = imread('AV.png');
-    hm = msgbox({'Blind system identification 1.0.'; 'Copyright 2020 AVITECH.'}, 'About', 'custom', msgicon, iconcmap);
+    hm = msgbox({'InfoSysID Toolbox v0.3.0.'; 'Copyright 2022 AVITECH.'}, 'About', 'custom', msgicon, iconcmap);
     jframe=get(hm, 'javaframe');
     jIcon=javax.swing.ImageIcon(fullfile(main_path, '/Resource/Icon/about.png'));
     jframe.setFigureIcon(jIcon);
