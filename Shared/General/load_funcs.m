@@ -105,7 +105,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     
     % If user changed the output type, we force change the fig mode to
     % subfig
-    if (results.pre_output ~= Output_type)
+    if (results.pre_output ~= Output_type && results.pre_output ~= 0)
         set(handles_main.holdon, 'Value', 0);
         set(handles_main.sub_fig, 'Value', 1);
         results.mode = 3;
@@ -122,8 +122,17 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
 
     title_toolboxes = algo;
     for i = 1:params.num_params
-        title_toolboxes = strcat(title_toolboxes, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
-            '_', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));
+        switch get(eval(strcat('handles.Op_', num2str(i))), 'Style')
+            case 'edit'
+                title_toolboxes = strcat(title_toolboxes, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
+                    '_', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'String')));
+            case 'popupmenu'
+                title_toolboxes = strcat(title_toolboxes, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
+                    '_', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));
+            case 'togglebutton'
+                title_toolboxes = strcat(title_toolboxes, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
+                    '_', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));
+        end
     end
     switch(fig_mode)
         case 1

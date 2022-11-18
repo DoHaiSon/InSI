@@ -9,7 +9,7 @@ classdef Results
         mode
         pre_mode = 0
         Output_type
-        pre_output = 1
+        pre_output = 0
         pos
         trigger=true            % for re-plot all lines
         inter=true              % for check currently inter-mode
