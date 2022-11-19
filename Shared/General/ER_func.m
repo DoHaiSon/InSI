@@ -87,13 +87,14 @@ function ER = ER_func(varargin)
             h      = varargin{1};       % Generated channel
             h_est  = varargin{2};       % Estimated channel
 
-            h      = h.';
-            h      = h(:);
-            
             if (nargin == 6)
+                h      = h(:);
                 ER = 10*log10(norm(h-h_est)^2);
                 return
             end
+
+            h      = h.';
+            h      = h(:);
 
             h_tmp  = h * exp(-1i*angle(h(1)));
             alpha  = h_est' * h_tmp / norm(h_est)^2;

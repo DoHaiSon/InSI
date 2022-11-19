@@ -97,13 +97,13 @@ for monte = 1:Monte
         % calcul de l'éstimée de H :
         H_1     = Us*Z*Q;
         h       = zeros(L,M+1);
-        for k=0:m1-1
-            h   = h+H_1(1+k*L:(k+1)*L,k+1:k+M+1);
+        for k = 0:m1-1
+            h   = h + H_1(1+k*L:(k+1)*L,k+1:k+M+1);
         end
 
         H_2     = h/m1;
         h1      = H_2(:);
-        H_vec = H(:);
+        H_vec   = H(:);
         alpha   = h1'*H_vec/norm(h1)^2;
         h_est   = alpha*h1;
 
