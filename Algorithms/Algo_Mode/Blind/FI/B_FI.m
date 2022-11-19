@@ -6,7 +6,6 @@ M         = Op{3};     % length of the channel
 Ch_type   = Op{4};     % complex
 Mod_type  = Op{5};     
 N         = Op{6};     % Window length
-Nb        = N * L - (M + N + 1);
 
 Monte     = Monte;
 SNR       = SNR;       % Signal to noise ratio (dB)
@@ -24,19 +23,19 @@ for monte = 1:Monte
     H         = H / norm(H, 'fro');
     
     %% Generate signals
-    [sig_src, data] = eval(strcat(modulation{Mod_type}, '(num_sq + M)'));
+    [sig, data] = eval(strcat(modulation{Mod_type}, '(num_sq + M)'));
     
     % Signal rec
-    sig_rec = [];
+    sig_rec_noiseless = [];
     for l = 1:L
-        sig_rec(:, l) = conv( H(l,:).', sig_src ) ;
+        sig_rec_noiseless(:, l) = conv( H(l,:).', sig ) ;
     end
-    sig_rec = sig_rec(M+1:num_sq + M, :);
+    sig_rec_noiseless = sig_rec_noiseless(M+1:num_sq + M, :);
 
     err_b = [];
     for snr_i = SNR
 %         fprintf('Working at SNR: %d dB\n', snr_i);
-        sig_rec = awgn(sig_rec, snr_i);
+        sig_rec = awgn(sig_rec_noiseless, snr_i);
 
         %% Algorithm FI
         m1      = N;
@@ -47,7 +46,7 @@ for monte = 1:Monte
         %---------------------------------------------------
         somm0   = zeros(B);
         somm1   = zeros(B);
-        sig_rec1=zeros(B,1);
+        sig_rec1= zeros(B,1);
 
         for ii=0:num_sq-m1
             sig_rec2 = sig_rec(m1+ii:-1:ii+1,:);
@@ -64,7 +63,7 @@ for monte = 1:Monte
 
         % calcul de l'éstimée de la puissance du bruit s:
         %-------------------------------------------------
-        [U,Zs,S]=svd(Rx0);
+        [U,Zs,S]= svd(Rx0);
         s       = mean(Zs(d+1:B));
 
         % Us représente les vecteurs singuliers associés aux d plus grandes valeurs singulières de R0 :
@@ -104,12 +103,12 @@ for monte = 1:Monte
 
         H_2     = h/m1;
         h1      = H_2(:);
-        can_vec = H(:);
-        alpha   = h1'*can_vec/norm(h1)^2;
+        H_vec = H(:);
+        alpha   = h1'*H_vec/norm(h1)^2;
         h_est   = alpha*h1;
 
         % Compute MSE Channel
-        ER_SNR  = ER_func(H, h_est, Mod_type, Output_type, sig_src, 0);
+        ER_SNR  = ER_func(H, h_est, Mod_type, Output_type, sig, 0);
 
         err_b   = [err_b, ER_SNR];
     end

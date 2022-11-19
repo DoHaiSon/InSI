@@ -29,19 +29,19 @@ for monte = 1:Monte
     H         = H / norm(H, 'fro');
     
     %% Generate signals
-    [sig_src, data] = eval(strcat(modulation{Mod_type}, '(num_sq + M)'));
+    [sig, data] = eval(strcat(modulation{Mod_type}, '(num_sq + M)'));
     
     % Signal rec
-    sig_rec = [];
+    sig_rec_noiseless = [];
     for l = 1:L
-        sig_rec(:, l) = conv( H(l,:).', sig_src ) ;
+        sig_rec_noiseless(:, l) = conv( H(l,:).', sig ) ;
     end
-    sig_rec = sig_rec(M+1:num_sq + M, :);
+    sig_rec_noiseless = sig_rec_noiseless(M+1:num_sq + M, :);
 
     err_b = [];
     for snr_i = SNR
 %         fprintf('Working at SNR: %d dB\n', snr_i);
-        sig_rec = awgn(sig_rec, snr_i);
+        sig_rec = awgn(sig_rec_noiseless, snr_i);
 
         %% Algorithm CR Minimum
         % Calcul de la forme quadratique Q

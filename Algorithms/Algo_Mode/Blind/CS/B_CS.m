@@ -40,19 +40,19 @@ for monte = 1:Monte
     H         = H / norm(H, 'fro');
     
     %% Generate signals
-    [sig_src, data] = eval(strcat(modulation{Mod_type}, '(num_sq + M)'));
+    [sig, data] = eval(strcat(modulation{Mod_type}, '(num_sq + M)'));
     
     % Signal rec
-    sig_rec = [];
+    sig_rec_noiseless = [];
     for l = 1:L
-        sig_rec(:, l) = conv( H(l,:).', sig_src ) ;
+        sig_rec_noiseless(:, l) = conv( H(l,:).', sig ) ;
     end
-    sig_rec = sig_rec(M+1:num_sq + M, :);
+    sig_rec_noiseless = sig_rec_noiseless(M+1:num_sq + M, :);
 
     err_b = [];
     for snr_i = SNR
 %         fprintf('Working at SNR: %d dB\n', snr_i);
-        sig_rec = awgn(sig_rec, snr_i);
+        sig_rec = awgn(sig_rec_noiseless, snr_i);
 
         %% Algorithm CS
         R       = EstimateCov(sig_rec, num_sq, L, N);
@@ -70,8 +70,8 @@ for monte = 1:Monte
         for icap=1:L
             Ecap = E(N*(icap-1)+1:N*icap,:)';
             for jdec=1:M+1
-	        B   = zeros(Nb,M+N);
-	        B(:,jdec:jdec+N-1) = Ecap;
+	            B = zeros(Nb,M+N);
+	            B(:,jdec:jdec+N-1) = Ecap;
                 BB(:,icol) = B;
                 icol = icol+M+N;
             end
