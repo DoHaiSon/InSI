@@ -6,7 +6,8 @@ function start()
     global main_path;
     main_path = mfilename('fullpath'); %   get path of active file
     main_path = main_path(1:end-6);
-    addpath(genpath(main_path));
+    addpath(strcat(main_path, '\Shared\Utils'));
+    addpath(genpath_exclude(main_path, {'.git'}));
     
     % Clear auto save file of matlab
     clear_asv_files(main_path);

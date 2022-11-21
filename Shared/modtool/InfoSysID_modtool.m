@@ -35,8 +35,8 @@ function [function_dir, function_params_dir] = InfoSysID_modtool(mode, model, na
         case 1  %% CRB Mode
             %% Read template file
             template_dir    = fullfile(main_path, '/Shared/modtool/Template/CRB_Mode');
-            function_main   = fileread(fullfile(template_dir, 'function_main.m'), Encoding='UTF-8');
-            function_params = fileread(fullfile(template_dir, 'Params', 'function_params.m'), Encoding='UTF-8');
+            function_main   = fileread(fullfile(template_dir, 'function_main.m'));
+            function_params = fileread(fullfile(template_dir, 'Params', 'function_params.m'));
 
             %% Modify the template file
             %%% function_main file
@@ -174,8 +174,8 @@ function [function_dir, function_params_dir] = InfoSysID_modtool(mode, model, na
         case 2  %% Algo Mode
             %% Read template file
             template_dir    = fullfile(main_path, '/Shared/modtool/Template/Algo_Mode');
-            function_main   = fileread(fullfile(template_dir, 'function_main.m'), Encoding='UTF-8');
-            function_params = fileread(fullfile(template_dir, 'Params', 'function_params.m'), Encoding='UTF-8');
+            function_main   = fileread(fullfile(template_dir, 'function_main.m'));
+            function_params = fileread(fullfile(template_dir, 'Params', 'function_params.m'));
 
             %% Modify the template file
             %%% function_main file

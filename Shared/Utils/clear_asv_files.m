@@ -6,7 +6,7 @@ function clear_asv_files(folder)
         % Find the folders
         folders = genpath([pwd filesep folder]);
     else
-        folders = genpath(folder);
+        folders = genpath_exclude(folder, {'.git'});
     end
     folders = regexp(folders, ';', 'split');
     % Find the asv files in the found folders
