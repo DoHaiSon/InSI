@@ -53,7 +53,7 @@ for monte = 1:Monte
 
         %% ----------------------------------------------------------------
         %% Blind Linear Prediction program
-        [R, Y]  = EstimateCov(sig_rec, num_sq, L, N);
+        [R, Y]  = EstimateCov1(sig_rec, num_sq, L, N);
 
         dim_ker = N*L - (N+M);
         

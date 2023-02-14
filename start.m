@@ -2,7 +2,6 @@ function start()
 %%  For testing, we close everything when the program startup
     close all hidden;
 
-%%  TODO: Do not add everything 
     global main_path;
     main_path = mfilename('fullpath'); %   get path of active file
     main_path = main_path(1:end-6);
