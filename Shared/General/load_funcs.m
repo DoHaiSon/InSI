@@ -137,25 +137,23 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo )
     switch(fig_mode)
         case 1
             results.figparams.fig_visible(end - 1) = false;
-            switch mode
-                case 'CRB_Mode'
-                   toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(end).x), ...
-                        matrix2char(results.figparams.data(end).y)}]];
-                otherwise
-                    toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(end).x), ...
-                        matrix2char(results.figparams.data(end).y), ...
-                        Op{1}}]];
-            end
+%             switch mode
+%                 case 'CRB_Mode'
+%                    toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(end).x), ...
+%                         matrix2char(results.figparams.data(end).y)}]];
+%                 otherwise
+            toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(end).x), ...
+                matrix2char(results.figparams.data(end).y)}]];
+%             end
         otherwise
-            switch mode
-                case 'CRB_Mode'
-                    toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(results.figparams.count).x), ...
-                        matrix2char(results.figparams.data(results.figparams.count).y)}]];
-                otherwise
-                    toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(results.figparams.count).x), ...
-                        matrix2char(results.figparams.data(results.figparams.count).y), ...
-                        Op{1}}]];
-            end
+%             switch mode
+%                 case 'CRB_Mode'
+%                     toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(results.figparams.count).x), ...
+%                         matrix2char(results.figparams.data(results.figparams.count).y)}]];
+%                 otherwise
+            toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(results.figparams.count).x), ...
+                matrix2char(results.figparams.data(results.figparams.count).y)}]];
+%             end
     end
     % Modify toolboxws option here
     if (results.figparams.count ~= 1)

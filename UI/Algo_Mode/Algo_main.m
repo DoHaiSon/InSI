@@ -22,7 +22,7 @@ function varargout = Algo_main(varargin)
 
 % Edit the above text to modify the response to help Algo_main
 
-% Last Modified by GUIDE v2.5 04-Nov-2022 15:54:32
+% Last Modified by GUIDE v2.5 16-Feb-2023 14:36:20
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -342,7 +342,7 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 %     set(hObject, 'ColumnName', {'Plot', 'Name', '$E_b$ / $N_o$ (dB)', 'BER', '# of Bits'});
-    global toolboxws;
+     global toolboxws;
     toolboxws = {};
     set(hObject, 'Data', toolboxws);
     set(hObject, 'units','pixels');
@@ -350,14 +350,13 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
     Position_p = hObject.Parent.Position;
     set(hObject, 'Position', [0, 0, Position_p(3), Position_p(4)/4]);
 %     Set columns width when init main window
-    Position = hObject.Position;
-    x_total = Position(3);
+    Postion = hObject.Position;
+    x_total = Postion(3);
     x_plot = x_total / 20;
     x_name = x_total / 3;
     x_snr  = x_total / 4;
-    x_err  = x_total / 4;
-    x_bits = x_total / 13;
-    set(hObject, 'ColumnWidth', {x_plot, x_name, x_snr, x_err, x_bits});
+    x_err  = x_total / 3.1;
+    set(hObject, 'ColumnWidth', {x_plot, x_name, x_snr, x_err});
 
 
 % --- Executes when entered data in editable cell(s) in toolbox_ws.
