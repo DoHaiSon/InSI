@@ -1,5 +1,5 @@
 function chr = arr2char ( arr_ )
-    % TODO: Recursive func
+    % TODO: Recursive func; N-D array
     
     chr = '[';
     for i=1:length(arr_) - 1

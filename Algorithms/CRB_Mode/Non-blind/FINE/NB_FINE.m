@@ -1,26 +1,30 @@
 function [SNR, Err] = NB_FINE (Op, Monte, SNR)
 
 % Initialize variables
-Nt  = Op{1};    % number of transmit antennas
-Nr  = Op{2};    % number of receive antennas
-L   = Op{3};    % channel order
-M   = Op{4};    % Number of multipaths 
-K   = Op{5};    % OFDM subcarriers
-ratio = Op{6};  % Pilot/Data Power ratio
+data_size  = Op{1};    % Data size
+delta_arr  = Op{2};    % delta
+Epochs     = Op{3};    % max epochs
+lr         = Op{4};    % learning-rate 
 
 Monte   = Monte;
 SNR     = SNR;
 
 OS_support = ["OS_WINDOWS", "OS_LINUX"];
-ls_pkgs = ["numpy", "torch", "multiprocessing", "tqdm", "matplotlib", "test1"];
+ls_pkgs = ["numpy", "torch", "multiprocessing", "tqdm", "matplotlib"];
 
 if ~Check_Installed_pkgs(OS_support, ls_pkgs)
     return
+end
+
+global main_path;
+file_path = fullfile(main_path, 'Algorithms', 'CRB_Mode', 'Non-blind', 'FINE', 'NB_FINE.py');
 
 Err_f = [];
 for Monte_i = 1:Monte
-    
-    Err_f = [Err_f; Err_SNR];
+    [status, SNR, Err] = Run_py_script(file_path, data_size, delta_arr, Epochs, lr, Monte, SNR);
+    if status == 1
+        Err_f = [Err_f; Err];
+    end
 end
 
 % Return

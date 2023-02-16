@@ -4,19 +4,19 @@ classdef NB_FINE_params
     
     properties
         % Parameters
-        num_params = 6
-        params = {'Nt', 'Nr', 'ChL', 'Multipaths', 'Sub-carriers', 'Pilot/Data Power ratio'}
+        num_params = 4
+        params = {'Data size', 'Delta', 'Epochs', 'Learning rate'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
         %                        button      = 3
-        params_type = [1, 1, 1, 1, 1, 1]
-        values = {2, 16, 4, 2, 64, 0.3}
-        default_values = {2, 16, 4, 2, 64, 0.3}
+        params_type = [1, 1, 1, 1]
+        values = {10000, 0.1, 2000, 0.0002}
+        default_values = {10000, 0.1, 2000, 0.0002}
         
         % Default SNR and Monte
-        default_Monte = 10
-        default_SNR = '-10:5:20'
+        default_Monte = 1
+        default_SNR = '1:1:10'
 
         % Output
         % Type of the outputs: SER Sig = 1
@@ -27,7 +27,7 @@ classdef NB_FINE_params
         
         % Figure
         sys_model = 'nonblind_model.png'
-        title     = {'NB-FIR'}
+        title     = {'NB-FINE'}
         xlabel    = {'SNR (dB)'}
         ylabel    = {'CRB (dB)'}
         trigger   = false 
@@ -36,11 +36,11 @@ classdef NB_FINE_params
         color     = 'k'
         
         % Triggers/Flags
-        has_inter     = [true, true, false, false, false, false]
+        has_inter     = [false, false, false, false]
         rect = {}
-        rect_position = {[5 290 60 60], [1025 620 60 60], 0, 0, 0, 0}
-        rect_linewidth = {2, 2, 0, 0, 0, 0}
-        rect_color     = {'b', 'r', 'b', 'b', 'b', 'b'}
+        rect_position = {0, 0, 0, 0}
+        rect_linewidth = {0, 0, 0, 0}
+        rect_color     = {'b', 'b', 'b', 'b'}
     end
     
     methods (Access = private)
