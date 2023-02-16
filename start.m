@@ -5,10 +5,11 @@ function start()
     global main_path;
     main_path = mfilename('fullpath'); %   get path of active file
     main_path = main_path(1:end-6);
-    addpath(strcat(main_path, '\Shared\Utils'));
+    addpath(fullfile(main_path, 'Shared', 'Utils'));
     addpath(genpath_exclude(main_path, {'.git'}));
     
     % Clear auto save file of matlab
+    %% TODO: Not working in Linux: dir too long
     clear_asv_files(main_path);
     
     % TODO: Close all BSI toolbox windows

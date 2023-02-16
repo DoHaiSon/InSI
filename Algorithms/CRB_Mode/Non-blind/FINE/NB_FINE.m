@@ -21,7 +21,7 @@ file_path = fullfile(main_path, 'Algorithms', 'CRB_Mode', 'Non-blind', 'FINE', '
 
 Err_f = [];
 for Monte_i = 1:Monte
-    [status, SNR, Err] = Run_py_script(file_path, data_size, delta_arr, Epochs, lr, Monte, SNR);
+    [status, ~, Err] = Run_py_script(file_path, data_size, delta_arr, Epochs, lr, Monte, SNR);
     if status == 1
         Err_f = [Err_f; Err];
     end

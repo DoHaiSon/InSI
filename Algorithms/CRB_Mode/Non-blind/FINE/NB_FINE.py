@@ -232,7 +232,7 @@ if __name__ == "__main__":
     epochs = int(args[3])
     lr = float(args[4])
     num_exp = int(args[5])
-    sigma_square_arr = ast.literal_eval(args[6])
+    sigma_square_arr = 1/np.array(ast.literal_eval(args[6]))
 
     BCRB_arr = []
     FINE_BIM_arr = []
