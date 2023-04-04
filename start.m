@@ -31,7 +31,7 @@ function start()
     init_modtool();
     
 %%  Load MODE GUI
-    loader('Opening the application', 'mode');
+    loader('Opening the application', 'InfoSysID_mode');
     try
         F = findall(0, 'type', 'figure', 'tag', 'loader');
         waitbar(1, F, 'Done!');
