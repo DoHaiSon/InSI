@@ -8,7 +8,19 @@ function clear_asv_files(folder)
     else
         folders = genpath_exclude(folder, {'.git'});
     end
-    folders = regexp(folders, ';', 'split');
+    
+    % Determine if version is for Windows/Linux/MacOS platform
+    os     = checkOS();
+    if os == "macos"
+        folders = regexp(folders, ':', 'split');
+    elseif os == "linux"
+        folders = regexp(folders, ':', 'split');
+    elseif os == "windows"
+        folders = regexp(folders, ';', 'split');
+    else
+        error('Platform not supported');
+    end
+
     % Find the asv files in the found folders
     asvFiles = cell(0);
     for iFolder = 1:numel(folders)

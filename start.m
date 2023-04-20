@@ -9,7 +9,6 @@ function start()
     addpath(genpath_exclude(main_path, {'.git'}));
     
     % Clear auto save file of matlab
-    %% TODO: Not working in Linux: dir too long
     clear_asv_files(main_path);
     
     % TODO: Close all BSI toolbox windows

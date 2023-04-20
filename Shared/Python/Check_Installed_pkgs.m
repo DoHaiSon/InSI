@@ -4,11 +4,12 @@ function status = Check_Installed_pkgs ( OS_support,  ls_pkgs)
     ls_pkgs = strjoin(ls_pkgs, " ");
     
     % Determine if version is for Windows/Linux/MacOS platform
-    if ismac
+    os     = checkOS();
+    if os == "macos"
         python = 'python3 ';
-    elseif isunix
+    elseif os == "linux"
         python = 'python3 ';
-    elseif ispc
+    elseif os == "windows"
         python = 'python ';
     else
         error('Platform not supported');
