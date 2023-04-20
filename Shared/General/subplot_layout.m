@@ -1,31 +1,21 @@
 function [p,n] = subplot_layout(n)
-% function [p,n]=subplot_layout(n)
-%
-% Purpose
+
+%% [p, n] = subplot_layout(n): 
 % Calculate how many rows and columns of sub-plots are needed to
 % neatly display n subplots. 
 %
-% Inputs
-% n - the desired number of subplots.     
-%  
-% Outputs
-% p - a vector length 2 defining the number of rows and number of
-%     columns required to show n plots.     
-% [ n - the current number of subplots. This output is used only by
-%       this function for a recursive call.]
+%% Input:
+    % 1. n: (numeric) - the desired number of subplots
 %
+%% Output: 
+    % 1. p: (numeric) - a vector length 2 defining the number of rows and number of columns required to show n plots. 
+    % 2. n: (numeric) - the current number of subplots. This output is used only by this function for a recursive call.
 %
+%% Require R2006A
 %
-% Example: neatly lay out 13 sub-plots
-% >> p=subplot_layout(13)
-% p = 
-%     3   5
-% for i=1:13; subplot(p(1),p(2),i), pcolor(rand(10)), end 
-%
-%
-% Rob Campbell - January 2010
+% Author: Rob Campbell
+% Last Modified by Do Hai Son 20-Apr-2023 17:52:13 
    
-    
 while isprime(n) && n > 4 
     n=n+1;
 end
@@ -58,4 +48,4 @@ while p(2)/p(1)>2.5
     [p,n]=subplot_layout(N); %Recursive!
 end
 
-
+end

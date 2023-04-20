@@ -369,7 +369,7 @@ function toolbox_ws_CellEditCallback(hObject, eventdata, handles)
 %	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
 %	Error: error string when failed to convert EditData to appropriate value for Data
 % handles    structure with handles and user data (see GUIDATA)
-    hidden_line(hObject, eventdata, handles);
+    hide_line(hObject);
     
 
 

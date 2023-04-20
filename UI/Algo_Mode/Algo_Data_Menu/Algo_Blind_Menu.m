@@ -204,7 +204,7 @@ function Op_1_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Op_1 as text
 %        str2double(get(hObject,'String')) returns contents of Op_1 as a double
-    input_data(hObject, eventdata, handles);
+    input_data(hObject);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -227,7 +227,7 @@ function Op_2_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Op_2 as text
 %        str2double(get(hObject,'String')) returns contents of Op_2 as a double
-    input_data(hObject, eventdata, handles);
+    input_data(hObject);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -250,7 +250,7 @@ function Op_3_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Op_3 as text
 %        str2double(get(hObject,'String')) returns contents of Op_3 as a double
-    input_data(hObject, eventdata, handles);
+    input_data(hObject);
 
 % --- Executes during object creation, after setting all properties.
 function Op_4_CreateFcn(hObject, eventdata, handles)
@@ -271,7 +271,7 @@ function Op_4_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Op_4 as text
 %        str2double(get(hObject,'String')) returns contents of Op_4 as a double
-    input_data(hObject, eventdata, handles);
+    input_data(hObject);
 
 % --- Executes during object creation, after setting all properties.
 function Op_5_CreateFcn(hObject, eventdata, handles)
@@ -294,7 +294,7 @@ function Op_5_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Op_5 as text
 %        str2double(get(hObject,'String')) returns contents of Op_5 as a double
-    input_data(hObject, eventdata, handles);
+    input_data(hObject);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -318,7 +318,7 @@ function Op_6_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Op_6 as text
 %        str2double(get(hObject,'String')) returns contents of Op_6 as a double
-    input_data(hObject, eventdata, handles);
+    input_data(hObject);
 
 % --- Executes during object creation, after setting all properties.
 function Op_7_CreateFcn(hObject, eventdata, handles)
@@ -339,7 +339,7 @@ function Op_7_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Op_7 as text
 %        str2double(get(hObject,'String')) returns contents of Op_7 as a double
-    input_data(hObject, eventdata, handles);
+    input_data(hObject);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -361,7 +361,7 @@ function Op_8_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Op_8 as text
 %        str2double(get(hObject,'String')) returns contents of Op_8 as a double
-    input_data(hObject, eventdata, handles);
+    input_data(hObject);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -383,7 +383,7 @@ function Op_9_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Op_9 as text
 %        str2double(get(hObject,'String')) returns contents of Op_9 as a double
-    input_data(hObject, eventdata, handles);
+    input_data(hObject);
 
 % --- Executes during object creation, after setting all properties.
 function Op_10_CreateFcn(hObject, eventdata, handles)
@@ -405,7 +405,7 @@ function Op_10_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Op_10 as text
 %        str2double(get(hObject,'String')) returns contents of Op_10 as a double
-    input_data(hObject, eventdata, handles);
+    input_data(hObject);
     
 % --- Executes during object creation, after setting all properties.
 function Monte_CreateFcn(hObject, eventdata, handles)

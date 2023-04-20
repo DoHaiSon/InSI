@@ -1,21 +1,25 @@
 function [SNR, Err] = B_CMA_Grad(Op, Monte, SNR, Output_type)
 
-%BLIND CHANNEL USING CMA ALGORITHM
-% Ref: J. Treichler and B. Agee, "A new approach to multipath correction of constant modulus signals,"
+%% BLIND CHANNEL USING CMA ALGORITHM
+%
+%% Ref: J. Treichler and B. Agee, "A new approach to multipath correction of constant modulus signals,"
 % in IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 31, no. 2, pp. 459-472, 1983.
+%
 %% Input:
-    % N: number of sample data
-    % ChL: length of the channel
-    % Ch_type: type of the channel (real, complex, specular, user' input
-    % Mod_type: type of modulation (Bin, QPSK, 4-QAM)
-    % mu: step size
-    % L: length of the CMA filter
-    % Monte: simulation times
-    % SNR: range of the SNR
-    % Ouput_type: MSE Sig, MSE Ch, Error rate
+    % + N: number of sample data
+    % + ChL: length of the channel
+    % + Ch_type: type of the channel (real, complex, specular, user' input
+    % + Mod_type: type of modulation (Bin, QPSK, 4-QAM)
+    % + mu: step size
+    % + L: length of the CMA filter
+    % + Monte: simulation times
+    % + SNR: range of the SNR
+    % + Ouput_type: MSE Sig, MSE Ch, Error rate
+%
 %% Output:
-    % SNR: range of the SNR
-    % SER: Symbol error rate
+    % + SNR: range of the SNR
+    % + SER: Symbol error rate
+%
 %% Algorithm:
     % Step 1: Initialize variables
     % Step 2: Generate input signal
@@ -33,8 +37,9 @@ function [SNR, Err] = B_CMA_Grad(Op, Monte, SNR, Output_type)
     %     Demodulate Y
     %     Compate elements in two array init data and Demodulated signal
     % Step 7: Return 
-%% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-%% Last Modified by Son 22-Oct-2021 12:52:13 
+%
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 22-Oct-2021 12:52:13 
 
 
 % Initialize variables
@@ -112,4 +117,6 @@ if Monte ~= 1
     Err = mean(ER_f);
 else
     Err = ER_f;
+end
+
 end
