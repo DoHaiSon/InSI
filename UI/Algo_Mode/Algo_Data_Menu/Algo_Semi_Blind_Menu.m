@@ -22,7 +22,7 @@ function varargout = Algo_Semi_Blind_Menu(varargin)
 
 % Edit the above text to modify the response to help Algo_Semi_Blind_Menu
 
-% Last Modified by GUIDE v2.5 02-Oct-2022 21:32:07
+% Last Modified by GUIDE v2.5 20-Apr-2023 17:30:27
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -127,6 +127,7 @@ function methods_Callback(hObject, eventdata, handles)
         
         set(handles.panelparams, 'Visible', 'off');
         set(handles.btngroup, 'Visible', 'off');
+        set(handles.ref_web, 'Visible', 'off');
         return;
     end
     default = '            Select version';
@@ -167,9 +168,12 @@ function version_Callback(hObject, eventdata, handles)
         % Feedback turn off param panel
         set(handles.panelparams, 'Visible', 'off');
         set(handles.btngroup, 'Visible', 'off');
+        set(handles.ref_web, 'Visible', 'off');
         return;
     end
     load_params(hObject, eventdata, handles, 'Algo_Mode', 'Semi-blind', vers{ver});
+
+    set(handles.ref_web, 'Visible', 'on');
 
 % --- Executes during object creation, after setting all properties.
 function panelparams_CreateFcn(hObject, eventdata, handles)
@@ -654,3 +658,11 @@ function dB_text_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
     set(hObject, 'units','pixels');
     set(hObject, 'Position', [175, 15, 30, 20]);
+
+
+% --- Executes on button press in ref_web.
+function ref_web_Callback(hObject, eventdata, handles)
+% hObject    handle to ref_web (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    load_ref_web();

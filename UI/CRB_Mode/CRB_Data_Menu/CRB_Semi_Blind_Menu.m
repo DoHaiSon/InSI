@@ -22,7 +22,7 @@ function varargout = CRB_Semi_Blind_Menu(varargin)
 
 % Edit the above text to modify the response to help CRB_Semi_Blind_Menu
 
-% Last Modified by GUIDE v2.5 17-Nov-2022 18:02:39
+% Last Modified by GUIDE v2.5 20-Apr-2023 17:29:08
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -120,11 +120,14 @@ function methods_Callback(hObject, eventdata, handles)
     if method == 1
         % Feedback turn off param panel
         set(handles.panelparams, 'Visible', 'off');
+        set(handles.ref_web, 'Visible', 'off');
         return;
     end
     % TODO: Version is lost when choose default but method is not default
     algo = strcat('SB_', methods{method});
     load_params(hObject, eventdata, handles, 'CRB_Mode', 'Semi-blind', algo);
+
+    set(handles.ref_web, 'Visible', 'on');
 
 
 % --- Executes during object creation, after setting all properties.
@@ -608,3 +611,11 @@ function dB_text_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
     set(hObject, 'units','pixels');
     set(hObject, 'Position', [175, 15, 30, 20]);
+
+
+% --- Executes on button press in ref_web.
+function ref_web_Callback(hObject, eventdata, handles)
+% hObject    handle to ref_web (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    load_ref_web();

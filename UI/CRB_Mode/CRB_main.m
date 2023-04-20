@@ -161,7 +161,7 @@ function mode_Callback(hObject, eventdata, handles)
         if (~ isempty(other_wins(1, 1).CurrentFigure))
             delete(other_wins);
         end
-        mode();
+        InfoSysID_mode();
     end
 
 

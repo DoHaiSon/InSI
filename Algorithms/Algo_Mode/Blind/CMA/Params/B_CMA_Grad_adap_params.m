@@ -41,7 +41,10 @@ classdef B_CMA_Grad_adap_params
         rect = {}
         rect_position = {[1 193 105 65], 0, 0, 0, 0, [810 645 30 30], [405 355 45 45]}
         rect_linewidth = {2, 0, 0, 0, 0, 2, 2}
-        rect_color     = {'b', 'b', 'b', 'b', 'r', 'g', 'g'}       
+        rect_color     = {'b', 'b', 'b', 'b', 'r', 'g', 'g'}    
+
+        % Reference website
+        web_url = "https://ieeexplore.ieee.org/document/1164062"
     end
     
     methods (Access = private)
