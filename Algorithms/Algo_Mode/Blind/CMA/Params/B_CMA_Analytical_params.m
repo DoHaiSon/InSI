@@ -28,7 +28,7 @@ classdef B_CMA_Analytical_params
         
         % Figure
         sys_model = 'Algo_B_CMA.png'
-        title     = {'Blind-CMA'}
+        title     = {'B-CMA analytical'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 

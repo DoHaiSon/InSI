@@ -28,7 +28,7 @@ classdef B_CMA_Grad_params
         
         % Figure
         sys_model = 'Algo_B_CMA.png'
-        title     = {'Blind-CMA'}
+        title     = {'B-CMA gradient'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 

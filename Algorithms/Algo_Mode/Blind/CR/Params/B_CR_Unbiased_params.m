@@ -28,7 +28,7 @@ classdef B_CR_Unbiased_params
         
         % Figure
         sys_model = 'Default.png'
-        title     = {'Blind-CR'}
+        title     = {'B-CR unbias'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 

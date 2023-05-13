@@ -1,4 +1,4 @@
-classdef NB_ZF_params
+classdef NB_ZF_OFDM_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     
@@ -28,7 +28,7 @@ classdef NB_ZF_params
         
         % Figure
         sys_model = 'OFDM_trx.png'
-        title     = {'NB-ZF'}
+        title     = {'NB-ZF OFDM'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 

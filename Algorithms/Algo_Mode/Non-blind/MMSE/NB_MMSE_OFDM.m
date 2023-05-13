@@ -1,4 +1,4 @@
-function [SNR, Err] = NB_MMSE(Op, Monte, SNR, Output_type)
+function [SNR, Err] = NB_MMSE_OFDM(Op, Monte, SNR, Output_type)
 
 % MMSE (Minimum Mean Square Error)
 % Ref: https://www.sharetechnote.com/html/Communication_ChannelModel_MMSE.html

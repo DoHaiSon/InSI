@@ -29,7 +29,7 @@ classdef B_CS_SCMA_params
         
         % Figure
         sys_model = 'Default.png'
-        title     = {'Blind-CS'}
+        title     = {'B-CS SCMA'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 

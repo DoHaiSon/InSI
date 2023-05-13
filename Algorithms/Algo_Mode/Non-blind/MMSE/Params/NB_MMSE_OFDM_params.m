@@ -1,4 +1,4 @@
-classdef NB_MMSE_params
+classdef NB_MMSE_OFDM_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     
@@ -28,7 +28,7 @@ classdef NB_MMSE_params
         
         % Figure
         sys_model = 'OFDM_trx.png'
-        title     = {'NB-MMSE'}
+        title     = {'NB-MMSE OFDM'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 

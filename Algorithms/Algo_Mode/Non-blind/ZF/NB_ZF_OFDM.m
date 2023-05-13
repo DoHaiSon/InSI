@@ -1,4 +1,4 @@
-function [SNR, Err] = NB_ZF(Op, Monte, SNR, Output_type)
+function [SNR, Err] = NB_ZF_OFDM(Op, Monte, SNR, Output_type)
 
 % Zero forcing
 % Ref: https://www.sharetechnote.com/html/Communication_ChannelModel_ZF.html

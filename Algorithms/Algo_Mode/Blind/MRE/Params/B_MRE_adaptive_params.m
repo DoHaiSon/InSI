@@ -28,7 +28,7 @@ classdef B_MRE_adaptive_params
         
         % Figure
         sys_model = 'Default.png'
-        title     = {'Blind-MRE'}
+        title     = {'B-MRE adap'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 

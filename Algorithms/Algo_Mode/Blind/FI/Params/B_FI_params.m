@@ -29,7 +29,7 @@ classdef B_FI_params
         
         % Figure
         sys_model = 'Default.png'
-        title     = {'Blind-FI'}
+        title     = {'B-FI'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 

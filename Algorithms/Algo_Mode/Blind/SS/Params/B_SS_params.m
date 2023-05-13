@@ -28,7 +28,7 @@ classdef B_SS_params
         
         % Figure
         sys_model = 'Default.png'
-        title     = {'Blind-SS'}
+        title     = {'B-SS'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 
