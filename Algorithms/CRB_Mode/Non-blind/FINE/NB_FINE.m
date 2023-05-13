@@ -9,8 +9,8 @@ lr         = Op{4};    % learning-rate
 Monte   = Monte;
 SNR     = SNR;
 
-OS_support = ["OS_WINDOWS", "OS_LINUX"];
-ls_pkgs = ["numpy", "torch", "multiprocessing", "tqdm", "matplotlib"];
+OS_support = {'OS_WINDOWS', 'OS_LINUX'};
+ls_pkgs = {'numpy', 'torch', 'multiprocessing', 'tqdm', 'matplotlib'};
 
 if ~Check_Installed_pkgs(OS_support, ls_pkgs)
     return
