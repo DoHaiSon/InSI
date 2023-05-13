@@ -27,10 +27,6 @@ function start()
     % Clear auto save file of matlab
     clear_asv_files(main_path);
 
-%%  format master clock
-    format shortg;
-    global time;
-    time = clock;
     
 %%  Declear global vars
     global results;
