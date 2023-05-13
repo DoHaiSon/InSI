@@ -18,7 +18,7 @@ global results;
 % Check empty figure
 if ~ishandle(results.fig)
 %   output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
-    output = figure('Tag', 'channel_estimation', 'visible','off');
+    output = figure('Tag', 'InfoSysID_Toolbox_Output', 'visible','off');
     results.fig = output;
     results.figaxes = axes;
     movegui(results.figaxes, results.pos);
@@ -40,7 +40,7 @@ switch (results.mode)
     case 1
         % Reset the output figure before re-plot all data
         delete(results.fig);
-        output = figure('Tag', 'channel_estimation', 'visible','off');
+        output = figure('Tag', 'InfoSysID_Toolbox_Output', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);
@@ -80,7 +80,7 @@ switch (results.mode)
         else
             % Reset the output figure before re-plot all data
             delete(results.fig);
-            output = figure('Tag', 'channel_estimation', 'visible','off');
+            output = figure('Tag', 'InfoSysID_Toolbox_Output', 'visible','off');
             results.fig = output;
             results.figaxes = axes;
             movegui(results.figaxes, results.pos);
