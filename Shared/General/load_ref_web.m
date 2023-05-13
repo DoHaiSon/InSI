@@ -17,7 +17,7 @@ try
     web_url = params.web_url;
     web(web_url, '-browser');
 catch 
-    disp("This algorithm does not have any reference paper.");
+    disp('This algorithm does not have any reference paper.');
 end
 
 end

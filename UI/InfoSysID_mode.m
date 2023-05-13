@@ -126,3 +126,4 @@ function demo_mode_Callback(hObject, eventdata, handles)
     % TODO: not yet support
     global switch_mode;
     switch_mode = 3;
+    disp('DEMO mode is not supported yet.')

@@ -5,7 +5,8 @@ function start()
         fig = all_fig(idx);
         if(strcmp(fig.Tag, 'InfoSysID_Toolbox') || ...
                 strcmp(fig.Name, 'System Identification: CRB mode') || ...
-                strcmp(fig.Name, 'System Identification: Algo mode'))
+                strcmp(fig.Name, 'System Identification: Algo mode') || ...
+                strcmp(fig.Name, 'Select Mode'))
             close(fig);
         end
     end
