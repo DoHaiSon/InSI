@@ -43,7 +43,7 @@ cmd = [python, script, OS_support_p, ls_pkgs_p];
 
 [~, stdout] = system(cmd);
 
-if contains(stdout, 'True')
+if ~isempty(strfind(stdout, 'True'))
     status = true;
 else
     error(stdout);
