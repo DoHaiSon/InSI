@@ -1,5 +1,6 @@
 function start()
     %% Close all InfoSysID_Toolbox windows
+    open_warning = true;
     all_fig = findall(groot, 'Type', 'figure');
     for idx = 1:length(all_fig)
         fig = all_fig(idx);
@@ -7,6 +8,12 @@ function start()
                 ~isempty(strfind(fig.Name, 'System Identification')) || ...
                 strcmp(fig.Name, 'Select Mode') || ...
                 ~isempty(strfind(fig.Name, 'methods'))) 
+            if (open_warning && fig.Visible)
+                open_warning = ~mode_questdlg();
+                if open_warning
+                    return;
+                end
+            end
             close(fig);
         end
     end
