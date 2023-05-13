@@ -1,9 +1,11 @@
 function start()
     %% Close all InfoSysID_Toolbox windows
-    all_fig = findobj('Type', 'figure');
+    all_fig = findall(groot, 'Type', 'figure');
     for idx = 1:length(all_fig)
         fig = all_fig(idx);
-        if(strcmp(fig.Tag, 'InfoSysID_Toolbox'))
+        if(strcmp(fig.Tag, 'InfoSysID_Toolbox') || ...
+                strcmp(fig.Name, 'System Identification: CRB mode') || ...
+                strcmp(fig.Name, 'System Identification: Algo mode'))
             close(fig);
         end
     end

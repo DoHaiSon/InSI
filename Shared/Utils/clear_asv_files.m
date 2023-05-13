@@ -11,11 +11,11 @@ function clear_asv_files(folder)
     
     % Determine if version is for Windows/Linux/MacOS platform
     os     = checkOS();
-    if os == "macos"
+    if strcmp(os, 'macos')
         folders = regexp(folders, ':', 'split');
-    elseif os == "linux"
+    elseif strcmp(os, 'linux')
         folders = regexp(folders, ':', 'split');
-    elseif os == "windows"
+    elseif strcmp(os, 'windows')
         folders = regexp(folders, ';', 'split');
     else
         error('Platform not supported');

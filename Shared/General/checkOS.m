@@ -13,13 +13,13 @@ function os = checkOS ()
 % Last Modified by Son 20-Apr-2023 17:52:13 
 
 if ismac
-    os = "macos";
+    os = 'macos';
 elseif isunix
-    os = "linux";
+    os = 'linux';
 elseif ispc
-    os = "windows";
+    os = 'windows';
 else
-    error("Platform not supported.");
+    error('Platform not supported.');
 end
 
 end

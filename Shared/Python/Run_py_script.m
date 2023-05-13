@@ -6,11 +6,11 @@ function [status, SNR, Err] = Run_py_script ( file_path, varargin)
 
     % Determine if version is for Windows/Linux/MacOS platform
     os     = checkOS();
-    if os == "macos"
+    if strcmp(os, 'macos')
         python = 'python3 ';
-    elseif os == "linux"
+    elseif strcmp(os, 'linux')
         python = 'python3 ';
-    elseif os == "windows"
+    elseif strcmp(os, 'windows')
         python = 'python ';
     else
         error('Platform not supported');
