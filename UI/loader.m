@@ -2,9 +2,6 @@ function loader (str, varargin)
 %%     varargin:
 %%     func: name of function
 %%     time: declear time to waitbar
-
-    % Master timer
-    global time;
     
     if nargin == 2 && ~isempty(varargin{1})
         f = waitbar(0, 'Please wait...', 'Tag', 'loader');

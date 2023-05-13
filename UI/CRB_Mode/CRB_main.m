@@ -27,9 +27,6 @@ function varargout = CRB_main(varargin)
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 
-% Master timer
-global time;
-
 % Path of start.m file
 global main_path;
 
