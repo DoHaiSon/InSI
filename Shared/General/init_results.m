@@ -13,7 +13,7 @@ function init_results()
 
 global results;
 % output = figure('Name', 'CE', 'Tag', 'channel_estimation');
-output = figure('Tag', 'channel_estimation');
+output = figure('Tag', 'InfoSysID_Toolbox');
 results.fig = output;
 output.Visible = 'off';
 results.figaxes = axes;

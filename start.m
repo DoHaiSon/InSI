@@ -1,6 +1,12 @@
 function start()
-%%  For testing, we close everything when the program startup
-    close all hidden;
+    %% Close all InfoSysID_Toolbox windows
+    all_fig = findobj('Type', 'figure');
+    for idx = 1:length(all_fig)
+        fig = all_fig(idx);
+        if(strcmp(fig.Tag, 'InfoSysID_Toolbox'))
+            close(fig);
+        end
+    end
 
     global main_path;
     main_path = mfilename('fullpath'); %   get path of active file
@@ -10,8 +16,6 @@ function start()
     
     % Clear auto save file of matlab
     clear_asv_files(main_path);
-    
-    % TODO: Close all BSI toolbox windows
 
 %%  format master clock
     format shortg;
