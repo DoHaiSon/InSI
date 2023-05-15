@@ -2,10 +2,8 @@
 %
 % T = number of samples to generate 
 %
-function sig= QAM16(T)
+function [sig, data] = QAM16(T)
     %rand('seed',1234)
-    i= sqrt(-1);
-    cons=[1+i,3+i,1+(3*i),3+(3*i),-1+i,-3+i,-1+(3*i),-3+(3*i),1-i,3-i,1-(3*i),3-(3*i),-1-i,-3-i,-1-(3*i),-3-(3*i)];
-    cons=cons/sqrt(10);
-    sig=randsrc(T,1,cons);
+    data = randi([0 3], T, 1);
+    sig  = qammod(data, 16);
 end

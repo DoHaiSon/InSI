@@ -88,6 +88,14 @@ switch Output_type
         ER = sum(bin_est ~= bin_src) / length(bin_src);
     
     case 3  % MSE Signal
+        % Transpose to row vector
+        if length(est_src) ~= 1
+            est_src = est_src.';
+        end
+        if length(sig_src) ~= 1
+            sig_src = sig_src.';
+        end
+
         roo    = abs(est_src' * sig_src) / (norm(est_src,'fro')*norm(sig_src,'fro'));
         ER     = 1 - (roo^2);
         ER     = 10*log10(ER);

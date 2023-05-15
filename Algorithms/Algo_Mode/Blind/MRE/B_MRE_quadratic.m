@@ -14,33 +14,32 @@ Output_type = Output_type;
 % Generate input signal
 modulation = {'Bin', 'QPSK', 'QAM4', 'QAM16'};
 
-%% Generate channel
-H         = Generate_channel(L, M, Ch_type);
-
 res_b     = [];
 for monte = 1:Monte
-%     fprintf('------------------------------------------------------------\nExperience No %d \n', monte); 
     err_b = [];
+
+    %% Generate channel
+    H         = Generate_channel(L, M, Ch_type);
+    
+    %% Generate signals
+    [sig_src, data] = eval(strcat(modulation{Mod_type}, '(num_sq + M)'));
+    
+    % Signal rec
+    sig_rec = [];
+    for l = 1:L
+        sig_rec(:, l) = conv( H(l,:).', sig_src ) ;
+    end
+    sig_rec = sig_rec(M+1:num_sq + M, :);
+
     for snr_i = SNR
-%         fprintf('Working at SNR: %d dB\n', snr_i);
 
-        %% Generate signals
-        [sig_src, data] = eval(strcat(modulation{Mod_type}, '(num_sq + M)'));
-        
-        % Signal rec
-        sig_rec = [];
-        for l = 1:L
-            sig_rec(:, l) = conv( H(l,:).', sig_src ) ;
-        end
-        sig_rec = sig_rec(M+1:num_sq + M, :);
-
-        sig_rec = awgn(sig_rec, snr_i);
+        sig_rec_i = awgn(sig_rec, snr_i);
 
         %% MRE
         Vt      = zeros(K, L*N);
         X       = [];
         for ii  = 1:L
-          x     = sig_rec(:, ii);
+          x     = sig_rec_i(:, ii);
           mat   = hankel(x(1:N), x(N:num_sq));
           mat   = mat(N:-1:1, :);
           X     = [X; mat];
