@@ -1,4 +1,4 @@
-function [SNR, Err] = SB_MRE(Op, Monte, SNR, Output_type)
+function [SNR, Err] = SB_rc_MRE(Op, Monte, SNR, Output_type)
 
 %% SEMI-BLIND CHANNEL ESTIMATION USING MRE ALGORITHM
 %
@@ -70,7 +70,7 @@ for monte = 1:Monte
         sig_rec = sig_rec + y;
     end
 
-    sig_rec = sig_rec(M+1:num_sq + M, :);                               % samp_size x Nr
+    sig_rec = sig_rec(M+1:num_sq + M, :);                               % num_sq x Nr
 
     ER_SNR = [];
     for snr_i = SNR
@@ -86,44 +86,44 @@ for monte = 1:Monte
         end
         
         %% ----------------------------------------------------------------
-        %% Blind MRE program
-        X_n     = X(:, 1:num_sq-N);
-        X_n_1   = X(:, 2:num_sq-N+1);
-        A       = kron([eye((K-1)*Nt), zeros((K-1)*Nt, Nt)], X_n') - ...
-            kron([zeros((K-1)*Nt, Nt), eye((K-1)*Nt)], X_n_1');
-        Q       = A' * A;                                                   % N_rN KN_t x NrN KN_t
+        %% Blind MRE program: 2 filters
+        X_n     = X(:, 1: num_sq - N - K + 2);
+        X_n_k   = X(:, K: num_sq - N + 1);
+        A_rc    = kron([eye(Nt), zeros(Nt, Nt)], X_n') - ...
+            kron([zeros(Nt, Nt), eye(Nt)], X_n_k');
+        Q_rc    = A_rc' * A_rc; 
 
         %% Son's Semi-Blind program 
         X_SB    = X(:, 1:N_p - N + 1);                                      % N_tN x (N_p - N + 1)
-        S_SB    = [];                                                       % N_tK x (N_p - N + 1)
+        S_rc    = [];                                                       % N_tP x (N_p - N + 1)
         for i   = N:N_p                                                     % S = [S_{1}(N-1), ..., S_{1}(N_p-1); S_{N_t}(N-1), ..., S_{N_t}(N_p-1)]
-            S_k = sig_src(:, i+M:-1:i+M-K+1);
-            S_SB= [S_SB, S_k(:)];
+            S_rc_k = [sig_src(:, i+M) sig_src(:, i+M-K+1)];
+            S_rc   = [S_rc, S_rc_k(:)];
         end
     
-        %% J(G)                         
-        A       = kron(eye(K*Nt), X_SB');                                   % KN_t(N_p - N + 1) x KN_tN_rN
-        s_bar   = S_SB';                                          
-        s_bar   = s_bar(:);                                                 % KN_t(N_p - N + 1) x 1
-        
-        g       = inv(A' * A + lambda * Q) * A' * s_bar;                    % KN_rNN_t x 1
+        %% J(G_rc)
+        A       = kron(eye(2*Nt), X_SB');                         % 2N_t(N_p - N + 1) x 2N_tN_rN
+        s_bar   = S_rc';                                          
+        s_bar   = s_bar(:);                                       % 2N_t(N_p - N + 1) x 1
+        g_rc    = pinv(A' * A + lambda * Q_rc) * A' * s_bar;      % 2N_rNN_t x 1
         
         % Reshape G
-        G       = reshape(g, [Nr*N, Nt, K]);                                % N_rN x N_t x K
+        G_rc    = reshape(g_rc, [Nr*N, Nt, 2]);                   % N_rN x N_t x 2
 
         % Select the delay-th Equalizer
-        delay       = round(K/2);
+        delay_rc    = 2;
+        idelay      = delay_rc * (K - 1) - K + 2;   % 0 or (K-1)-th delay
 
         % Equalization
-        s_hat_sb    = G(:, :, delay)'    * X;
+        s_hat_sb_rc = G_rc(:, :, delay_rc)' * X;
 
-        s           = sig_src(:, K-delay+1:num_sq+M-delay+1);
-        data_src    = data(:, K-delay+1:num_sq+M-delay+1);
+        s_rc        = sig_src(:, K-idelay+1:num_sq+M-idelay+1);
+        data_src    = data(:, K-idelay+1:num_sq+M-idelay+1);
         
         % Compute Error rate / MSE Signal
         ER_SNR_i = 0;
         for tx  = 1:Nt
-            ER_SNR_i     = ER_SNR_i + ER_func(data_src(tx,:), s_hat_sb(tx, :), Mod_type, Output_type, s(tx, :));
+            ER_SNR_i     = ER_SNR_i + ER_func(data_src(tx,:), s_hat_sb_rc(tx, :), Mod_type, Output_type, s_rc(tx, :));
         end
 
         ER_SNR(end+1)  = ER_SNR_i;
