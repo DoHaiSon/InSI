@@ -19,8 +19,8 @@ function [SNR, Err] = SB_rc_MRE(Op, Monte, SNR, Output_type)
     % + 12. Ouput_type: MSE Sig, MSE Ch, Error rate
 %
 %% Output:
-    % + SNR: range of the SNR
-    % + SER: Symbol error rate
+    % + 1. SNR: range of the SNR
+    % + 2. SER: Symbol error rate
 %
 %% Algorithm:
     % Step 1: Initialize variables
@@ -106,7 +106,7 @@ for monte = 1:Monte
         s_bar   = S_rc';                                          
         s_bar   = s_bar(:);                                       % 2N_t(N_p - N + 1) x 1
         g_rc    = pinv(A' * A + lambda * Q_rc) * A' * s_bar;      % 2N_rNN_t x 1
-        
+
         % Reshape G
         G_rc    = reshape(g_rc, [Nr*N, Nt, 2]);                   % N_rN x N_t x 2
 
