@@ -11,8 +11,8 @@ classdef NB_MMSE_OFDM_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 1, 2, 2]
-        values = {48, 48, 2, {'Real', 'Complex', 'Specular', 'Input'}, {'Bin', 'QPSK', 'QAM4'}}
-        default_values = {48, 48, 2, 2, 2}
+        values = {48, 12, 2, {'Real', 'Complex', 'Specular', 'Input'}, {'Bin', 'QPSK', 'QAM4', 'QAM16'}}
+        default_values = {48, 12, 2, 2, 2}
         
         % Default SNR and Monte
         default_Monte = 10

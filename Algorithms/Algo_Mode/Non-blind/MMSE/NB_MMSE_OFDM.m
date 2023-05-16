@@ -1,19 +1,23 @@
 function [SNR, Err] = NB_MMSE_OFDM(Op, Monte, SNR, Output_type)
 
-% MMSE (Minimum Mean Square Error)
-% Ref: https://www.sharetechnote.com/html/Communication_ChannelModel_MMSE.html
+%% [SNR, Err] = NB_MMSE_OFDM(Op, Monte, SNR, Output_type). MMSE (Minimum Mean Square Error)
+%
+%% Ref: Yong Soo Cho, Jaekwon Kim, Won Young Yang, Chung G. Kang, "Channel Estimation," 
+% in MIMO‐OFDM Wireless Communications with MATLAB, John Wiley & Sons, Ltd, pp. 187-207, 2010. 
+%
 %% Input:
-    % N: number of sample data
-    % Pilot_L: number of pilot symbols
-    % ChL: length of the channel
-    % Ch_type: type of the channel (real, complex, specular, user' input
-    % Mod_type: type of modulation (Bin, QPSK, 4-QAM)
-    % Monte: simulation times
-    % SNR: range of the SNR
-    % Ouput_type: MSE Sig, MSE Ch, Error rate
+    % 1. Nfft: number of Occ carriers
+    % 2. Pilot_L: number of pilot symbols
+    % 3. ChL: length of the channel
+    % 4. Ch_type: type of the channel (real, complex, specular, user' input)
+    % 5. Mod_type: type of modulation (Bin, QPSK, 4-QAM)
+    % 6. Monte: simulation times
+    % 7. SNR: range of the SNR
+    % 8. Ouput_type: MSE Sig, MSE Ch, Error rate
+%
 %% Output:
-    % SNR: range of the SNR
-    % SER: Symbol error rate
+    % 1. SNR: range of the SNR
+    % 2. SER: Symbol error rate / MSE H_est
 %% Algorithm:
     % Step 1: Initialize variables
     % Step 2: Generate input signal
@@ -26,73 +30,112 @@ function [SNR, Err] = NB_MMSE_OFDM(Op, Monte, SNR, Output_type)
     %     Demodulate Y
     %     Compate elements in two array init data and Demodulated signal
     % Step 6: Return 
-%% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-%% Last Modified by Son 29-Sept-2022 12:52:13 
+%
+%% Author: Montadar Abas Taher
+%% Last Modified by Son 16-May-2023 22:52:13 
 
 
 % Initialize variables
 Nfft    = Op{1};         % Occ carriers
-Ng      = Nfft/4;        % CP length
-Nofdm   = Nfft+Ng;       % OFDM symbol len
-Nbit    = Nfft;          % Seq
 Pilot_L = Op{2};         % Number of pilots per OFDM symbol
-Nps     = Nfft / Pilot_L;% Pilot spacing
-P_loc   = 1:(1+Nps):(Nfft + Pilot_L);
 ChL     = Op{3};         % length of the channel
 Ch_type = Op{4};         % complex
 Mod_type= Op{5};
+Ncp     = Nfft/4;        % CP length
+Nps     = Nfft/Pilot_L;  % Pilot spacing
+Ep      = 1/sqrt(2);     % Pilot energy
 Monte   = Monte;
 SNR     = SNR;
 Output_type = Output_type;
 
 % Generate input signal
-modulation = {'Bin', 'QPSK', 'QAM4'};
+modulation = {'Bin', 'QPSK', 'QAM4', 'QAM16'};
 
-% ZF algorithm
-ER_f   = [];
+% MMSE algorithm
+ER_f    = [];
 for Monte_i = 1:Monte
-    %% Data Bit generation
-    [sig, data]= eval(strcat(modulation{Mod_type}, '(Nfft)'));
+    %% Bits generation
+    [D_Mod, D]= eval(strcat(modulation{Mod_type}, '(Nfft)'));
 
-    %% Pilot sequence generation
-    Pilot      = Gen_Pilot(Pilot_L);
+    %% serial to parallel 
+    D_Mod_serial = D_Mod.';
+
+    %% specify Pilot & Date Locations
+    PLoc = 1:Nps:Nfft; % location of pilots
+    DLoc = setxor(1:Nfft, PLoc); % location of data
+
+    %% Pilot Insertion
+    D_Mod_serial(PLoc) = Ep*D_Mod_serial(PLoc);
+
+    %% inverse discret Fourier transform (IFFT)
+    d_ifft = ifft(D_Mod_serial);
+
+    %% parallel to serial 
+    d_ifft_parallel = d_ifft.';
+
+    %% Adding Cyclic Prefix
+    CP_part = d_ifft_parallel(end-Ncp+1:end); % this is the Cyclic Prefix part to be appended.
+    ofdm_cp = [CP_part; d_ifft_parallel];
     
-    x_p        = ifft(Pilot, Nfft);
-    xt_p       = [x_p(Nfft-Ng+1:Nfft); x_p]; % IFFT and add CP
-    x_d        = ifft(sig, Nfft);
-    xt_d       = [x_d(Nfft-Ng+1:Nfft); x_d]; % IFFT and add CP
-
-    Ch         = Generate_channel(1, ChL, Ch_type);
-
-    H          = fft(Ch, Nfft);
-
-    %% Channel path (convolution)
-    x_pilot    = conv(xt_p, Ch); 
-    x          = conv(xt_d, Ch);
+    h       = Generate_channel(1, ChL, Ch_type);
     
-    ER_SNR    = [];
-    for SNR_i  = 1:length(SNR)
-        X_pilot= awgn(x_pilot, SNR(SNR_i));        % received noisy pilot
-        X      = awgn(x, SNR(SNR_i));              % received noisy signal
-        
-        %% Remove CP
-        y_p    = X_pilot(Ng+1:Nofdm);
-        Y_p    = fft(y_p); % FFT
+    H       = fft(h, Nfft);
 
-        y_d    = X(Ng+1:Nbit + Ng);
-        Y_d    = fft(y_d); % FFT
+    d_channelled = filter(h, 1, ofdm_cp.').'; % channel effect
+    
+    ER_SNR     = [];
+    for snr_i  = SNR
         
-        %% Estimate H
-        H_est  = MMSE_CE(Y_p, Pilot, P_loc, Nfft, Nps, Ch, SNR_i);
+        ofdm_noisy_with_chann = awgn(d_channelled, snr_i, 'measured');
+
+        %% Receiver
+        % remove Cyclic Prefix
+        ofdm_cp_removed_with_chann = ofdm_noisy_with_chann(Ncp+1:Nfft+Ncp);
+        % serial to parallel 
+        ofdm_parallel_chann = ofdm_cp_removed_with_chann.';
+        % Discret Fourier transform (FFT)
+        d_parallel_fft_channel=fft(ofdm_parallel_chann) ;
+
+        %% Channel estimation
+        % Extracting received pilots
+        TxP = D_Mod_serial(PLoc); % trnasmitted pilots
+        RxP = d_parallel_fft_channel(PLoc); % received pilots
+        % Least-Square Estimation
+        Hpilot_LS= RxP./TxP; % LS channel estimation
+
+        noiseVar = 10^(snr_i*0.1);
+        k=0:length(h)-1; 
+        hh = h*h'; 
+        r = sum(h.*conj(h).*k)/hh;  
+        r2 = (h.*conj(h).*k)*k.'/hh;
+        t_rms = sqrt(r2-r^2);     % rms delay
+        D_1 = 1i*2*pi*t_rms/Nfft; % Denomerator of Eq. (6.16) page 192
+        K1 = repmat([0:Nfft-1].',1,Pilot_L);
+        K2 = repmat([0:Pilot_L-1],Nfft,1);
+        rf = 1./(1+D_1*(K1-K2*Nps));
+        K3 = repmat([0:Pilot_L-1].',1,Pilot_L);
+        K4 = repmat([0:Pilot_L-1],Pilot_L,1);
+        rf2 = 1./(1+D_1*Nps*(K3-K4));
+        Rhp = rf;
+        Rpp = rf2 + eye(length(Hpilot_LS),length(Hpilot_LS))/noiseVar;
+
+        H_MMSE = transpose(Rhp*inv(Rpp)*Hpilot_LS.');  % MMSE channel estimate
         
-        % Equalization
-        Y   = Y_d ./ H_est(1:Nfft).';
+        %% parallel to serial   
+        HData_MMSE_parallel1 = H_MMSE.';
+
+        X_hat = d_parallel_fft_channel.' ./ HData_MMSE_parallel1;
+
+        %% Removing Pilots from received data and original data 
+        D_no_pilots = D(DLoc); % removing pilots from msgint
+        D_Mod_no_pilots = D_Mod(DLoc);
+        Rec_d_LS    = X_hat(DLoc); % removing pilots from d_received_chann_LS
         
         % Compute Error rate / MSE Signal
         if Output_type ~= 4
-            ER_SNR(end + 1) = ER_func(data, Y, Mod_type, Output_type, sig);
+            ER_SNR(end + 1) = ER_func(D_no_pilots, Rec_d_LS, Mod_type, Output_type, D_Mod_no_pilots);
         else
-            ER_SNR(end + 1) = ER_func(H, H_est.', Mod_type, Output_type);
+            ER_SNR(end + 1) = ER_func(H, H_MMSE.', Mod_type, Output_type);
         end
     end
     ER_f   = [ER_f; ER_SNR];
