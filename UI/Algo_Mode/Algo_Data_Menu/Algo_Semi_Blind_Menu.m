@@ -62,7 +62,7 @@ jFrame.setFigureIcon(jicon);
 movegui(hObject, 'west');
 
 % Release system model when cursor not in any UIClass
-set(hObject,'WindowButtonDownFcn',{@releasesysmodel});
+% set(hObject,'WindowButtonDownFcn',{@releasesysmodel});
 % TODO: set interactive again
 
 % Reset this trigger
