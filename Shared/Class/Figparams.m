@@ -10,7 +10,7 @@ classdef Figparams
         xlabel = {}
         ylabel = {}
         gridmode
-        marker
+        marker = {}
         count = 0
         fig_visible = []
         data = struct('x', 0, 'y', 0)

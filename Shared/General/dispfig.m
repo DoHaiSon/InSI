@@ -50,10 +50,10 @@ switch (results.mode)
         if (index ~= 0)
             if (results.Output_type == 1 || results.Output_type == 2)
                 semilogy(results.figaxes, results.figparams.data(index).x, results.figparams.data(index).y ...
-                    , results.figparams.marker);
+                    , results.figparams.marker{index});
             else
                 plot(results.figaxes, results.figparams.data(index).x, results.figparams.data(index).y ...
-                    , results.figparams.marker);
+                    , results.figparams.marker{index});
             end
             legend(results.figaxes, results.figparams.legends(index), 'Interpreter', interpreter);
         end
@@ -70,10 +70,10 @@ switch (results.mode)
 
             if (results.Output_type == 1 || results.Output_type == 2)
                 semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
-                    , results.figparams.marker);
+                    , results.figparams.marker{i});
             else
                 plot(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
-                    , results.figparams.marker);
+                    , results.figparams.marker{i});
             end
             hold (results.figaxes, 'on');
         else
@@ -89,10 +89,10 @@ switch (results.mode)
                 if (results.figparams.fig_visible(i))
                     if (results.Output_type == 1 || results.Output_type == 2)
                         semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
-                            , results.figparams.marker);
+                            , results.figparams.marker{i});
                     else
                         plot(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
-                            , results.figparams.marker);
+                            , results.figparams.marker{i});
                     end
                     hold (results.figaxes, 'on');
                 end
@@ -113,6 +113,8 @@ switch (results.mode)
         xlabel(results.figaxes, results.figparams.xlabel{end}, 'Interpreter', interpreter);
 %             title(results.figaxes, results.figparams.title{end}, 'Interpreter', interpreter, 'fontweight','bold','fontsize', 16);
         set(results.figaxes ,'TickLabelInterpreter',interpreter);
+
+        results.trigger = true;
     case 3
         num = sum(results.figparams.fig_visible(:) == true);
         [p, n] = subplot_layout(num);
@@ -122,10 +124,10 @@ switch (results.mode)
                 subfig = subplot(p(1), p(2), index, 'Parent', results.fig); 
                 if (results.Output_type == 1 || results.Output_type == 2)
                     semilogy(subfig, results.figparams.data(j).x, results.figparams.data(j).y ...
-                        , results.figparams.marker);
+                        , results.figparams.marker{j});
                 else
                     plot(subfig, results.figparams.data(j).x, results.figparams.data(j).y ...
-                    , results.figparams.marker);
+                    , results.figparams.marker{j});
                 end
                 legend(subfig, results.figparams.legends(j), 'Interpreter', interpreter);
                 grid (subfig, results.figparams.gridmode);

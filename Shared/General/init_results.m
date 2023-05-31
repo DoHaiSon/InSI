@@ -12,7 +12,7 @@ function init_results()
 % Last Modified by Son 20-Apr-2023 18:54:13 
 
 global results;
-% output = figure('Name', 'CE', 'Tag', 'channel_estimation');
+
 output = figure('Tag', 'InSI_Figure');
 results.fig = output;
 output.Visible = 'off';

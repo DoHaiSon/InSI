@@ -110,7 +110,10 @@ switch mode
         results.figparams.ylabel{end+1} = params.ylabel(Output_type);
 end
 results.figparams.gridmode = 'on';
-results.figparams.marker = '-o';
+
+% Random marker
+all_marks = {'o','+','*','.','x','s','d','^','v','>','<','p','h'};
+results.figparams.marker{end + 1} = ['-' all_marks{randi(length(all_marks))}];
 results.Output_type = Output_type;
 results.figparams.legends{end + 1} = parseleg(mode, algo);
 results.figparams.fig_visible(end + 1) = true;
