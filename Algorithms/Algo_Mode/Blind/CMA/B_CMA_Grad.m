@@ -1,6 +1,6 @@
 function [SNR, Err] = B_CMA_Grad(Op, Monte, SNR, Output_type)
 
-%% BLIND CHANNEL USING CMA ALGORITHM
+%% Constant modulus algorithm
 %
 %% Ref: J. Treichler and B. Agee, "A new approach to multipath correction of constant modulus signals,"
 % in IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 31, no. 2, pp. 459-472, 1983.

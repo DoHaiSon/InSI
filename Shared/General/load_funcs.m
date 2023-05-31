@@ -97,13 +97,15 @@ results.figparams.count = results.figparams.count + 1;
 results.figparams.data(results.figparams.count).x = SNR;
 results.figparams.data(results.figparams.count).y = Err;
 
+% Load figure title
+results.figparams.title{end+1} = load_title(algo);
+
 switch mode
     case 'CRB_Mode'
-        results.figparams.title{end+1}  = params.title;
+        
         results.figparams.xlabel{end+1} = params.xlabel;
         results.figparams.ylabel{end+1} = params.ylabel;
     otherwise
-        results.figparams.title{end+1}  = params.title;
         results.figparams.xlabel{end+1} = params.xlabel(Output_type);
         results.figparams.ylabel{end+1} = params.ylabel(Output_type);
 end
