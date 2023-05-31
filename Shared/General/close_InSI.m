@@ -21,7 +21,12 @@ for idx = 1:length(all_fig)
     if(~isempty(strfind(fig.Tag, 'InSI')) || ...
        ~isempty(strfind(fig.Name, 'InSI')) || ...
        ~isempty(strfind(fig.Tag, 'loader'))) 
-        if (open_warning && fig.Visible)
+        tmp_0 = char(fig.Visible);
+        tmp_1 = 0;
+        if (strcmp(tmp_0, 'on'))
+            tmp_1 = 1;
+        end
+        if (open_warning && tmp_1)
             open_warning = ~mode_questdlg();
             if open_warning
                 status = false;
