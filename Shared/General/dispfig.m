@@ -10,15 +10,14 @@ function dispfig(font)
 %% Require R2006A
 %
 % Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 20-Apr-2023 17:52:13 
+% Last Modified by Son 31-May-2023 17:52:13 
 
 
 global results;
 
 % Check empty figure
 if ~ishandle(results.fig)
-%   output = figure('Name', 'CE', 'Tag', 'channel_estimation', 'visible','off');
-    output = figure('Tag', 'InfoSysID_Toolbox_Output', 'visible','off');
+    output = figure('Tag', 'InSI_Figure', 'visible','off');
     results.fig = output;
     results.figaxes = axes;
     movegui(results.figaxes, results.pos);
@@ -40,7 +39,7 @@ switch (results.mode)
     case 1
         % Reset the output figure before re-plot all data
         delete(results.fig);
-        output = figure('Tag', 'InfoSysID_Toolbox_Output', 'visible','off');
+        output = figure('Tag', 'InSI_Figure', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);
@@ -80,7 +79,7 @@ switch (results.mode)
         else
             % Reset the output figure before re-plot all data
             delete(results.fig);
-            output = figure('Tag', 'InfoSysID_Toolbox_Output', 'visible','off');
+            output = figure('Tag', 'InSI_Figure', 'visible','off');
             results.fig = output;
             results.figaxes = axes;
             movegui(results.figaxes, results.pos);

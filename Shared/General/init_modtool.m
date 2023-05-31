@@ -1,6 +1,6 @@
 function init_modtool()
 
-%% ~ = init_modtool():  Initialize the variable for InfoSysID_modtool.
+%% ~ = init_modtool():  Initialize the variable for InSI_modtool.
 %
 %% Input: None
 %
@@ -9,7 +9,7 @@ function init_modtool()
 %% Require R2006A
 %
 % Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 20-Apr-2023 18:54:13 
+% Last Modified by Son 31-May-2023 18:54:13 
 
 global modtool_inputs
 modtool_inputs = struct();

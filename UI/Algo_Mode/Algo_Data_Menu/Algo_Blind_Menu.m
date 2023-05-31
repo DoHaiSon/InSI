@@ -22,7 +22,7 @@ function varargout = Algo_Blind_Menu(varargin)
 
 % Edit the above text to modify the response to help Algo_Blind_Menu
 
-% Last Modified by GUIDE v2.5 20-Apr-2023 17:29:43
+% Last Modified by GUIDE v2.5 31-May-2023 13:46:49
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,7 +54,7 @@ function Algo_Blind_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   command line arguments to Algo_Blind_Menu (see VARARGIN)
 
 global main_path;
-jFrame=get(handle(handles.figure1), 'javaframe');
+jFrame=get(handle(handles.InSI_A_B), 'javaframe');
 jicon=javax.swing.ImageIcon(fullfile(main_path,'/Resource/Icon/menu_icon.png'));
 jFrame.setFigureIcon(jicon);
 
@@ -76,7 +76,7 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 % UIWAIT makes Algo_Blind_Menu wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.InSI_A_B);
 
 
 % --- Outputs from this function are returned to the command line.

@@ -22,7 +22,7 @@ function varargout = Algo_main(varargin)
 
 % Edit the above text to modify the response to help Algo_main
 
-% Last Modified by GUIDE v2.5 16-Feb-2023 14:36:20
+% Last Modified by GUIDE v2.5 31-May-2023 13:57:52
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -56,7 +56,7 @@ function Algo_main_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to Algo_main (see VARARGIN)
 global main_path;
-jFrame=get(handle(handles.figure1), 'javaframe');
+jFrame=get(handle(handles.InSI_A), 'javaframe');
 jicon=javax.swing.ImageIcon(fullfile(main_path,'/Resource/Icon/main_icon.png'));
 jFrame.setFigureIcon(jicon);
 
@@ -71,7 +71,7 @@ setappdata(0,'handles_main', handles)
 movegui(hObject, 'center');
 
 % UIWAIT makes Algo_main wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.InSI_A);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -114,7 +114,7 @@ function About_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     global main_path;
     [msgicon, iconcmap] = imread('AV.png');
-    hm = msgbox({'InfoSysID Toolbox v1.1.0.'; 'Copyright 2023 AVITECH.'}, 'About', 'custom', msgicon, iconcmap);
+    hm = msgbox({'InSI Toolbox v1.2.0.'; 'Copyright 2023 AVITECH.'}, 'About', 'custom', msgicon, iconcmap);
     jframe=get(hm, 'javaframe');
     jIcon=javax.swing.ImageIcon(fullfile(main_path, '/Resource/Icon/about.png'));
     jframe.setFigureIcon(jIcon);
@@ -158,7 +158,7 @@ function mode_Callback(hObject, eventdata, handles)
         if (~ isempty(other_wins(1, 1).CurrentFigure))
             delete(other_wins);
         end
-        InfoSysID_mode();
+        InSI_mode();
     end
              
 
@@ -270,7 +270,7 @@ function board_CreateFcn(hObject, eventdata, handles)
     [Nafosted_sample, ~, Nafosted_sample_alpha] = imread(fullfile(main_path, '/Resource/Icon/Nafosted.png'));
 
     ax1 = subplot(3, 4, 1);
-    text(0, 0, 0, 'InfoSysID Toolbox', 'Color', 'blue','FontSize', 20);
+    text(0, 0, 0, 'InSI Toolbox', 'Color', 'blue','FontSize', 20);
     ax1.Position = [x_0 + width / 3, y_0 + height/1.2, width / 5, height / 5];
     axis off;
 
