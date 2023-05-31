@@ -1,8 +1,9 @@
 function [SNR, Err] = B_CMA_Grad_adap(Op, Monte, SNR, Output_type)
 
-%BLIND CHANNEL USING CMA ALGORITHM
-% Ref: J. Treichler and B. Agee, "A new approach to multipath correction of constant modulus signals,"
-% in IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 31, no. 2, pp. 459-472, 1983.
+%% Constant modulus algorithm
+%
+%% Ref: J. Treichler and B. Agee, "A new approach to multipath correction of constant modulus signals," in IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 31, no. 2, pp. 459-472, 1983.
+% 
 %% Input:
     % N: number of sample data
     % ChL: length of the channel
@@ -13,6 +14,7 @@ function [SNR, Err] = B_CMA_Grad_adap(Op, Monte, SNR, Output_type)
     % Monte: simulation times
     % SNR: range of the SNR
     % Ouput_type: MSE Sig, MSE Ch, Error rate
+%
 %% Output:
     % SNR: range of the SNR
     % SER: Symbol error rate
@@ -33,6 +35,7 @@ function [SNR, Err] = B_CMA_Grad_adap(Op, Monte, SNR, Output_type)
     %     Demodulate Y
     %     Compate elements in two array init data and Demodulated signal
     % Step 7: Return 
+%
 %% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
 %% Last Modified by Son 22-Oct-2021 12:52:13 
 

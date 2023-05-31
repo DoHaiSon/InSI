@@ -618,4 +618,10 @@ function ref_web_Callback(hObject, eventdata, handles)
 % hObject    handle to ref_web (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    load_ref_web();
+    
+    method = get(handles.methods, 'Value');
+    methods = get(handles.methods, 'String');
+    algo = strcat('B_', methods{method});
+    msg = load_help(algo);
+
+    help_questdlg(msg, algo);

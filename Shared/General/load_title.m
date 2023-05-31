@@ -11,7 +11,7 @@ function title = load_title( algo )
 %% Require R2006A
 %
 % Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 20-Apr-2023 18:52:13 
+% Last Modified by Son 31-May-2023 18:52:13 
 
 load_help   = evalc(['help ' algo]);
 split_help  = strsplit(load_help, '\n');
