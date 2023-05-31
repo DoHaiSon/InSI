@@ -1,0 +1,15 @@
+.logo {
+    width: 10%;
+    }
+.dashboard {
+    width: 50%;
+    }
+    
+@media screen and (max-width: 600px) {
+.logo {
+    width: 40%;
+    }
+.dashboard {
+    width: 100%;
+    }
+}
