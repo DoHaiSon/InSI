@@ -44,7 +44,7 @@ classdef B_CMA_Grad_params
         rect_color     = {'b', 'b', 'b', 'b', 'r', 'g', 'g'}       
 
         % Reference website
-        web_url = "https://ieeexplore.ieee.org/document/1164062"
+        web_url = 'https://ieeexplore.ieee.org/document/1164062'
     end
     
     methods (Access = private)
