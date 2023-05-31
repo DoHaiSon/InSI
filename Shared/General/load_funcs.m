@@ -32,6 +32,8 @@ end
 Monte   = str2num(get(handles.Monte, 'String'));
 SNR     = str2num(get(handles.SNR, 'String'));
 
+all_output_types = {'SER', 'BER', 'MSE Sig', 'MSE H'};
+
 % Load output panel
 switch (mode)
     case 'Algo_Mode'
@@ -117,6 +119,7 @@ results.figparams.marker{end + 1} = ['-' all_marks{randi(length(all_marks))}];
 results.Output_type = Output_type;
 results.figparams.legends{end + 1} = parseleg(mode, algo);
 results.figparams.fig_visible(end + 1) = true;
+results.figparams.output_types(end + 1) = Output_type;
 
 % Check figure mode: Clear/hold on/subfigure
 % Load system model
@@ -159,9 +162,17 @@ end
 switch(results.mode)
     case 1
         results.figparams.fig_visible(end - 1) = false;
+    case 2
+
+    case 3
+end
+
+switch (mode)
+    case 'Algo_Mode' 
+        toolboxws = [toolboxws; {true, name_ws, all_output_types{Output_type}, datestr(runtime, 'HH:MM:SS')}];
+    case 'CRB_Mode'
         toolboxws = [toolboxws; {true, name_ws, datestr(runtime, 'HH:MM:SS')}];
-    otherwise
-        toolboxws = [toolboxws; {true, name_ws, datestr(runtime, 'HH:MM:SS')}];
+    case 'Demo_Mode'
 end
 
 % Modify toolboxws option here

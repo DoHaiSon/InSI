@@ -253,7 +253,7 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to toolbox_ws (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-%     set(hObject, 'ColumnName', {'Plot', 'Name', '$E_b$ / $N_o$ (dB)', 'BER', '# of Bits'});
+    set(hObject, 'ColumnName', {'Plot', 'Name', 'Run time'});
     global toolboxws;
     toolboxws = {};
     set(hObject, 'Data', toolboxws);
@@ -336,8 +336,8 @@ function modtool_nav_Callback(hObject, eventdata, handles)
 % hObject    handle to modtool_nav (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     modtool();
-    closereq();
 
 
 % --------------------------------------------------------------------
@@ -354,7 +354,7 @@ function figmode_1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
     global results;
-    if(results.pre_mode ~= 1 && results.pre_mode ~= 0)
+    if(results.pre_mode ~= 1 && results.pre_mode ~= 0 && results.figparams.count > 0)
         results.mode = 1;
         % Set WS values
         % Get plot options
@@ -378,7 +378,7 @@ function figmode_2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
     global results;
-    if(results.pre_mode ~= 2 && results.pre_mode ~= 0)
+    if(results.pre_mode ~= 2 && results.pre_mode ~= 0 && results.figparams.count > 0)
         results.mode = 2;
         dispfig(results.inter);
     end
@@ -390,7 +390,7 @@ function figmode_3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
     global results;
-    if(results.pre_mode ~= 3 && results.pre_mode ~= 0)
+    if(results.pre_mode ~= 3 && results.pre_mode ~= 0 && results.figparams.count > 0)
         results.mode = 3;
         dispfig(results.inter);
     end

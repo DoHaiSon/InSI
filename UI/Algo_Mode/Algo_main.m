@@ -22,7 +22,7 @@ function varargout = Algo_main(varargin)
 
 % Edit the above text to modify the response to help Algo_main
 
-% Last Modified by GUIDE v2.5 31-May-2023 16:24:26
+% Last Modified by GUIDE v2.5 31-May-2023 22:44:38
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -257,7 +257,7 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to toolbox_ws (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-%     set(hObject, 'ColumnName', {'Plot', 'Name', '$E_b$ / $N_o$ (dB)', 'BER', '# of Bits'});
+    set(hObject, 'ColumnName', {'Plot', 'Name', 'Output types', 'Run time'});
     global toolboxws;
     toolboxws = {};
     set(hObject, 'Data', toolboxws);
@@ -269,9 +269,10 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
     Postion = hObject.Position;
     x_total = Postion(3);
     x_plot     = x_total / 18;
-    x_name     = x_total / 1.3;
+    x_name     = x_total / 1.5;
+    x_output_t = x_total / 7;
     x_runtime  = x_total / 7;
-    set(hObject, 'ColumnWidth', {x_plot, x_name, x_runtime});
+    set(hObject, 'ColumnWidth', {x_plot, x_name, x_output_t, x_runtime});
 
 
 % --- Executes when entered data in editable cell(s) in toolbox_ws.
@@ -336,8 +337,8 @@ function modtool_nav_Callback(hObject, eventdata, handles)
 % hObject    handle to modtool_nav (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     modtool();
-    closereq();
 
 
 % --------------------------------------------------------------------
@@ -354,7 +355,7 @@ function figmode_1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     
     global results;
-    if(results.pre_mode ~= 1 && results.pre_mode ~= 0)
+    if(results.pre_mode ~= 1 && results.pre_mode ~= 0 && results.figparams.count > 0)
         results.mode = 1;
         % Set WS values
         % Get plot options
@@ -378,7 +379,23 @@ function figmode_2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
     global results;
-    if(results.pre_mode ~= 2 && results.pre_mode ~= 0)
+    if(results.pre_mode ~= 2 && results.pre_mode ~= 0 && results.figparams.count > 0)
+
+        InSI_ws   = get(handles.toolbox_ws, 'Data');
+        ws_op     = [InSI_ws{:, 1}];
+        ws_output = {InSI_ws{:, 3}};
+
+        tmp = {};
+        for i = 1:length(ws_op)
+            if ws_op(i)
+                tmp{end + 1} = ws_output{i};
+            end
+        end
+
+        if (length(unique(tmp)) ~= 1)
+            msgbox('Combine figure mode not available in multi output types.');
+            return;
+        end
         results.mode = 2;
         dispfig(results.inter);
     end
@@ -390,7 +407,7 @@ function figmode_3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
     global results;
-    if(results.pre_mode ~= 3 && results.pre_mode ~= 0)
+    if(results.pre_mode ~= 3 && results.pre_mode ~= 0 && results.figparams.count > 0)
         results.mode = 3;
         dispfig(results.inter);
     end

@@ -12,6 +12,7 @@ classdef Figparams
         gridmode
         marker = {}
         count = 0
+        output_types = []
         fig_visible = []
         data = struct('x', 0, 'y', 0)
     end
