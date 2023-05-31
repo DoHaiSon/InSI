@@ -11,7 +11,7 @@ classdef SB_MRE_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 1, 1, 2, 2, 1, 1, 1]
-        values = {256, 2, 4, 4, {'Real', 'Complex', 'Specular', 'Input'}, {'Bin', 'QPSK', 'QAM4', 'QAM16'}, 256, 32, 0.1}
+        values = {256, 2, 4, 4, {'Real', 'Complex', 'Parametric', 'Input'}, {'Binary', 'QPSK', '4-QAM', '16-QAM', '64-QAM', '128-QAM', '256-QAM'}, 256, 32, 0.1}
         default_values = {256, 2, 4, 4, 2, 2, 10, 32, 0.1}
         
         % Default SNR and Monte

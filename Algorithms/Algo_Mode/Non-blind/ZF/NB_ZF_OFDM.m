@@ -49,7 +49,7 @@ SNR     = SNR;
 Output_type = Output_type;
 
 % Generate input signal
-modulation = {'Bin', 'QPSK', 'QAM4', 'QAM16'};
+modulation = {'Bin', 'QPSK', 'QAM4', 'QAM16', 'QAM64', 'QAM128', 'QAM256'};
 
 % ZF algorithm
 ER_f    = [];

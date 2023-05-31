@@ -12,7 +12,7 @@ SNR       = SNR;       % Signal to noise ratio (dB)
 Output_type = Output_type;
 
 % Generate input signal
-modulation = {'Bin', 'QPSK', 'QAM4', 'QAM16'};
+modulation = {'Bin', 'QPSK', 'QAM4', 'QAM16', 'QAM64', 'QAM128', 'QAM256'};
 
 res_b     = [];
 for monte = 1:Monte

@@ -2,7 +2,7 @@ function channel = Generate_channel(L, chL, type, N_t, N_r, fading, delay, DOA)
 % Generate channel models
 %   L: number of channels (sensors)
 %   chL: length of the channels
-%   type: [1, real], [2, complex], [3, specular], [4, input_channel]
+%   type: [1, real], [2, complex], [3, parametric], [4, input_channel]
 
     switch(type)
         case 1                  % Real channel
@@ -11,7 +11,7 @@ function channel = Generate_channel(L, chL, type, N_t, N_r, fading, delay, DOA)
         case 2                  % Complex channel
             channel = (randn(L, chL + 1) + 1i*randn(L, chL + 1));        
             channel = channel / sqrt(2);
-        case 3                  % Sepcular channel
+        case 3                  % Parametric channel
             % fading, delay, DOA of size (M,Nt)
             channel = zeros(N_r, chL, N_t);
             M       = size(DOA, 1);  
