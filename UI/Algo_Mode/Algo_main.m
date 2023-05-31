@@ -22,7 +22,7 @@ function varargout = Algo_main(varargin)
 
 % Edit the above text to modify the response to help Algo_main
 
-% Last Modified by GUIDE v2.5 31-May-2023 13:57:52
+% Last Modified by GUIDE v2.5 31-May-2023 16:24:26
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -197,48 +197,7 @@ function Pilotbutton_Callback(hObject, eventdata, handles)
 %     Not support yet
     Algo_Non_Blind_Menu();
     
-    
-% --- Executes on button press in holdon.
-function holdon_Callback(hObject, eventdata, handles)
-% hObject    handle to holdon (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of holdon
-    holdon_state = get(hObject,'Value');
-    sub_fig_state= get(handles.sub_fig, 'Value');
-    if holdon_state && sub_fig_state
-        set(handles.sub_fig, 'Value', 0);
-    end
-
-    if holdon_state
-        global results;
-        if(results.pre_mode ~= 2 && results.pre_mode ~= 0)
-            results.mode = 2;
-            dispfig(results.inter);
-        end
-    end
-
-    if ~holdon_state && ~sub_fig_state
-        global results;
-        if(results.pre_mode ~= 1 && results.pre_mode ~= 0)
-            results.mode = 1;
-            % Set WS values
-            % Get plot options
-            ws_op = get(handles.toolbox_ws, 'Data');
-            plot_op = [ws_op{:, 1}];
-            last_true_i = find(plot_op, true, 'last');
-            plot_op_new = false(1, length(plot_op));
-            plot_op_new(1, last_true_i) = true;
-            for i=1:length(plot_op_new)
-                handles.toolbox_ws.Data{i, 1} = [plot_op_new(i)];
-            end
-            
-            results.figparams.fig_visible = plot_op_new;
-            dispfig(results.inter);
-        end
-    end
-
+   
 
 % --- Executes during object creation, after setting all properties.
 function board_CreateFcn(hObject, eventdata, handles)
@@ -292,46 +251,6 @@ function board_CreateFcn(hObject, eventdata, handles)
     copyobj(ax, board);
     close(hfig); % close the temporary figure
 
-% --- Executes on button press in sub_fig.
-function sub_fig_Callback(hObject, eventdata, handles)
-% hObject    handle to sub_fig (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of sub_fig
-    holdon_state = get(hObject,'Value');
-    sub_fig_state= get(handles.sub_fig, 'Value');
-    if holdon_state && sub_fig_state
-        set(handles.holdon, 'Value', 0);
-    end
-
-    if sub_fig_state
-        global results;
-        if(results.pre_mode ~= 3 && results.pre_mode ~= 0)
-            results.mode = 3;
-            dispfig(results.inter);
-        end
-    end
-
-    if ~holdon_state && ~sub_fig_state
-        global results;
-        if(results.pre_mode ~= 1 && results.pre_mode ~= 0)
-            results.mode = 1;
-            % Set WS values
-            % Get plot options
-            ws_op = get(handles.toolbox_ws, 'Data');
-            plot_op = [ws_op{:, 1}];
-            last_true_i = find(plot_op, true, 'last');
-            plot_op_new = false(1, length(plot_op));
-            plot_op_new(1, last_true_i) = true;
-            for i=1:length(plot_op_new)
-                handles.toolbox_ws.Data{i, 1} = [plot_op_new(i)];
-            end
-            
-            results.figparams.fig_visible = plot_op_new;
-            dispfig(results.inter);
-        end
-    end
     
 % --- Executes during object creation, after setting all properties.
 function toolbox_ws_CreateFcn(hObject, eventdata, handles)
@@ -339,7 +258,7 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 %     set(hObject, 'ColumnName', {'Plot', 'Name', '$E_b$ / $N_o$ (dB)', 'BER', '# of Bits'});
-     global toolboxws;
+    global toolboxws;
     toolboxws = {};
     set(hObject, 'Data', toolboxws);
     set(hObject, 'units','pixels');
@@ -349,11 +268,10 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
 %     Set columns width when init main window
     Postion = hObject.Position;
     x_total = Postion(3);
-    x_plot = x_total / 20;
-    x_name = x_total / 3;
-    x_snr  = x_total / 4;
-    x_err  = x_total / 3.1;
-    set(hObject, 'ColumnWidth', {x_plot, x_name, x_snr, x_err});
+    x_plot     = x_total / 18;
+    x_name     = x_total / 1.3;
+    x_runtime  = x_total / 7;
+    set(hObject, 'ColumnWidth', {x_plot, x_name, x_runtime});
 
 
 % --- Executes when entered data in editable cell(s) in toolbox_ws.
@@ -420,3 +338,59 @@ function modtool_nav_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     modtool();
     closereq();
+
+
+% --------------------------------------------------------------------
+function Figure_options_Callback(hObject, eventdata, handles)
+% hObject    handle to Figure_options (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --------------------------------------------------------------------
+function figmode_1_Callback(hObject, eventdata, handles)
+% hObject    handle to figmode_1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    
+    global results;
+    if(results.pre_mode ~= 1 && results.pre_mode ~= 0)
+        results.mode = 1;
+        % Set WS values
+        % Get plot options
+        ws_op = get(handles.toolbox_ws, 'Data');
+        plot_op = [ws_op{:, 1}];
+        last_true_i = find(plot_op, true, 'last');
+        plot_op_new = false(1, length(plot_op));
+        plot_op_new(1, last_true_i) = true;
+        for i=1:length(plot_op_new)
+            handles.toolbox_ws.Data{i, 1} = [plot_op_new(i)];
+        end
+        
+        results.figparams.fig_visible = plot_op_new;
+        dispfig(results.inter);
+    end
+
+% --------------------------------------------------------------------
+function figmode_2_Callback(hObject, eventdata, handles)
+% hObject    handle to figmode_2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+    global results;
+    if(results.pre_mode ~= 2 && results.pre_mode ~= 0)
+        results.mode = 2;
+        dispfig(results.inter);
+    end
+
+% --------------------------------------------------------------------
+function figmode_3_Callback(hObject, eventdata, handles)
+% hObject    handle to figmode_3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+    global results;
+    if(results.pre_mode ~= 3 && results.pre_mode ~= 0)
+        results.mode = 3;
+        dispfig(results.inter);
+    end

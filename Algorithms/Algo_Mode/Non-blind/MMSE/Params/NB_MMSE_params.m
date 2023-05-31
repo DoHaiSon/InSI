@@ -28,7 +28,7 @@ classdef NB_MMSE_params
         
         % Figure
         sys_model = 'Default.png'
-        title     = {'NB-ZF'}
+        title     = {'NB-MMSE'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 
