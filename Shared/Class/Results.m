@@ -6,8 +6,8 @@ classdef Results
         fig
         figaxes
         figparams
-        mode
-        pre_mode = 0
+        mode = 2
+        pre_mode = 2
         Output_type
         pre_output = 0
         pos

@@ -62,6 +62,9 @@ for i = 1:params.num_params
     end
 end
 
+global InSI_time;
+InSI_time = datetime('now');
+
 %% Exec algorithm
 loader('Execute function');
 switch (mode)
@@ -71,6 +74,9 @@ switch (mode)
         [SNR, Err] = eval(strcat(algo, '(Op, Monte, SNR)'));
     case 'Demo_Mode'
 end
+
+runtime = datetime('now') - InSI_time;
+
 try
     F = findall(0, 'type', 'figure', 'tag', 'loader');
     waitbar(1, F, 'Done!');
@@ -111,23 +117,13 @@ results.figparams.fig_visible(end + 1) = true;
 % Load system model
 handles_main = getappdata(0,'handles_main');
 
-fig_mode = checkfigmode(handles_main);
-switch(fig_mode)
-    case 1
-        results.mode = 1;
-    case 2
-        results.trigger = true;
-        results.mode = 2;
-    case 3
-        results.mode = 3;
-    otherwise
+if (results.pre_output == 2 && results.mode == 2)
+    results.trigger = true;
 end
 
 % If user changed the output type, we force change the fig mode to
 % subfig
 if (results.pre_output ~= Output_type && results.pre_output ~= 0)
-    set(handles_main.holdon, 'Value', 0);
-    set(handles_main.sub_fig, 'Value', 1);
     results.mode = 3;
 end
 
@@ -140,41 +136,29 @@ results.pre_output = Output_type;
 %% Export data to Toolbox Workspace
 global toolboxws;
 
-title_toolboxes = algo;
+name_ws = algo;
 for i = 1:params.num_params
     switch get(eval(strcat('handles.Op_', num2str(i))), 'Style')
         case 'edit'
-            title_toolboxes = strcat(title_toolboxes, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
+            name_ws = strcat(name_ws, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
                 '_', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'String')));
         case 'popupmenu'
-            title_toolboxes = strcat(title_toolboxes, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
+            name_ws = strcat(name_ws, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
                 '_', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));
         case 'togglebutton'
-            title_toolboxes = strcat(title_toolboxes, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
+            name_ws = strcat(name_ws, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
                 '_', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));
     end
 end
-switch(fig_mode)
+
+switch(results.mode)
     case 1
         results.figparams.fig_visible(end - 1) = false;
-%             switch mode
-%                 case 'CRB_Mode'
-%                    toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(end).x), ...
-%                         matrix2char(results.figparams.data(end).y)}]];
-%                 otherwise
-        toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(end).x), ...
-            matrix2char(results.figparams.data(end).y)}]];
-%             end
+        toolboxws = [toolboxws; {true, name_ws, datestr(runtime, 'HH:MM:SS')}];
     otherwise
-%             switch mode
-%                 case 'CRB_Mode'
-%                     toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(results.figparams.count).x), ...
-%                         matrix2char(results.figparams.data(results.figparams.count).y)}]];
-%                 otherwise
-        toolboxws = [toolboxws; [{true, title_toolboxes, matrix2char(results.figparams.data(results.figparams.count).x), ...
-            matrix2char(results.figparams.data(results.figparams.count).y)}]];
-%             end
+        toolboxws = [toolboxws; {true, name_ws, datestr(runtime, 'HH:MM:SS')}];
 end
+
 % Modify toolboxws option here
 if (results.figparams.count ~= 1)
     for i = 1:length(results.figparams.fig_visible)
