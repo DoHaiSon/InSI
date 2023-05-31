@@ -269,7 +269,7 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
     Postion = hObject.Position;
     x_total = Postion(3);
     x_plot     = x_total / 18;
-    x_name     = x_total / 1.5;
+    x_name     = x_total / 1.6;
     x_output_t = x_total / 7;
     x_runtime  = x_total / 7;
     set(hObject, 'ColumnWidth', {x_plot, x_name, x_output_t, x_runtime});
@@ -285,8 +285,8 @@ function toolbox_ws_CellEditCallback(hObject, eventdata, handles)
 %	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
 %	Error: error string when failed to convert EditData to appropriate value for Data
 % handles    structure with handles and user data (see GUIDATA)
-    hide_line(hObject);
-    
+
+    hide_line(hObject);    
 
 
 % --------------------------------------------------------------------
@@ -303,13 +303,15 @@ function inter_latex_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     global results;
-    if ~results.inter && results.figparams.count ~= 0
+    if ~results.inter && results.figparams.count > 0
         close(results.fig);
-        output = figure('Tag', 'channel_estimation', 'visible','off');
+        output = figure('Tag', 'InSI_Figure', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);
         results.trigger = false;
+        set(hObject, 'Text', 'x Latex');
+        set(handles.inter_non_latex, 'Text', '  Normal');
         dispfig(true);
         results.inter = true;
     end
@@ -320,13 +322,15 @@ function inter_non_latex_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     global results;
-    if results.inter && results.figparams.count ~= 0
+    if results.inter && results.figparams.count > 0
         close(results.fig);
-        output = figure('Tag', 'channel_estimation', 'visible','off');
+        output = figure('Tag', 'InSI_Figure', 'visible','off');
         results.fig = output;
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);
         results.trigger = false;
+        set(handles.inter_latex, 'Text', '  Latex');
+        set(hObject, 'Text', 'x Normal');
         dispfig(false);
         results.inter = false;
     end
@@ -369,6 +373,9 @@ function figmode_1_Callback(hObject, eventdata, handles)
         end
         
         results.figparams.fig_visible = plot_op_new;
+        set(hObject, 'Text', 'x Single');
+        set(handles.figmode_2, 'Text', ' Combine');
+        set(handles.figmode_3, 'Text', ' Separate');
         dispfig(results.inter);
     end
 
@@ -397,6 +404,9 @@ function figmode_2_Callback(hObject, eventdata, handles)
             return;
         end
         results.mode = 2;
+        set(handles.figmode_1, 'Text', ' Single');
+        set(hObject, 'Text', 'x Combine');
+        set(handles.figmode_3, 'Text', ' Separate');
         dispfig(results.inter);
     end
 
@@ -409,5 +419,8 @@ function figmode_3_Callback(hObject, eventdata, handles)
     global results;
     if(results.pre_mode ~= 3 && results.pre_mode ~= 0 && results.figparams.count > 0)
         results.mode = 3;
+        set(handles.figmode_1, 'Text', ' Single');
+        set(handles.figmode_2, 'Text', ' Combine');
+        set(hObject, 'Text', 'x Separate');
         dispfig(results.inter);
     end

@@ -20,6 +20,19 @@ plot_op = [plot_op{:, 1}];
 global results;
 fig =  results.fig;
 
+if (results.mode == 1)
+    pre_plot_op = results.figparams.fig_visible;
+
+    plot_op = ~(plot_op == pre_plot_op);
+
+    for i=1:length(plot_op)
+        hObject.Data{i, 1} = [plot_op(i)];
+    end
+end
+
+% // TODO: check switch from mode 1=>3
+% // TODO: users enable different output types line in figmode_2
+
 results.figparams.fig_visible = plot_op;
 results.trigger = false;
 dispfig(results.inter);

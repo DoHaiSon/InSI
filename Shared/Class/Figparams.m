@@ -4,13 +4,13 @@ classdef Figparams
     
     properties
         axes
-        legends
         name 
         title  = {}
         xlabel = {}
         ylabel = {}
         gridmode
         marker = {}
+        legends = {}
         count = 0
         output_types = []
         fig_visible = []
