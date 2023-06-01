@@ -296,6 +296,8 @@ function inter_latex_Callback(hObject, eventdata, handles)
 % hObject    handle to inter_latex (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+    global configs;
     global results;
     if ~results.inter && results.figparams.count ~= 0
         % TODO: remove data instead of close recent figure
@@ -306,8 +308,8 @@ function inter_latex_Callback(hObject, eventdata, handles)
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);
         results.trigger = false;
-        set(hObject, 'Text', 'x Latex');
-        set(handles.inter_non_latex, 'Text', '  Normal');
+        set(hObject, configs.UI_container_Menu, 'x Latex');
+        set(handles.inter_non_latex, configs.UI_container_Menu, '  Normal');
         dispfig(true);
         results.inter = true;
     end
@@ -317,6 +319,8 @@ function inter_non_latex_Callback(hObject, eventdata, handles)
 % hObject    handle to inter_non_latex (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+    global configs;
     global results;
     if results.inter && results.figparams.count ~= 0
         % TODO: remove data instead of close recent figure
@@ -327,8 +331,8 @@ function inter_non_latex_Callback(hObject, eventdata, handles)
         results.figaxes = axes;
         movegui(results.figaxes, results.pos);
         results.trigger = false;
-        set(handles.inter_latex, 'Text', '  Latex');
-        set(hObject, 'Text', 'x Normal');
+        set(handles.inter_latex, configs.UI_container_Menu, '  Latex');
+        set(hObject, configs.UI_container_Menu, 'x Normal');
         dispfig(false);
         results.inter = false;
     end
@@ -356,6 +360,7 @@ function figmode_1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+    global configs;
     global results;
     if(results.pre_mode ~= 1 && results.pre_mode ~= 0 && results.figparams.count > 0)
         results.mode = 1;
@@ -371,9 +376,9 @@ function figmode_1_Callback(hObject, eventdata, handles)
         end
         
         results.figparams.fig_visible = plot_op_new;
-        set(hObject, 'Text', 'x Single');
-        set(handles.figmode_2, 'Text', ' Combine');
-        set(handles.figmode_3, 'Text', ' Separate');
+        set(hObject, configs.UI_container_Menu, 'x Single');
+        set(handles.figmode_2, configs.UI_container_Menu, ' Combine');
+        set(handles.figmode_3, configs.UI_container_Menu, ' Separate');
         dispfig(results.inter);
     end
 
@@ -383,12 +388,13 @@ function figmode_2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+    global configs;
     global results;
     if(results.pre_mode ~= 2 && results.pre_mode ~= 0 && results.figparams.count > 0)
         results.mode = 2;
-        set(handles.figmode_1, 'Text', ' Single');
-        set(hObject, 'Text', 'x Combine');
-        set(handles.figmode_3, 'Text', ' Separate');
+        set(handles.figmode_1, configs.UI_container_Menu, ' Single');
+        set(hObject, configs.UI_container_Menu, 'x Combine');
+        set(handles.figmode_3, configs.UI_container_Menu, ' Separate');
         dispfig(results.inter);
     end
 
@@ -397,12 +403,13 @@ function figmode_3_Callback(hObject, eventdata, handles)
 % hObject    handle to figmode_3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+    
+    global configs;
     global results;
     if(results.pre_mode ~= 3 && results.pre_mode ~= 0 && results.figparams.count > 0)
         results.mode = 3;
-        set(handles.figmode_1, 'Text', ' Single');
-        set(handles.figmode_2, 'Text', ' Combine');
-        set(hObject, 'Text', 'x Separate');
+        set(handles.figmode_1, configs.UI_container_Menu, ' Single');
+        set(handles.figmode_2, configs.UI_container_Menu, ' Combine');
+        set(hObject, configs.UI_container_Menu, 'x Separate');
         dispfig(results.inter);
     end

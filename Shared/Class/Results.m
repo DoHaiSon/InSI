@@ -19,4 +19,3 @@ classdef Results
     end
     
 end
-

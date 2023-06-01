@@ -18,6 +18,18 @@ if ~close_InSI()
     return
 end
 
+% Check MatLab version and load config
+global configs;
+
+matlab_version = version('-release');
+matlab_version = regexp(matlab_version,'(-)?\d+(\.\d+)?(e(-|+)\d+)?','match');
+if (str2num(matlab_version{1}) < 2016)
+    configs = Configs_R16;
+else
+    configs = Configs_R17;
+end
+
+
 % Clear auto save file of matlab
 clear_asv_files(main_path);
 
