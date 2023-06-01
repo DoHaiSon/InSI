@@ -18,7 +18,7 @@ if ~close_InSI()
     return
 end
 
-% Check MatLab version and load config
+% Check MatLab version and load configs
 global configs;
 
 matlab_version = version('-release');
