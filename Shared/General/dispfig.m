@@ -32,8 +32,6 @@ else
     interpreter = 'none';
 end
 
-%% TODO: Force keep subfig_mode when users swapped Output_type
-
 % figure
 switch (results.mode)
     case 1
@@ -56,6 +54,10 @@ switch (results.mode)
                     , results.figparams.marker{index});
             end
             legend(results.figaxes, results.figparams.legends(index), 'Interpreter', interpreter);
+        else
+            grid (results.figaxes, results.figparams.gridmode);
+            set(results.figaxes ,'TickLabelInterpreter', interpreter);
+            return;
         end
         
         grid (results.figaxes, results.figparams.gridmode);
@@ -116,6 +118,20 @@ switch (results.mode)
 
         results.trigger = true;
     case 3
+        if (sum(results.figparams.fig_visible) == 0)
+            % Reset the output figure before re-plot all data
+            delete(results.fig);
+            output = figure('Tag', 'InSI_Figure', 'visible','off');
+            results.fig = output;
+            results.figaxes = axes;
+            movegui(results.figaxes, results.pos);
+            set(results.fig, 'Visible', 'on');
+            grid (results.figaxes, results.figparams.gridmode);
+            
+            set(results.figaxes ,'TickLabelInterpreter',interpreter);
+            return;
+        end
+
         num = sum(results.figparams.fig_visible(:) == true);
         [p, n] = subplot_layout(num);
         index = 1;
