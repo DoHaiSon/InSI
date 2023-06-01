@@ -88,6 +88,7 @@ catch ME
 end
         
 %% Figure result
+global configs;
 global results;         % Be careful 
     
 % GUI to WS
@@ -132,9 +133,9 @@ end
 % If user changed the output type, we force change the fig mode to
 % subfig
 if (results.pre_output ~= Output_type && results.pre_output ~= 0)
-    set(handles_main.figmode_1, 'Text', ' Single');
-    set(handles_main.figmode_2, 'Text', ' Combine');
-    set(handles_main.figmode_3, 'Text', 'x Separate');
+    set(handles_main.figmode_1, configs.UI_container_Menu, ' Single');
+    set(handles_main.figmode_2, configs.UI_container_Menu, ' Combine');
+    set(handles_main.figmode_3, configs.UI_container_Menu, 'x Separate');
     results.mode = 3;
 end
 
