@@ -102,7 +102,7 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
     % Set default menu to escape error when temp of menu is stored
-    default = '            Select model';
+    default = '                  Select model';
     set(hObject, 'String', default);
     methods = load_methods(default, 'CRB_Mode', 'Blind');
     set(hObject, 'String', methods);

@@ -22,7 +22,7 @@ function varargout = CRB_Semi_Blind_Menu(varargin)
 
 % Edit the above text to modify the response to help CRB_Semi_Blind_Menu
 
-% Last Modified by GUIDE v2.5 31-May-2023 13:51:05
+% Last Modified by GUIDE v2.5 02-Jun-2023 18:06:10
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -102,7 +102,7 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
     % Set default menu to escape error when temp of menu is stored
-    default = '            Select model';
+    default = '                  Select model';
     set(hObject, 'String', default);
     methods = load_methods(default, 'CRB_Mode', 'Semi-blind');
     set(hObject, 'String', methods);
@@ -315,7 +315,7 @@ function Op_8_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of Op_8 as text
 %        str2double(get(hObject,'String')) returns contents of Op_8 as a double
     input_data(hObject);
-
+    
 
 % --- Executes during object creation, after setting all properties.
 function Op_9_CreateFcn(hObject, eventdata, handles)
@@ -359,7 +359,7 @@ function Op_10_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of Op_10 as text
 %        str2double(get(hObject,'String')) returns contents of Op_10 as a double
     input_data(hObject);
-    
+
 % --- Executes during object creation, after setting all properties.
 function Monte_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to Monte (see GCBO)

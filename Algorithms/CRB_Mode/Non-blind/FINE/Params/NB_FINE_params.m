@@ -6,6 +6,7 @@ classdef NB_FINE_params
         % Parameters
         num_params = 4
         params = {'Data size', 'Delta', 'Epochs', 'Learning rate'}
+        notations = {'data_size', 'delta_arr', 'Epochs', 'lr'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2

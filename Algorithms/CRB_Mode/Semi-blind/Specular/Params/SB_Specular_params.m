@@ -5,7 +5,8 @@ classdef SB_Specular_params
     properties
         % Parameters
         num_params = 6
-        params = {'Nt', 'Nr', 'ChL', 'Multipaths', 'Sub-carriers', 'Pilot/Data Power ratio'}
+        params = {'Num. transmitters', 'Num. receivers', 'Channel order', 'Num. channels', 'Sub-carriers', 'Pilot/Data Power ratio'}
+        notations = {'Nt', 'Nr', 'L', 'M', 'K', 'ratio'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2

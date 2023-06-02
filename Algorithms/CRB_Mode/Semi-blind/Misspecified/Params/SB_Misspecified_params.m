@@ -5,7 +5,8 @@ classdef SB_Misspecified_params
     properties
         % Parameters
         num_params = 5
-        params = {'Nt', 'Nr', 'Ltr', 'Lpt', 'K'}
+        params = {'Num. transmitters', 'Num. receivers', 'Ltr', 'Lpt', 'K'}
+        notations = {'Nt', 'Nr', 'Ltr', 'Lpt', 'K'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2

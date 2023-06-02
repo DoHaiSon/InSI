@@ -22,7 +22,7 @@ function varargout = CRB_Non_Blind_Menu(varargin)
 
 % Edit the above text to modify the response to help CRB_Non_Blind_Menu
 
-% Last Modified by GUIDE v2.5 31-May-2023 13:50:36
+% Last Modified by GUIDE v2.5 02-Jun-2023 17:50:28
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -102,7 +102,7 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
     % Set default menu to escape error when temp of menu is stored
-    default = '            Select model';
+    default = '                  Select model';
     set(hObject, 'String', default);
     methods = load_methods(default, 'CRB_Mode', 'Non-blind');
     set(hObject, 'String', methods);
@@ -128,6 +128,7 @@ function methods_Callback(hObject, eventdata, handles)
     load_params(hObject, eventdata, handles, 'CRB_Mode', 'Non-blind', algo);
 
     set(handles.ref_web, 'Visible', 'on');
+
 
 % --- Executes during object creation, after setting all properties.
 function panelparams_CreateFcn(hObject, eventdata, handles)
@@ -314,7 +315,7 @@ function Op_8_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of Op_8 as text
 %        str2double(get(hObject,'String')) returns contents of Op_8 as a double
     input_data(hObject);
-
+    
 
 % --- Executes during object creation, after setting all properties.
 function Op_9_CreateFcn(hObject, eventdata, handles)
@@ -358,7 +359,7 @@ function Op_10_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of Op_10 as text
 %        str2double(get(hObject,'String')) returns contents of Op_10 as a double
     input_data(hObject);
-    
+
 % --- Executes during object creation, after setting all properties.
 function Monte_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to Monte (see GCBO)
@@ -372,7 +373,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
     set(hObject, 'units','pixels');
     set(hObject, 'Position', [125, 50, 70, 20]);
-
 
 function Monte_Callback(hObject, eventdata, handles)
 % hObject    handle to Monte (see GCBO)
@@ -595,7 +595,6 @@ function Monte_text_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
     set(hObject, 'units','pixels');
     set(hObject, 'Position', [30, 50, 90, 20]);
-
 
 % --- Executes during object creation, after setting all properties.
 function SNR_text_CreateFcn(hObject, eventdata, handles)
