@@ -5,7 +5,8 @@ classdef B_CMA_Analytical_params
     properties
         % Parameters
         num_params = 6
-        params = {'N', 'Sensors' 'ChL', 'ChType', 'Modulation', 'Window length'}
+        params = {'Num. samples', 'Num. channels', 'Channel order', 'Channel type', 'Modulation', 'Window length'}
+        notations = {'N', 'Nr', 'ChL', 'ChType', 'Mod', 'L'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
