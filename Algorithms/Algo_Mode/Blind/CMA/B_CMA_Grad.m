@@ -7,7 +7,7 @@ function [SNR, Err] = B_CMA_Grad(Op, Monte, SNR, Output_type)
 %% Input:
     % + N: number of sample data
     % + ChL: length of the channel
-    % + Ch_type: type of the channel (real, complex, specular, user' input
+    % + Ch_type: type of the channel (real, complex, specular, user' input)
     % + Mod_type: type of modulation (Bin, QPSK, 4-QAM)
     % + mu: step size
     % + L: length of the CMA filter

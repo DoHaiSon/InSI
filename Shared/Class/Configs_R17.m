@@ -4,6 +4,7 @@ classdef Configs_R17
     
     properties
         UI_container_Menu = 'Text'
+        max_params = 10
     end
     
     methods

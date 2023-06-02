@@ -4,6 +4,7 @@ classdef Configs_R16
     
     properties
         UI_container_Menu = 'Label'
+        max_params = 10
     end
     
     methods

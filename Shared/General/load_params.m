@@ -22,6 +22,7 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
 
 global main_path;
 param_file_name = strcat(algo, '_params');
+global configs;
 global params;
 params = eval(param_file_name);
 
@@ -40,7 +41,7 @@ end
 set(handles.panelparams, 'Visible', 'on');
 
 % Turn off unuse params
-if params.num_params < 10
+if params.num_params < configs.max_params
     for i=1:params.num_params
         set(eval(strcat('handles.Text_', num2str(i))), 'Visible', 'on');
         set(eval(strcat('handles.Op_', num2str(i))), 'Visible', 'on');
@@ -53,7 +54,10 @@ end
 
 % Set texts for using params
 for i=1:params.num_params
-    set(eval(strcat('handles.Text_', num2str(i))), 'String', params.params{i});
+    % Cat params and notation to Op Label
+    Label = [params.params{i} ' (' params.notations{i} ')'];
+
+    set(eval(strcat('handles.Text_', num2str(i))), 'String', Label);
 end
 
 % Set UIClass and default value for using params

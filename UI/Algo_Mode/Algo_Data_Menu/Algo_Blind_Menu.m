@@ -102,7 +102,7 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
     % Set default menu to escape error when temp of menu is stored
-    default = '            Select method';
+    default = '                  Select method';
     set(hObject, 'String', default);
     methods = load_methods(default, 'Algo_Mode', 'Blind');
     set(hObject, 'String', methods);
@@ -130,7 +130,7 @@ function methods_Callback(hObject, eventdata, handles)
         set(handles.ref_web, 'Visible', 'off');
         return;
     end
-    default = '            Select version';
+    default = '                  Select version';
     vers = load_versions('Blind', default, methods{method});
     set(handles.version, 'String', vers);
     set(handles.version, 'Value', 1);
@@ -150,6 +150,8 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 %% TODO: width of algorithms exceed the parent.
 %     set(hObject, 'FontSize', 10);
+    default = '                  Select version';
+    set(hObject, 'String', default);
 
 % --- Executes on selection change in version.
 function version_Callback(hObject, eventdata, handles)
