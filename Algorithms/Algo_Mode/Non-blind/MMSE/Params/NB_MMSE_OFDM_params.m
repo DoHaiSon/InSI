@@ -5,7 +5,8 @@ classdef NB_MMSE_OFDM_params
     properties
         % Parameters
         num_params = 5
-        params = {'Occupied carriers', 'Pilot_L', 'ChL', 'ChType', 'Modulation'}
+        params = {'Occupied carriers', 'Num. pilots', 'Channel order', 'Channel type', 'Modulation'}
+        notations = {'N', 'N_p', 'ChL', 'ChType', 'Mod'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
