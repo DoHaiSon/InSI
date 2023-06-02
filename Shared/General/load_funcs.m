@@ -90,10 +90,6 @@ end
 %% Figure result
 global configs;
 global results;         % Be careful 
-    
-% GUI to WS
-GUI2WS(SNR);
-GUI2WS(Err);
 
 % Define Figure params
 results.figparams.count = results.figparams.count + 1;
@@ -121,6 +117,27 @@ results.Output_type = Output_type;
 results.figparams.legends{end + 1} = parseleg(mode, algo);
 results.figparams.fig_visible(end + 1) = true;
 results.figparams.output_types(end + 1) = Output_type;
+
+% GUI to WS
+for i = 1:params.num_params
+    eval([algo '.' params.notations{i} '= Op{i};']);
+end
+eval([algo '.SNR' '= SNR;']);
+eval([algo '.Err' '= Err;']);
+
+ws_index = -1;
+for i = 1:results.figparams.count
+    if strcmp(results.figparams.title{end}, results.figparams.title{i})
+        ws_index = ws_index + 1;
+    end
+end
+if ws_index == 0
+    ws_name  = algo;
+else
+    ws_name  = [algo '_' num2str(ws_index)];
+end
+
+GUI2WS(ws_name, eval(algo));
 
 % Check figure mode: Clear/hold on/subfigure
 % Load system model
@@ -152,14 +169,14 @@ name_ws = algo;
 for i = 1:params.num_params
     switch get(eval(strcat('handles.Op_', num2str(i))), 'Style')
         case 'edit'
-            name_ws = strcat(name_ws, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
-                '_', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'String')));
+            name_ws = strcat([name_ws ' ' params.notations{i}], ...
+                '=', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'String')));
         case 'popupmenu'
-            name_ws = strcat(name_ws, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
-                '_', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));
+            name_ws = strcat([name_ws ' ' params.notations{i}], ...
+                '=', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));
         case 'togglebutton'
-            name_ws = strcat(name_ws, '_', get(eval(strcat('handles.Text_', num2str(i))), 'String'), ...
-                '_', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));
+            name_ws = strcat([name_ws ' ' params.notations{i}], ...
+                '=', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));
     end
 end
 
