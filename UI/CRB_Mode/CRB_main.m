@@ -22,7 +22,7 @@ function varargout = CRB_main(varargin)
 
 % Edit the above text to modify the response to help CRB_main
 
-% Last Modified by GUIDE v2.5 04-Jun-2023 00:08:19
+% Last Modified by GUIDE v2.5 04-Jun-2023 00:24:58
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -487,3 +487,22 @@ function board_title_CreateFcn(hObject, eventdata, handles)
 
     set(hObject, 'FontUnits','normalized');
     set(hObject, 'FontSize', 0.5882352941176471);
+
+
+% --------------------------------------------------------------------
+function bug_report_Callback(hObject, eventdata, handles)
+% hObject    handle to bug_report (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+    web('https://github.com/DoHaiSon/InSI/issues/new/choose', '-browser');
+
+
+% --------------------------------------------------------------------
+function LICENSE_Callback(hObject, eventdata, handles)
+% hObject    handle to LICENSE (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+    % // TODO: Load from .md file
+    web('https://github.com/DoHaiSon/InSI/blob/master/LICENSE', '-browser');
