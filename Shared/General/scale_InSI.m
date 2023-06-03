@@ -32,11 +32,21 @@ h = 0;
 
 
 if (isempty(strfind(hObject.Name, 'method')))
-    x = 0;
-    y = 0;
-    w = Sc_w * 0.5826388889;
-    h = Sc_h * 0.8255555556;
+    if (isempty(strfind(hObject.Tag, 'InSI_mode')))
+        % Main windows
+        x = 0;
+        y = 0;
+        w = Sc_w * 0.5826388889;
+        h = Sc_h * 0.8255555556;
+    else
+        % Loader window
+        x = 0;
+        y = 0;
+        w = Sc_w * 0.2368055556;
+        h = Sc_h * 0.5444444444;
+    end
 else
+    % Menu windows
     x = 0;
     y = 0;
     w = Sc_w * 0.2180555556;

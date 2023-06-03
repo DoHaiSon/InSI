@@ -22,7 +22,7 @@ function varargout = CRB_main(varargin)
 
 % Edit the above text to modify the response to help CRB_main
 
-% Last Modified by GUIDE v2.5 31-May-2023 17:23:26
+% Last Modified by GUIDE v2.5 03-Jun-2023 23:15:06
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -55,23 +55,24 @@ function CRB_main_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to CRB_main (see VARARGIN)
-global main_path;
-jFrame=get(handle(handles.InSI_C), 'javaframe');
-jicon=javax.swing.ImageIcon(fullfile(main_path,'/Resource/Icon/main_icon.png'));
-jFrame.setFigureIcon(jicon);
 
-% Choose default command line output for CRB_main
-handles.output = hObject;
-
-% Update handles structure
-guidata(hObject, handles);
-setappdata(0,'handles_main', handles)
-
-% Set position for this GUI
-movegui(hObject, 'center');
-
-% UIWAIT makes CRB_main wait for user response (see UIRESUME)
-% uiwait(handles.InSI_C);
+    global main_path;
+    jFrame=get(handle(handles.InSI_C), 'javaframe');
+    jicon=javax.swing.ImageIcon(fullfile(main_path,'/Resource/Icon/main_icon.png'));
+    jFrame.setFigureIcon(jicon);
+    
+    % Choose default command line output for CRB_main
+    handles.output = hObject;
+    
+    % Update handles structure
+    guidata(hObject, handles);
+    setappdata(0,'handles_main', handles)
+    
+    % Set position for this GUI
+    movegui(hObject, 'center');
+    
+    % UIWAIT makes CRB_main wait for user response (see UIRESUME)
+    % uiwait(handles.InSI_C);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -81,8 +82,7 @@ function varargout = CRB_main_OutputFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Get default command line output from handles structure
-varargout{1} = handles.output;
+    varargout{1} = handles.output;
 
 
 % --------------------------------------------------------------------
@@ -90,7 +90,6 @@ function File_Callback(hObject, eventdata, handles)
 % hObject    handle to File (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 
 
 % --------------------------------------------------------------------
@@ -112,6 +111,7 @@ function About_Callback(hObject, eventdata, handles)
 % hObject    handle to About (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     global main_path;
     [msgicon, iconcmap] = imread('AV.png');
     hm = msgbox({'InSI Toolbox v1.2.0.'; 'Copyright 2023 AVITECH.'}, 'About', 'custom', msgicon, iconcmap);
@@ -125,6 +125,7 @@ function Open_Callback(hObject, eventdata, handles)
 % hObject    handle to Open (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     path = openfile();
     disp(path);
 
@@ -141,6 +142,7 @@ function Close_Callback(hObject, eventdata, handles)
 % hObject    handle to Close (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     closereq();
 
 
@@ -149,6 +151,7 @@ function mode_Callback(hObject, eventdata, handles)
 % hObject    handle to mode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     if (mode_questdlg())
         global results;
         results = Results;
@@ -168,14 +171,14 @@ function dataaxes_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: place code in OpeningFcn to populate dataaxes
+
 
 % --- Executes on button press in Blindbutton.
 function Blindbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Blindbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%     Not support yet
+
     CRB_Blind_Menu();
 
 
@@ -184,6 +187,7 @@ function SBbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to SBbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     CRB_Semi_Blind_Menu();
 
     
@@ -192,6 +196,7 @@ function Pilotbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Pilotbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     CRB_Non_Blind_Menu();
 
 
@@ -201,7 +206,6 @@ function board_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: place code in OpeningFcn to populate board
     global main_path;
     axesH = hObject;  % Not safe! Better get the handle explicitly!
     axis off;
@@ -253,11 +257,16 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to toolbox_ws (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits', 'Normalized');
+    set(hObject, 'FontSize', 0.0969044414483497);
+
     set(hObject, 'ColumnName', {'Plot', 'Name', 'Run time'});
     global toolboxws;
     toolboxws = {};
     set(hObject, 'Data', toolboxws);
     set(hObject, 'units','pixels');
+
     set(hObject.Parent, 'units','pixels');
     [x, y, w, h] = scale_InSI(hObject.Parent);
     set(hObject.Parent, 'Position', [x, y, w, h]);
@@ -286,13 +295,13 @@ function toolbox_ws_CellEditCallback(hObject, eventdata, handles)
 
     hide_line(hObject);
     
+
 % --------------------------------------------------------------------
 function Interpreter_Callback(hObject, eventdata, handles)
 % hObject    handle to Interpreter (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     
-
 
 % --------------------------------------------------------------------
 function inter_latex_Callback(hObject, eventdata, handles)
@@ -385,6 +394,7 @@ function figmode_1_Callback(hObject, eventdata, handles)
         dispfig(results.inter);
     end
 
+    
 % --------------------------------------------------------------------
 function figmode_2_Callback(hObject, eventdata, handles)
 % hObject    handle to figmode_2 (see GCBO)
@@ -401,6 +411,7 @@ function figmode_2_Callback(hObject, eventdata, handles)
         dispfig(results.inter);
     end
 
+
 % --------------------------------------------------------------------
 function figmode_3_Callback(hObject, eventdata, handles)
 % hObject    handle to figmode_3 (see GCBO)
@@ -416,3 +427,53 @@ function figmode_3_Callback(hObject, eventdata, handles)
         set(hObject, configs.UI_container_Menu, 'x Separate');
         dispfig(results.inter);
     end
+
+
+% --- Executes during object creation, after setting all properties.
+function selectmodel_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to selectmodel (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.0399502876390316);
+    
+
+% --- Executes during object creation, after setting all properties.
+function Blindbutton_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Blindbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.24413362617038498);
+
+
+% --- Executes during object creation, after setting all properties.
+function SBbutton_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to SBbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.24413362617038498);
+
+
+% --- Executes during object creation, after setting all properties.
+function Pilotbutton_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Pilotbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.24413362617038498);
+
+
+% --- Executes during object creation, after setting all properties.
+function mode_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to mode (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.33198743829527205);

@@ -22,7 +22,7 @@ function varargout = Algo_main(varargin)
 
 % Edit the above text to modify the response to help Algo_main
 
-% Last Modified by GUIDE v2.5 31-May-2023 22:44:38
+% Last Modified by GUIDE v2.5 03-Jun-2023 22:24:28
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -82,7 +82,6 @@ function varargout = Algo_main_OutputFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Get default command line output from handles structure
     varargout{1} = handles.output;
 
 
@@ -126,6 +125,7 @@ function Open_Callback(hObject, eventdata, handles)
 % hObject    handle to Open (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     path = openfile();
     disp(path);
 
@@ -142,6 +142,7 @@ function Close_Callback(hObject, eventdata, handles)
 % hObject    handle to Close (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     closereq();
 
 
@@ -150,6 +151,7 @@ function mode_Callback(hObject, eventdata, handles)
 % hObject    handle to mode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     if (mode_questdlg())
         global results;
         results = Results;
@@ -163,14 +165,12 @@ function mode_Callback(hObject, eventdata, handles)
     end
              
 
-
 % --- Executes during object creation, after setting all properties.
 function dataaxes_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to dataaxes (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: place code in OpeningFcn to populate dataaxes
 
 
 % --- Executes on button press in Blindbutton.
@@ -178,6 +178,7 @@ function Blindbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Blindbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     Algo_Blind_Menu();
 
 
@@ -186,7 +187,7 @@ function SBbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to SBbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%     Not support yet
+
     Algo_Semi_Blind_Menu();
 
 
@@ -195,7 +196,7 @@ function Pilotbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Pilotbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%     Not support yet
+
     Algo_Non_Blind_Menu();
     
    
@@ -206,7 +207,6 @@ function board_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: place code in OpeningFcn to populate board
     global main_path;
     axesH = hObject;  % Not safe! Better get the handle explicitly!
     axis off;
@@ -260,6 +260,7 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
     
     set(hObject, 'FontUnits', 'Normalized');
+    set(hObject, 'FontSize', 0.0969044414483497);
     set(hObject, 'ColumnName', {'Plot', 'Name', 'Output types', 'Run time'});
     global toolboxws;
     toolboxws = {};
@@ -324,6 +325,7 @@ function inter_latex_Callback(hObject, eventdata, handles)
         dispfig(true);
         results.inter = true;
     end
+
 
 % --------------------------------------------------------------------
 function inter_non_latex_Callback(hObject, eventdata, handles)
@@ -438,3 +440,53 @@ function figmode_3_Callback(hObject, eventdata, handles)
         set(hObject, configs.UI_container_Menu, 'x Separate');
         dispfig(results.inter);
     end
+
+
+% --- Executes during object creation, after setting all properties.
+function Blindbutton_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Blindbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.24413362617038498);
+
+
+% --- Executes during object creation, after setting all properties.
+function SBbutton_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to SBbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.24413362617038498);
+
+
+% --- Executes during object creation, after setting all properties.
+function Pilotbutton_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Pilotbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.24413362617038498);
+
+
+% --- Executes during object creation, after setting all properties.
+function selectmodel_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to selectmodel (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.0399502876390316);
+
+
+% --- Executes during object creation, after setting all properties.
+function mode_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to mode (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.33198743829527205);
