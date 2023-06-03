@@ -120,6 +120,7 @@ releasesysmodel();
 
 img          = imread(fullfile(main_path, '/Resource/Dashboard', params.sys_model));
 imshow(img, 'Parent', axesH);
+set(handles_main.board_title, 'String', load_title(algo));
 
 % Load interactiveness
 for i=1:params.num_params

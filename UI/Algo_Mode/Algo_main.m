@@ -22,7 +22,7 @@ function varargout = Algo_main(varargin)
 
 % Edit the above text to modify the response to help Algo_main
 
-% Last Modified by GUIDE v2.5 03-Jun-2023 22:24:28
+% Last Modified by GUIDE v2.5 04-Jun-2023 00:11:48
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -230,7 +230,7 @@ function board_CreateFcn(hObject, eventdata, handles)
     [Nafosted_sample, ~, Nafosted_sample_alpha] = imread(fullfile(main_path, '/Resource/Icon/Nafosted.png'));
 
     ax1 = subplot(3, 4, 1);
-    text(0, 0, 0, 'InSI Toolbox', 'Color', 'blue','FontSize', 20);
+%     text(0, 0, 0, 'InSI Toolbox', 'Color', 'blue','FontSize', 20);
     ax1.Position = [x_0 + width / 3, y_0 + height/1.2, width / 5, height / 5];
     axis off;
 
@@ -490,3 +490,13 @@ function mode_CreateFcn(hObject, eventdata, handles)
     
     set(hObject, 'FontUnits','normalized');
     set(hObject, 'FontSize', 0.33198743829527205);
+
+
+% --- Executes during object creation, after setting all properties.
+function board_title_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to board_title (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.5102040816326531);
