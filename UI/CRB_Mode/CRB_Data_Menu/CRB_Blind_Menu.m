@@ -22,7 +22,7 @@ function varargout = CRB_Blind_Menu(varargin)
 
 % Edit the above text to modify the response to help CRB_Blind_Menu
 
-% Last Modified by GUIDE v2.5 31-May-2023 13:49:56
+% Last Modified by GUIDE v2.5 03-Jun-2023 20:27:52
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -104,7 +104,7 @@ end
     % Set default menu to escape error when temp of menu is stored
     default = '                  Select model';
     set(hObject, 'String', default);
-    methods = load_methods(default, 'CRB_Mode', 'Blind');
+    methods = load_methods(default, 'CRB_Mode', 'UI/Algo_Mode/Algo_Data_Menu/Algo_Non_Blind_Menu.fig');
     set(hObject, 'String', methods);
 
 % --- Executes on selection change in methods.
@@ -371,8 +371,6 @@ function Monte_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-    set(hObject, 'units','pixels');
-    set(hObject, 'Position', [125, 50, 70, 20]);
 
 function Monte_Callback(hObject, eventdata, handles)
 % hObject    handle to Monte (see GCBO)
@@ -395,8 +393,6 @@ function SNR_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-    set(hObject, 'units','pixels');
-    set(hObject, 'Position', [80, 15, 90, 20]);
 
 function SNR_Callback(hObject, eventdata, handles)
 % hObject    handle to SNR (see GCBO)
@@ -593,24 +589,18 @@ function Monte_text_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to Monte_text (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-    set(hObject, 'units','pixels');
-    set(hObject, 'Position', [30, 50, 90, 20]);
 
 % --- Executes during object creation, after setting all properties.
 function SNR_text_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to SNR_text (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-    set(hObject, 'units','pixels');
-    set(hObject, 'Position', [25, 15, 45, 20]);
 
 % --- Executes during object creation, after setting all properties.
 function dB_text_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to dB_text (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-    set(hObject, 'units','pixels');
-    set(hObject, 'Position', [175, 15, 30, 20]);
 
 
 % --- Executes on button press in ref_web.

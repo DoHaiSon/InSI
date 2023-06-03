@@ -55,23 +55,24 @@ function Algo_main_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to Algo_main (see VARARGIN)
-global main_path;
-jFrame=get(handle(handles.InSI_A), 'javaframe');
-jicon=javax.swing.ImageIcon(fullfile(main_path,'/Resource/Icon/main_icon.png'));
-jFrame.setFigureIcon(jicon);
 
-% Choose default command line output for Algo_main
-handles.output = hObject;
+    global main_path;
+    jFrame=get(handle(handles.InSI_A), 'javaframe');
+    jicon=javax.swing.ImageIcon(fullfile(main_path,'/Resource/Icon/main_icon.png'));
+    jFrame.setFigureIcon(jicon);
+    
+    % Choose default command line output for Algo_main
+    handles.output = hObject;
+    
+    % Update handles structure
+    guidata(hObject, handles);
+    setappdata(0,'handles_main', handles)
+    
+    % UIWAIT makes Algo_main wait for user response (see UIRESUME)
+    % uiwait(handles.InSI_A);
 
-% Update handles structure
-guidata(hObject, handles);
-setappdata(0,'handles_main', handles)
-
-% Set position for this GUI
-movegui(hObject, 'center');
-
-% UIWAIT makes Algo_main wait for user response (see UIRESUME)
-% uiwait(handles.InSI_A);
+    % Set position for this GUI
+    movegui(hObject, 'center');
 
 
 % --- Outputs from this function are returned to the command line.
@@ -82,7 +83,7 @@ function varargout = Algo_main_OutputFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Get default command line output from handles structure
-varargout{1} = handles.output;
+    varargout{1} = handles.output;
 
 
 % --------------------------------------------------------------------
@@ -257,18 +258,24 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to toolbox_ws (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits', 'Normalized');
     set(hObject, 'ColumnName', {'Plot', 'Name', 'Output types', 'Run time'});
     global toolboxws;
     toolboxws = {};
     set(hObject, 'Data', toolboxws);
     set(hObject, 'units','pixels');
+
     set(hObject.Parent, 'units','pixels');
+    [x, y, w, h] = scale_InSI(hObject.Parent);
+    set(hObject.Parent, 'Position', [x, y, w, h]);
+
     Position_p = hObject.Parent.Position;
     set(hObject, 'Position', [0, 0, Position_p(3), Position_p(4)/4]);
 %     Set columns width when init main window
     Postion = hObject.Position;
     x_total = Postion(3);
-    x_plot     = x_total / 18;
+    x_plot     = x_total / 19;
     x_name     = x_total / 1.6;
     x_output_t = x_total / 7;
     x_runtime  = x_total / 7;
