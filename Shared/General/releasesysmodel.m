@@ -16,6 +16,15 @@ function releasesysmodel(hobject, event)
 handles_main = getappdata(0,'handles_main');
 axes(handles_main.board);   % Not safe! Better get the handle explicitly!
 
+% remove old algorithm model on the dashboard
+list_axes = findall(gcf, 'Type', 'axes');
+for axes_i = 1:length(list_axes)
+%     if (isempty(strfind(list_axes(axes_i).Units, 'normalized')))
+        cla(list_axes(axes_i));
+%     end
+end
+
+
 rect = findall(gcf, 'Type', 'Rectangle'); 
 if ~isempty(rect)
     delete(rect); 

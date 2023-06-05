@@ -225,26 +225,36 @@ function board_CreateFcn(hObject, eventdata, handles)
     hfig = figure();
     set(hfig,'position', Position);
 
-    [AVITECH_sample, ~, AVITECH_sample_alpha] = imread(fullfile(main_path, '/Resource/Icon/AVITECH.png'));
-    [Orleans_sample, ~, Orleans_sample_alpha] = imread(fullfile(main_path, '/Resource/Icon/Orleans.png'));
+    [AVITECH_sample, ~, AVITECH_sample_alpha]   = imread(fullfile(main_path, '/Resource/Icon/AVITECH.png'));
+    [Orleans_sample, ~, Orleans_sample_alpha]   = imread(fullfile(main_path, '/Resource/Icon/Orleans.png'));
     [Nafosted_sample, ~, Nafosted_sample_alpha] = imread(fullfile(main_path, '/Resource/Icon/Nafosted.png'));
+    [PRIMSE_sample, ~, PRIMSE_sample_alpha]     = imread(fullfile(main_path, '/Resource/Icon/PRISME.png'));
+    [M3_sample, ~, M3_sample_alpha]             = imread(fullfile(main_path, '/Resource/Icon/Viettel_M3.png'));
+    [UET_sample, ~, UET_sample_alpha]           = imread(fullfile(main_path, '/Resource/Icon/VNU_UET.png'));
 
-    ax1 = subplot(3, 4, 1);
-%     text(0, 0, 0, 'InSI Toolbox', 'Color', 'blue','FontSize', 20);
-    ax1.Position = [x_0 + width / 3, y_0 + height/1.2, width / 5, height / 5];
+    ax1 = subplot(6, 6, 1);
+    image(UET_sample, 'AlphaData', UET_sample_alpha);
+    ax1.Position = [x_0 + width / 4, y_0 + height / 4, width /5, height /4.3];
     axis off;
-
-    ax2 = subplot(3, 4, 5);
-    image(AVITECH_sample, 'AlphaData', AVITECH_sample_alpha);
-    ax2.Position = [x_0 + width / 25, y_0, width / 3.2, height / 3.2];
-    axis off;
-    ax3 = subplot(3, 4, 6);
+    ax2 = subplot(6, 6, 2);
     image(Orleans_sample, 'AlphaData', Orleans_sample_alpha);
-    ax3.Position = [width / 2.4, y_0 + height / 15, width / 5, height / 5];
+    ax2.Position = [x_0 + width / 1.9, y_0 + height / 4, width /5, height / 5];
     axis off;
-    ax4 = subplot(3, 4, 7);
-    ax4.Position = [width / 1.5, y_0, width / 3, height / 3];
+    ax3 = subplot(6, 6, 3);
+    image(AVITECH_sample, 'AlphaData', AVITECH_sample_alpha);
+    ax3.Position = [x_0, y_0, width / 4.2, height / 4.2];
+    axis off;
+    ax4 = subplot(6, 6, 4);
+    image(PRIMSE_sample, 'AlphaData', PRIMSE_sample_alpha);
+    ax4.Position = [x_0 + width / 4, y_0, width / 4.2, height / 4.2];
+    axis off;
+    ax5 = subplot(6, 6, 5);
+    image(M3_sample, 'AlphaData', M3_sample_alpha);
+    ax5.Position = [x_0 + width / 2.1, y_0, width / 4.2, height / 4.2];
+    axis off;
+    ax6 = subplot(6, 6, 6);
     image(Nafosted_sample, 'AlphaData', Nafosted_sample_alpha);
+    ax6.Position = [width / 1.3, y_0, width / 4.2, height / 4.2];
     axis off;
     
     ax = get(hfig,'children');
