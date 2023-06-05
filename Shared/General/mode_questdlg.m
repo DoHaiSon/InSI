@@ -24,6 +24,9 @@ switch answer
     case 'Cancel'
         confirm = false;
         return
+    otherwise
+        confirm = false;
+        return
 end
 
 end

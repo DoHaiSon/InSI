@@ -23,6 +23,8 @@ switch answer
         return
     case 'OK'
         return
+    otherwise
+        return
 end
 
 end
