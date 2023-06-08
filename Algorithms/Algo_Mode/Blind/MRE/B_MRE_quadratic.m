@@ -1,5 +1,44 @@
 function [SNR, Err] = B_MRE_quadratic(Op, Monte, SNR, Output_type)
 
+%% Quadratic Mutually Referenced Filters
+%
+%% Input:
+    % + 1. num_sq: number of samples
+    % + 2. L: number of channels
+    % + 3. M: Channel order
+    % + 4. Ch_type: Type of the channel (real, complex, specular,
+    % user's input)
+    % + 5. Mod_type: Type of modulation (Bin, QPSK, 4-QAM)
+    % + 6. N: Window size
+    % + 7. Monte: Simulation times
+    % + 8. SNR: Range of the SNR
+    % + 9. Ouput_type: SER / BER / MSE Signal
+%
+%% Output:
+    % + 1. SNR: Range of the SNR
+    % + 2. Err: Error rate
+%
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Generate input signal
+    %     X <= h^T * s + n
+    % Step 3:
+    % Step 4: MRE algorithm
+    % Step 5: Compute Error rate
+    %     Demodulate Y
+    %     Compute SER / BER / MSE Sig
+    % Step 6: Return 
+%
+% Ref: D. Gesbert, P. Duhamel and S. Mayrargue, "On-line blind 
+% multichannel equalization based on mutually referenced 
+% filters," in IEEE Transactions on Signal Processing, vol. 45, 
+% no. 9, pp. 2307-2317, Sept. 1997.
+%
+%% Require R2006A
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 17:00:00.
+
 num_sq    = Op{1};     % number of sig sequences
 L         = Op{2};     % number of the sensors
 M         = Op{3};     % length of the channel

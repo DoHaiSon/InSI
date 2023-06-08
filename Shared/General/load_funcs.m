@@ -172,8 +172,9 @@ for i = 1:params.num_params
             name_ws = strcat([name_ws ' ' params.notations{i}], ...
                 '=', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'String')));
         case 'popupmenu'
+            list_values = params.values{i};
             name_ws = strcat([name_ws ' ' params.notations{i}], ...
-                '=', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));
+                '=', list_values{Op{i}});
         case 'togglebutton'
             name_ws = strcat([name_ws ' ' params.notations{i}], ...
                 '=', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));

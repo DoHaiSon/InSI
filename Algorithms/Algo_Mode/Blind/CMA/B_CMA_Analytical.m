@@ -1,23 +1,42 @@
 function [SNR, Err] = B_CMA_Analytical(Op, Monte, SNR, Output_type)
 
-%% function [A,S,sp] = acma(X,d,d1);
+%% Analytical Constant Modulus Algorithm
 %
-% Analytical constant-modulus algorithm, to separate 
-% linear combinations of CM sources
+%% Input:
+    % + 1. N: number of samples
+    % + 2. Num_Ch: number of channels
+    % + 3. ChL: Channel order
+    % + 4. Ch_type: Type of the channel (real, complex, specular,
+    % user's input)
+    % + 5. Mod_type: Type of modulation (Bin, QPSK, 4-QAM)
+    % + 6. L: Length of the CMA filter
+    % + 7. Monte: Simulation times
+    % + 8. SNR: Range of the SNR
+    % + 9. Ouput_type: SER / BER / MSE Signal
 %
-% Given data matrix X of rank d, find factorization  
-%   W X = S, A = pinv(W), where W,S are rank d1,
-% and | S_ij | = 1, for d1 of the signals
+%% Output:
+    % + 1. SNR: Range of the SNR
+    % + 2. Err: Error rate
 %
-% d: number of sources;  d1: number of constant-modulus sources
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Generate input signal
+    %     X <= h^T * s + n
+    % Step 3: 
+    % Step 4: Analytical CMA algorithm
+    % Step 5: Compute Error rate
+    %     Demodulate Y
+    %     Compute SER / BER / MSE Sig
+    % Step 6: Return 
 %
-% sp: singular values of P (for statistics).  CM sources correspond to zero
-% singular values.
+% Ref: A. . -J. van der Veen and A. Paulraj, "An analytical 
+% constant modulus algorithm," in IEEE Transactions on Signal 
+% Processing, vol. 44, no. 5, pp. 1136-1155, May 1996.
 %
-% See IEEE Tr SP, May 1996
+%% Require R2006A
 
-%% Alle-Jan van der Veen, Stanford Univ, April 1994
-%% allejan@isl.stanford.edu,  allejan@cas.et.tudelft.nl
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 15:54:13.
 
 
 % Initialize variables

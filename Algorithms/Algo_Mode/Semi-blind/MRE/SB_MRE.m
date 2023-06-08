@@ -1,33 +1,34 @@
 function [SNR, Err] = SB_MRE(Op, Monte, SNR, Output_type)
 
-%% SEMI-BLIND CHANNEL ESTIMATION USING MRE ALGORITHM
-%
-%% Ref: 
+%% Semi-Blind Mutually Referenced Filters
 %
 %% Input:
     % + 1. num_sq: number of sample data
     % + 2. Nt: number of transmit antennas
     % + 3. Nr: number of receive antennas
     % + 4. ChL: length of the channel
-    % + 5. Ch_type: type of the channel (real, complex, specular, user' input
-    % + 6. Mod_type: type of modulation (Bin, QPSK, 4-QAM)
+    % + 5. Ch_type: type of the channel (real, complex, specular,
+    % user' input
+    % + 6. Mod_type: type of modulation (All)
     % + 7. N: window size
     % + 8. N_p: number of pilot symbols
     % + 9. lambda: Ratio between SB and B-MRE 
     % + 10. Monte: simulation times
     % + 11. SNR: range of the SNR
-    % + 12. Ouput_type: MSE Sig, MSE Ch, Error rate
+    % + 12. Ouput_type: SER / BER / MSE Signal 
 %
 %% Output:
     % + SNR: range of the SNR
-    % + SER: Symbol error rate
+    % + Err: SER / BER / MSE Signal
 %
 %% Algorithm:
     % Step 1: Initialize variables
     % Step 2: Return 
 %
+% Ref:
+
 % Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 15-May-2023 16:52:13 
+% Last Modified by Son 08-Jun-2023 16:52:13 
 
 
 % Initialize variables

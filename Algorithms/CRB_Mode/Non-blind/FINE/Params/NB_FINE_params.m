@@ -42,6 +42,9 @@ classdef NB_FINE_params
         rect_position = {0, 0, 0, 0}
         rect_linewidth = {0, 0, 0, 0}
         rect_color     = {'b', 'b', 'b', 'b'}
+
+        % Reference website
+        web_url = 'https://ieeexplore.ieee.org/abstract/document/9909530'
     end
     
     methods (Access = private)

@@ -4,16 +4,16 @@ classdef NB_FIR_params
     
     properties
         % Parameters
-        num_params = 6
-        params = {'Num. transmitters', 'Num. receivers', 'Channel order', 'Num. channels', 'Sub-carriers', 'Pilot/Data Power ratio'}
-        notations = {'Nt', 'Nr', 'L', 'M', 'K', 'ratio'}
+        num_params = 5
+        params = {'Num. transmitters', 'Num. receivers', 'Channel order', 'Sub-carriers', 'Pilot/Data Power ratio'}
+        notations = {'Nt', 'Nr', 'L', 'K', 'ratio'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
         %                        button      = 3
-        params_type = [1, 1, 1, 1, 1, 1]
-        values = {2, 16, 4, 2, 64, 0.3}
-        default_values = {2, 16, 4, 2, 64, 0.3}
+        params_type = [1, 1, 1, 1, 1]
+        values = {2, 16, 4, 64, 0.3}
+        default_values = {2, 16, 4, 64, 0.3}
         
         % Default SNR and Monte
         default_Monte = 10
@@ -37,11 +37,14 @@ classdef NB_FIR_params
         color     = 'k'
         
         % Triggers/Flags
-        has_inter     = [true, true, false, false, false, false]
+        has_inter     = [true, true, false, false, false]
         rect = {}
-        rect_position = {[5 290 60 60], [1025 620 60 60], 0, 0, 0, 0}
-        rect_linewidth = {2, 2, 0, 0, 0, 0}
-        rect_color     = {'b', 'r', 'b', 'b', 'b', 'b'}
+        rect_position = {[5 290 60 60], [1025 620 60 60], 0, 0, 0}
+        rect_linewidth = {2, 2, 0, 0, 0}
+        rect_color     = {'b', 'r', 'b', 'b', 'b'}
+
+        % Reference website
+        web_url = ''
     end
     
     methods (Access = private)

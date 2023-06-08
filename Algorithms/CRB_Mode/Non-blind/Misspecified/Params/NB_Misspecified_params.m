@@ -5,7 +5,7 @@ classdef NB_Misspecified_params
     properties
         % Parameters
         num_params = 5
-        params = {'Num. transmitters', 'Num. receivers', 'Ltr', 'Lpt', 'K'}
+        params = {'Num. transmitters', 'Num. receivers', 'True Channel order', 'Misspecified Channel order', 'Unknown data blocks'}
         notations = {'Nt', 'Nr', 'Ltr', 'Lpt', 'K'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
@@ -42,6 +42,9 @@ classdef NB_Misspecified_params
         rect_position = {[5 290 60 60], [1025 620 60 60], 0, 0, 0}
         rect_linewidth = {2, 2, 0, 0, 0}
         rect_color     = {'b', 'r', 'b', 'b', 'b'}
+
+        % Reference website
+        web_url = 'https://ieeexplore.ieee.org/abstract/document/9537597'
     end
     
     methods (Access = private)

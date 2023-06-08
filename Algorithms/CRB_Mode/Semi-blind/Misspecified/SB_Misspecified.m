@@ -1,5 +1,33 @@
 function [SNR, Err] = SB_Misspecified (Op, Monte, SNR)
 
+%% Semi-Blind Misspecified Cramer–Rao bound
+%
+%% Input:
+    % + 1. N_t: number of transmit antennas
+    % + 2. N_r: number of receive antennas
+    % + 3. L_tr: True Channel Order
+    % + 4. L_pt: Misspecified Channel Order
+    % + 5. K: Number of Unknown data Blocks
+    % + 6. Monte: simulation times
+    % + 7. SNR: range of the SNR
+%
+%% Output:
+    % + SNR: range of the SNR
+    % + Err: CRB
+%
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Return 
+%
+% Ref: L. T. Thanh, K. Abed-Meraim and N. L. Trung, "Misspecified
+% Cramer–Rao Bounds for Blind Channel Estimation Under Channel
+% Order Misspecification," in IEEE Transactions on Signal
+% Processing, vol. 69, pp. 5372-5385, 2021.
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 16:52:13 
+
+
 % Initialize variables
 N_t  = Op{1};    % number of transmit antennas
 N_r  = Op{2};    % number of receive antennas

@@ -1,23 +1,22 @@
 function [SNR, Err] = NB_MMSE_OFDM(Op, Monte, SNR, Output_type)
 
-%% [SNR, Err] = NB_MMSE_OFDM(Op, Monte, SNR, Output_type). MMSE (Minimum Mean Square Error)
-%
-%% Ref: Yong Soo Cho, Jaekwon Kim, Won Young Yang, Chung G. Kang, "Channel Estimation," 
-% in MIMO‐OFDM Wireless Communications with MATLAB, John Wiley & Sons, Ltd, pp. 187-207, 2010. 
+%% Minimum Mean Square Error - OFDM
 %
 %% Input:
     % 1. Nfft: number of Occ carriers
     % 2. Pilot_L: number of pilot symbols
     % 3. ChL: length of the channel
-    % 4. Ch_type: type of the channel (real, complex, specular, user' input)
-    % 5. Mod_type: type of modulation (Bin, QPSK, 4-QAM)
+    % 4. Ch_type: type of the channel (real, complex, specular, 
+    % user's input)
+    % 5. Mod_type: type of modulation (All)
     % 6. Monte: simulation times
     % 7. SNR: range of the SNR
-    % 8. Ouput_type: MSE Sig, MSE Ch, Error rate
+    % 8. Ouput_type: SER / BER / MSE Signal / MSE Channel
 %
 %% Output:
     % 1. SNR: range of the SNR
-    % 2. SER: Symbol error rate / MSE H_est
+    % 2. SER: SER / BER / MSE Signal / MSE Channel
+%
 %% Algorithm:
     % Step 1: Initialize variables
     % Step 2: Generate input signal
@@ -26,13 +25,17 @@ function [SNR, Err] = NB_MMSE_OFDM(Op, Monte, SNR, Output_type)
     %     H_est <= Y_pilot ./ X_pilot
     % Step 4: Equalization
     %     X <= Y ./ H_est
-    % Step 5: Compute Symbol Error rate
+    % Step 5: Compute Error rate
     %     Demodulate Y
-    %     Compate elements in two array init data and Demodulated signal
+    %     Compute SER / BER / MSE Signal / MSE Channel
     % Step 6: Return 
 %
-%% Author: Montadar Abas Taher
-%% Last Modified by Son 16-May-2023 22:52:13 
+% Ref: Yong Soo Cho, Jaekwon Kim, Won Young Yang, Chung G. Kang, 
+% "Channel Estimation," in MIMO‐OFDM Wireless Communications 
+% with MATLAB, John Wiley & Sons, Ltd, pp. 187-207, 2010. 
+
+% Author: Montadar Abas Taher
+% Last Modified by Son 08-Jun-2023 22:52:13 
 
 
 % Initialize variables

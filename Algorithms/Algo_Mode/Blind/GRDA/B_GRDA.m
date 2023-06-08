@@ -1,12 +1,43 @@
 function [SNR, Err] = B_GRDA(Op, Monte, SNR, Output_type)
-% function [gmin,gmax]=GRDA(c,Rshift,m)
-%        [gmin,gmax]=GRDA(c,Rshift,m) : l-taps Eqzer
-% version de IEEESP
-% Rshift : correlation (c*l)-square ST-format
-%          l : longeur du egalizeur
-% m : ordre de canal,  Eventuellement over estimated
-% gmin/gmax ZF equalizers 0(min) delay et m+l(max) delay
-% tous les deux choisis selon EPC
+
+%% GRDA
+%
+%% Input:
+    % + 1. num_sq: number of samples
+    % + 2. L: number of channels
+    % + 3. M: Channel order
+    % + 4. Ch_type: Type of the channel (real, complex, specular,
+    % user's input)
+    % + 5. Mod_type: Type of modulation (All)
+    % + 6. N: Window size
+    % + 7. Monte: Simulation times
+    % + 8. SNR: Range of the SNR
+    % + 9. Ouput_type: SER / BER / MSE Signal
+%
+%% Output:
+    % + 1. SNR: Range of the SNR
+    % + 2. Err: Error rate
+%
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Generate input signal
+    %     X <= h^T * s + n
+    % Step 3: 
+    % Step 4: GRDA algorithm
+    % Step 5: Compute Error rate
+    %     Demodulate Y
+    %     Compute SER / BER / MSE Sig
+    % Step 6: Return 
+%
+% Ref: H. Gazzah, P. A. Regalia, J. . -P. Delmas, and 
+% K. Abed-Meraim, "A blind multichannel identification algorithm
+% robust to order overestimation," in IEEE Transactions on Signal
+% Processing, vol. 50, no. 6, pp. 1449-1458, Jun. 2002.
+%
+%% Require R2006A
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 15:54:13.
 
 
 num_sq    = Op{1};     % number of sig sequences

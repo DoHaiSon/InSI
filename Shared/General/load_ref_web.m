@@ -14,6 +14,10 @@ function [] = load_ref_web()
 global params;
 
 try
+    if (strcmp(params.web_url, ''))
+        disp('This algorithm does not have any reference paper.');
+        return
+    end
     web_url = params.web_url;
     web(web_url, '-browser');
 catch 

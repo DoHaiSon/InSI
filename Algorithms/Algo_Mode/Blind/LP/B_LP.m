@@ -1,17 +1,40 @@
 function [SNR, Err] = B_LP(Op, Monte, SNR, Output_type)
-% estimation of source signals using linear prediction method
+
+%% Linear Prediction
 %
-% SYNTAXE est_source = fpl(sig_cap, sig_source, N, M, q, T, alpha);
+%% Input:
+    % + 1. num_sq: number of samples
+    % + 2. L: number of channels
+    % + 3. M: Channel order
+    % + 4. Ch_type: Type of the channel (real, complex, specular,
+    % user's input)
+    % + 5. Mod_type: Type of modulation (All)
+    % + 6. N: Window size
+    % + 7. Monte: Simulation times
+    % + 8. SNR: Range of the SNR
+    % + 9. Ouput_type: SER / BER / MSE Signal
 %
-% sig_cap : T x q observation matrix
-% sig_source : (T+M) x 1 source signal vector
-% N : window length
-% M : channel degree
-% q : number of channels
-% T : number of observation
-% alpha : alphabet
+%% Output:
+    % + 1. SNR: Range of the SNR
+    % + 2. Err: Error rate
 %
-% est_source : estimate of the source signal vector
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Generate input signal
+    %     X <= h^T * s + n
+    % Step 3: 
+    % Step 4: LP algorithm
+    % Step 5: Compute Error rate
+    %     Demodulate Y
+    %     Compute SER / BER / MSE Sig
+    % Step 6: Return 
+%
+% Ref:
+%
+%% Require R2006A
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 15:54:13.
 
 
 num_sq    = Op{1};     % number of sig sequences

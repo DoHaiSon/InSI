@@ -42,6 +42,9 @@ classdef SB_Specular_params
         rect_position = {[5 290 60 60], [1025 620 60 60], 0, 0, 0, 0}
         rect_linewidth = {2, 2, 0, 0, 0, 0}
         rect_color     = {'b', 'r', 'b', 'b', 'b', 'b'}
+
+        % Reference website
+        web_url = 'https://ieeexplore.ieee.org/document/9723265'
     end
     
     methods (Access = private)

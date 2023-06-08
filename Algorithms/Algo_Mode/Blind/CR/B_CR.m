@@ -1,11 +1,41 @@
 function [SNR, Err] = B_CR(Op, Monte, SNR, Output_type)
 
-% SYNTAXE: est_can=fcr(sig_cap,M);
+%% Cross-relations
 %
-% est_can : estimateur du canal de transmission
+%% Input:
+    % + 1. num_sq: number of samples
+    % + 2. L: number of channels
+    % + 3. M: Channel order
+    % + 4. Ch_type: Type of the channel (real, complex, specular,
+    % user's input)
+    % + 5. Mod_type: Type of modulation (All)
+    % + 6. Monte: Simulation times
+    % + 7. SNR: Range of the SNR
+    % + 8. Ouput_type: MSE Channel
 %
-% sig_cap: observations T x q
-% M : degres des filtres
+%% Output:
+    % + 1. SNR: Range of the SNR
+    % + 2. Err: MSE Channel
+%
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Generate input signal
+    %     X <= h^T * s + n
+    % Step 3: 
+    % Step 4: CR algorithm
+    % Step 5: Compute MSE Channel
+    % Step 6: Return 
+%
+% Ref: Hui Liu, Guanghan Xu and Lang Tong, "A deterministic 
+% approach to blind identification of multi-channel FIR systems,"
+% in IEEE International Conference on Acoustics, Speech and 
+% Signal Processing (ICASSP), Adelaide, SA, Australia, Apr. 1994.
+%
+%% Require R2006A
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 16:13:00.
+
 
 num_sq    = Op{1};     % number of sig sequences
 L         = Op{2};     % number of the sensors

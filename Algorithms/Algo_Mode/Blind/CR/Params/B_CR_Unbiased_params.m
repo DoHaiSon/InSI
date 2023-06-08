@@ -43,6 +43,9 @@ classdef B_CR_Unbiased_params
         rect_position = {[1 193 105 65], 0, 0, 0, [810 645 30 30]}
         rect_linewidth = {2, 0, 0, 0, 2}
         rect_color     = {'b', 'b', 'b', 'b', 'r'}        
+
+        % Reference website
+        web_url = ''
     end
     
     methods (Access = private)

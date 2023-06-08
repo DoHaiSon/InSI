@@ -43,7 +43,10 @@ classdef B_CS_MNS_params
         rect = {}
         rect_position = {[1 193 105 65], 0, 0, 0, [810 645 30 30], 0}
         rect_linewidth = {2, 0, 0, 0, 2, 0}
-        rect_color     = {'b', 'b', 'b', 'b', 'r', 'b'}        
+        rect_color     = {'b', 'b', 'b', 'b', 'r', 'b'}      
+
+        % Reference website
+        web_url = ''
     end
     
     methods (Access = private)

@@ -1,5 +1,30 @@
 function [SNR, Err] = SB_FIR (Op, Monte, SNR)
 
+%% Semi-Blind Finite Impulse Response
+%
+%% Input:
+    % + 1. Nt: number of transmit antennas
+    % + 2. Nr: number of receive antennas
+    % + 3. L: channel order
+    % + 4. M: number of multi-paths
+    % + 5. K: OFDM subcarriers
+    % + 6. ratio: Pilot/Data Power ratio
+    % + 7. Monte: simulation times
+    % + 8. SNR: range of the SNR
+%
+%% Output:
+    % + SNR: range of the SNR
+    % + Err: CRB
+%
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Return 
+%
+% Ref:
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 16:52:13 
+
 % Initialize variables
 Nt  = Op{1};    % number of transmit antennas
 Nr  = Op{2};    % number of receive antennas

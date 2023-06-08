@@ -1,19 +1,38 @@
 function [SNR, Err] = B_CS_OMNS(Op, Monte, SNR, Output_type)
 
-% calcule un estimateur des coefficients des H par la methode MNS.
-% syntaxe: est_can= forth_space(can,Mat_ins,q,p,N,M)
+%% OMNS Channel Subspace
 %
-% Input:
-%          can: coeff exacts des H (on considere le p)
-%          Mat_ins = Matrice contenant des vectors orthogonales  
-%          q = nombre de H
-%          p = nb. d'entree 
-%          N = taille du snapshot (i.e., nombre de decalage temporels)
-%          pour chaque H
-%          M = degre des polynomes associes aux H 
+%% Input:
+    % + 1. num_sq: number of samples
+    % + 2. L: number of channels
+    % + 3. M: Channel order
+    % + 4. Ch_type: Type of the channel (real, complex, specular,
+    % user's input)
+    % + 5. Mod_type: Type of modulation (All)
+    % + 6. Monte: Simulation times
+    % + 7. SNR: Range of the SNR
+    % + 8. Ouput_type: MSE Channel
 %
-% Output:
-%          est_can = coefficients estimes des H (qX(M+1)) Xp)
+%% Output:
+    % + 1. SNR: Range of the SNR
+    % + 2. Err: MSE Channel
+%
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Generate input signal
+    %     X <= h^T * s + n
+    % Step 3: 
+    % Step 4: CS algorithm
+    % Step 5: Compute MSE Channel
+    % Step 6: Return 
+%
+% Ref: 
+%
+%% Require R2006A
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 16:13:00.
+
 
 num_sq    = Op{1};     % number of sig sequences
 L         = Op{2};     % number of the sensors

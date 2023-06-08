@@ -42,7 +42,10 @@ classdef NB_ZF_params
         rect = {}
         rect_position = {0, 0, 0, 0, 0, 0}
         rect_linewidth = {0, 0, 0, 0, 0, 0}
-        rect_color     = {'b', 'b', 'b', 'b', 'b', 'b'}        
+        rect_color     = {'b', 'b', 'b', 'b', 'b', 'b'} 
+
+        % Reference website
+        web_url = 'https://www.sharetechnote.com/html/Communication_ChannelModel_ZF.html'
     end
     
     methods (Access = private)

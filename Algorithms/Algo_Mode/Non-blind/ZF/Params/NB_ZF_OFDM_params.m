@@ -42,7 +42,10 @@ classdef NB_ZF_OFDM_params
         rect = {}
         rect_position = {0, 0, 0, 0, 0}
         rect_linewidth = {0, 0, 0, 0, 0}
-        rect_color     = {'b', 'b', 'b', 'b', 'b'}        
+        rect_color     = {'b', 'b', 'b', 'b', 'b'}     
+
+        % Reference website
+        web_url = 'https://ieeexplore.ieee.org/book/5675894'
     end
     
     methods (Access = private)

@@ -1,5 +1,34 @@
 function [SNR, Err] = NB_Specular (Op, Monte, SNR)
 
+%% Specular / Parametric
+%
+%% Input:
+    % + 1. Nt: number of transmit antennas
+    % + 2. Nr: number of receive antennas
+    % + 3. L: channel order
+    % + 4. M: number of multi-paths
+    % + 5. K: OFDM subcarriers
+    % + 6. ratio: Pilot/Data Power ratio
+    % + 7. Monte: simulation times
+    % + 8. SNR: range of the SNR
+%
+%% Output:
+    % + SNR: range of the SNR
+    % + Err: CRB
+%
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Return 
+%
+% Ref: O. Rekik, A. Mokraoui, T. T. Thuy Quynh, T. -T. Le and 
+% K. Abed-Meraim, "Side Information Effect on Semi-Blind Channel
+% Identification for MIMO-OFDM Communications Systems," in 55th
+% Asilomar Conference on Signals, Systems, and Computers,
+% Pacific Grove, CA, USA, 2021, pp. 443-448.
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 16:52:13 
+
 % Initialize variables
 Nt  = Op{1};    % number of transmit antennas
 Nr  = Op{2};    % number of receive antennas

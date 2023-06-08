@@ -1,5 +1,32 @@
 function [SNR, Err] = NB_FINE (Op, Monte, SNR)
 
+%% Fisher Information Neural Estimation
+%
+%% Input:
+    % + 1. data_size: number of sample data
+    % + 2. delta_arr: number of transmit antennas
+    % + 3. Epochs: number of receive antennas
+    % + 4. lr: length of the channel
+    % + 5. Monte: simulation times
+    % + 6. SNR: range of the SNR
+%
+%% Output:
+    % + SNR: range of the SNR
+    % + Err: CRB
+%
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Return 
+%
+% Ref: T. T. Duy, L. V. Nguyen, V. -D. Nguyen, N. L. Trung, and 
+% K. Abed-Meraim, "Fisher Information Neural Estimation," in 30th
+% European Signal Processing Conference (EUSIPCO), Belgrade,
+% Serbia, 2022, pp. 2111-2115.
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 16:52:13 
+
+
 % Initialize variables
 data_size  = Op{1};    % Data size
 delta_arr  = Op{2};    % delta

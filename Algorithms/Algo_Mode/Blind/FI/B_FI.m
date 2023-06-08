@@ -1,5 +1,40 @@
 function [SNR, Err] = B_FI(Op, Monte, SNR, Output_type)
 
+%% Fisher Information
+%
+%% Input:
+    % + 1. num_sq: number of samples
+    % + 2. L: number of channels
+    % + 3. M: Channel order
+    % + 4. Ch_type: Type of the channel (real, complex, specular,
+    % user's input)
+    % + 5. Mod_type: Type of modulation (All)
+    % + 6. N: Window length
+    % + 7. Monte: Simulation times
+    % + 8. SNR: Range of the SNR
+    % + 9. Ouput_type: MSE Channel
+%
+%% Output:
+    % + 1. SNR: Range of the SNR
+    % + 2. Err: MSE Channel
+%
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Generate input signal
+    %     X <= h^T * s + n
+    % Step 3: 
+    % Step 4: FI algorithm
+    % Step 5: Compute MSE Channel
+    % Step 6: Return 
+%
+% Ref: 
+%
+%% Require R2006A
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 16:13:00.
+
+
 num_sq    = Op{1};     % number of sig sequences
 L         = Op{2};     % number of the sensors
 M         = Op{3};     % length of the channel 
@@ -16,7 +51,6 @@ modulation = {'Bin', 'QPSK', 'QAM4', 'QAM16', 'QAM64', 'QAM128', 'QAM256'};
 
 res_b     = [];
 for monte = 1:Monte
-%     fprintf('------------------------------------------------------------\nExperience No %d \n', monte); 
 
     %% Generate channel
     H         = Generate_channel(L, M, Ch_type);

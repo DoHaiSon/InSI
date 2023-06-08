@@ -1,44 +1,50 @@
 function [SNR, Err] = B_CMA_Grad(Op, Monte, SNR, Output_type)
 
-%% Constant modulus algorithm
-%
-%% Ref: J. Treichler and B. Agee, "A new approach to multipath correction of constant modulus signals," in IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 31, no. 2, pp. 459-472, 1983.
+%% Constant Modulus Algorithm
 %
 %% Input:
-    % + N: number of sample data
-    % + ChL: length of the channel
-    % + Ch_type: type of the channel (real, complex, specular, user' input)
-    % + Mod_type: type of modulation (Bin, QPSK, 4-QAM)
-    % + mu: step size
-    % + L: length of the CMA filter
-    % + Monte: simulation times
-    % + SNR: range of the SNR
-    % + Ouput_type: MSE Sig, MSE Ch, Error rate
+    % + 1. N: number of samples
+    % + 2. Num_Ch: number of channels
+    % + 3. ChL: Channel order
+    % + 4. Ch_type: Type of the channel (real, complex, specular,
+    % user's input)
+    % + 5. Mod_type: Type of modulation (Bin, QPSK, 4-QAM)
+    % + 6. mu: Step size
+    % + 7. L: Length of the CMA filter
+    % + 8. Monte: Simulation times
+    % + 9. SNR: Range of the SNR
+    % + 10. Ouput_type: SER / BER / MSE Signal
 %
 %% Output:
-    % + SNR: range of the SNR
-    % + SER: Symbol error rate
+    % + 1. SNR: Range of the SNR
+    % + 2. Err: Error rate
 %
 %% Algorithm:
     % Step 1: Initialize variables
     % Step 2: Generate input signal
     %     X <= h^T * s + n
     % Step 3: Initialize CMA FIR
-    %     W <= randn(L, 1)
-	%	  W <= W/norm(W)
+    %     W <= [0, 0, ..., 1, ..., 0]
     % Step 4: CMA algorithm
     %     repeat
     %         y(k)   <= x^T(k) * W(k)
-    %         W(k+1) <= W(k) - mu * (|y(k)|^2 - 1)* y_k * conj(x(k))
+    %         W(k+1) <= W(k) - mu*(|y(k)|^2 - 1)* y_k*conj(x(k))
     %         Y      <= [Y y(k)]
     %     util end of the input
-    % Step 5: Compute Symbol Error rate
+    % Step 5: Compute Error rate
     %     Demodulate Y
-    %     Compate elements in two array init data and Demodulated signal
-    % Step 7: Return 
+    %     Compute SER / BER / MSE Sig
+    % Step 6: Return 
 %
+% Ref: J. Treichler and B. Agee, "A new approach to multipath 
+% correction of constant modulus signals," in IEEE Transactions 
+% on Acoustics, Speech, and Signal Processing, vol. 31, no. 2, 
+% pp. 459-472, Apr. 1983.
+%
+%% Require R2006A
+
 % Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 22-Oct-2021 12:52:13 
+% Last Modified by Son 08-Jun-2023 15:54:13.
 
 
 % Initialize variables

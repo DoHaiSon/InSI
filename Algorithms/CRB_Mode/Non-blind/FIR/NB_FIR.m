@@ -1,12 +1,36 @@
 function [SNR, Err] = NB_FIR (Op, Monte, SNR)
 
+%% Finite Impulse Response
+%
+%% Input:
+    % + 1. Nt: number of transmit antennas
+    % + 2. Nr: number of receive antennas
+    % + 3. L: channel order
+    % + 4. K: OFDM subcarriers
+    % + 5. ratio: Pilot/Data Power ratio
+    % + 6. Monte: simulation times
+    % + 7. SNR: range of the SNR
+%
+%% Output:
+    % + SNR: range of the SNR
+    % + Err: CRB
+%
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Return 
+%
+% Ref:
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 16:52:13 
+
+
 % Initialize variables
 Nt  = Op{1};    % number of transmit antennas
 Nr  = Op{2};    % number of receive antennas
 L   = Op{3};    % channel order
-M   = Op{4};    % Number of multipaths 
-K   = Op{5};    % OFDM subcarriers
-ratio = Op{6};  % Pilot/Data Power ratio
+K   = Op{4};    % OFDM subcarriers
+ratio = Op{5};  % Pilot/Data Power ratio
 
 Monte   = Monte;
 SNR     = SNR;

@@ -1,14 +1,37 @@
 function [SNR, Err] = B_OP(Op, Monte, SNR, Output_type)
 
-%        h=OP(L,R)
-% outer product decomposition
-% returned solution is ST format
-% R                 is ST format
-%    (estimee) matrice de correlation
-%    dimension L*(m+1)
-% m : ordre canal
-% L : nb de capteur
-% h : estimee canal
+%% OP
+%
+%% Input:
+    % + 1. num_sq: number of samples
+    % + 2. L: number of channels
+    % + 3. M: Channel order
+    % + 4. Ch_type: Type of the channel (real, complex, specular,
+    % user's input)
+    % + 5. Mod_type: Type of modulation (All)
+    % + 6. Monte: Simulation times
+    % + 7. SNR: Range of the SNR
+    % + 8. Ouput_type: MSE Channel
+%
+%% Output:
+    % + 1. SNR: Range of the SNR
+    % + 2. Err: MSE Channel
+%
+%% Algorithm:
+    % Step 1: Initialize variables
+    % Step 2: Generate input signal
+    %     X <= h^T * s + n
+    % Step 3: 
+    % Step 4: OP algorithm
+    % Step 5: Compute MSE Channel
+    % Step 6: Return 
+%
+% Ref: 
+%
+%% Require R2006A
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 16:13:00.
 
 num_sq    = Op{1};     % number of sig sequences
 L         = Op{2};     % number of the sensors

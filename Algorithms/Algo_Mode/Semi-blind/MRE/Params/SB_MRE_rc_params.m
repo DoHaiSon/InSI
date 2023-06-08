@@ -43,6 +43,9 @@ classdef SB_MRE_rc_params
         rect_position = {[1 193 105 65], 0, 0, 0, 0, [810 645 30 30], [405 355 45 45], 0, 0}
         rect_linewidth = {2, 0, 0, 0, 0, 2, 2, 0, 0}
         rect_color     = {'b', 'b', 'b', 'b', 'r', 'g', 'g', 'b', 'b'}       
+
+        % Reference website
+        web_url = ''
     end
     
     methods (Access = private)

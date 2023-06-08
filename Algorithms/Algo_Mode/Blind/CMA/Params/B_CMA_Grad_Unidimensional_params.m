@@ -42,7 +42,10 @@ classdef B_CMA_Grad_Unidimensional_params
         rect = {}
         rect_position = {[1 193 105 65], 0, 0, 0, 0, [405 355 45 45]}
         rect_linewidth = {2, 0, 0, 0, 0, 2}
-        rect_color     = {'b', 'b', 'b', 'b', 'r', 'g'}       
+        rect_color     = {'b', 'b', 'b', 'b', 'r', 'g'}    
+
+        % Reference website
+        web_url = ''
     end
     
     methods (Access = private)

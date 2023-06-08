@@ -1,21 +1,22 @@
 function [SNR, Err] = NB_MMSE(Op, Monte, SNR, Output_type)
 
-% MMSE (Minimum Mean Square Error)
-% Ref: https://www.sharetechnote.com/html/Communication_ChannelModel_MMSE.html
+%% Minimum Mean Square Error
+%
 %% Input:
     % + 1. num_sq: number of sample data
     % + 2. Nt: number of transmit antennas
     % + 3. Nr: number of receive antennas
     % + 4. ChL: length of the channel
-    % + 5. Ch_type: type of the channel (real, complex, specular, user' input
-    % + 6. Mod_type: type of modulation (Bin, QPSK, 4-QAM)
+    % + 5. Ch_type: type of the channel (real, complex, specular,
+    % user's input
+    % + 6. Mod_type: type of modulation (All)
     % + 7. Monte: simulation times
     % + 8. SNR: range of the SNR
-    % + 9. Ouput_type: MSE Sig, Error rate
+    % + 9. Ouput_type: SER / BER / MSE Signal
 %
 %% Output:
     % 1. SNR: range of the SNR
-    % 2. SER: Symbol error rate / MSE H_est
+    % 2. Err: SER / BER / MSE Signal
 %
 %% Algorithm:
     % Step 1: Initialize variables
@@ -25,13 +26,15 @@ function [SNR, Err] = NB_MMSE(Op, Monte, SNR, Output_type)
     %     H_est <= Y_pilot ./ X_pilot
     % Step 4: Equalization
     %     X <= Y ./ H_est
-    % Step 5: Compute Symbol Error rate
+    % Step 5: Compute Compute Error rate
     %     Demodulate Y
-    %     Compate elements in two array init data and Demodulated signal
+    %     Compute SER / BER / MSE Signal
     % Step 6: Return 
 %
-%% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-%% Last Modified by Son 15-May-2023 17:00:13 
+% Ref: https://www.sharetechnote.com/html/Communication_ChannelModel_ZF.html
+
+% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
+% Last Modified by Son 08-Jun-2023 18:00:13 
 
 
 % Initialize variables
