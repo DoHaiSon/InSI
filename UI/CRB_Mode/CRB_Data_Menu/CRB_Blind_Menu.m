@@ -22,7 +22,7 @@ function varargout = CRB_Blind_Menu(varargin)
 
 % Edit the above text to modify the response to help CRB_Blind_Menu
 
-% Last Modified by GUIDE v2.5 03-Jun-2023 22:55:39
+% Last Modified by GUIDE v2.5 09-Jun-2023 17:07:59
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -687,7 +687,7 @@ function Text_2_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
     set(hObject, 'FontUnits','normalized');
-    set(hObject, 'FontSize', 0.6532258064516138);
+    set(hObject, 'FontSize', 0.7061900610287699);
 
 
 % --- Executes during object creation, after setting all properties.

@@ -687,7 +687,7 @@ function Text_2_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
     set(hObject, 'FontUnits','normalized');
-    set(hObject, 'FontSize', 0.6532258064516138);
+    set(hObject, 'FontSize', 0.7061900610287699);
 
 
 % --- Executes during object creation, after setting all properties.
