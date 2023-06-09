@@ -56,6 +56,17 @@ end
 for i=1:params.num_params
     % Cat params and notation to Op Label
     Label = [params.params{i} ' (' params.notations{i} ')'];
+    if (strcmp(mode, 'CRB_mode'))
+        font_size = eval(strcat('configs.max_Op_text_CRB.Op_', num2str(i)));
+    else
+        font_size = eval(strcat('configs.max_Op_text_Algo.Op_', num2str(i)));
+    end
+
+    if (length(Label) > configs.max_Op_text)
+        set(eval(strcat('handles.Text_', num2str(i))), 'FontSize', font_size * (configs.max_Op_text / length(Label)));
+    else
+        set(eval(strcat('handles.Text_', num2str(i))), 'FontSize', font_size);
+    end
 
     set(eval(strcat('handles.Text_', num2str(i))), 'String', Label);
 end
@@ -120,7 +131,15 @@ releasesysmodel();
 
 img          = imread(fullfile(main_path, '/Resource/Dashboard', params.sys_model));
 imshow(img, 'Parent', axesH);
-set(handles_main.board_title, 'String', load_title(algo));
+title_dashboard = load_title(algo);
+
+if length(title_dashboard) > configs.max_title_dashboard
+    set(handles_main.board_title, 'FontSize', 0.5102040816326531 * (configs.max_title_dashboard / length(title_dashboard)) );
+else
+    set(handles_main.board_title, 'FontSize', 0.5102040816326531);
+end
+set(handles_main.board_title, 'String', title_dashboard);
+
 
 % Load interactiveness
 for i=1:params.num_params
