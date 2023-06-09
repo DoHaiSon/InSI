@@ -6,7 +6,7 @@ classdef Configs_R16
         UI_container_Menu = 'Label'
         max_params = 10
         max_title_dashboard = 45
-        max_Op_text = 17
+        max_Op_text = 16
 
         max_Op_text_CRB = struct('Op_1', 0.7061900610287699, ...
                                  'Op_2', 0.6532258064516138, ...
