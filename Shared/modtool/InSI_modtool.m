@@ -61,9 +61,9 @@ switch mode
         ind = strfind(function_main, 'flag');
         function_main_tmp1   = function_main(1:ind-1);
         function_main_tmp2   = function_main(ind + params_set('flag'):end);
-        tmp = ['' newline];
+        tmp = ['' sprintf('\n')];
         for i=1:num_params
-            tmp = [tmp strcat('var_', num2str(i), ' = Op{', num2str(i), '};') ' % ' params{i} newline];
+            tmp = [tmp strcat('var_', num2str(i), ' = Op{', num2str(i), '};') ' % ' params{i} sprintf('\n')];
         end
         function_main      = [function_main_tmp1 ' ' tmp function_main_tmp2];
 
@@ -213,9 +213,9 @@ switch mode
         ind = strfind(function_main, 'flag');
         function_main_tmp1   = function_main(1:ind-1);
         function_main_tmp2   = function_main(ind + params_set('flag'):end);
-        tmp = ['' newline];
+        tmp = ['' sprintf('\n')];
         for i=1:num_params
-            tmp = [tmp strcat('var_', num2str(i), ' = Op{', num2str(i), '};') ' % ' params{i} newline];
+            tmp = [tmp strcat('var_', num2str(i), ' = Op{', num2str(i), '};') ' % ' params{i} sprintf('\n')];
         end
         function_main      = [function_main_tmp1 ' ' tmp function_main_tmp2];
 
