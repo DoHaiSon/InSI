@@ -1,6 +1,6 @@
 function init_results()
 
-%% ~ = init_modtool():  Initialize figure of output.
+%% ~ = init_results():  Initialize figure of output.
 %
 %% Input: None
 %

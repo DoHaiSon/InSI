@@ -1,5 +1,7 @@
 function [SNR, Err] = function_main(Op, Monte, SNR, Output_type)
 
+% Modtool algorithm
+
 % Initialize variables
 flag  
 

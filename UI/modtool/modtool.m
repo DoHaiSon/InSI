@@ -22,9 +22,7 @@ function varargout = modtool(varargin)
 
 % Edit the above text to modify the response to help modtool
 
-% Last Modified by GUIDE v2.5 04-Nov-2022 14:18:26
-%% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-%% Last Modified by Son 04-Nov-2022 14:18:26
+% Last Modified by GUIDE v2.5 12-Jun-2023 13:56:57
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,25 +52,29 @@ function modtool_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to modtool (see VARARGIN)
 
-% Choose default command line output for modtool
-handles.output = hObject;
+    % Choose default command line output for modtool
+    handles.output = hObject;
+    
+    % Update handles structure
+    guidata(hObject, handles);
+    
+    movegui(hObject, 'center');
+    
+    % UIWAIT makes modtool wait for user response (see UIRESUME)
+    % uiwait(handles.InSI_modtool);
 
-% Update handles structure
-guidata(hObject, handles);
-
-% UIWAIT makes modtool wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
-
-
+    init_modtool();
+    
+    
 % --- Outputs from this function are returned to the command line.
 function varargout = modtool_OutputFcn(hObject, eventdata, handles) 
-% varargout  cell array for returning output args (see VARARGOUT);
-% hObject    handle to figure
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Get default command line output from handles structure
-varargout{1} = handles.output;
+    % varargout  cell array for returning output args (see VARARGOUT);
+    % hObject    handle to figure
+    % eventdata  reserved - to be defined in a future version of MATLAB
+    % handles    structure with handles and user data (see GUIDATA)
+    
+    % Get default command line output from handles structure
+    varargout{1} = handles.output;
 
 
 % --- Executes on button press in next_button.
@@ -170,6 +172,9 @@ function next_button_Callback(hObject, eventdata, handles)
         % name
         modtool_inputs.params{state} = get(handles.param_name, 'String');
 
+        % notation
+        modtool_inputs.notations{state} = get(handles.param_notation, 'String');
+
         % input_type
         edit_type   = get(handles.input_type_edit,   'Value');
         popup_type  = get(handles.input_type_popup,  'Value');
@@ -222,20 +227,20 @@ function next_button_Callback(hObject, eventdata, handles)
         modtool_inputs.state = modtool_inputs.state + 1;
         state                = modtool_inputs.state;
 
-        %% Pass params to InfoSysID_modtool func
+        %% Pass params to InSI_text func
         if (modtool_inputs.finish)
-            [function_dir, function_params_dir] = InfoSysID_modtool(modtool_inputs.mode, modtool_inputs.model, modtool_inputs.name, ...
-                modtool_inputs.num_params, modtool_inputs.params, modtool_inputs.params_type, ...
-                modtool_inputs.values, modtool_inputs.default_values, modtool_inputs.outputs);
+            [function_dir, function_params_dir] = InSI_modtool(modtool_inputs.mode, modtool_inputs.model, modtool_inputs.name, ...
+                modtool_inputs.num_params, modtool_inputs.params, modtool_inputs.notations, modtool_inputs.params_type, ...
+                modtool_inputs.values, modtool_inputs.default_values, modtool_inputs.outputs, '');
             fprintf('-------------------------------------------------------------------\n');
             fprintf('Finshed. Please modify the below files:\n');
             fprintf('%s\n', function_dir);
             fprintf('%s\n', function_params_dir);
-            fprintf('Copyright 2022 AVITECH.\n');
+            fprintf('Copyright 2023 @ AVITECH-UET, PRISME-Orleans.\n');
             fprintf('-------------------------------------------------------------------\n');
 
-            [msgicon, iconcmap] = imread('AV.png');
-            hm = msgbox({'Please modify the below files:'; function_dir; function_params_dir; 'Copyright 2022 AVITECH.'}, 'Finished', 'custom', msgicon, iconcmap);
+            [msgicon, iconcmap] = imread('about.png');
+            hm = msgbox({'Please modify the below files:'; function_dir; function_params_dir; 'Copyright 2023 @ AVITECH-UET, PRISME-Orleans.'}, 'Finished', 'custom', msgicon, iconcmap);
             jframe=get(hm, 'javaframe');
             jIcon=javax.swing.ImageIcon(fullfile(main_path, '/Resource/Icon/about.png'));
             jframe.setFigureIcon(jIcon);
@@ -260,11 +265,14 @@ function next_button_Callback(hObject, eventdata, handles)
     %% Set value if user used back_button
     if (state <= current_len && state <= modtool_inputs.num_params)
         % panel title
-        param_panel_tile = ['Interface: Parameter ' num2str(state)];
-        set(handles.param_panel, 'Title', param_panel_tile);
+        param_panel_title = ['Interface: Parameter ' num2str(state)];
+        set(handles.param_panel, 'Title', param_panel_title);
 
         % name
         set(handles.param_name, 'String', modtool_inputs.params{state});
+
+        % notation
+        set(handles.param_notation, 'String', modtool_inputs.notations{state});
 
         % Input type
         edit_type  = false;
@@ -343,6 +351,7 @@ function back_button_Callback(hObject, eventdata, handles)
 % hObject    handle to back_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     global modtool_inputs;
     set(handles.next_button, 'String', 'Next');
     modtool_inputs.finish = false;
@@ -351,6 +360,9 @@ function back_button_Callback(hObject, eventdata, handles)
     %% Get all interface setup
     % name
     modtool_inputs.params{state} = get(handles.param_name, 'String');
+
+    % notation
+    modtool_inputs.notations{state} = get(handles.param_notation, 'String');
 
     % input_type 
     edit_type   = get(handles.input_type_edit,   'Value');
@@ -465,11 +477,14 @@ function back_button_Callback(hObject, eventdata, handles)
         state = modtool_inputs.state;
 
         % panel title
-        param_panel_tile = ['Interface: Parameter ' num2str(state)];
-        set(handles.param_panel, 'Title', param_panel_tile);
+        param_panel_title = ['Interface: Parameter ' num2str(state)];
+        set(handles.param_panel, 'Title', param_panel_title);
 
         % name
         set(handles.param_name, 'String', modtool_inputs.params{state});
+
+        % notation
+        set(handles.param_notation, 'String', modtool_inputs.notations{state});
 
         % Input type
         edit_type  = false;
@@ -521,14 +536,13 @@ function back_button_Callback(hObject, eventdata, handles)
         end
     end
 
+
 % --- Executes on selection change in select_mode.
 function select_mode_Callback(hObject, eventdata, handles)
 % hObject    handle to select_mode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns select_mode contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from select_mode
     mode = get(hObject, 'Value');
     global modtool_inputs;
     switch mode
@@ -542,17 +556,18 @@ function select_mode_Callback(hObject, eventdata, handles)
             modtool_inputs.outputs = [];
     end
 
+
 % --- Executes during object creation, after setting all properties.
 function select_mode_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to select_mode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.6666666666666666);
 
 
 % --- Executes on selection change in select_model.
@@ -561,9 +576,6 @@ function select_model_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns select_model contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from select_model
-
 
 % --- Executes during object creation, after setting all properties.
 function select_model_CreateFcn(hObject, eventdata, handles)
@@ -571,12 +583,11 @@ function select_model_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.6666666666666666);
 
 
 function name_Callback(hObject, eventdata, handles)
@@ -584,8 +595,6 @@ function name_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of name as text
-%        str2double(get(hObject,'String')) returns contents of name as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -594,11 +603,11 @@ function name_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.711111111111111);
 
 
 % --- Executes on selection change in num_params.
@@ -607,9 +616,6 @@ function num_params_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns num_params contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from num_params
-
 
 % --- Executes during object creation, after setting all properties.
 function num_params_CreateFcn(hObject, eventdata, handles)
@@ -617,12 +623,11 @@ function num_params_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.6666666666666666);
 
 
 % --- Executes on button press in output_type_ser.
@@ -640,7 +645,6 @@ function output_type_ber_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of output_type_ber
 
 
 % --- Executes on button press in output_type_mses.
@@ -649,7 +653,6 @@ function output_type_mses_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of output_type_mses
 
 
 % --- Executes on button press in output_type_mseh.
@@ -658,7 +661,6 @@ function output_type_mseh_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of output_type_mseh
 
 
 
@@ -667,8 +669,6 @@ function param_name_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of param_name as text
-%        str2double(get(hObject,'String')) returns contents of param_name as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -677,12 +677,11 @@ function param_name_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.6590038314176231);
 
 
 function input_value_Callback(hObject, eventdata, handles)
@@ -690,8 +689,6 @@ function input_value_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of input_value as text
-%        str2double(get(hObject,'String')) returns contents of input_value as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -700,12 +697,11 @@ function input_value_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.5245901639344263);
 
 
 function input_default_Callback(hObject, eventdata, handles)
@@ -713,8 +709,6 @@ function input_default_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of input_default as text
-%        str2double(get(hObject,'String')) returns contents of input_default as a double
 
 
 % --- Executes during object creation, after setting all properties.
@@ -723,11 +717,11 @@ function input_default_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.3516483516483516);
 
 
 % --- Executes on button press in input_type_edit.
@@ -736,8 +730,8 @@ function input_type_edit_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of input_type_edit
     set(handles.input_value_panel, 'Visible', 'off');
+
 
 % --- Executes on button press in input_type_popup.
 function input_type_popup_Callback(hObject, eventdata, handles)
@@ -745,9 +739,9 @@ function input_type_popup_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of input_type_popup
     set(handles.input_value_panel, 'Visible', 'on');
     set(handles.input_value, 'Visible', 'on');
+
 
 % --- Executes on button press in input_type_toggle.
 function input_type_toggle_Callback(hObject, eventdata, handles)
@@ -755,6 +749,266 @@ function input_type_toggle_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of input_type_toggle
     set(handles.input_value_panel, 'Visible', 'off');
     set(handles.input_default, 'String', 'on');
+
+
+
+function param_notation_Callback(hObject, eventdata, handles)
+% hObject    handle to param_notation (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes during object creation, after setting all properties.
+function param_notation_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to param_notation (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.6590038314176248);
+
+
+% --- Executes during object creation, after setting all properties.
+function param_panel_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to param_panel (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.03531079789315661);
+
+
+% --- Executes during object creation, after setting all properties.
+function back_button_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to back_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject.Parent, 'units','pixels');
+    [x, y, w, h] = scale_InSI(hObject.Parent);
+    set(hObject.Parent, 'Position', [x, y, w, h]);
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.4848484848484848);
+
+
+% --- Executes during object creation, after setting all properties.
+function next_button_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to next_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.5079365079365079);
+
+
+% --- Executes during object creation, after setting all properties.
+function InSI_text_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to InSI_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.5765765765765766);
+
+
+% --- Executes during object creation, after setting all properties.
+function param_name_text_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to param_name_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.7615155385270328);
+
+
+% --- Executes during object creation, after setting all properties.
+function param_notation_text_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to param_notation_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.7615155385270328);
+
+
+% --- Executes during object creation, after setting all properties.
+function input_type_panel_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to input_type_panel (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.19470567746429815);
+
+
+% --- Executes during object creation, after setting all properties.
+function input_type_edit_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to input_type_edit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.6095238095238095);
+
+
+% --- Executes during object creation, after setting all properties.
+function input_type_popup_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to input_type_popup (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.6095238095238095);
+
+
+% --- Executes during object creation, after setting all properties.
+function input_type_toggle_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to input_type_toggle (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.6095238095238095);
+
+
+% --- Executes during object creation, after setting all properties.
+function input_value_panel_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to input_value_panel (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.16635048171707034);
+
+
+% --- Executes during object creation, after setting all properties.
+function text9_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to text9 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.5333333333333333);
+
+
+% --- Executes during object creation, after setting all properties.
+function input_default_panel_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to input_default_panel (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.1730717133015984);
+
+
+% --- Executes during object creation, after setting all properties.
+function text10_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to text10 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.17066666666666666);
+
+
+% --- Executes during object creation, after setting all properties.
+function step1_panel_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to step1_panel (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.035516093229744736);
+
+% --- Executes during object creation, after setting all properties.
+function output_type_ser_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to output_type_ser (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.6095238095238095);
+
+% --- Executes during object creation, after setting all properties.
+function output_type_ber_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to output_type_ber (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.60952380952381);
+
+
+% --- Executes during object creation, after setting all properties.
+function output_type_mses_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to output_type_mses (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.6095238095238095);
+
+
+% --- Executes during object creation, after setting all properties.
+function output_type_mseh_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to output_type_mseh (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.6095238095238095);
+
+
+% --- Executes during object creation, after setting all properties.
+function select_mode_text_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to select_mode_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.7703703703703703);
+
+
+% --- Executes during object creation, after setting all properties.
+function select_model_text_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to select_model_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.7703703703703703);
+
+
+% --- Executes during object creation, after setting all properties.
+function name_text_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to name_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.7703703703703703);
+
+
+% --- Executes during object creation, after setting all properties.
+function num_params_text_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to num_params_text (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.24586288416075627);
+
+
+% --- Executes during object creation, after setting all properties.
+function output_type_panel_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to output_type_panel (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.11479028697571744);

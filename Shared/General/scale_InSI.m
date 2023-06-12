@@ -33,12 +33,20 @@ h = 0;
 
 if (isempty(strfind(hObject.Name, 'method')))
     if (isempty(strfind(hObject.Tag, 'InSI_mode')))
-        % Main windows
-        x = 0;
-        y = 0;
-        w = Sc_w * 0.5826388889;
-        h = Sc_h * 0.8255555556;
-    else
+        if (~isempty(strfind(hObject.Tag, 'InSI_modtool')))
+            % modtool windows
+            x = 0;
+            y = 0;
+            w = Sc_w * 0.2451388889;
+            h = Sc_h * 0.7966666667;
+        else
+            % Main windows
+            x = 0;
+            y = 0;
+            w = Sc_w * 0.5826388889;
+            h = Sc_h * 0.8255555556;
+        end
+    else  
         % Loader window
         x = 0;
         y = 0;

@@ -44,7 +44,7 @@ classdef B_CMA_Analytical_params
         rect_linewidth = {2, 0, 0, 0, 0, 2}
         rect_color     = {'b', 'b', 'b', 'b', 'r', 'g'}       
 
-         % Reference website
+        % Reference website
         web_url = 'https://ieeexplore.ieee.org/abstract/document/502327'
     end
     

@@ -1,11 +1,11 @@
 function release_params(handles, modtool_inputs)
 
-%% ~ = release_params(handles, modtool_inputs): Renew all input box of InfoSysID_modtool
+%% ~ = release_params(handles, modtool_inputs): Renew all input box of InSI_modtool
 %
 %% Input:
     % 1. handles: (handles) - handles of current GUI
-    % 2. modtool_inputs: (struct) - struct of current input parameter in
-    % the InfoSysID_modtool
+    % 2. modtool_inputs: (struct) - struct of current input 
+    % parameter in the InSI_modtool
 %
 %% Output: None
 %
@@ -20,6 +20,9 @@ set(handles.param_panel, 'Title', param_panel_tile);
 
 % name
 set(handles.param_name, 'String', 'edit');
+
+% notation
+set(handles.param_notation, 'String', 'edit');
 
 % input_type
 set(handles.input_type_edit, 'Value', 1);

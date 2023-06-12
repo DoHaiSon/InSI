@@ -6,6 +6,7 @@ classdef function_params
         % Parameters
         num_params = 
         params = 
+        notations = 
         tooltips = {} 
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
@@ -42,6 +43,9 @@ classdef function_params
         rect_position = 
         rect_linewidth = 
         rect_color =     
+
+        % Reference website
+        web_url = ''
     end
     
     methods (Access = private)

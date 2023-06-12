@@ -14,6 +14,7 @@ function init_modtool()
 global modtool_inputs
 modtool_inputs = struct();
 modtool_inputs.params = {};
+modtool_inputs.notations = {};
 modtool_inputs.params_type = [];
 modtool_inputs.values = {};
 modtool_inputs.default_values = {};

@@ -47,8 +47,6 @@ pre_algo = '';
 global input_data;
 input_data = {};
 
-init_modtool();
-
 %%  Load MODE GUI
 loader('Opening the application', 'InSI_mode');
 try
