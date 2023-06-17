@@ -6,7 +6,7 @@
 **InSI docs website**: [https://dohaison.github.io/InSI](https://dohaison.github.io/InSI).
 
 **Core Functions**:
-- Renamed from InSysID to InSI, [#1](https://github.com/DoHaiSon/InSI/issues/1).
+- Renamed from InfoSysID to InSI, [#1](https://github.com/DoHaiSon/InSI/issues/1).
 - Re-constructed the dashboard layout: figure options to the menu bar area, [#3](https://github.com/DoHaiSon/InSI/issues/3).
 - Text changed: "Criterion" => Performance and "Params" => "Parameters", [#4](https://github.com/DoHaiSon/InSI/issues/4).
 - Replaced SNR and Err on the Toolbox Workspace by Output type and Run time, [#5](https://github.com/DoHaiSon/InSI/issues/5).
