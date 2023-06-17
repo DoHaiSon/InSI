@@ -26,7 +26,7 @@
 - [fixed issue: when user closes the questdlg, nothing return.](https://github.com/DoHaiSon/InSI/commit/d0ac896b6227874dadc134960f6922a1a2d3dbe1)
 - [convert OnOffSwitchState enumeration to char: working in R2006A](https://github.com/DoHaiSon/InSI/commit/df65b57872f7529a85f69e16a49671f71ad632e4).
 - [move close_InSI after addpath](https://github.com/DoHaiSon/InSI/commit/9d2abba04844d0b7fa78dd2de9d851352c36105f)
-- More and more small bugs fixed.
+- More and more minor bug fixes in GitHub commits.
 
 # [v1.1.0](https://github.com/DoHaiSon/InfoSysID_Toolbox/releases/tag/v1.1.0) (2023-05-16)
 
