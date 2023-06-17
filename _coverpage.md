@@ -2,7 +2,7 @@
 
 # **InSI**
 
-> A MatLab Toolbox for Informed System IDentification in Wireless communication systems
+> A MatLab Toolbox for Informed System Identification in wireless communication systems
 
 ![](./assets/img/En_cover_text.svg)
 
