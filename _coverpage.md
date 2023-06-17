@@ -4,7 +4,7 @@
 
 > A MatLab Toolbox for Informed System IDentification in Wireless communication systems
 
-[![](https://readme-typing-svg.demolab.com?font=Source+Sans+Pro&duration=2000&pause=1000&color=34495e&&weight=600&&center=true&vCenter=true&lines=Simple,+Efficiency;Free;For+education)]()
+![](./assets/img/En_cover_text.svg)
 
 
 <img class="dashboard" src="./assets/img/Intro.png">

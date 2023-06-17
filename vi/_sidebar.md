@@ -6,4 +6,8 @@
 - [**Thay đổi**](vi/CHANGELOG.md)
 
 - **Hỗ trợ**
-<a href="https://avitech.uet.vnu.edu.vn/" target="_blank"> <img src="./assets/img/avitech.png" width=30%></a>
+    - [**Câu hỏi thường gặp**](vi/faq.md)
+    - [**Gỡ lỗi**](https://github.com/DoHaiSon/InSI/issues)
+    - [**Liên hệ**](vi/contact.md)
+    - [**Đóng góp**](https://github.com/DoHaiSon/InSI/pulls)
+    - [**Giấy phép**](https://github.com/DoHaiSon/InSI/blob/master/LICENSE)

@@ -1,10 +1,10 @@
-## **InfoSysID Toolbox**
+## **InSI**
 
 > Bộ công cụ trên MatLab hỗ trợ nhận dạng hệ thống truyền thông không dây
 
 ## Giới thiệu
 
-InfoSysID là ...
+InSI là ...
 
 Xem [hướng dẫn](vi/quickstart.md) cho người mới để biết thêm thông tin chi tiết.
 
@@ -15,10 +15,9 @@ Xem [hướng dẫn](vi/quickstart.md) cho người mới để biết thêm th�
 
 ## Hỗ trợ
 
-- Github issues:
-- Email:
+- Github issues: [https://github.com/avitech-vnu/InSI/issues](https://github.com/avitech-vnu/InSI/issues/new/choose)
+- Email: [avitech@vnu.edu.vn](mailto:avitech@vnu.edu.vn)
 
 ## Cộng đồng
 
-- Facebook
-- Discord
+- Facebook: [https://www.facebook.com/avitech.vnu.uet](https://www.facebook.com/avitech.vnu.uet)

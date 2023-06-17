@@ -1,4 +1,31 @@
 # 
+# [v1.2.0](https://github.com/DoHaiSon/InSI/releases/tag/v1.2.0) (2023-06-17)
+
+### Dynamic InSI resolution, help, ref, and more
+
+**Core Functions**:
+- Renamed from InSysID to InSI, [#1](https://github.com/DoHaiSon/InSI/issues/1).
+- Re-constructed the dashboard layout: figure options to the menu bar area, [#3](https://github.com/DoHaiSon/InSI/issues/3).
+- Text changed: "Criterion" => Performance and "Params" => "Parameters", [#4](https://github.com/DoHaiSon/InSI/issues/4).
+- Replaced SNR and Err on the Toolbox Workspace by Output type and Run time, [#5](https://github.com/DoHaiSon/InSI/issues/5).
+- Export input parameters and output error rate to the Matlab workspace in a struct, [#6](https://github.com/DoHaiSon/InSI/issues/6).
+- Renamed and more modulations: QAM-4 => 4-QAM, QAM-64, 128, 256, [#7](https://github.com/DoHaiSon/InSI/issues/7).
+- New dashboard title, load output figure title and dashboard title from the comment of algorithms instead of params.m file, [#8](https://github.com/DoHaiSon/InSI/issues/8), [#9](https://github.com/DoHaiSon/InSI/issues/9).
+- New help button in select input parameters menu, the massage dialog box of help as shown in the command window and access the original paper URL, [#10](https://github.com/DoHaiSon/InSI/issues/10).
+- Disable the hold on figure option when users had multiple output types, [#11](https://github.com/DoHaiSon/InSI/issues/11). 
+- Full name + notation of input parameters menu, [#13](https://github.com/DoHaiSon/InSI/issues/13).
+- Dynamic the size of the InSI toolbox and texts in any screen resolution and scale, [#14](https://github.com/DoHaiSon/InSI/issues/14), [#16](https://github.com/DoHaiSon/InSI/issues/16), [#17](https://github.com/DoHaiSon/InSI/issues/17).
+- Load logos of VNU-UET, Orleans, AVITECH, PRISME Lab, Viettel-M3, and NAFOSTED onto the InSI dashboard, [#15](https://github.com/DoHaiSon/InSI/issues/15).
+- InSI modtool version 1.2.0, [#18](https://github.com/DoHaiSon/InSI/issues/18).
+- [New menu bar for bug report and license.](https://github.com/DoHaiSon/InSI/commit/cb59e6639e597e7106d5d4576f8be353c887a361)
+
+**Bugs fixed**:
+- In Matlab version 2016 and earlier, handles.figmode property is Label not Text, [#12](https://github.com/DoHaiSon/InSI/issues/12).
+- [fixed issue: when user closes the questdlg, nothing return.](https://github.com/DoHaiSon/InSI/commit/d0ac896b6227874dadc134960f6922a1a2d3dbe1)
+- [convert OnOffSwitchState enumeration to char: working in R2006A](https://github.com/DoHaiSon/InSI/commit/df65b57872f7529a85f69e16a49671f71ad632e4).
+- [move close_InSI after addpath](https://github.com/DoHaiSon/InSI/commit/9d2abba04844d0b7fa78dd2de9d851352c36105f)
+- More and more small bugs fixed.
+
 # [v1.1.0](https://github.com/DoHaiSon/InfoSysID_Toolbox/releases/tag/v1.1.0) (2023-05-16)
 
 ### #1 Python support and docs of core functions

@@ -1,15 +1,35 @@
 .logo {
-    width: 10%;
-    }
+  width: 10%;
+}
 .dashboard {
-    width: 50%;
-    }
-    
+  width: 50%;
+}
+
+.footer {
+  width: 40%;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 25%;
+  padding: 25px;
+}
+
 @media screen and (max-width: 600px) {
-.logo {
+  .logo {
     width: 40%;
-    }
-.dashboard {
+  }
+  .dashboard {
     width: 100%;
-    }
+  }
+  .footer {
+    width: 100%;
+  }
+  .column {
+    padding: 10px;
+  }
 }

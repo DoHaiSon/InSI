@@ -3,7 +3,7 @@
 
 ## Không mù
 
-- [Zero forcing (ZF)](vi/algorithms/ZF.md)
+- [Zero forcing (ZF)](vi/algorithms/NB_ZF.md)
 
 - MMSE
 

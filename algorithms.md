@@ -3,7 +3,7 @@
 
 ## Non-blind
 
-- [Zero forcing (ZF)](algorithms/ZF.md)
+- [Zero forcing (ZF)](algorithms/NB_ZF.md)
 
 
 - MMSE
