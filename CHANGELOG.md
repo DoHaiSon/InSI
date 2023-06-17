@@ -1,7 +1,9 @@
 # 
 # [v1.2.0](https://github.com/DoHaiSon/InSI/releases/tag/v1.2.0) (2023-06-17)
 
-### Dynamic InSI resolution, help, ref, and more
+### InSI docs website, dynamic InSI resolution, help, ref, and more
+
+**InSI docs website**: [https://dohaison.github.io/InSI](https://dohaison.github.io/InSI).
 
 **Core Functions**:
 - Renamed from InSysID to InSI, [#1](https://github.com/DoHaiSon/InSI/issues/1).
