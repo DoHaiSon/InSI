@@ -4,7 +4,7 @@ function loader (str, varargin)
 %%     time: declear time to waitbar
     
     if nargin == 2 && ~isempty(varargin{1})
-        f = waitbar(0, 'Please wait...', 'Tag', 'loader');
+        f = waitbar(0, 'Please wait...', 'Tag', 'InSI_loader');
         pause(.2)
 
         waitbar(.33, f, str);
@@ -18,7 +18,7 @@ function loader (str, varargin)
 
         waitbar(.8, f, str);
     else
-        f = waitbar(0, 'Please wait...', 'Tag', 'loader');
+        f = waitbar(0, 'Please wait...', 'Tag', 'InSI_loader');
         pause(.2)
 
         waitbar(.33, f, str);

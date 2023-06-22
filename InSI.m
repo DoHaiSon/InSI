@@ -50,7 +50,7 @@ input_data = {};
 %%  Load MODE GUI
 loader('Opening the application', 'InSI_mode');
 try
-    F = findall(0, 'type', 'figure', 'tag', 'loader');
+    F = findall(0, 'type', 'figure', 'tag', 'InSI_loader');
     waitbar(1, F, 'Done!');
     close(F);
 catch ME

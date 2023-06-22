@@ -19,8 +19,7 @@ all_fig = findall(groot, 'Type', 'figure');
 for idx = 1:length(all_fig)
     fig = all_fig(idx);
     if(~isempty(strfind(fig.Tag, 'InSI')) || ...
-       ~isempty(strfind(fig.Name, 'InSI')) || ...
-       ~isempty(strfind(fig.Tag, 'loader'))) 
+       ~isempty(strfind(fig.Name, 'InSI'))) 
         tmp_0 = char(fig.Visible);
         tmp_1 = 0;
         if (strcmp(tmp_0, 'on'))

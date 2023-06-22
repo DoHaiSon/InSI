@@ -80,7 +80,7 @@ end
 runtime = datetime('now') - InSI_time;
 
 try
-    F = findall(0, 'type', 'figure', 'tag', 'loader');
+    F = findall(0, 'type', 'figure', 'tag', 'InSI_loader');
     waitbar(1, F, 'Done!');
     close(F);
 catch ME

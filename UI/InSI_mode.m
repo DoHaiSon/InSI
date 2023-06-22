@@ -96,7 +96,7 @@ function crb_mode_Callback(hObject, eventdata, handles)
     switch_mode = 1;
     loader('Opening the CRB mode', 'CRB_main');
     try
-        F = findall(0, 'type', 'figure', 'tag', 'loader');
+        F = findall(0, 'type', 'figure', 'tag', 'InSI_loader');
         waitbar(1, F, 'Done!');
         close(F);
     catch ME
@@ -115,7 +115,7 @@ function algo_mode_Callback(hObject, eventdata, handles)
     switch_mode = 2;
     loader('Opening the Channel Estimation mode', 'Algo_main');
     try
-        F = findall(0, 'type', 'figure', 'tag', 'loader');
+        F = findall(0, 'type', 'figure', 'tag', 'InSI_loader');
         waitbar(1, F, 'Done!');
         close(F);
     catch ME
