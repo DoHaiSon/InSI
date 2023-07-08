@@ -11,7 +11,7 @@ function Err = B_CMA_Analytical(Op, SNR_i, Output_type)
     % + 5. Mod_type: Type of modulation (Bin, QPSK, 4-QAM)
     % + 6. L: Length of the CMA filter
     % + 7. SNR_i: signal noise ratio
-    % + 8. Ouput_type: SER / BER / MSE Signal
+    % + 8. Output_type: SER / BER / MSE Signal
 %
 %% Output:
     % + 1. Err: Error rate

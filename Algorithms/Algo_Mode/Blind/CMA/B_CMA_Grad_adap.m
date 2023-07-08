@@ -12,7 +12,7 @@ function Err = B_CMA_Grad_adap(Op, SNR_i, Output_type)
     % + 6. mu: Step size
     % + 7. L: Length of the CMA filter
     % + 8. SNR_i: signal noise ratio
-    % + 9. Ouput_type: SER / BER / MSE Signal
+    % + 9. Output_type: SER / BER / MSE Signal
 %
 %% Output:
     % + 1. Err: Error rate
