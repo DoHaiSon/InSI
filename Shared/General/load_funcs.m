@@ -69,23 +69,54 @@ InSI_time = datetime('now');
 
 %% Exec algorithm
 loader('Execute function');
-switch (mode)
-    case 'Algo_Mode'
-        [SNR, Err] = eval(strcat(algo, '(Op, Monte, SNR, Output_type)'));
-    case 'CRB_Mode'
-        [SNR, Err] = eval(strcat(algo, '(Op, Monte, SNR)'));
-    case 'Demo_Mode'
+
+% Declear the InSI_waitbar to update the progress
+global InSI_waitbar; 
+
+% The main function
+ER_f = [];
+for Monte_i = 1:Monte
+    ER_SNR      = [];
+    for SNR_i   = SNR
+        tic
+        switch (mode)
+            case 'Algo_Mode'
+                Err = eval(strcat(algo, '(Op, SNR_i, Output_type)'));
+            case 'CRB_Mode'
+                Err = eval(strcat(algo, '(Op, SNR_i)'));
+            case 'Demo_Mode'
+        end
+        ER_SNR(end+1) = Err;
+
+        if(getappdata(InSI_waitbar, 'canceling'))
+            delete(InSI_waitbar);
+            return
+        end
+        
+        % Estimate the progress bar
+        portion = ((Monte_i-1) * length(SNR) + find(SNR == SNR_i)) / (Monte * length(SNR));
+        % Estimate the remaining time
+        running_time = toc;
+        remain_time = ((Monte * length(SNR)) - ((Monte_i-1) * length(SNR) + find(SNR == SNR_i))) * running_time;
+
+        waitbar(portion * 0.89 + 0.1, InSI_waitbar, sprintf('Progress: %3.1f %%, \n Remaining time: %5.2f seconds.', [(portion * 0.89 + 0.1) * 100 remain_time]));
+    end
+    ER_f = [ER_f; ER_SNR];
 end
+
+% Return
+if Monte ~= 1
+    Err = mean(ER_f);
+else
+    Err = ER_f;
+end
+
+% Close the progress bar
+waitbar(1, InSI_waitbar, sprintf('Done!'));
+pause(.3);
+delete(InSI_waitbar);
 
 runtime = datetime('now') - InSI_time;
-
-try
-    F = findall(0, 'type', 'figure', 'tag', 'InSI_loader');
-    waitbar(1, F, 'Done!');
-    close(F);
-catch ME
-    disp(ME);
-end
         
 %% Figure result
 global configs;

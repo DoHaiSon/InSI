@@ -1,6 +1,6 @@
 function InSI()
 
-%% A MatLab Toolbox for Informed System IDentification in Wireless communication systems
+%% A MatLab Toolbox for Informed System Identification in wireless communication systems
 %
 %% Support R2014b or later
 %
@@ -52,7 +52,7 @@ loader('Opening the application', 'InSI_mode');
 try
     F = findall(0, 'type', 'figure', 'tag', 'InSI_loader');
     waitbar(1, F, 'Done!');
-    close(F);
+    delete(F);
 catch ME
     disp(ME);
 end

@@ -1,4 +1,4 @@
-function [SNR, Err] = B_CMA_Grad_block(Op, Monte, SNR, Output_type)
+function Err = B_CMA_Grad_block(Op, SNR_i, Output_type)
 
 %% Block Constant Modulus Algorithm
 %
@@ -11,13 +11,11 @@ function [SNR, Err] = B_CMA_Grad_block(Op, Monte, SNR, Output_type)
     % + 5. Mod_type: Type of modulation (Bin, QPSK, 4-QAM)
     % + 6. mu: Step size
     % + 7. L: Length of the CMA filter
-    % + 8. Monte: Simulation times
-    % + 9. SNR: Range of the SNR
-    % + 10. Ouput_type: SER / BER / MSE Signal
+    % + 8. SNR_i: signal noise ratio
+    % + 9. Ouput_type: SER / BER / MSE Signal
 %
 %% Output:
-    % + 1. SNR: Range of the SNR
-    % + 2. Err: Error rate
+    % + 1. Err: Error rate
 %
 %% Algorithm:
     % Step 1: Initialize variables
@@ -35,7 +33,7 @@ function [SNR, Err] = B_CMA_Grad_block(Op, Monte, SNR, Output_type)
 %% Require R2006A
 
 % Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 08-Jun-2023 16:13:00.
+% Last Modified by Son 08-Jul-2023 11:38:00.
 
 
 % Initialize variables
@@ -46,72 +44,60 @@ Ch_type = Op{4};         % complex
 Mod_type= Op{5};
 mu      = Op{6};         % Step size
 L       = Op{7};         % Window length
-Monte   = Monte;
-SNR     = SNR;
-Output_type = Output_type;
 
 % Generate input signal
-modulation = {'Bin', 'QPSK', 'QAM4'};
+modulation  = {'Bin', 'QPSK', 'QAM4'};
+[sig, data] = eval(strcat(modulation{Mod_type}, '(N + ChL)'));
 
-ER_f = [];
-for Monte_i = 1:Monte
-    [sig, data] = eval(strcat(modulation{Mod_type}, '(N + ChL)'));
+% Generate channel
+H           = Generate_channel(Num_Ch, ChL, Ch_type);
 
-    H           = Generate_channel(Num_Ch, ChL, Ch_type);
-
-    sig_rec = [];
-        for l = 1:Num_Ch
-            sig_rec(:, l) = conv( H(l,:).', sig ) ;
-        end
-    x           = sig_rec(ChL+1:N + ChL, :);
+sig_rec = [];
+for l = 1:Num_Ch
+    sig_rec(:, l) = conv( H(l,:).', sig ) ;
+end
+x       = sig_rec(ChL+1:N + ChL, :);
     
-    ER_SNR     = [];
-    for SNR_i   = 1:length(SNR)
-        X       = awgn(x, SNR(SNR_i));              % received noisy signal
-        
-        Xn=[];
-        for i   = L:N
-            x1  = X(i:-1:(i-L+1),:);
-            Zn  = x1(:);
-            Xn  = [Xn Zn];
-        end
-        
-        %% CMA estimator
-        CM      = abs(sig(1));
-        d       = floor(L*Num_Ch/2);
-        W       = [zeros(d, 1); 1 ; zeros(L*Num_Ch-d-1,1)];
-        
-        jj      = 1;
-        while (jj < 5)
-            
-            Y   = W'*Xn;
-            EP  = (CM - abs(Y).^2).*conj(Y);
-            G   = Xn*EP';
-            
-            W   = W+(mu*G);            
-            jj  = jj+1;
-        end
+X       = awgn(x, SNR_i);              % received noisy signal
 
-        if any(isnan(W(:)))
-            error('W matrix includes N/A values. Please choose a lower step size (mu) value.');
-        end
+Xn=[];
+for i   = L:N
+    x1  = X(i:-1:(i-L+1),:);
+    Zn  = x1(:);
+    Xn  = [Xn Zn];
+end
 
-        est_src_b       = conj(Xn'*W);
-        
-        % Compute Error rate / MSE Signal
-        for win=1:ChL+L
-            sig_src_b       = sig(win:N+win-L);                                                   
-            data_src        = data(win:N+win-L);  
-            Err_tmp(win)    = ER_func(data_src, est_src_b, Mod_type, Output_type, sig_src_b);
-        end
-        ER_SNR(end+1)  = min(Err_tmp);
-    end
-    ER_f = [ER_f; ER_SNR];
+%% CMA estimator
+CM      = abs(sig(1));
+d       = floor(L*Num_Ch/2);
+W       = [zeros(d, 1); 1 ; zeros(L*Num_Ch-d-1,1)];
+
+jj      = 1;
+while (jj < 5)
+    
+    Y   = W'*Xn;
+    EP  = (CM - abs(Y).^2).*conj(Y);
+    G   = Xn*EP';
+    
+    W   = W+(mu*G);            
+    jj  = jj+1;
+end
+
+if any(isnan(W(:)))
+    error(['W matrix includes N/A values. Please choose a' ...
+        'lower step size (mu) value.']);
+end
+
+est_src_b       = conj(Xn'*W);
+
+% Compute Error rate / MSE Signal
+for win=1:ChL+L
+    sig_src_b       = sig(win:N+win-L);                                                   
+    data_src        = data(win:N+win-L);  
+    Err_tmp(win)    = ER_func(data_src, est_src_b, Mod_type, Output_type, sig_src_b);
 end
 
 % Return
-if Monte ~= 1
-    Err = mean(ER_f);
-else
-    Err = ER_f;
+Err = min(Err_tmp);
+
 end

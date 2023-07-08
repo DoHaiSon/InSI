@@ -32,7 +32,7 @@ for idx = 1:length(all_fig)
                 return;
             end
         end
-        close(fig);
+        delete(fig);
     end
 end
 
