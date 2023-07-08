@@ -30,7 +30,7 @@ function Err = B_CS_OMNS(Op, SNR_i, Output_type)
 %% Require R2006A
 
 % Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 08-Jun-2023 16:13:00.
+% Last Modified by Son 08-Jul-2023 12:26:00.
 
 
 num_sq    = Op{1};     % number of sig sequences
