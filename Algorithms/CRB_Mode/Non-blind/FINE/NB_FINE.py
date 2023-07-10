@@ -227,106 +227,91 @@ def GLM_generate_observation(theta):
 if __name__ == "__main__":
     # # Load args
     args = sys.argv
-    data_size = int(args[1])
-    delta_arr = [float(args[2])] * 10
-    epochs = int(args[3])
-    lr = float(args[4])
-    num_exp = int(args[5])
-    sigma_square_arr = 1/np.array(ast.literal_eval(args[6]))
+    timestamp_id = args[1]
+    data_size = int(args[2])
+    delta_arr = [float(args[3])] * 10
+    epochs = int(args[4])
+    lr = float(args[5])
+    sigma_square = 1/float(args[6])
+    i_sigma = 0
 
     BCRB_arr = []
     FINE_BIM_arr = []
     FINE_BCRB_arr = []
-    # sigma_square_arr = [0.1, 0.5, 1, 2, 4, 5]
-    # delta_arr = [0.1] * 10
     size_multi = []
-    # data_size = int(1e4)
 
-    for i_sigma, sigma_square in enumerate(sigma_square_arr):
-        print("########## sigma_square =", sigma_square, "##########")
-        d = 1 # have not derived ground truth for d > 1
-        BCRB_arr.append(sigma_square / (sigma_square + 1)) # ground truth
+    d = 1 # have not derived ground truth for d > 1
+    BCRB_arr.append(sigma_square / (sigma_square + 1)) # ground truth
 
-        sigma = np.sqrt(sigma_square)
-        theta = np.random.normal(scale=sigma, size=(d, data_size))    
-        x = GLM_generate_observation(theta)
+    sigma = np.sqrt(sigma_square)
+    theta = np.random.normal(scale=sigma, size=(d, data_size))    
+    x = GLM_generate_observation(theta)
 
-        train_settings = {
-            "max_epochs": epochs,
-            "batch_size": None,
-            "sr": 5,
-            "lr": lr,
-            "minor": 1e-4,
-            "get_model": None,
-            "debug": False
-        }
-        trials = 1
+    train_settings = {
+        "max_epochs": epochs,
+        "batch_size": None,
+        "sr": 5,
+        "lr": lr,
+        "minor": 1e-4,
+        "get_model": None,
+        "debug": False
+    }
+    trials = 1
 
-        n_theta = np.zeros(d)
-        for m in range(d):
-            print("Diagon #", m + 1, "/", d, flush=True)
+    n_theta = np.zeros(d)
+    for m in range(d):
+        print("Diagon #", m + 1, "/", d, flush=True)
+        delta = np.zeros(d)
+        delta[m] = delta_arr[i_sigma]
+
+        theta_shifted = np.copy(theta) + np.expand_dims(delta, axis=1)
+        origin = np.vstack((x, theta)).T
+        shifted = np.vstack((x, theta_shifted)).T
+
+        estimate = []
+        for _ in (range(trials)):
+            estimate.append(2 * DivergenceApproximate(origin, shifted, **train_settings))
+        n_theta[m] = np.max(estimate)
+
+    B_diag = n_theta / (delta ** 2)
+    BIM = np.diag(B_diag)
+
+    # non-diagonal, no need for d=1
+    for i in range(d - 1):
+        for j in range(i + 1, d):
+            print("Entry", i, '-', j, flush=True)
             delta = np.zeros(d)
-            delta[m] = delta_arr[i_sigma]
+            delta[i] = delta_arr[i_sigma]
+            delta[j] = delta_arr[i_sigma]
 
             theta_shifted = np.copy(theta) + np.expand_dims(delta, axis=1)
+            x_prime = GLM_generate_observation(theta_shifted)
+
             origin = np.vstack((x, theta)).T
-            shifted = np.vstack((x, theta_shifted)).T
+            shifted = np.vstack((x_prime, theta_shifted)).T
+
 
             estimate = []
-            for _ in (range(trials)):
+            for _ in range(trials):
                 estimate.append(2 * DivergenceApproximate(origin, shifted, **train_settings))
-            n_theta[m] = np.max(estimate)
+            n_theta = np.max(estimate)
+            BIM[i, j] = (n_theta - (delta_arr[i_sigma] ** 2) * (B_diag[i] + B_diag[j]) ) / (2 * delta_arr[i_sigma] ** 2)
+            BIM[j, i] = BIM[i, j]
 
-        B_diag = n_theta / (delta ** 2)
-        BIM = np.diag(B_diag)
+    FINE_BIM_arr.append(BIM)
+    FINE_BCRB = np.linalg.inv(BIM)
 
-        # non-diagonal, no need for d=1
-        for i in range(d - 1):
-            for j in range(i + 1, d):
-                print("Entry", i, '-', j, flush=True)
-                delta = np.zeros(d)
-                delta[i] = delta_arr[i_sigma]
-                delta[j] = delta_arr[i_sigma]
-
-                theta_shifted = np.copy(theta) + np.expand_dims(delta, axis=1)
-                x_prime = GLM_generate_observation(theta_shifted)
-
-                origin = np.vstack((x, theta)).T
-                shifted = np.vstack((x_prime, theta_shifted)).T
-
-
-                estimate = []
-                for _ in range(trials):
-                    estimate.append(2 * DivergenceApproximate(origin, shifted, **train_settings))
-                n_theta = np.max(estimate)
-                BIM[i, j] = (n_theta - (delta_arr[i_sigma] ** 2) * (B_diag[i] + B_diag[j]) ) / (2 * delta_arr[i_sigma] ** 2)
-                BIM[j, i] = BIM[i, j]
-
-        FINE_BIM_arr.append(BIM)
-        FINE_BCRB = np.linalg.inv(BIM)
-
-        FINE_BCRB_arr.append(np.abs(np.trace(FINE_BCRB)))
+    FINE_BCRB_arr.append(np.abs(np.trace(FINE_BCRB)))
 
     ## Save result to .txt file for MATLAB
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    time_now = str(int(time.time()))
-    file_name = 'result_' + time_now + '.txt'
+    file_name = 'result_' + timestamp_id + '.txt'
     file_path = os.path.join(dir_path, file_name)
-
-    print(time_now)
-    print('True')
     
-    with open(file_path, 'w') as result:
-        result.write(str(sigma_square_arr))
+    print('True')
+
+    with open(file_path, 'a') as result:
+        result.write('\n')
+        result.write(str(sigma_square))
         result.write('\n')
         result.write(str(FINE_BCRB_arr))
-
-    # plt.plot(sigma_square_arr, (np.array(BCRB_arr)), '-*')
-    # plt.plot(sigma_square_arr, (np.array(FINE_BCRB_arr)), '-p')
-    # # plt.plot(sigma_square_arr, (np.array(FINE_convex_arr)), '-|')
-    # plt.legend(['BCRB', 'FINE_BCRB', 'FINE_convex'])
-    # plt.xlabel('$\sigma^2$')
-    # plt.ylabel('MSE')
-    # plt.xticks(sigma_square_arr)
-    # # plt.savefig('GLM.png', dpi=200)
-    # plt.show()

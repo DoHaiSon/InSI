@@ -50,16 +50,16 @@ disp(stdout);
 % Check status
 split_output = strsplit(stdout, '\n');
 if (strcmp(split_output{end-1}, 'True'))
-    file_name = ['result_' split_output{end - 2} '.txt'];
+    file_name = ['result_' varargin{1} '.txt'];
     result_file = fullfile(dir_path, file_name);
 
     % Read file
     fop = fileread(result_file);
 
-    split_fop = strsplit(fop, ']');
+    split_fop = strsplit(fop, '\n');
 
-    SNR = str2num([regexprep(split_fop{1},'\s+',' ') ']']);
-    Err = str2num([regexprep(split_fop{2},'\s+',' ') ']']);
+    SNR = str2num(split_fop{end - 1});
+    Err = str2num(split_fop{end});
     
     if strcmp(type_of(SNR), 'array') && strcmp(type_of(Err), 'array')
         status = 1;

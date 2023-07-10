@@ -5,7 +5,7 @@ function InSI()
 %% Support R2014b or later
 %
 % Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 1-Jun-2023 17:52:13 
+% Last Modified by Son 10-Jul-2023 13:03:00 
 
 global main_path;
 main_path = mfilename('fullpath'); %   get path of active file

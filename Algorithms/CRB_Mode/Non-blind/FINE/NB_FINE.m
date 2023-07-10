@@ -1,4 +1,4 @@
-function [SNR, Err] = NB_FINE (Op, Monte, SNR)
+function Err = NB_FINE (Op, SNR_i)
 
 %% Fisher Information Neural Estimation
 %
@@ -7,12 +7,10 @@ function [SNR, Err] = NB_FINE (Op, Monte, SNR)
     % + 2. delta_arr: number of transmit antennas
     % + 3. Epochs: number of receive antennas
     % + 4. lr: length of the channel
-    % + 5. Monte: simulation times
-    % + 6. SNR: range of the SNR
+    % + 5. SNR_i: signal noise ratio
 %
 %% Output:
-    % + SNR: range of the SNR
-    % + Err: CRB
+    % + 1. Err: CRB
 %
 %% Algorithm:
     % Step 1: Initialize variables
@@ -24,7 +22,7 @@ function [SNR, Err] = NB_FINE (Op, Monte, SNR)
 % Serbia, 2022, pp. 2111-2115.
 
 % Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 08-Jun-2023 16:52:13 
+% Last Modified by Son 10-Jul-2023 11:13:13 
 
 
 % Initialize variables
@@ -32,9 +30,6 @@ data_size  = Op{1};    % Data size
 delta_arr  = Op{2};    % delta
 Epochs     = Op{3};    % max epochs
 lr         = Op{4};    % learning-rate 
-
-Monte   = Monte;
-SNR     = SNR;
 
 OS_support = {'OS_WINDOWS', 'OS_LINUX'};
 ls_pkgs = {'numpy', 'torch', 'multiprocessing', 'tqdm', 'matplotlib'};
@@ -45,20 +40,12 @@ end
 
 global main_path;
 file_path = fullfile(main_path, 'Algorithms', 'CRB_Mode', 'Non-blind', 'FINE', 'NB_FINE.py');
+global InSI_time;
+timestamp_id = num2str(round(posixtime(InSI_time)));
 
-Err_f = [];
-for Monte_i = 1:Monte
-    [status, ~, Err] = Run_py_script(file_path, data_size, delta_arr, Epochs, lr, Monte, SNR);
-    if status == 1
-        Err_f = [Err_f; Err];
-    end
-end
-
-% Return
-if Monte ~= 1
-    Err = mean(Err_f);
-else
-    Err = Err_f;
+[status, ~, Err] = Run_py_script(file_path, timestamp_id, data_size, delta_arr, Epochs, lr, SNR_i);
+if status == 1
+    return
 end
 
 end
