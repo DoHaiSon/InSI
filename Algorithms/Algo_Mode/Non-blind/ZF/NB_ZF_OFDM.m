@@ -13,7 +13,7 @@ function Err = NB_ZF_OFDM(Op, SNR_i, Output_type)
     % 7. Output_type: SER / BER / MSE Signal / MSE Channel
 %
 %% Output:
-    % 2. Err: SER / BER / MSE Signal / MSE Channel
+    % 1. Err: SER / BER / MSE Signal / MSE Channel
 %
 %% Algorithm:
     % Step 1: Initialize variables
