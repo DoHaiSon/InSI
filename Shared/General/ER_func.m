@@ -84,6 +84,12 @@ switch Output_type
                 data_est     = qamdemod(est_src, 4); 
             case 4
                 data_est     = qamdemod(est_src, 16);
+            case 5
+                data_est     = qamdemod(est_src, 64);
+            case 6
+                data_est     = qamdemod(est_src, 128);
+            case 7
+                data_est     = qamdemod(est_src, 256);
         end
         % Dec to bin
         bin_src = dec2bin(data_src);
