@@ -12,7 +12,7 @@ classdef NB_MMSE_OFDM_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 1, 2, 2]
-        values = {48, 12, 2, {'Real', 'Complex', 'Parametric', 'Input'}, {'Binary', 'QPSK', '4-QAM', '16-QAM', '64-QAM', '128-QAM', '256-QAM'}}
+        values = {48, 12, 2, {'Real', 'Complex', 'Input'}, {'Binary', 'QPSK', '4-QAM', '16-QAM', '64-QAM', '128-QAM', '256-QAM'}}
         default_values = {48, 12, 2, 2, 2}
         
         % Default SNR and Monte
@@ -31,7 +31,7 @@ classdef NB_MMSE_OFDM_params
         sys_model = 'OFDM_trx.png'
         title     = {'NB-MMSE OFDM'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
-        ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
+        ylabel    = {'SER', 'BER', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 
         position
         linewidth = 1

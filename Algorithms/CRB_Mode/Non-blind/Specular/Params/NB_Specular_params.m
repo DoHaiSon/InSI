@@ -30,7 +30,7 @@ classdef NB_Specular_params
         sys_model = 'nonblind_model.png'
         title     = {'NB-Specular'}
         xlabel    = {'SNR (dB)'}
-        ylabel    = {'CRB (dB)'}
+        ylabel    = {'CRB'}
         trigger   = false 
         position
         linewidth = 1

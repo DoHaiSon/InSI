@@ -12,7 +12,7 @@ classdef B_CR_Minimum_White_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 1, 2, 2, 1]
-        values = {1000, 4, 4, {'Real', 'Complex', 'Parametric', 'Input'}, {'Binary', 'QPSK', '4-QAM', '16-QAM', '64-QAM', '128-QAM', '256-QAM'}}
+        values = {1000, 4, 4, {'Real', 'Complex', 'Input'}, {'Binary', 'QPSK', '4-QAM', '16-QAM', '64-QAM', '128-QAM', '256-QAM'}}
         default_values = {1000, 4, 4, 2, 2}
         
         % Default SNR and Monte
@@ -32,7 +32,7 @@ classdef B_CR_Minimum_White_params
         sys_model = 'Default.png'
         title     = {'B-CR minimum white'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
-        ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
+        ylabel    = {'SER', 'BER', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 
         position
         linewidth = 1

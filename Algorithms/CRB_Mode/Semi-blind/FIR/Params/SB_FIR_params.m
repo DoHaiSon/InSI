@@ -30,7 +30,7 @@ classdef SB_FIR_params
         sys_model = 'nonblind_model.png'
         title     = {'SB-FIR'}
         xlabel    = {'SNR (dB)'}
-        ylabel    = {'CRB (dB)'}
+        ylabel    = {'CRB'}
         trigger   = false 
         position
         linewidth = 1

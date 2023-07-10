@@ -12,7 +12,7 @@ classdef B_CMA_Grad_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 1, 2, 2, 1, 1]
-        values = {10000,  4, 4, {'Real', 'Complex', 'Parametric', 'Input'}, {'Binary', 'QPSK', '4-QAM'}, 0.00001, 20}
+        values = {10000,  4, 4, {'Real', 'Complex', 'Input'}, {'Binary', 'QPSK', '4-QAM'}, 0.00001, 20}
         default_values = {10000, 4, 4, 2, 2, 0.00001, 20}
         
         % Default SNR and Monte
@@ -31,7 +31,7 @@ classdef B_CMA_Grad_params
         sys_model = 'Algo_B_CMA.png'
         title     = {'B-CMA gradient'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
-        ylabel    = {'SER (dB)', 'BER (dB)', 'MSE Signal (dB)', 'MSE Channel (dB)'}
+        ylabel    = {'SER', 'BER', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 
         position
         linewidth = 1
