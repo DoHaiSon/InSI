@@ -204,8 +204,13 @@ for i = 1:params.num_params
                 '=', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'String')));
         case 'popupmenu'
             list_values = params.values{i};
-            name_ws = strcat([name_ws ' ' params.notations{i}], ...
-                '=', list_values{Op{i}});
+            if iscell(list_values)
+                name_ws = strcat([name_ws ' ' params.notations{i}], ...
+                    '=', list_values{Op{i}});
+            else
+                name_ws = strcat([name_ws ' ' params.notations{i}], ...
+                    '=', list_values);
+            end
         case 'togglebutton'
             name_ws = strcat([name_ws ' ' params.notations{i}], ...
                 '=', num2str(get(eval(strcat('handles.Op_', num2str(i))), 'Value')));

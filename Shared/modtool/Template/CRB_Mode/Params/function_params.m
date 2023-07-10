@@ -29,7 +29,7 @@ classdef function_params
         sys_model = 'Default.png'
         title = 
         xlabel    = {'SNR (dB)'}
-        ylabel    = {'CRB (dB)'}
+        ylabel    = {'CRB'}
         trigger   = false 
         position  
         linewidth = 1
