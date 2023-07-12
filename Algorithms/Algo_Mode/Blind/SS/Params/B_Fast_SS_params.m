@@ -1,22 +1,22 @@
-classdef B_SS_params
+classdef B_Fast_SS_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     
     properties
         % Parameters
-        num_params = 6
-        params = {'Num. bits', 'Num. channels', 'Channel order', 'Channel type', 'Modulation', 'Window length'}
-        notations = {'N', 'Nr', 'ChL', 'ChType', 'Mod', 'L'}
+        num_params = 7
+        params = {'Num. samples', 'Num. transmitters', 'Num. receivers', 'Num. paths', 'Num. sub-carriers', 'Channel type', 'Modulation'}
+        notations = {'Ns', 'Nt', 'Nr', 'N', 'K', 'ChType', 'Mod'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
         %                        button      = 3
-        params_type = [1, 1, 1, 2, 2, 1]
-        values = {100, 4, 4, {'Real', 'Complex', 'Input'}, {'Binary', 'QPSK', '4-QAM', '16-QAM', '64-QAM', '128-QAM', '256-QAM'}, 10}
-        default_values = {100, 4, 4, 2, 2, 10}
+        params_type = [1, 1, 1, 1, 1, 2, 2]
+        values = {30, 2, 4, 5, 64, {'Real', 'Complex', 'Input'}, {'Binary', 'QPSK', '4-QAM', '16-QAM', '64-QAM', '128-QAM', '256-QAM'}}
+        default_values = {30, 2, 4, 5, 64, 2, 3}
         
         % Default SNR and Monte
-        default_Monte = 10
+        default_Monte = 100
         default_SNR = '-10:5:20'
 
         % Output
@@ -24,12 +24,12 @@ classdef B_SS_params
         %                      BER Sig = 2
         %                      MSE Sig = 3
         %                      MSE Cha = 4
-        outputs = [1, 2, 3]
-        default_output = 1
+        outputs = [4]
+        default_output = 4
         
         % Figure
-        sys_model = 'Default.png'
-        title     = {'B-SS'}
+        sys_model = 'Algo_B_Fast_SS.png'
+        title     = {'B-Fast_SS'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER', 'BER', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 
@@ -38,14 +38,14 @@ classdef B_SS_params
         color     = 'k'
         
         % Triggers/Flags
-        has_inter     = [true, false, false, false, false, false]
+        has_inter     = [false, true, true, false, true, false, false]
         rect = {}
-        rect_position = {[1 193 105 65], 0, 0, 0, [810 645 30 30], [405 355 45 45]}
-        rect_linewidth = {2, 0, 0, 0, 2, 2}
-        rect_color     = {'b', 'b', 'b', 'b', 'r', 'g'}        
+        rect_position = {0, [880 1180 70 70], [1107 1180 70 70], 0, [1850 1235 170 80], 0, 0}
+        rect_linewidth = {0, 2, 2, 0, 2, 0, 0}
+        rect_color     = {'b', 'r', 'b', 'b', 'g', 'b', 'b'}        
 
         % Reference website
-        web_url = 'https://ieeexplore.ieee.org/abstract/document/348133'
+        web_url = ''
     end
     
     methods (Access = private)
