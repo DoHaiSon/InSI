@@ -12,8 +12,8 @@ classdef B_Fast_SS_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 1, 1, 1, 2, 2]
-        values = {30, 2, 4, 5, 64, {'Real', 'Complex', 'Input'}, {'Binary', 'QPSK', '4-QAM', '16-QAM', '64-QAM', '128-QAM', '256-QAM'}}
-        default_values = {30, 2, 4, 5, 64, 2, 3}
+        values = {100, 2, 4, 5, 64, {'Real', 'Complex', 'Input'}, {'Binary', 'QPSK', '4-QAM', '16-QAM', '64-QAM', '128-QAM', '256-QAM'}}
+        default_values = {100, 2, 4, 5, 64, 2, 3}
         
         % Default SNR and Monte
         default_Monte = 100
