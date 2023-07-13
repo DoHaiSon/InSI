@@ -229,7 +229,7 @@ function board_CreateFcn(hObject, eventdata, handles)
     [Orleans_sample, ~, Orleans_sample_alpha]   = imread(fullfile(main_path, '/Resource/Icon/Orleans.png'));
     [Nafosted_sample, ~, Nafosted_sample_alpha] = imread(fullfile(main_path, '/Resource/Icon/Nafosted.png'));
     [PRIMSE_sample, ~, PRIMSE_sample_alpha]     = imread(fullfile(main_path, '/Resource/Icon/PRISME.png'));
-    [M3_sample, ~, M3_sample_alpha]             = imread(fullfile(main_path, '/Resource/Icon/Viettel_M3.png'));
+    [VMC_sample, ~, VMC_sample_alpha]           = imread(fullfile(main_path, '/Resource/Icon/Viettel_VMC.png'));
     [UET_sample, ~, UET_sample_alpha]           = imread(fullfile(main_path, '/Resource/Icon/VNU_UET.png'));
 
     ax1 = subplot(6, 6, 1);
@@ -249,7 +249,7 @@ function board_CreateFcn(hObject, eventdata, handles)
     ax4.Position = [x_0 + width / 4, y_0, width / 4.2, height / 4.2];
     axis off;
     ax5 = subplot(6, 6, 5);
-    image(M3_sample, 'AlphaData', M3_sample_alpha);
+    image(VMC_sample, 'AlphaData', VMC_sample_alpha);
     ax5.Position = [x_0 + width / 2.1, y_0, width / 4.2, height / 4.2];
     axis off;
     ax6 = subplot(6, 6, 6);
