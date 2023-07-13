@@ -28,7 +28,7 @@ classdef B_CMA_Grad_Unidimensional_params
         default_output = 1
         
         % Figure
-        sys_model = 'Algo_B_CMA.png'
+        sys_model = 'Algo_B_CMA_Grad_Unidimensional.png'
         title     = {'B-CMA gradient uni'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER', 'BER', 'MSE Signal (dB)', 'MSE Channel (dB)'}
@@ -40,7 +40,7 @@ classdef B_CMA_Grad_Unidimensional_params
         % Triggers/Flags
         has_inter     = [true, false, false, false, false, true]
         rect = {}
-        rect_position = {[1 193 105 65], 0, 0, 0, 0, [405 355 45 45]}
+        rect_position = {[5 415 210 150], 0, 0, 0, 0, [870 760 100 100]}
         rect_linewidth = {2, 0, 0, 0, 0, 2}
         rect_color     = {'b', 'b', 'b', 'b', 'r', 'g'}    
 

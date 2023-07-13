@@ -40,9 +40,9 @@ classdef B_CMA_Grad_params
         % Triggers/Flags
         has_inter     = [true, false, false, false, false, true, true]
         rect = {}
-        rect_position = {[1 193 105 65], 0, 0, 0, 0, [810 645 30 30], [405 355 45 45]}
+        rect_position = {[5 415 210 150], 0, 0, 0, 0, [1735 1390 100 100], [870 760 100 100]}
         rect_linewidth = {2, 0, 0, 0, 0, 2, 2}
-        rect_color     = {'b', 'b', 'b', 'b', 'r', 'g', 'g'}       
+        rect_color     = {'b', 'b', 'b', 'b', 'r', 'g', 'r'}       
 
         % Reference website
         web_url = 'https://ieeexplore.ieee.org/document/1164062'
