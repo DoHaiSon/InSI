@@ -130,7 +130,10 @@ axesH        = handles_main.board;  % Not safe! Better get the handle explicitly
 releasesysmodel();
 
 img          = imread(fullfile(main_path, '/Resource/Dashboard', params.sys_model));
-imshow(img, 'Parent', axesH);
+if length(img) < 2000
+    img = imresize(img, 2065 / length(img));
+end
+imshow(img, 'Parent', axesH, 'InitialMagnification','fit');
 title_dashboard = load_title(algo);
 
 if length(title_dashboard) > configs.max_title_dashboard

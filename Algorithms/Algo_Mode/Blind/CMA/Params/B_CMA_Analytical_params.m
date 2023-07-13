@@ -11,7 +11,7 @@ classdef B_CMA_Analytical_params
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
         %                        button      = 3
-        params_type = [1, 1, 1, 2, 2, 1, 1]
+        params_type = [1, 1, 1, 2, 2, 1]
         values = {1000,  4, 4, {'Real', 'Complex', 'Input'}, {'Binary', 'QPSK', '4-QAM'}, 20}
         default_values = {1000, 4, 4, 2, 2, 20}
         
@@ -28,7 +28,7 @@ classdef B_CMA_Analytical_params
         default_output = 1
         
         % Figure
-        sys_model = 'Algo_B_CMA.png'
+        sys_model = 'Algo_B_CMA_Analytical.png'
         title     = {'B-CMA analytical'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER', 'BER', 'MSE Signal (dB)', 'MSE Channel (dB)'}
@@ -38,10 +38,10 @@ classdef B_CMA_Analytical_params
         color     = 'k'
         
         % Triggers/Flags
-        has_inter     = [true, false, false, false, false, true]
+        has_inter     = [false, true, false, false, false, false]
         rect = {}
-        rect_position = {[1 193 105 65], 0, 0, 0, 0, [405 355 45 45]}
-        rect_linewidth = {2, 0, 0, 0, 0, 2}
+        rect_position = {0, [490 850 550 300], 0, 0, 0, 0}
+        rect_linewidth = {2, 2, 0, 0, 0, 2}
         rect_color     = {'b', 'b', 'b', 'b', 'r', 'g'}       
 
         % Reference website

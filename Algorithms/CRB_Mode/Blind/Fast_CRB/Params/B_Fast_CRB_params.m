@@ -26,8 +26,8 @@ classdef  B_Fast_CRB_params
         %                      MSE Cha = 4
         
         % Figure
-        sys_model = 'Default.png'
-        title ={'B_CCRB'}
+        sys_model = 'CRB_B_Fast_CRB.png'
+        title ={'B_Fast_CRB'}
         xlabel    = {'SNR (dB)'}
         ylabel    = {'CRB'}
         trigger   = false 
@@ -36,11 +36,11 @@ classdef  B_Fast_CRB_params
         color     = 'k'
         
         % Triggers/Flags
-        has_inter =[false,false,false]
+        has_inter =[true,false,true]
         rect = {}
-        rect_position ={0,0,0}
+        rect_position ={[1240 1205 265 80],0, [430 940 110 110]}
         rect_linewidth ={2,2,2}
-        rect_color ={'b','b','b'}
+        rect_color ={'b','b','r'}
 
         % Reference website
         web_url = 'https://ieeexplore.ieee.org/abstract/document/9187805'
