@@ -178,8 +178,8 @@ if (results.pre_output == 2 && results.mode == 2)
     results.trigger = true;
 end
 
-% If user changed the output type, we force change the fig mode to
-% subfig
+% If user changed the output type, we force change the fig mode 
+% to subfig
 if (results.pre_output ~= Output_type && results.pre_output ~= 0)
     set(handles_main.figmode_1, configs.UI_container_Menu, ' Single');
     set(handles_main.figmode_2, configs.UI_container_Menu, ' Combine');

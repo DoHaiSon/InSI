@@ -127,9 +127,10 @@ function methods_Callback(hObject, eventdata, handles)
         
         set(handles.panelparams, 'Visible', 'off');
         set(handles.btngroup, 'Visible', 'off');
-        set(handles.ref_web, 'Visible', 'off');
         return;
     end
+    set(handles.ref_web, 'Visible', 'off');
+
     default = '                  Select version';
     vers = load_versions('Blind', default, methods{method});
     set(handles.version, 'String', vers);

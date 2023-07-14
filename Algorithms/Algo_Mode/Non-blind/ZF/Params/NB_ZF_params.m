@@ -38,11 +38,11 @@ classdef NB_ZF_params
         color     = 'k'
         
         % Triggers/Flags
-        has_inter     = [false, false, false, false, false, false]
+        has_inter     = [true, true, true, false, false, false]
         rect = {}
-        rect_position = {0, 0, 0, 0, 0, 0}
-        rect_linewidth = {0, 0, 0, 0, 0, 0}
-        rect_color     = {'b', 'b', 'b', 'b', 'b', 'b'} 
+        rect_position = {[145 480 100 100], [275 1130 290 100], [1485 1130 290 100], 0, 0, 0}
+        rect_linewidth = {2, 2, 2, 0, 0, 0}
+        rect_color     = {'b', 'g', 'r', 'b', 'b', 'b'}
 
         % Reference website
         web_url = 'https://www.sharetechnote.com/html/Communication_ChannelModel_ZF.html'

@@ -28,7 +28,7 @@ classdef B_MRE_quadratic_params
         default_output = 1
         
         % Figure
-        sys_model = 'Default.png'
+        sys_model = 'CRB_B_Fast_CRB.png'
         title     = {'B-MRE quadra'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER', 'BER', 'MSE Signal (dB)', 'MSE Channel (dB)'}
@@ -38,11 +38,11 @@ classdef B_MRE_quadratic_params
         color     = 'k'
         
         % Triggers/Flags
-        has_inter     = [true, false, false, false, false, false]
+        has_inter     = [true, true, false, false, false, false]
         rect = {}
-        rect_position = {[1 193 105 65], 0, 0, 0, [810 645 30 30], [405 355 45 45]}
-        rect_linewidth = {2, 0, 0, 0, 2, 2}
-        rect_color     = {'b', 'b', 'b', 'b', 'r', 'g'}        
+        rect_position = {[430 940 110 110], [1240 1205 265 80], 0, 0, 0, 0}
+        rect_linewidth = {2, 2, 0, 0, 2, 0}
+        rect_color     = {'b', 'r', 'b', 'b', 'r', 'b'}
 
         % Reference website
         web_url = 'https://ieeexplore.ieee.org/document/622953'

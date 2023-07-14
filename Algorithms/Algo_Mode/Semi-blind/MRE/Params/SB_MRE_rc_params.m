@@ -28,8 +28,8 @@ classdef SB_MRE_rc_params
         default_output = 1
         
         % Figure
-        sys_model = 'Algo_B_CMA.png'
-        title     = {'SB-MRE'}
+        sys_model = 'Algo_SB_MRE.png'
+        title     = {'SB-MRE rc'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER', 'BER', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 
@@ -38,11 +38,11 @@ classdef SB_MRE_rc_params
         color     = 'k'
         
         % Triggers/Flags
-        has_inter     = [true, false, false, false, false, true, true, false, false]
+        has_inter     = [true, true, true, false, false, false, false, false, false]
         rect = {}
-        rect_position = {[1 193 105 65], 0, 0, 0, 0, [810 645 30 30], [405 355 45 45], 0, 0}
-        rect_linewidth = {2, 0, 0, 0, 0, 2, 2, 0, 0}
-        rect_color     = {'b', 'b', 'b', 'b', 'r', 'g', 'g', 'b', 'b'}       
+        rect_position = {[120 480 100 100], [260 1130 290 100], [1470 1130 290 100], 0, 0, 0, 0, 0, 0}
+        rect_linewidth = {2, 2, 2, 2, 2, 2, 2, 2, 2}
+        rect_color     = {'b', 'g', 'r', 'b', 'r', 'g', 'g', 'b', 'b'}         
 
         % Reference website
         web_url = ''

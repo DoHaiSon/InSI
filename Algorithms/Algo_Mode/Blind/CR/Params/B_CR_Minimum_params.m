@@ -29,7 +29,7 @@ classdef B_CR_Minimum_params
         default_output = 4
         
         % Figure
-        sys_model = 'Default.png'
+        sys_model = 'CRB_B_Fast_CRB.png'
         title     = {'B-CR minimum'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER', 'BER', 'MSE Signal (dB)', 'MSE Channel (dB)'}
@@ -39,11 +39,11 @@ classdef B_CR_Minimum_params
         color     = 'k'
         
         % Triggers/Flags
-        has_inter     = [true, false, false, false, false]
+        has_inter     = [true, true, false, false, false]
         rect = {}
-        rect_position = {[1 193 105 65], 0, 0, 0, [810 645 30 30]}
-        rect_linewidth = {2, 0, 0, 0, 2}
-        rect_color     = {'b', 'b', 'b', 'b', 'r'}        
+        rect_position = {[430 940 110 110], [1240 1205 265 80], 0, 0, 0}
+        rect_linewidth = {2, 2, 0, 0, 2}
+        rect_color     = {'b', 'r', 'b', 'b', 'r'}        
 
         % Reference website
         web_url = ''
