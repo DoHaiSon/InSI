@@ -27,7 +27,7 @@ classdef SB_Misspecified_params
 %         default_output = 1
         
         % Figure
-        sys_model = 'nonblind_model.png'
+        sys_model = 'Default.png'
         title     = {'SB-Misspecified'}
         xlabel    = {'SNR (dB)'}
         ylabel    = {'CRB'}
@@ -37,11 +37,11 @@ classdef SB_Misspecified_params
         color     = 'k'
         
         % Triggers/Flags
-        has_inter     = [true, true, false, false, false]
+        has_inter     = [true, true, false, false, false, false]
         rect = {}
-        rect_position = {[5 290 60 60], [1025 620 60 60], 0, 0, 0}
-        rect_linewidth = {2, 2, 0, 0, 0}
-        rect_color     = {'b', 'r', 'b', 'b', 'b'}
+        rect_position = {[275 1130 290 100], [1485 1130 290 100], 0, 0, 0, 0}
+        rect_linewidth = {2, 2, 0, 0, 0, 0}
+        rect_color     = {'b', 'r', 'b', 'b', 'b', 'b'}
 
         % Reference website
         web_url = 'https://ieeexplore.ieee.org/abstract/document/9537597'

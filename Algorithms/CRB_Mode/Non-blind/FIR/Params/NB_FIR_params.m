@@ -27,7 +27,7 @@ classdef NB_FIR_params
 %         default_output = 1
         
         % Figure
-        sys_model = 'nonblind_model.png'
+        sys_model = 'Default.png'
         title     = {'NB-FIR'}
         xlabel    = {'SNR (dB)'}
         ylabel    = {'CRB'}
@@ -39,7 +39,7 @@ classdef NB_FIR_params
         % Triggers/Flags
         has_inter     = [true, true, false, false, false]
         rect = {}
-        rect_position = {[5 290 60 60], [1025 620 60 60], 0, 0, 0}
+        rect_position = {[275 1130 290 100], [1485 1130 290 100], 0, 0, 0}
         rect_linewidth = {2, 2, 0, 0, 0}
         rect_color     = {'b', 'r', 'b', 'b', 'b'}
 
