@@ -99,7 +99,7 @@ for i=1:params.num_params
             set(eval(strcat('handles.Op_', num2str(i))), 'Style', 'popupmenu');
             % Scale droplist box
             if (trigger_scale)
-                set(eval(strcat('handles.Op_', num2str(i))), 'units','pixels');
+%                 set(eval(strcat('handles.Op_', num2str(i))), 'units','pixels');
                 old_pos    = get(eval(strcat('handles.Op_', num2str(i))), 'Position');
                 if (old_pos(3) <= 60)
                     new_pos    = old_pos;

@@ -1,2 +1,4 @@
 /codegen/*
 *.asv
+*.txt
+__pycache__/
