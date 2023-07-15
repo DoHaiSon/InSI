@@ -1,16 +1,18 @@
 function load_funcs(hObject, eventdata, handles, mode, method, algo)
 
 %% ~ = load_funcs(hObject, eventdata, handles, mode, method, algo)
-% Load current parameters in Menu, run the function, and export results to
-% figure and toolbox workspace.
+% Load current parameters in Menu, run the function, and export 
+% results to figure and toolbox workspace.
 %
 %% Input:
     % 1. hObject: (hObject) - hObject of current GUI
     % 2. eventdata: (eventdata) - eventdata of current GUI
     % 3. handles: (handles) - handles of current GUI
-    % 4. mode: (char) - current mode of toolbox 'Algo_Mode': Algorithm mode; 'CRB_Mode': CRB mode;
-    % 'Demo_Mode': Demo mode
-    % 5. method: (char) - the selected method 'Non-blind': None-blind;
+    % 4. mode: (char) - current mode of toolbox 'Algo_Mode': 
+    % Algorithm mode; 'CRB_Mode': CRB mode; 'Demo_Mode': Demo 
+    % mode
+    % 5. method: (char) - the selected method 'Non-blind': 
+    % None-blind;
     % 'Semi-blind': Semi-blind; 'Blind': Blind
     % 6. algo: (char) - the name of selected algorithm
 %
@@ -19,7 +21,7 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo)
 %% Require R2006A
 %
 % Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 20-Apr-2023 17:52:13 
+% Last Modified by Son 15-Jul-2023 18:23:00 
 
 global main_path;
 param_file_name = strcat(algo, '_params');
@@ -121,6 +123,8 @@ catch
     waitbar(1, InSI_waitbar, sprintf('Done!'));
     pause(.3);
     delete(InSI_waitbar);
+
+    return
 end
 
 runtime = datetime('now') - InSI_time;
@@ -162,11 +166,16 @@ for i = 1:params.num_params
 end
 eval([algo '.SNR' '= SNR;']);
 eval([algo '.Err' '= Err;']);
+eval([algo '.Monte' '= Monte;']);
 
 ws_index = -1;
 for i = 1:results.figparams.count
-    if strcmp(results.figparams.title{end}, results.figparams.title{i})
-        ws_index = ws_index + 1;
+    try
+        if strcmp(results.figparams.title{end}, results.figparams.title{i})
+            ws_index = ws_index + 1;
+        end
+    catch ME
+        disp(ME);
     end
 end
 if ws_index == 0
