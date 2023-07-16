@@ -39,7 +39,7 @@ classdef B_FINE_params
         % Triggers/Flags
         has_inter     = [false, true, false, true, false, false]
         rect = {}
-        rect_position = {0, [20 1130 150 150], 0, [1100 590 400 200], 0, 0}
+        rect_position = {0, [1 1110 150 150], 0, [860 1110 400 200], 0, 0}
         rect_linewidth = {0, 2, 0, 2, 0, 0}
         rect_color     = {'b', 'b', 'b', 'r', 'b', 'b'}
 
