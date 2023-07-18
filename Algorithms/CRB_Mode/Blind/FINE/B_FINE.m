@@ -48,7 +48,7 @@ file_path = fullfile(main_path, 'Algorithms', 'CRB_Mode', 'Blind', 'FINE', 'B_FI
 global InSI_time;
 timestamp_id = num2str(round(posixtime(InSI_time)));
 
-modulation = {'Bin', 'QPSK', 'QAM4', 'QAM16', 'QAM64', 'QAM256'};
+modulation = {'Bin', 'QPSK', 'QAM4', 'QAM16'};
 
 [status, ~, Err] = Run_py_script(file_path, timestamp_id, K, data_size, Mod_type, sigma_w, Epochs, lr, SNR_i);
 if status == 1

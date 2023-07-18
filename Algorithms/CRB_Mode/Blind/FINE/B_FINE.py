@@ -263,15 +263,9 @@ if __name__ == "__main__":
     elif mod == 3:
         syms = np.random.randint(0, 4, K * data_size)
         modem = QAMModem(4, bin_input=False, gray_map=False)
-    elif mod == 4:
+    else:
         syms = np.random.randint(0, 16, K * data_size)
         modem = QAMModem(16, bin_input=False, gray_map=False)
-    elif mod == 5:
-        syms = np.random.randint(0, 64, K * data_size)
-        modem = QAMModem(64, bin_input=False, gray_map=False)
-    else:
-        syms = np.random.randint(0, 256, K * data_size)
-        modem = QAMModem(256, bin_input=False, gray_map=False)
 
     a = modem.modulate(syms)
     a = np.reshape(a, (K, data_size))

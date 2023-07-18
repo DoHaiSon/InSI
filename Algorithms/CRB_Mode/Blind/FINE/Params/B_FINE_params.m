@@ -12,12 +12,12 @@ classdef B_FINE_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 2, 1, 1, 1]
-        values = {2, 1000, {'Binary', 'QPSK', '4-QAM', '16-QAM', '64-QAM', '256-QAM'}, 0.1, 2000, 0.001}
+        values = {2, 1000, {'Binary', 'QPSK', '4-QAM', '16-QAM'}, 0.1, 2000, 0.001}
         default_values = {2, 1000, 1, 0.1, 2000, 0.001}
         
         % Default SNR and Monte
         default_Monte = 1
-        default_SNR = '1:1:10'
+        default_SNR = '-10:5:20'
 
         % Output
         % Type of the outputs: SER Sig = 1
