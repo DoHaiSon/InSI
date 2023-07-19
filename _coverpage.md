@@ -10,4 +10,4 @@
 <img class="dashboard" src="./assets/img/Intro.png">
 
 [Getting Started](README.md)
-[Download](https://github.com/DoHaiSon/InSI/archive/refs/heads/master.zip)
+[Download](https://github.com/avitech-vnu/InSI/archive/refs/heads/master.zip)
