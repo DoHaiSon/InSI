@@ -45,6 +45,12 @@ Based on the above specifications, we separated the toolbox architecture into th
 
 ## Output interface
 
+<p style="text-align-last: center">
+<img src="./assets/img/InSI_output.png" style="scale: 70%">
+</p>
+
 ## InSI_modtool interface
+
+![](./assets/img/InSI_modtool_interface.svg)
 
 [help]: https://www.mathworks.com/help/matlab/matlab_prog/add-help-for-your-program.html
