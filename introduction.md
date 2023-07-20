@@ -26,6 +26,7 @@ Supporting both professional and particular users, this toolbox, thus, is design
 ## Application architecture
 
 ![](./assets/img/InSI_architecture.svg)
+
 Based on the above specifications, we separated the toolbox architecture into three layers as shown in figure \ref{fig:architecture}:
 
 - GUI: when the toolbox is initialized, the user can choose the MODE as shown in figure \ref{fig:guide}. Each MODE corresponds to the dashboard, input parameters, and output interface. For more details, see \ref{dashboard}, \ref{params}, and \ref{output}.
@@ -36,9 +37,14 @@ Based on the above specifications, we separated the toolbox architecture into th
 
 ## Dashboard interface
 
+![](./assets/img/InSI_dashboard_interface.svg)
+
 ## Input parameters interface
+
+![](./assets/img/InSI_input_interface.svg)
 
 ## Output interface
 
+## InSI_modtool interface
 
 [help]: https://www.mathworks.com/help/matlab/matlab_prog/add-help-for-your-program.html
