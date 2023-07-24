@@ -21,7 +21,7 @@ See the [Quick start](quickstart.md) guide for more details.
 
 ## Support
 
-- Github issue: [https://github.com/avitech-vnu/InSI/issues](https://github.com/avitech-vnu/InSI/issues/new/choose)
+- Github issue: [https://github.com/DoHaiSon/InSI/issues](https://github.com/DoHaiSon/InSI/issues/new/choose)
 - Email: [avitech@vnu.edu.vn](mailto:avitech@vnu.edu.vn)
 
 ## Community
@@ -36,5 +36,7 @@ This work was supported by the **National Foundation for Science and Technology 
   <a href="https://nafosted.gov.vn/" target="_blank"><img src="./assets/img/Nafosted.png" class="logo"/></a>
   <img src="./assets/img/Viettel_VMC.png" class="logo" style="margin-left:10%"/>
 </p>
+
+> Docs website is powered by [docsify](https://docsify.js.org/)
 
 [matlab]: http://www.mathworks.com/products/matlab/
