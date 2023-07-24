@@ -2,10 +2,13 @@ function InSI()
 
 %% A MatLab Toolbox for Informed System Identification in wireless communication systems
 %
+%% Documents: https://avitech-vnu.github.io/InSI
+%
 %% Support R2014b or later
 %
 % Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 10-Jul-2023 13:03:00 
+% Last Modified by Son 24-Jul-2023 16:29:00 
+
 
 global main_path;
 main_path = mfilename('fullpath'); %   get path of active file
