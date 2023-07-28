@@ -22,7 +22,7 @@ function varargout = CRB_main(varargin)
 
 % Edit the above text to modify the response to help CRB_main
 
-% Last Modified by GUIDE v2.5 04-Jun-2023 00:24:58
+% Last Modified by GUIDE v2.5 28-Jul-2023 15:33:12
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -516,3 +516,41 @@ function LICENSE_Callback(hObject, eventdata, handles)
 
     % // TODO: Load from .md file
     web('https://github.com/DoHaiSon/InSI/blob/master/LICENSE', '-browser');
+
+
+% --- Executes on button press in SideSI.
+function SideSI_Callback(hObject, eventdata, handles)
+% hObject    handle to SideSI (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    
+    CRB_SideInfor_Menu();
+
+
+% --- Executes on button press in InformedSI.
+function InformedSI_Callback(hObject, eventdata, handles)
+% hObject    handle to InformedSI (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+    CRB_Informed_Menu();
+
+
+% --- Executes during object creation, after setting all properties.
+function SideSI_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to SideSI (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.24413362617038498);
+
+
+% --- Executes during object creation, after setting all properties.
+function InformedSI_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to InformedSI (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.24413362617038498);

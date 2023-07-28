@@ -31,7 +31,7 @@ w = 0;
 h = 0;
 
 
-if (isempty(strfind(hObject.Name, 'method')))
+if (~(~isempty(strfind(hObject.Tag, 'InSI_C_')) || ~isempty(strfind(hObject.Tag, 'InSI_A_')) || ~isempty(strfind(hObject.Tag, 'InSI_D_'))))
     if (isempty(strfind(hObject.Tag, 'InSI_mode')))
         if (~isempty(strfind(hObject.Tag, 'InSI_modtool')))
             % modtool windows

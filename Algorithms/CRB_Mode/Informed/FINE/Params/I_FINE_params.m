@@ -1,4 +1,4 @@
-classdef B_FINE_params
+classdef I_FINE_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     
