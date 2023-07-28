@@ -17,7 +17,7 @@ See the [Quick start](quickstart.md) guide for more details.
 
 - **Algorithms mode**: in the light of the performance analysis in the Performance mode, a set of efficient algorithms are introduced to achieve high performance levels.
 
-- **Demo mode**: a "proof of concept" to illustrate and validate the obtained results for communication systems: MIMO communication channel estimation, Dynamical phase offset estimation, Indoor localization, etc.
+- **Demo mode**: a "proof of concept" to illustrate and validate the obtained results for communication systems: MIMO-OFDM communication channel estimation, Dynamical phase offset estimation, Indoor localization, etc.
 
 ## Support
 
