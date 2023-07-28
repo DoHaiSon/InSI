@@ -40,12 +40,14 @@ if (results.mode == 2)
         end
     end
 
-    if (length(unique(tmp)) ~= 1 && ~isempty(unique(tmp)))
-        msgbox('Combine figure mode not available in multi output types.');
-        for i=1:length(results.figparams.fig_visible)
-            hObject.Data{i, 1} = [results.figparams.fig_visible(i)];
+    if length(InSI_ws) ~= 3
+        if (length(unique(tmp)) ~= 1 && ~isempty(unique(tmp)))
+            msgbox('Combine figure mode not available in multi output types.');
+            for i=1:length(results.figparams.fig_visible)
+                hObject.Data{i, 1} = [results.figparams.fig_visible(i)];
+            end
+            return;
         end
-        return;
     end
 end
 
