@@ -5,7 +5,7 @@ classdef B_CMA_Grad_block_params
     properties
         % Parameters
         num_params = 7
-        params = {'Num. samples', 'Num. channels', 'Channel order', 'Channel type', 'Modulation', 'Step size', 'Window length'}
+        params = {'No. samples', 'No. channels', 'Channel order', 'Channel type', 'Modulation', 'Step size', 'Window length'}
         notations = {'N', 'Nr', 'ChL', 'ChType', 'Mod', 'mu', 'L'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1

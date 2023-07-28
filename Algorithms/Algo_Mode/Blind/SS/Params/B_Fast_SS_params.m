@@ -5,7 +5,7 @@ classdef B_Fast_SS_params
     properties
         % Parameters
         num_params = 7
-        params = {'Num. samples', 'Num. transmitters', 'Num. receivers', 'Num. paths', 'Num. sub-carriers', 'Channel type', 'Modulation'}
+        params = {'No. samples', 'No. transmitters', 'No. receivers', 'No. paths', 'No. sub-carriers', 'Channel type', 'Modulation'}
         notations = {'Ns', 'Nt', 'Nr', 'N', 'K', 'ChType', 'Mod'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1

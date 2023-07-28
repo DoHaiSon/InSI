@@ -5,7 +5,7 @@ classdef NB_Misspecified_params
     properties
         % Parameters
         num_params = 5
-        params = {'Num. transmitters', 'Num. receivers', 'True Channel order', 'Misspecified Channel order', 'Unknown data blocks'}
+        params = {'No. transmitters', 'No. receivers', 'True Channel order', 'Misspecified Channel order', 'Unknown data blocks'}
         notations = {'Nt', 'Nr', 'Ltr', 'Lpt', 'K'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1

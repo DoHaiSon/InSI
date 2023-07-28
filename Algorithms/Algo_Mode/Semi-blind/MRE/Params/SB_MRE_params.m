@@ -5,7 +5,7 @@ classdef SB_MRE_params
     properties
         % Parameters
         num_params = 9
-        params = {'Num. samples', 'Num. transmitters', 'Num. receivers', 'Channel order', 'Channel type', 'Modulation', 'Window length', 'Num. pilots', 'Blind ratio'}
+        params = {'No. samples', 'No. transmitters', 'No. receivers', 'Channel order', 'Channel type', 'Modulation', 'Window length', 'No. pilots', 'Blind ratio'}
         notations = {'Ns', 'T', 'L', 'M', 'ChType', 'Mod', 'N', 'Np', 'lambda'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1

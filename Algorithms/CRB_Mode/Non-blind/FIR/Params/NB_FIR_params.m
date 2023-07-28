@@ -5,7 +5,7 @@ classdef NB_FIR_params
     properties
         % Parameters
         num_params = 5
-        params = {'Num. transmitters', 'Num. receivers', 'Channel order', 'Sub-carriers', 'Pilot/Data Power ratio'}
+        params = {'No. transmitters', 'No. receivers', 'Channel order', 'Sub-carriers', 'Pilot/Data Power ratio'}
         notations = {'Nt', 'Nr', 'L', 'K', 'ratio'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1

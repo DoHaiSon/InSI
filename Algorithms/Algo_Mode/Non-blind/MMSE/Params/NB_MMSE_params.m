@@ -5,7 +5,7 @@ classdef NB_MMSE_params
     properties
         % Parameters
         num_params = 6
-        params = {'Num. bits', 'Num. transmitters', 'Num. receivers', 'Channel order', 'Channel type', 'Modulation'}
+        params = {'No. samples', 'No. transmitters', 'No. receivers', 'Channel order', 'Channel type', 'Modulation'}
         notations = {'N', 'Nt', 'Nr', 'ChL', 'ChType', 'Mod'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1

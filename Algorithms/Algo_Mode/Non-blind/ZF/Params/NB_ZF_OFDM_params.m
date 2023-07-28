@@ -5,7 +5,7 @@ classdef NB_ZF_OFDM_params
     properties
         % Parameters
         num_params = 5
-        params = {'Occupied carriers', 'Num. pilots', 'Channel order', 'Channel type', 'Modulation'}
+        params = {'Occupied carriers', 'No. pilots', 'Channel order', 'Channel type', 'Modulation'}
         notations = {'N', 'N_p', 'ChL', 'ChType', 'Mod'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1

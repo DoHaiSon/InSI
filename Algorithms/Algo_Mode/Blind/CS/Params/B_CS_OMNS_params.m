@@ -5,7 +5,7 @@ classdef B_CS_OMNS_params
     properties
         % Parameters
         num_params = 5
-        params = {'Num. bits', 'Num. channels', 'Channel order', 'Channel type', 'Modulation'}
+        params = {'No. samples', 'No. channels', 'Channel order', 'Channel type', 'Modulation'}
         notations = {'N', 'Nr', 'ChL', 'ChType', 'Mod'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1

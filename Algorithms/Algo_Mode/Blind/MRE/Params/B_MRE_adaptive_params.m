@@ -5,7 +5,7 @@ classdef B_MRE_adaptive_params
     properties
         % Parameters
         num_params = 7
-        params = {'Num. bits', 'Num. channels', 'Channel order', 'Channel type', 'Modulation', 'Window length', 'Step size'}
+        params = {'No. samples', 'No. channels', 'Channel order', 'Channel type', 'Modulation', 'Window length', 'Step size'}
         notations = {'N', 'Nr', 'ChL', 'ChType', 'Mod', 'L', 'mu'}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2

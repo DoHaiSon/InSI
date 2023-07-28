@@ -5,7 +5,7 @@ classdef  B_Fast_GCRB_SIMO_params
     properties
         % Parameters
         num_params =3
-        params ={'Num. receivers','Channel order','Num. samples'}
+        params ={'No. receivers','Channel order','No. samples'}
         notations ={'Nr','L','N'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1

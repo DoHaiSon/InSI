@@ -5,7 +5,7 @@ classdef B_CMA_Grad_Unidimensional_params
     properties
         % Parameters
         num_params = 6
-        params = {'Num. samples', 'Num. channels', 'Channel order', 'Channel type', 'Modulation', 'Window length'}
+        params = {'No. samples', 'No. channels', 'Channel order', 'Channel type', 'Modulation', 'Window length'}
         notations = {'N', 'Nr', 'ChL', 'ChType', 'Mod', 'L'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
