@@ -3,7 +3,7 @@
 
 [![Minimum Version](https://img.shields.io/badge/Requires-R2014a-blue.svg)][matlab]
 
-## What it is
+## What is it?
 
 InSI Toolbox provides a set of tools to analyse, evaluate and design complicated systems, specially in wireless communication. 
 
@@ -13,11 +13,11 @@ See the [Quick start](quickstart.md) guide for more details.
 
 ## Features
 
-- **Cramer-Rao bound (CRB) Mode**: this feature provides performance analysis to understand both the limitations and the needs of the considered systems. 
+- **Performance mode**: this feature provides performance analysis based on Cramer-Rao bounds to understand both the limitations and the needs of the considered systems. 
 
-- **Algorithm Mode**: in the light of the previous performance bounds study, a set of efficient algorithms are introduced to achieve high performance level.
+- **Algorithms mode**: in the light of the performance analysis in the Performance mode, a set of efficient algorithms are introduced to achieve high performance levels.
 
-- **Demo Mode**: a "proof of concept" to illustrate and validate the obtained results for the massive MIMO system.
+- **Demo mode**: a "proof of concept" to illustrate and validate the obtained results for communication systems: MIMO communication channel estimation, Dynamical phase offset estimation, Indoor localization, etc.
 
 ## Support
 
