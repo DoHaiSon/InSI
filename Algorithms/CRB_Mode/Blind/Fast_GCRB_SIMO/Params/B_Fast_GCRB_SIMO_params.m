@@ -1,4 +1,4 @@
-classdef  B_Fast_CRB_params
+classdef  B_Fast_GCRB_SIMO_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     
@@ -27,7 +27,7 @@ classdef  B_Fast_CRB_params
         
         % Figure
         sys_model = 'CRB_B_Fast_CRB.png'
-        title ={'B_Fast_CRB'}
+        title ={'B_Fast_GCRB_SIMO'}
         xlabel    = {'SNR (dB)'}
         ylabel    = {'CRB'}
         trigger   = false 

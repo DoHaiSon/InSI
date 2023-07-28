@@ -1,6 +1,6 @@
-function Err =  B_Fast_CRB (Op, SNR_i)
+function Err =  B_Fast_GCRB_SIMO (Op, SNR_i)
 
-%% Fast Gaussian CRB
+%% Fast computation of the Gaussian CRB for blind SIMO system identification
 %
 %% Input:
     % + 1. nber_of_channels: number of receive antennas
