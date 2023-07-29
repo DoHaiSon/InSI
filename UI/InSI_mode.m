@@ -133,7 +133,15 @@ function demo_mode_Callback(hObject, eventdata, handles)
     % TODO: not yet support
     global switch_mode;
     switch_mode = 3;
-    disp('DEMO mode is not supported yet.')
+    loader('Opening the DEMO mode', 'Demo_main');
+    try
+        F = findall(0, 'type', 'figure', 'tag', 'InSI_loader');
+        waitbar(1, F, 'Done!');
+        close(F);
+    catch ME
+        disp(ME);
+    end
+    closereq(); 
 
 
 % --- Executes during object creation, after setting all properties.
