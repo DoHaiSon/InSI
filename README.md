@@ -1,5 +1,5 @@
 ## InSI
-> A MatLab Toolbox for Informed System Identification in Wireless communication systems
+> A MatLab Toolbox for Informed System Identification in Wireless Communications
 
 [![Minimum Version](https://img.shields.io/badge/Requires-R2014a-blue.svg)][matlab]
 
