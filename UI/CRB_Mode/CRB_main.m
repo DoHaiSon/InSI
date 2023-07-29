@@ -22,7 +22,7 @@ function varargout = CRB_main(varargin)
 
 % Edit the above text to modify the response to help CRB_main
 
-% Last Modified by GUIDE v2.5 28-Jul-2023 15:33:12
+% Last Modified by GUIDE v2.5 28-Jul-2023 17:23:36
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -233,27 +233,39 @@ function board_CreateFcn(hObject, eventdata, handles)
 
     ax1 = subplot(6, 6, 1);
     image(UET_sample, 'AlphaData', UET_sample_alpha);
-    ax1.Position = [x_0 + width / 4, y_0 + height / 4, width /5, height /4.3];
+    ax1.Position = [x_0 + width / 8, y_0 + height / 4, width /6.2, height /5.5];
     axis off;
     ax2 = subplot(6, 6, 2);
     image(Orleans_sample, 'AlphaData', Orleans_sample_alpha);
-    ax2.Position = [x_0 + width / 1.9, y_0 + height / 4, width /5, height / 5];
+    ax2.Position = [x_0 + width / 2.45, y_0 + height / 3.8, width /6,   height / 6];
     axis off;
     ax3 = subplot(6, 6, 3);
-    image(AVITECH_sample, 'AlphaData', AVITECH_sample_alpha);
-    ax3.Position = [x_0, y_0, width / 4.2, height / 4.2];
+    image(Nafosted_sample, 'AlphaData', Nafosted_sample_alpha);
+    ax3.Position = [x_0 + width / 1.5, y_0 + height / 4.3, width / 4.2, height / 4.2];
     axis off;
     ax4 = subplot(6, 6, 4);
-    image(PRIMSE_sample, 'AlphaData', PRIMSE_sample_alpha);
-    ax4.Position = [x_0 + width / 4, y_0, width / 4.2, height / 4.2];
+    image(AVITECH_sample, 'AlphaData', AVITECH_sample_alpha);
+    ax4.Position = [x_0 + width / 10, y_0, width / 4.5, height / 4.5];
     axis off;
     ax5 = subplot(6, 6, 5);
-    image(VMC_sample, 'AlphaData', VMC_sample_alpha);
-    ax5.Position = [x_0 + width / 2.1, y_0, width / 4.2, height / 4.2];
+    image(PRIMSE_sample, 'AlphaData', PRIMSE_sample_alpha);
+    ax5.Position = [x_0 + width / 2.6, y_0, width / 4.2, height / 4.2];
     axis off;
     ax6 = subplot(6, 6, 6);
-    image(Nafosted_sample, 'AlphaData', Nafosted_sample_alpha);
-    ax6.Position = [width / 1.3, y_0, width / 4.2, height / 4.2];
+    image(VMC_sample, 'AlphaData', VMC_sample_alpha);
+    ax6.Position = [width / 1.45, y_0, width / 4, height / 4];
+    axis off;
+    ax7 = subplot(6, 6, 7);
+    text(ax7, x_0 + width * 2.5, y_0 + height * 2.5, 'InSI', 'FontSize', 28, 'FontWeight', 'bold', 'Color', '#004d80');
+    axis off;
+    ax8 = subplot(6, 6, 8);
+    text(ax8, x_0 - width * 3.3, y_0 + height * 1.8, 'Informed System Identification in Wireless Communication Systems', 'FontSize', 14, 'FontWeight', 'normal');
+    axis off;
+    ax9 = subplot(6, 6, 9);
+    text(ax9, x_0 - width * 2.8, y_0 + height / 1.5, 'Performance analysis', 'FontSize', 20, 'FontWeight', 'bold', 'Color', '#0072BD');
+    axis off;
+    ax10 = subplot(6, 6, 10);
+    text(ax10, x_0 - width * 5.5, y_0, 'based on Cramer-Rao bounds', 'FontSize', 20, 'FontWeight', 'bold', 'Color', '#0072BD');
     axis off;
     
     ax = get(hfig,'children');

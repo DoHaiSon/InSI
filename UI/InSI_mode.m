@@ -94,7 +94,7 @@ function crb_mode_Callback(hObject, eventdata, handles)
 
     global switch_mode;
     switch_mode = 1;
-    loader('Opening the CRB mode', 'CRB_main');
+    loader('Opening the PERFORMANCE mode', 'CRB_main');
     try
         F = findall(0, 'type', 'figure', 'tag', 'InSI_loader');
         waitbar(1, F, 'Done!');
@@ -113,7 +113,7 @@ function algo_mode_Callback(hObject, eventdata, handles)
 
     global switch_mode;
     switch_mode = 2;
-    loader('Opening the Channel Estimation mode', 'Algo_main');
+    loader('Opening the ALGORITHMS mode', 'Algo_main');
     try
         F = findall(0, 'type', 'figure', 'tag', 'InSI_loader');
         waitbar(1, F, 'Done!');
@@ -143,7 +143,7 @@ function name_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
     set(hObject, 'FontUnits','normalized');
-    set(hObject, 'FontSize', 0.23225806451612904);
+    set(hObject, 'FontSize', 0.43225806451612904);
 
 
 % --- Executes during object creation, after setting all properties.
