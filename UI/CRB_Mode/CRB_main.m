@@ -260,8 +260,8 @@ function board_CreateFcn(hObject, eventdata, handles)
     ax7.Position = [x_0 + width / 2.3, y_0 + height / 1.05, x_0, y_0];
     axis off;
     ax8 = subplot(6, 6, 8);
-    text(0, 0, 'Informed System Identification in Wireless Communication Systems', 'FontUnits', 'normalized', 'FontSize', 0.095, 'FontWeight', 'normal');
-    ax8.Position = [x_0 + width / 40, y_0 + height / 1.15, x_0, y_0];
+    text(0, 0, 'Informed System Identification in Wireless Communications', 'FontUnits', 'normalized', 'FontSize', 0.095, 'FontWeight', 'normal');
+    ax8.Position = [x_0 + width / 10, y_0 + height / 1.15, x_0, y_0];
     axis off;
     ax9 = subplot(6, 6, 9);
     text(0, 0, 'Performance analysis', 'FontUnits', 'normalized', 'FontSize', 0.15, 'FontWeight', 'bold', 'Color', [0 0.4470 0.7410]);
