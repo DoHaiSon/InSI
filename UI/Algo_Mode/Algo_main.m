@@ -22,7 +22,7 @@ function varargout = Algo_main(varargin)
 
 % Edit the above text to modify the response to help Algo_main
 
-% Last Modified by GUIDE v2.5 04-Jun-2023 00:24:35
+% Last Modified by GUIDE v2.5 29-Jul-2023 17:39:33
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -234,27 +234,39 @@ function board_CreateFcn(hObject, eventdata, handles)
 
     ax1 = subplot(6, 6, 1);
     image(UET_sample, 'AlphaData', UET_sample_alpha);
-    ax1.Position = [x_0 + width / 4, y_0 + height / 4, width /5, height /4.3];
+    ax1.Position = [x_0 + width / 8, y_0 + height / 4, width /6.2, height /5.5];
     axis off;
     ax2 = subplot(6, 6, 2);
     image(Orleans_sample, 'AlphaData', Orleans_sample_alpha);
-    ax2.Position = [x_0 + width / 1.9, y_0 + height / 4, width /5, height / 5];
+    ax2.Position = [x_0 + width / 2.45, y_0 + height / 3.8, width /6,   height / 6];
     axis off;
     ax3 = subplot(6, 6, 3);
-    image(AVITECH_sample, 'AlphaData', AVITECH_sample_alpha);
-    ax3.Position = [x_0, y_0, width / 4.2, height / 4.2];
+    image(Nafosted_sample, 'AlphaData', Nafosted_sample_alpha);
+    ax3.Position = [x_0 + width / 1.5, y_0 + height / 4.3, width / 4.2, height / 4.2];
     axis off;
     ax4 = subplot(6, 6, 4);
-    image(PRIMSE_sample, 'AlphaData', PRIMSE_sample_alpha);
-    ax4.Position = [x_0 + width / 4, y_0, width / 4.2, height / 4.2];
+    image(AVITECH_sample, 'AlphaData', AVITECH_sample_alpha);
+    ax4.Position = [x_0 + width / 10, y_0, width / 4.5, height / 4.5];
     axis off;
     ax5 = subplot(6, 6, 5);
-    image(VMC_sample, 'AlphaData', VMC_sample_alpha);
-    ax5.Position = [x_0 + width / 2.1, y_0, width / 4.2, height / 4.2];
+    image(PRIMSE_sample, 'AlphaData', PRIMSE_sample_alpha);
+    ax5.Position = [x_0 + width / 2.6, y_0, width / 4.2, height / 4.2];
     axis off;
     ax6 = subplot(6, 6, 6);
-    image(Nafosted_sample, 'AlphaData', Nafosted_sample_alpha);
-    ax6.Position = [width / 1.3, y_0, width / 4.2, height / 4.2];
+    image(VMC_sample, 'AlphaData', VMC_sample_alpha);
+    ax6.Position = [width / 1.45, y_0, width / 4, height / 4];
+    axis off;
+    ax7 = subplot(6, 6, 7);
+    text(0, 0, 'InSI', 'FontUnits', 'normalized', 'FontSize', 0.25, 'FontWeight', 'bold', 'Color', [0 0.30196078431372547 0.5019607843137255]);
+    ax7.Position = [x_0 + width / 2.3, y_0 + height / 1.05, x_0, y_0];
+    axis off;
+    ax8 = subplot(6, 6, 8);
+    text(0, 0, 'Informed System Identification in Wireless Communication Systems', 'FontUnits', 'normalized', 'FontSize', 0.095, 'FontWeight', 'normal');
+    ax8.Position = [x_0 + width / 40, y_0 + height / 1.15, x_0, y_0];
+    axis off;
+    ax9 = subplot(6, 6, 9);
+    text(0, 0, 'System identification algorithms', 'FontUnits', 'normalized', 'FontSize', 0.15, 'FontWeight', 'bold', 'Color', [0 0.4470 0.7410]);
+    ax9.Position = [x_0 + width / 8, y_0 + height / 1.5, x_0, y_0];
     axis off;
     
     ax = get(hfig,'children');
@@ -529,3 +541,41 @@ function LICENSE_Callback(hObject, eventdata, handles)
 
     % // TODO: Load from .md file
     web('https://github.com/DoHaiSon/InSI/blob/master/LICENSE', '-browser');
+
+
+% --- Executes on button press in SIbutton.
+function SIbutton_Callback(hObject, eventdata, handles)
+% hObject    handle to SIbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    
+    Algo_SideInfor_Menu();
+
+
+% --- Executes on button press in Ibutton.
+function Ibutton_Callback(hObject, eventdata, handles)
+% hObject    handle to Ibutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+    Algo_Informed_Menu();
+
+
+% --- Executes during object creation, after setting all properties.
+function Ibutton_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Ibutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+    
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.24413362617038498);
+    
+
+% --- Executes during object creation, after setting all properties.
+function SIbutton_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to SIbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.24413362617038498);
