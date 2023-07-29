@@ -18,13 +18,22 @@ function Err = I_FINE (Op, SNR_i)
     % Step 1: Initialize variables
     % Step 2: Return 
 %
-% Ref: T. T. Duy, L. V. Nguyen, V. -D. Nguyen, N. L. Trung, and 
-% K. Abed-Meraim, "Fisher Information Neural Estimation," in 30th
-% European Signal Processing Conference (EUSIPCO), Belgrade,
-% Serbia, 2022, pp. 2111-2115.
+% Ref: Tran Trong Duy, Nguyen Van Ly, Nguyen Linh Trung, and 
+% Karim Abed-Meraim, "Fisher information estimation using neural 
+% networks," REV Journal on Electronics and Communications, vol.
+% 13, no. 1-2, Jan-Jun, 2023.
+%
+%% Require R2014B
 
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 15-Jul-2023 17:54:00 
+% Author: Tran Trong Duy, Vietnam National University, Hanoi, Vietnam
+
+% Adapted for InSI by Do Hai Son, 29-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
 
 
 % Initialize variables

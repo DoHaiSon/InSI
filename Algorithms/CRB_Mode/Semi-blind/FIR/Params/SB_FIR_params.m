@@ -44,7 +44,7 @@ classdef SB_FIR_params
         rect_color     = {'b', 'r', 'b', 'b', 'b', 'b'}
 
         % Reference website
-        web_url = ''
+        web_url = 'https://dl.acm.org/doi/abs/10.5555/151045'
     end
     
     methods (Access = private)

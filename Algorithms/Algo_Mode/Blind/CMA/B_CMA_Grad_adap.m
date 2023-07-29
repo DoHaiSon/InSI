@@ -6,7 +6,7 @@ function Err = B_CMA_Grad_adap(Op, SNR_i, Output_type)
     % + 1. N: number of samples
     % + 2. Num_Ch: number of channels
     % + 3. ChL: Channel order
-    % + 4. Ch_type: Type of the channel (real, complex, specular,
+    % + 4. Ch_type: Type of the channel (real, complex,
     % user's input)
     % + 5. Mod_type: Type of modulation (Bin, QPSK, 4-QAM)
     % + 6. mu: Step size
@@ -44,8 +44,15 @@ function Err = B_CMA_Grad_adap(Op, SNR_i, Output_type)
 %
 %% Require R2006A
 
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 08-Jul-2023 11:35:13.
+% Author: J. Treichler and B. Agee
+
+% Adapted for InSI by Do Hai Son, 29-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
 
 
 % Initialize variables

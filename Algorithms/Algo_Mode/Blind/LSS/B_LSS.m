@@ -6,7 +6,7 @@ function Err = B_LSS(Op, SNR_i, Output_type)
     % + 1. num_sq: number of samples
     % + 2. L: number of channels
     % + 3. M: Channel order
-    % + 4. Ch_type: Type of the channel (real, complex, specular,
+    % + 4. Ch_type: Type of the channel (real, complex,
     % user's input)
     % + 5. Mod_type: Type of modulation (All)
     % + 6. SNR_i: signal noise ratio
@@ -31,8 +31,15 @@ function Err = B_LSS(Op, SNR_i, Output_type)
 %
 %% Require R2006A
 
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 10-Jul-2023 10:05:00.
+% Author: Lang Tong and Qing Zhao
+
+% Adapted for InSI by Do Hai Son, 29-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
 
 
 num_sq    = Op{1};     % number of sig sequences

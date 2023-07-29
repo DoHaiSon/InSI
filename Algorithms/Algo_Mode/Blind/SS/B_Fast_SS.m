@@ -34,8 +34,15 @@ function Err = B_Fast_SS(Op, SNR_i, Output_type)
 %
 %% Require R2006A
 
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 12-Jul-2023 21:52:00.
+% Author: Ouahbi Rekik
+
+% Adapted for InSI by Do Hai Son, 29-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
 
 
 Ns         = Op{1};     % number of sig sequences

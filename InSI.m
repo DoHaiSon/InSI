@@ -4,10 +4,15 @@ function InSI()
 %
 %% Documents: https://avitech-vnu.github.io/InSI
 %
-%% Support R2014b or later
+%% Support R2014B or later
 %
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 24-Jul-2023 16:29:00 
+% Adapted for InSI by Do Hai Son, 28-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
 
 
 global main_path;
@@ -51,7 +56,7 @@ global input_data;
 input_data = {};
 
 %%  Load MODE GUI
-loader('Opening the application', 'InSI_mode');
+loader('Opening InSI', 'InSI_mode');
 try
     F = findall(0, 'type', 'figure', 'tag', 'InSI_loader');
     waitbar(1, F, 'Done!');

@@ -28,9 +28,18 @@ function Err = SB_MRE_rc(Op, SNR_i, Output_type)
 % Referenced Equalizers for MIMO Systems," in 2023 Asia Pacific
 % Signal and Information Processing Association Annual Summit and
 % Conference (APSIPA ASC), Nov. 2023.
+%
+%% Require R2006A
 
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 10-Jul-2023 10:43:13 
+% Author: Do Hai Son, Vietnam National University, Hanoi, Vietnam
+
+% Adapted for InSI by Do Hai Son, 29-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
 
 
 % Initialize variables

@@ -23,9 +23,19 @@ function Err = NB_Specular (Op, SNR_i)
 % Identification for MIMO-OFDM Communications Systems," in 55th
 % Asilomar Conference on Signals, Systems, and Computers,
 % Pacific Grove, CA, USA, 2021, pp. 443-448.
+%
+%% Require R2006A
 
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 08-Jun-2023 16:52:13 
+% Author: Le Trung Thanh, Vietnam National University, Hanoi, Vietnam
+
+% Adapted for InSI by Do Hai Son, 29-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
+
 
 % Initialize variables
 Nt  = Op{1};    % number of transmit antennas

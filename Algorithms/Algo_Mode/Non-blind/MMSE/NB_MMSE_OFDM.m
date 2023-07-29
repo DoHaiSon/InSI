@@ -6,7 +6,7 @@ function Err = NB_MMSE_OFDM(Op, SNR_i, Output_type)
     % 1. Nfft: number of Occ carriers
     % 2. Pilot_L: number of pilot symbols
     % 3. ChL: length of the channel
-    % 4. Ch_type: type of the channel (real, complex, specular, 
+    % 4. Ch_type: type of the channel (real, complex, 
     % user's input)
     % 5. Mod_type: type of modulation (All)
     % 6. SNR_i: signal noise ratio
@@ -31,9 +31,18 @@ function Err = NB_MMSE_OFDM(Op, SNR_i, Output_type)
 % Ref: Yong Soo Cho, Jaekwon Kim, Won Young Yang, Chung G. Kang, 
 % "Channel Estimation," in MIMO‐OFDM Wireless Communications 
 % with MATLAB, John Wiley & Sons, Ltd, pp. 187-207, 2010. 
+%
+%% Require R2006A
 
 % Author: Montadar Abas Taher
-% Last Modified by Son 10-Jul-2023 10:27:13 
+
+% Adapted for InSI by Do Hai Son, 29-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
 
 
 % Initialize variables

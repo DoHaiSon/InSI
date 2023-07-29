@@ -19,9 +19,18 @@ function Err =  B_Fast_GCRB_SIMO (Op, SNR_i)
 % Trung, "On the Gaussian Cramér-Rao Bound for Blind Single-Input
 % Multiple-Output System Identification: Fast and Asymptotic
 % Computations," IEEE Access, vol. 8, pp. 166503-166512, 2020.
+%
+%% Require R2006A
 
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 13-Jul-2023 14:04:00 
+% Author: M. Nait-Meziane
+
+% Adapted for InSI by Do Hai Son, 29-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
 
 
 % Initialize variables

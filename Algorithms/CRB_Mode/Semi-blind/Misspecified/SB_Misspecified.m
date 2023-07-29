@@ -19,11 +19,20 @@ function Err = SB_Misspecified (Op, SNR_i)
 %
 % Ref: L. T. Thanh, K. Abed-Meraim and N. L. Trung, "Misspecified
 % Cramer–Rao Bounds for Blind Channel Estimation Under Channel
-% Order Misspecification," in IEEE Transactions on Signal
-% Processing, vol. 69, pp. 5372-5385, 2021.
+% Order Misspecification," IEEE Transactions on Signal Processing,
+% vol. 69, pp. 5372-5385, 2021.
+%
+%% Require R2006A
 
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 10-Jul-2023 11:07:13 
+% Author: Le Trung Thanh, Vietnam National University, Hanoi, Vietnam
+
+% Adapted for InSI by Do Hai Son, 29-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
 
 
 % Initialize variables
