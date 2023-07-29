@@ -112,9 +112,10 @@ function About_Callback(hObject, eventdata, handles)
 % hObject    handle to About (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
     global main_path;
     [msgicon, iconcmap] = imread('about.png');
-    hm = msgbox({'InSI Toolbox v1.2.0.'; 'Copyright 2023 @ AVITECH-UET, PRISME-Orleans.'}, 'About', 'custom', msgicon, iconcmap);
+    hm = msgbox({'InSI v1.3.0.'; 'Copyright 2023 @ AVITECH-UET, PRISME-Orleans.'; 'This work was supported by the National Foundation for Science and Technology Development of Vietnam under Grant 01/2019/TN. We also would like to thank the Viettel Manufacturing Corporation - VMC for their support.'}, 'About', 'custom', msgicon, iconcmap);
     jframe=get(hm, 'javaframe');
     jIcon=javax.swing.ImageIcon(fullfile(main_path, '/Resource/Icon/about.png'));
     jframe.setFigureIcon(jIcon);
