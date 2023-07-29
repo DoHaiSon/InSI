@@ -256,16 +256,20 @@ function board_CreateFcn(hObject, eventdata, handles)
     ax6.Position = [width / 1.45, y_0, width / 4, height / 4];
     axis off;
     ax7 = subplot(6, 6, 7);
-    text(ax7, x_0 + width * 2.5, y_0 + height * 2.5, 'InSI', 'FontSize', 28, 'FontWeight', 'bold', 'Color', '#004d80');
+    text(0, 0, 'InSI', 'FontUnits', 'normalized', 'FontSize', 0.25, 'FontWeight', 'bold', 'Color', [0 0.30196078431372547 0.5019607843137255]);
+    ax7.Position = [x_0 + width / 2.3, y_0 + height / 1.05, x_0, y_0];
     axis off;
     ax8 = subplot(6, 6, 8);
-    text(ax8, x_0 - width * 3.3, y_0 + height * 1.8, 'Informed System Identification in Wireless Communication Systems', 'FontSize', 14, 'FontWeight', 'normal');
+    text(0, 0, 'Informed System Identification in Wireless Communication Systems', 'FontUnits', 'normalized', 'FontSize', 0.095, 'FontWeight', 'normal');
+    ax8.Position = [x_0 + width / 40, y_0 + height / 1.15, x_0, y_0];
     axis off;
     ax9 = subplot(6, 6, 9);
-    text(ax9, x_0 - width * 2.8, y_0 + height / 1.5, 'Performance analysis', 'FontSize', 20, 'FontWeight', 'bold', 'Color', '#0072BD');
+    text(0, 0, 'Performance analysis', 'FontUnits', 'normalized', 'FontSize', 0.15, 'FontWeight', 'bold', 'Color', [0 0.4470 0.7410]);
+    ax9.Position = [x_0 + width / 3.7, y_0 + height / 1.4, x_0, y_0];
     axis off;
     ax10 = subplot(6, 6, 10);
-    text(ax10, x_0 - width * 5.5, y_0, 'based on Cramer-Rao bounds', 'FontSize', 20, 'FontWeight', 'bold', 'Color', '#0072BD');
+    text(0, 0, 'based on Cramer-Rao bounds', 'FontUnits', 'normalized', 'FontSize', 0.15, 'FontWeight', 'bold', 'Color', [0 0.4470 0.7410]);
+    ax10.Position = [x_0 + width / 5.5, y_0 + height / 1.6, x_0, y_0];
     axis off;
     
     ax = get(hfig,'children');
