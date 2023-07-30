@@ -54,7 +54,7 @@ cmd = [python, script, OS_support_p, ls_pkgs_p];
 if ~isempty(strfind(stdout, 'True'))
     status = true;
 else
-    error(stdout);
+    disp(stdout);
 end
 
 end

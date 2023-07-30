@@ -46,7 +46,7 @@ classdef I_FINE_params
         rect_color     = {'b', 'b', 'b', 'r', 'b', 'b'}
 
         % Reference website
-        web_url = 'https://ieeexplore.ieee.org/abstract/document/9909530'
+        web_url = 'https://www.rev-jec.org/index.php/rev-jec/article/view/322'
     end
     
     methods (Access = private)
