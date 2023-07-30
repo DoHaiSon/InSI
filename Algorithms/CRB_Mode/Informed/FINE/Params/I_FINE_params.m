@@ -25,12 +25,14 @@ classdef I_FINE_params
         %                      MSE Cha = 3
 %         outputs = [1]
 %         default_output = 1
+        n_outputs = 3
         
         % Figure
         sys_model = 'CRB_B_FINE.png'
         title     = {'B-FINE'}
         xlabel    = {'SNR (dB)'}
         ylabel    = {'CRB'}
+        legends   = {}
         trigger   = false 
         position
         linewidth = 1

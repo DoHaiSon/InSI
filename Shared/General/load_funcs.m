@@ -20,8 +20,16 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo)
 %
 %% Require R2006A
 %
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 15-Jul-2023 18:23:00 
+% Author: Do Hai Son, Vietnam National University, Hanoi, Vietnam
+
+% Last modified by Do Hai Son, 30-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
+
 
 global main_path;
 param_file_name = strcat(algo, '_params');
@@ -77,20 +85,23 @@ global InSI_waitbar;
 
 % The main function
 try
-    ER_f = [];
+    ER_f = {};
     for Monte_i = 1:Monte
-        ER_SNR      = [];
+
+        ER_SNR      = {};
+
         for SNR_i   = SNR
             tic
             switch (mode)
                 case 'Algo_Mode'
-                    Err = eval(strcat(algo, '(Op, SNR_i, Output_type)'));
+                    Err_i = eval(strcat(algo, '(Op, SNR_i, Output_type)'));
                 case 'CRB_Mode'
-                    Err = eval(strcat(algo, '(Op, SNR_i)'));
+                    Err_i = eval(strcat(algo, '(Op, SNR_i)'));
                 case 'Demo_Mode'
             end
-            ER_SNR(end+1) = Err;
-    
+
+            ER_SNR{end+1} = Err_i;
+
             if(getappdata(InSI_waitbar, 'canceling'))
                 delete(InSI_waitbar);
                 return
@@ -104,14 +115,29 @@ try
     
             waitbar(portion * 0.89 + 0.1, InSI_waitbar, sprintf('Progress: %3.1f %%, \n Remaining time: %5.2f seconds.', [(portion * 0.89 + 0.1) * 100 remain_time]));
         end
-        ER_f = [ER_f; ER_SNR];
+
+        ER_f{end+1} = ER_SNR;
     end
     
     % Return
-    if Monte ~= 1
-        Err = mean(ER_f);
-    else
-        Err = ER_f;
+    ER_f = parse_outputs(ER_f);
+    try
+        if params.n_outputs > 1
+            for n=1:params.n_outputs
+                ER_f_n = ER_f{n}.';
+                if Monte ~= 1
+                    Err{n} = mean(ER_f_n);
+                else
+                    Err{n} = ER_f_n;
+                end
+            end
+        end
+    catch
+        if Monte ~= 1
+            Err = mean(ER_f);
+        else
+            Err = ER_f;
+        end
     end
 
     % Close the progress bar
@@ -156,7 +182,13 @@ results.figparams.gridmode = 'on';
 all_marks = {'o','+','*','.','x','s','d','^','v','>','<','p','h'};
 results.figparams.marker{end + 1} = ['-' all_marks{randi(length(all_marks))}];
 results.Output_type = Output_type;
-results.figparams.legends{end + 1} = parseleg(mode, algo);
+try
+    if params.n_outputs > 1
+        results.figparams.legends{end + 1} = params.legends;
+    end
+catch
+    results.figparams.legends{end + 1} = parseleg(mode, algo);
+end
 results.figparams.fig_visible(end + 1) = true;
 results.figparams.output_types(end + 1) = Output_type;
 

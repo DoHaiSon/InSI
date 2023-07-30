@@ -10,8 +10,16 @@ function [data] = openfile(name)
 %
 %% Require R2006A
 %
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 20-Apr-2023 17:52:13 
+% Author: Do Hai Son, Vietnam National University, Hanoi, Vietnam
+
+% Last modified by Do Hai Son, 30-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
+
 
 [file,file_path, indx] = uigetfile( ...
 {'*.m;*.mlx;*.fig;*.mat;*.slx;*.mdl',...

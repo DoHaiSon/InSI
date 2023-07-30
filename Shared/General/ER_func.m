@@ -5,8 +5,11 @@ function ER = ER_func(varargin)
 %% Input: (varargin)
     % 1. data_src: (numeric) - symbols at source
     % 2. est_src: (numeric) - estimated signals 
-    % 3. Mod_type: (numeric) - type of modulation 1- Bin; 2 - QPSK; 3 - QAM4; 4 - QAM16
-    % 4. Output_type: (numeric) - type of output  1- SER; 2 - BER; 3 - MSE Signal; 4 - MSE Channel 
+    % 3. Mod_type: (numeric) - type of modulation 1- Bin; 
+    % 2 - QPSK; 3 - QAM4; 4 - QAM16; 5 - QAM64; 6 - QAM128;
+    % 7 - QAM256
+    % 4. Output_type: (numeric) - type of output  1- SER; 2 - BER;
+    % 3 - MSE Signal; 4 - MSE Channel 
     % 5. sig_src (optional in blind mode): (numeric) - signals at source 
 %
 %% Output: 
@@ -14,8 +17,16 @@ function ER = ER_func(varargin)
 %
 %% Require R2006A
 %
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 20-Apr-2023 18:52:13 
+% Author: Do Hai Son, Vietnam National University, Hanoi, Vietnam
+
+% Last modified by Do Hai Son, 30-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
+
 
 data_src = varargin{1};
 est_src  = varargin{2};

@@ -8,13 +8,23 @@ function [p,n] = subplot_layout(n)
     % 1. n: (numeric) - the desired number of subplots
 %
 %% Output: 
-    % 1. p: (numeric) - a vector length 2 defining the number of rows and number of columns required to show n plots. 
-    % 2. n: (numeric) - the current number of subplots. This output is used only by this function for a recursive call.
+    % 1. p: (numeric) - a vector length 2 defining the number of 
+    % rows and number of columns required to show n plots. 
+    % 2. n: (numeric) - the current number of subplots. This 
+    % output is used only by this function for a recursive call.
 %
 %% Require R2006A
 %
 % Author: Rob Campbell
-% Last Modified by Do Hai Son 20-Apr-2023 17:52:13 
+
+% Adapted for InSI by Do Hai Son, 30-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
+
    
 while isprime(n) && n > 4 
     n=n+1;

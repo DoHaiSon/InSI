@@ -6,14 +6,22 @@ function arg_type = type_of (arg)
     % 1. arg: (any) - input variable
 %
 %% Output: 
-    % 1. arg_type: (char) - type of input variable 'char': char; 'number':
-    % numeric; 'array': array of char or numeric; 'bool': boolean; 'str':
-    % string; 'cell': cell
+    % 1. arg_type: (char) - type of input variable 'char': char; 
+    % 'number': numeric; 'array': array of char or numeric; 
+    % 'bool': boolean; 'str': string; 'cell': cell
 %
 %% Require R2016b
 %
-% Author: Do Hai Son - AVITECH - VNU UET - VIETNAM
-% Last Modified by Son 20-Apr-2023 17:52:13 
+% Author: Do Hai Son, Vietnam National University, Hanoi, Vietnam
+
+% Last modified by Do Hai Son, 30-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless communication systems
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
+
 
 if ischar(arg)                          % char 
     arg_type = 'char';
