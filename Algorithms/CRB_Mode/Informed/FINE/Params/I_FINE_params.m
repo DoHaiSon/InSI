@@ -12,8 +12,8 @@ classdef I_FINE_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 2, 1, 1, 1]
-        values = {2, 1000, {'Binary', 'QPSK', '4-QAM', '16-QAM'}, 0.1, 2000, 0.001}
-        default_values = {2, 1000, 1, 0.1, 2000, 0.001}
+        values = {2, 50000, {'Binary', 'QPSK', '4-QAM', '16-QAM'}, 0.1, 300, 0.001}
+        default_values = {2, 50000, 1, 0.1, 300, 0.001}
         
         % Default SNR and Monte
         default_Monte = 1
@@ -32,7 +32,7 @@ classdef I_FINE_params
         title     = {'B-FINE'}
         xlabel    = {'SNR (dB)'}
         ylabel    = {'CRB'}
-        legends   = {}
+        legends   = {'FINE CRB', 'BCRB', 'ABCRB'}
         trigger   = false 
         position
         linewidth = 1

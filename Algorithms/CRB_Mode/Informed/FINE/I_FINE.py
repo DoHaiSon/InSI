@@ -56,7 +56,6 @@ def get_default_model(d, sr):
         nn.ReLU(),
         nn.Linear(no_hidden, 1))
 
-
 ##
 ## Implementation of the neural divergence estimator for one dimensional data
 ##
@@ -149,8 +148,6 @@ def DivergenceApproximate(x_pool, y_pool, batch_size=None, get_model=None, sr=1,
     if epoch == max_epochs - 1:
         if debug:
             pass
-            # print("Lim reached!", -np.min(estimates[-window:]))
-        # estimates = most_stable_part(estimates, window=10)
 
     return max(-np.min(estimates), 0.0)
 
@@ -158,6 +155,7 @@ def DivergenceApproximate(x_pool, y_pool, batch_size=None, get_model=None, sr=1,
 def log(*args, level=0, debug_level=0, **kwargs):
     if level <= debug_level:
         print(*args, **kwargs)
+
 
 def aggregate(data, mode):
     if mode == 'max':
@@ -168,6 +166,7 @@ def aggregate(data, mode):
         return np.mean(data)
     else:
         raise RuntimeError("Not supported aggregation mode")
+    
 
 def FINE_BCRB(theta, x, mag_delta=0.15, trial=1, mode='max', train_settings=None, return_BIM=False):
     if train_settings is None:
@@ -193,7 +192,7 @@ def FINE_BCRB(theta, x, mag_delta=0.15, trial=1, mode='max', train_settings=None
 
         shifted = np.hstack((x, theta_shifted))
         estimate = [(2 * DivergenceApproximate(origin, shifted, **train_settings)) for _ in range(trial)]
-        n_theta = aggregate(estimate, mode)
+        n_theta[m] = aggregate(estimate, mode)
 
     B_diag = n_theta / (delta_diag ** 2)
     BIM = np.diag(B_diag)
@@ -212,9 +211,9 @@ def FINE_BCRB(theta, x, mag_delta=0.15, trial=1, mode='max', train_settings=None
             BIM[i, j] = (n_theta - (delta[i] ** 2) * (B_diag[i] + B_diag[j]) ) / (2 * delta[i] ** 2) # del_i = del_j
             BIM[j, i] = BIM[i, j]
 
-    FINE_BCRB = np.linalg.inv(BIM) if np.linalg.matrix_rank(BIM) == BIM.shape[0] else None
+    F_BCRB = np.linalg.inv(BIM) if np.linalg.matrix_rank(BIM) == BIM.shape[0] else None
 
-    return (FINE_BCRB, BIM) if return_BIM else FINE_BCRB
+    return (F_BCRB, BIM) if return_BIM else F_BCRB
 
 
 if __name__ == "__main__":
@@ -231,26 +230,28 @@ if __name__ == "__main__":
 
     train_settings = {
         "max_epochs": epochs,
-        "batch_size": None,
-        "sr": 5,
+        "batch_size": 1e5,
+        "sr": 2,
         "lr": lr,
-        "minor": 1e-4,
+        "minor": 1e-5,
         "get_model": None,
         "debug": False
     }
 
     FINE_settings = {
-        'mag_delta': 0.1,
+        'mag_delta': 0.05,
         'trial': 1,
         'mode': 'median',
-        'train_settings': train_settings
+        'train_settings': train_settings,
+        'return_BIM': False
     }
 
     sigma_n = 1 / np.sqrt(10 ** (SNR / 10))
+    sigma_n_square = sigma_n ** 2
+    sigma_w_square = sigma_w ** 2
+    b = -1 / sigma_w_square
 
     # Generate input symbols
-    # a = np.random.binomial(n=1, p=0.5, size=(K, data_size))
-    # a = np.where(a, a, -1).astype(np.float32)
     modem = PSKModem(2, bin_input=False)
     a = np.random.randint(0, 2, 100)
 
@@ -275,17 +276,67 @@ if __name__ == "__main__":
     
     # Generate Wiener phase offset
     theta = np.random.normal(scale=sigma_w, size=(K, data_size))
-
+    
     for k in range(1, K):
         theta[k, :] += theta[k - 1, :]
-
+    
     # Evaluate receive signal
     y = a * np.exp(-1j * theta) + n
-
+    
     observation = np.vstack((y.real, y.imag)).T
 
     BCRB = FINE_BCRB(observation, theta.T, **FINE_settings)
+
+    ## FINE CRB
     FINE_BCRB_ = np.abs(np.trace(BCRB) / K)
+
+    prior_info_theta_1 = 1 / sigma_w_square
+    # Evaluate receive signal
+    theta = np.exp(-1j * theta)
+    x = a * theta + n
+    del a, n
+    # Auxiliary signal
+    x *= theta
+    del theta
+    # Evaluate J_D
+    J_diag = -np.mean(- 2 / sigma_n_square * np.real(x) * np.tanh(2 / sigma_n_square * np.real(x)) \
+                        + 4 / (sigma_n_square ** 2) * (np.imag(x) ** 2) * (1 - np.tanh(2 / sigma_n_square * np.real(x)) ** 2) \
+                    , axis=1)
+
+    A_diag = -sigma_w_square * J_diag - 2
+    A_diag[0] += 1
+    A_diag[K - 1] += 1
+    A = np.diag(A_diag)
+    B = np.zeros((K, K))
+    for k in range(K):
+        if k > 0:
+            B[k, k - 1] = 1
+        if k < K - 1:
+            B[k, k + 1] = 1
+
+    Fisher_prior = np.copy(B)
+
+    B += A
+    B *= b
+    B[0, 0] += prior_info_theta_1
+    BCRB = np.linalg.inv(B)
+
+    ## BCRB analytical
+    BCRB = (np.trace(BCRB) / K)
+
+    J_D_h = 2 / sigma_n_square
+    J_D_l = 4 / sigma_n_square ** 2
+
+    Fisher_prior += np.diag(np.ones(K) * -2)
+    Fisher_prior[0, 0] += 1
+    Fisher_prior[K - 1, K - 1] += 1
+    Fisher_prior *= b
+    ABIM = min(J_D_l, J_D_h) * np.identity(K) + Fisher_prior
+    ABIM[0, 0] += prior_info_theta_1
+    ABCRB = np.linalg.inv(ABIM)
+
+    ## ABCRB 
+    ABCRB = (np.trace(ABCRB) / K)
 
     ## Save result to .txt file for MATLAB
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -298,4 +349,4 @@ if __name__ == "__main__":
         result.write('\n')
         result.write(str(SNR))
         result.write('\n')
-        result.write(str(FINE_BCRB_))
+        result.write(str([FINE_BCRB_, BCRB, ABCRB]))

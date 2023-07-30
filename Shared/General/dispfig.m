@@ -55,45 +55,40 @@ switch (results.mode)
         index = find(results.figparams.fig_visible, true, 'last');
         if (index ~= 0)
             if (results.Output_type == 1 || results.Output_type == 2)
-                try
-                    if params.n_outputs > 1
-                        for n=1:params.n_outputs
+                if iscell(results.figparams.data(index).y)
+                    for n=1:length(results.figparams.data(index).y)
                             semilogy(results.figaxes, results.figparams.data(index).x, results.figparams.data(index).y{n} ...
                                 , results.figparams.marker{index});
                             hold (results.figaxes, 'on');
-                        end
                     end
-                catch
+                else
                     semilogy(results.figaxes, results.figparams.data(index).x, results.figparams.data(index).y ...
                         , results.figparams.marker{index});
                 end
             else
-                try
-                    if params.n_outputs > 1
-                        for n=1:params.n_outputs
-                            plot(results.figaxes, results.figparams.data(index).x, results.figparams.data(index).y{n} ...
-                                , results.figparams.marker{index});
-                            hold (results.figaxes, 'on');
-                        end
+                if iscell(results.figparams.data(index).y)
+                    for n=1:length(results.figparams.data(index).y)
+                        plot(results.figaxes, results.figparams.data(index).x, results.figparams.data(index).y{n} ...
+                            , results.figparams.marker{index});
+                        hold (results.figaxes, 'on');
                     end
-                catch
+                else
                     plot(results.figaxes, results.figparams.data(index).x, results.figparams.data(index).y ...
-                        , results.figparams.marker{index});
+                    , results.figparams.marker{index});
                 end
             end
 
-            try
-                if params.n_outputs > 1
-                    legends_tmps = {};
-                    legends_i = results.figparams.legends{index};
-                    for n=1:params.n_outputs
-                        legends_tmps{end+1} = legends_i{n};
-                    end
-                    legend(results.figaxes, legends_tmps, 'Interpreter', interpreter);
+            if iscell(results.figparams.legends{index})
+                legends_tmps = {};
+                legends_i = results.figparams.legends{index};
+                for n=1:length(results.figparams.legends{index})
+                    legends_tmps{end+1} = legends_i{n};
                 end
-            catch
+                legend(results.figaxes, legends_tmps, 'Interpreter', interpreter);
+            else
                 legend(results.figaxes, results.figparams.legends{index}, 'Interpreter', interpreter);
             end
+
         else
             grid (results.figaxes, results.figparams.gridmode);
             set(results.figaxes ,'TickLabelInterpreter', interpreter);
@@ -111,28 +106,24 @@ switch (results.mode)
             i=results.figparams.count; % Just plot the latest data per times.
 
             if (results.Output_type == 1 || results.Output_type == 2)
-                try 
-                    if params.n_outputs > 1
-                        for n=1:params.n_outputs
-                            semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y{n} ...
-                                , results.figparams.marker{i});
-                            hold (results.figaxes, 'on');
-                        end
+               if iscell(results.figparams.data(i).y)
+                    for n=1:length(results.figparams.data(i).y)
+                        semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y{n} ...
+                            , results.figparams.marker{i});
+                        hold (results.figaxes, 'on');
                     end
-                catch
+                else
                     semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
                         , results.figparams.marker{i});
                 end
             else
-                 try 
-                    if params.n_outputs > 1
-                        for n=1:params.n_outputs
-                            plot(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y{n} ...
-                                , results.figparams.marker{i});
-                            hold (results.figaxes, 'on');
-                        end
+                if iscell(results.figparams.data(i).y)
+                    for n=1:length(results.figparams.data(i).y)
+                        plot(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y{n} ...
+                            , results.figparams.marker{i});
+                        hold (results.figaxes, 'on');
                     end
-                catch
+                else
                     plot(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
                         , results.figparams.marker{i});
                 end
@@ -150,28 +141,24 @@ switch (results.mode)
             for i=1:results.figparams.count % Plot all data.
                 if (results.figparams.fig_visible(i))
                     if (results.Output_type == 1 || results.Output_type == 2)
-                        try
-                            if params.n_outputs > 1
-                                for n=1:params.n_outputs
-                                    semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y{n} ...
-                                        , results.figparams.marker{i});
-                                    hold (results.figaxes, 'on');
-                                end
+                        if iscell(results.figparams.data(i).y)
+                            for n=1:length(results.figparams.data(i).y)
+                                semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y{n} ...
+                                    , results.figparams.marker{i});
+                                hold (results.figaxes, 'on');
                             end
-                        catch
+                        else
                             semilogy(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
                                         , results.figparams.marker{i});
                         end
                     else
-                        try
-                            if params.n_outputs > 1
-                                for n=1:params.n_outputs
-                                    plot(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y{n} ...
-                                        , results.figparams.marker{i});
-                                    hold (results.figaxes, 'on');
-                                end
+                        if iscell(results.figparams.data(i).y)
+                            for n=1:length(results.figparams.data(i).y)
+                                plot(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y{n} ...
+                                    , results.figparams.marker{i});
+                                hold (results.figaxes, 'on');
                             end
-                        catch
+                        else
                             plot(results.figaxes, results.figparams.data(i).x, results.figparams.data(i).y ...
                                 , results.figparams.marker{i});
                         end
@@ -187,20 +174,18 @@ switch (results.mode)
                 end
             end
         end
-        try
-            if params.n_outputs > 1
-                legends_tmps = {};
-                for i=1:length(legends)
-                    legends_i = legends{i};
-                    for n=1:params.n_outputs
-                        legends_tmps{end+1} = legends_i{n};
-                    end
+        legends_tmps = {};
+        for i=1:length(legends)
+            if iscell(legends{i})
+                legends_j = legends{i};
+                for j=1:length(legends_j)
+                    legends_tmps{end+1} = legends_j{j};
                 end
-                legend(results.figaxes, legends_tmps, 'Interpreter', interpreter);
+            else
+                legends_tmps{end+1} = legends{i};
             end
-        catch
-            legend(results.figaxes, legends, 'Interpreter', interpreter);
         end
+        legend(results.figaxes, legends_tmps, 'Interpreter', interpreter);
 
         grid (results.figaxes, results.figparams.gridmode);
         ylabel(results.figaxes, results.figparams.ylabel{end}, 'Interpreter', interpreter);
@@ -231,43 +216,37 @@ switch (results.mode)
             if (results.figparams.fig_visible(j))
                 subfig = subplot(p(1), p(2), index, 'Parent', results.fig); 
                 if (results.Output_type == 1 || results.Output_type == 2)
-                    try
-                        if params.n_outputs > 1
-                            for n=1:params.n_outputs
-                                semilogy(subfig, results.figparams.data(j).x, results.figparams.data(j).y{n} ...
-                                    , results.figparams.marker{j});
-                                hold (subfig, 'on');
-                            end
+                    if iscell(results.figparams.data(j).y)
+                        for n=1:length(results.figparams.data(j).y)
+                            semilogy(subfig, results.figparams.data(j).x, results.figparams.data(j).y{n} ...
+                                , results.figparams.marker{j});
+                            hold (subfig, 'on');
                         end
-                    catch
+                    else
                         semilogy(subfig, results.figparams.data(j).x, results.figparams.data(j).y ...
                             , results.figparams.marker{j});
                     end
                 else
-                    try
-                        if params.n_outputs > 1
-                            for n=1:params.n_outputs
+                    if iscell(results.figparams.data(j).y)
+                        for n=1:length(results.figparams.data(j).y)
                                 plot(subfig, results.figparams.data(j).x, results.figparams.data(j).y{n} ...
                                     , results.figparams.marker{j});
                                 hold (subfig, 'on');
-                            end
                         end
-                    catch
+                    else
                         plot(subfig, results.figparams.data(j).x, results.figparams.data(j).y ...
                             , results.figparams.marker{j});
                     end
                 end
 
-                try
-                    if params.n_outputs > 1
-                        legends_tmps = {};
-                        legends_i = results.figparams.legends{j};
-                        for n=1:params.n_outputs
-                            legends_tmps{end+1} = legends_i{n};
-                        end
-                        legend(subfig, legends_tmps, 'Interpreter', interpreter);
+                legends_tmps = {};
+                legends_i = results.figparams.legends{j};
+                if iscell(legends_i)
+                    for n=1:length(legends_i)
+                        legends_tmps{end+1} = legends_i{n};
                     end
-                catch
+                    legend(subfig, legends_tmps, 'Interpreter', interpreter);
+                else
                     legend(subfig, results.figparams.legends{j}, 'Interpreter', interpreter);
                 end
 
