@@ -27,8 +27,7 @@ classdef SI_ISDNN_structured_params
         default_output = 2
         
         % Figure
-%         sys_model = 'Algo_SI_ISDNN_structured.png'
-        sys_model = 'Default.png'
+        sys_model = 'Algo_SI_ISDNN_structured.png'
         title     = {'SI-ISDNN structured'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER', 'BER', 'MSE Signal (dB)', 'MSE Channel (dB)'}

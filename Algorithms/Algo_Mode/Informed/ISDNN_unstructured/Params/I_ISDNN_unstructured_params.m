@@ -27,9 +27,8 @@ classdef I_ISDNN_unstructured_params
         default_output = 2
         
         % Figure
-%         sys_model = 'Algo_I_ISDNN_unstructured.png'
-        sys_model = 'Default.png'
-        title     = {'SI-ISDNN unstructured'}
+        sys_model = 'Algo_I_ISDNN_unstructured.png'
+        title     = {'I-ISDNN unstructured'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
         ylabel    = {'SER', 'BER', 'MSE Signal (dB)', 'MSE Channel (dB)'}
         trigger   = false 
