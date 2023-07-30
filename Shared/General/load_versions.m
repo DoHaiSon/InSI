@@ -30,7 +30,12 @@ path  = fullfile(main_path, '/Algorithms/Algo_Mode/', model, name);
 sub   = dir(path);
 algos = {default};
 for i=1:length(sub)
-    if ~sub(i).isdir
+    name = sub(i).name;
+    ext = '';
+    if length(name) > 2
+        ext = name(end - 1:end);
+    end
+    if ~sub(i).isdir && strcmp(ext, '.m') 
         switch (model)
             case 'Blind'
                 if strcmp(sub(i).name(1:2), 'B_')
@@ -42,6 +47,14 @@ for i=1:length(sub)
                 end
             case 'Semi-blind'
                 if strcmp(sub(i).name(1:3), 'SB_')
+                    algos{end+1} = sub(i).name(1:end-2);
+                end
+            case 'Side-information'
+                if strcmp(sub(i).name(1:3), 'SI_')
+                    algos{end+1} = sub(i).name(1:end-2);
+                end
+            case 'Informed'
+                if strcmp(sub(i).name(1:2), 'I_')
                     algos{end+1} = sub(i).name(1:end-2);
                 end
             otherwise

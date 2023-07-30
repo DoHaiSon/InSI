@@ -221,7 +221,7 @@ if __name__ == "__main__":
     args = sys.argv
     timestamp_id = args[1]
     K = int(args[2])
-    data_size = int(float(args[3]))
+    data_size = int(args[3])
     mod = int(args[4])
     sigma_w = float(args[5])
     epochs = int(args[6])
