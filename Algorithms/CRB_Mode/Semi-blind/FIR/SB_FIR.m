@@ -106,10 +106,10 @@ N_pilot = 2;
 N_data  = N_total-N_pilot;
 
 
-sigmav2 = 10^(-SNR_i/10);
+sigmav2  = 10^(-SNR_i/10);
     
 % Only Pilot    
-X_nga=kron(eye(Nr),X);
+X_nga    = kron(eye(Nr),X);
 
 % Only Pilot Normal
 Iop      = X_nga'*X_nga / sigmav2;
