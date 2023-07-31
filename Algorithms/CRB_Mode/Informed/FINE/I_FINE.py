@@ -285,7 +285,7 @@ if __name__ == "__main__":
     
     observation = np.vstack((y.real, y.imag)).T
 
-    BCRB = FINE_BCRB(observation, theta.T, **FINE_settings)
+    BCRB = FINE_BCRB(theta.T, observation, **FINE_settings)
 
     ## FINE CRB
     FINE_BCRB_ = np.abs(np.trace(BCRB) / K)

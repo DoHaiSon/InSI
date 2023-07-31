@@ -5,7 +5,7 @@ classdef I_FINE_params
     properties
         % Parameters
         num_params = 6
-        params = {'Dimension', 'Data size', 'Modulation', 'Noise variance', 'Epoch', 'Learning rate'}
+        params = {'Block length', 'Data size', 'Modulation', 'Noise variance', 'Epoch', 'Learning rate'}
         notations = {'K', 'L', 'Mod', 'sigma_w', 'Epochs', 'lr'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
