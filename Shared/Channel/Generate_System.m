@@ -1,5 +1,34 @@
 function [H_matrix,h,y_p,X_Matrix_Pilot] = Generate_System(L_tr,N_r,N_t,N,K)
 
+%% [H_matrix,h,y_p,X_Matrix_Pilot] = Generate_System(L_tr,N_r,N_t,N,K): Generation of Misspecified systems.
+%
+%% Input:
+    % 1. Ltr: (int) - True Channel Order
+    % 2. N_r: (int) - number of receivers
+    % 3. N_t: (int) - number of transmitters
+    % 4. N: (int)
+    % 5. K: (int) - number of Unknown data blocks
+%
+%% Output:
+    % 1. H_matrix: (numeric) - output channel matrix
+    % 2. h: (numeric) - output channel matrix in vector form
+    % 3. y_p: (numeric) - output of pilots after passed the
+    % channel
+    % 4. X_Matrix_Pilot: (numeric) - matrix of pilot symbols 
+%
+%% Require R2006A
+%
+% Author: Le Trung Thanh, Vietnam National University, Hanoi, Vietnam
+
+% Last modified by Do Hai Son, 31-Jul-2023
+% InSI: A MatLab Toolbox for Informed System Identification in 
+% Wireless Communications
+% https://avitech-vnu.github.io/InSI
+% Project: NAFOSTED 01/2019/TN on Informed System Identification
+% PI: Nguyen Linh Trung, Vietnam National University, Hanoi, Vietnam
+% Co-PI: Karim Abed-Meraim, Université d’Orléans, France
+
+
 if nargin < 5 
     N_r  = 3;         % Transmit Antena
     N_t  = 2;         % Receive  Antena
@@ -9,7 +38,6 @@ if nargin < 5
     N    = 30; 
 end
     
-
 
 %% Generate system
 % Generate H
