@@ -221,7 +221,7 @@ if __name__ == "__main__":
     args = sys.argv
     timestamp_id = args[1]
     K = int(args[2])
-    data_size = int(args[3])
+    data_size = int(float(args[3]))
     mod = int(args[4])
     sigma_w = float(args[5])
     epochs = int(args[6])
@@ -252,9 +252,6 @@ if __name__ == "__main__":
     b = -1 / sigma_w_square
 
     # Generate input symbols
-    modem = PSKModem(2, bin_input=False)
-    a = np.random.randint(0, 2, 100)
-
     if mod == 1:
         syms = np.random.randint(0, 2, K * data_size)
         modem = PSKModem(2, bin_input=False, gray_map=False)
@@ -285,7 +282,7 @@ if __name__ == "__main__":
     
     observation = np.vstack((y.real, y.imag)).T
 
-    BCRB = FINE_BCRB(observation, theta.T, **FINE_settings)
+    BCRB = FINE_BCRB(theta.T, observation, **FINE_settings)
 
     ## FINE CRB
     FINE_BCRB_ = np.abs(np.trace(BCRB) / K)
