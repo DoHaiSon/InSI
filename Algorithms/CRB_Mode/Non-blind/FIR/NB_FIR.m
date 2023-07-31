@@ -1,4 +1,4 @@
-function Err = NB_FIR (Op, SNR_i)
+function Err = NB_FIR (Op, SNR_i, ~)
 
 %% Finite Impulse Response
 %

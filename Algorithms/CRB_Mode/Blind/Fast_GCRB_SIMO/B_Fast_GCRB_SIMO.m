@@ -1,4 +1,4 @@
-function Err =  B_Fast_GCRB_SIMO (Op, SNR_i)
+function Err =  B_Fast_GCRB_SIMO (Op, SNR_i, ~)
 
 %% Fast computation of the Gaussian CRB for blind SIMO system identification
 %

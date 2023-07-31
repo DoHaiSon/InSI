@@ -1,4 +1,4 @@
-function methods = load_methods( default, mode, name )
+function methods = load_methods( default, mode, model )
 
 %% methods = load_methods(default, mode, name): Load the list of algorithms of current mode.
 %
@@ -6,8 +6,9 @@ function methods = load_methods( default, mode, name )
     % 1. default: (hObject) - hObject of current GUI
     % 2. mode: (char) - current mode of toolbox 'Algo_Mode': 
     % Algorithm mode; 'CRB_Mode': CRB mode; 'Demo_Mode': Demo mode
-    % 3. name: (char) - the selected method 'Non-blind': None-blind;
-    % 'Semi-blind': Semi-blind; 'Blind': Blind
+    % 3. model: (char) - the selected method 'Non-blind': None-blind;
+    % 'Semi-blind': Semi-blind; 'Blind': Blind;
+    % 'Side-information': Side-information; 'Informed': Informed
 %
 %% Output: 
     % 1. methods: (char, str) - the list of algorithms of current mode and
@@ -27,7 +28,7 @@ function methods = load_methods( default, mode, name )
 
 
 global main_path;
-path = fullfile(main_path, '/Algorithms/', mode, name);
+path = fullfile(main_path, '/Algorithms/', mode, model);
 sub  = dir(path);
 sub_folder = {default};
 for i=1:length(sub)

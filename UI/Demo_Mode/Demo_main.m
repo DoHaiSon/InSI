@@ -22,7 +22,7 @@ function varargout = Demo_main(varargin)
 
 % Edit the above text to modify the response to help Demo_main
 
-% Last Modified by GUIDE v2.5 29-Jul-2023 18:11:37
+% Last Modified by GUIDE v2.5 31-Jul-2023 17:19:22
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -66,7 +66,7 @@ function Demo_main_OpeningFcn(hObject, eventdata, handles, varargin)
     
     % Update handles structure
     guidata(hObject, handles);
-    setappdata(0,'handles_main', handles)
+    setappdata(0,'handles_main', handles);
     
     % Set position for this GUI
     movegui(hObject, 'center');
@@ -173,33 +173,6 @@ function dataaxes_CreateFcn(hObject, eventdata, handles)
 
 
 
-% --- Executes on button press in Blindbutton.
-function Blindbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to Blindbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-    CRB_Blind_Menu();
-
-
-% --- Executes on button press in SBbutton.
-function SBbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to SBbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-    CRB_Semi_Blind_Menu();
-
-    
-% --- Executes on button press in Pilotbutton.
-function Pilotbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to Pilotbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-    CRB_Non_Blind_Menu();
-
-
 % --- Executes during object creation, after setting all properties.
 function board_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to board (see GCBO)
@@ -282,8 +255,7 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
 
     set(hObject, 'FontUnits', 'Normalized');
     set(hObject, 'FontSize', 0.0969044414483497);
-
-    set(hObject, 'ColumnName', {'Plot', 'Name', 'Run time'});
+    set(hObject, 'ColumnName', {'Plot', 'Name', 'Output types', 'Run time'});
     global toolboxws;
     toolboxws = {};
     set(hObject, 'Data', toolboxws);
@@ -299,9 +271,10 @@ function toolbox_ws_CreateFcn(hObject, eventdata, handles)
     Postion = hObject.Position;
     x_total = Postion(3);
     x_plot     = x_total / 19;
-    x_name     = x_total / 1.3;
+    x_name     = x_total / 1.6;
+    x_output_t = x_total / 7;
     x_runtime  = x_total / 7;
-    set(hObject, 'ColumnWidth', {x_plot, x_name, x_runtime});
+    set(hObject, 'ColumnWidth', {x_plot, x_name, x_output_t, x_runtime});
 
 
 % --- Executes when entered data in editable cell(s) in toolbox_ws.
@@ -459,36 +432,6 @@ function selectmodel_CreateFcn(hObject, eventdata, handles)
 
     set(hObject, 'FontUnits','normalized');
     set(hObject, 'FontSize', 0.0399502876390316);
-    
-
-% --- Executes during object creation, after setting all properties.
-function Blindbutton_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to Blindbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-    
-    set(hObject, 'FontUnits','normalized');
-    set(hObject, 'FontSize', 0.24413362617038498);
-
-
-% --- Executes during object creation, after setting all properties.
-function SBbutton_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to SBbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-    set(hObject, 'FontUnits','normalized');
-    set(hObject, 'FontSize', 0.24413362617038498);
-
-
-% --- Executes during object creation, after setting all properties.
-function Pilotbutton_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to Pilotbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-    set(hObject, 'FontUnits','normalized');
-    set(hObject, 'FontSize', 0.24413362617038498);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -530,43 +473,6 @@ function LICENSE_Callback(hObject, eventdata, handles)
     web('https://github.com/DoHaiSon/InSI/blob/master/LICENSE', '-browser');
 
 
-% --- Executes on button press in SIbutton.
-function SIbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to SIbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-    
-    CRB_SideInfor_Menu();
-
-
-% --- Executes on button press in Ibutton.
-function Ibutton_Callback(hObject, eventdata, handles)
-% hObject    handle to Ibutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-    CRB_Informed_Menu();
-
-
-% --- Executes during object creation, after setting all properties.
-function SIbutton_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to SIbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-    set(hObject, 'FontUnits','normalized');
-    set(hObject, 'FontSize', 0.24413362617038498);
-
-
-% --- Executes during object creation, after setting all properties.
-function Ibutton_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to Ibutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-    
-    set(hObject, 'FontUnits','normalized');
-    set(hObject, 'FontSize', 0.24413362617038498);
-
 
 % --- Executes on selection change in SMbutton.
 function SMbutton_Callback(hObject, eventdata, handles)
@@ -574,6 +480,66 @@ function SMbutton_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+    system_model = get(hObject, 'Value');
+    system_models = get(hObject, 'String');
+
+    if system_model == 1
+        % Feedback turn to default values of CRB and estimator
+        
+        Op_1 = get(handles.Op1_button, 'String');
+        if iscell(Op_1)
+            set(handles.Op1_button, 'String', Op_1{1});
+        end
+        set(handles.Op1_button, 'Value', 1);
+        
+        Op_2 = get(handles.Op2_button, 'String');
+        if iscell(Op_2)
+            set(handles.Op2_button, 'String', Op_2{1});
+        end
+        set(handles.Op2_button, 'Value', 1);
+
+        Op_3 = get(handles.Op3_button, 'String');
+        if iscell(Op_3)
+            set(handles.Op2_button, 'String', Op_3{1});
+        end
+        set(handles.Op2_button, 'Value', 1);
+
+        Op_4 = get(handles.Op4_button, 'String');
+        if iscell(Op_4)
+            set(handles.Op4_button, 'String', Op_4{1});
+        end
+        set(handles.Op4_button, 'Value', 1);
+
+        Op_5 = get(handles.Op5_button, 'String');
+        if iscell(Op_5)
+            set(handles.Op5_button, 'String', Op_5{1});
+        end
+        set(handles.Op5_button, 'Value', 1);
+
+        set(handles.Op1_button, 'Visible', 'off');
+        set(handles.Op2_button, 'Visible', 'off');
+        set(handles.Op3_button, 'Visible', 'off');
+        set(handles.Op4_button, 'Visible', 'off');
+        set(handles.Op5_button, 'Visible', 'off');
+        return;
+    end
+
+    % Load Demo funcs-related current system model
+    funcs = load_versions('Demo_Mode', '', '', system_models{system_model});
+    funcs = funcs(2:end);
+
+    for func=1:length(funcs)
+        eval(strcat('set(handles.Op', num2str(func), '_button, ''Visible'', ''on'') '));
+
+        %% Load values to Op_buttons
+        default = ['Select ' funcs{func}];
+        Op_i = load_versions('Demo_Mode', funcs{func}, default, system_models{system_model});
+        eval(strcat('set(handles.Op', num2str(func), '_button, ''String'', Op_i)'));
+        eval(strcat('set(handles.Op', num2str(func), '_button, ''Value'', 1)'));
+    end
+    for i_o = length(funcs) + 1:5
+        eval(strcat('set(handles.Op', num2str(i_o), '_button, ''Visible'', ''off'') '));
+    end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -587,19 +553,33 @@ function SMbutton_CreateFcn(hObject, eventdata, handles)
     end
     set(hObject, 'FontUnits','normalized');
     set(hObject, 'FontSize', 0.32);
+    
+    % Set default menu to escape error when temp of menu is stored
+    default = '    Select system model';
+    set(hObject, 'String', default);
+    methods = load_methods(default, 'Demo_Mode', '');
+    set(hObject, 'String', methods);
 
 
-% --- Executes on selection change in CRBbutton.
-function CRBbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to CRBbutton (see GCBO)
+% --- Executes on selection change in Op1_button.
+function Op1_button_Callback(hObject, eventdata, handles)
+% hObject    handle to Op1_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+    all_fig = findall(groot, 'Type', 'figure');
+    for idx = 1:length(all_fig)
+        fig = all_fig(idx);
+        if(~isempty(strfind(fig.Tag, 'InSI_D_Menu')))
+            delete(fig);
+        end
+    end
+    Demo_Menu();
 
-
+    
 % --- Executes during object creation, after setting all properties.
-function CRBbutton_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to CRBbutton (see GCBO)
+function Op1_button_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Op1_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -610,22 +590,120 @@ function CRBbutton_CreateFcn(hObject, eventdata, handles)
     set(hObject, 'FontSize', 0.32);
 
 
-% --- Executes on selection change in Estbutton.
-function Estbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to Estbutton (see GCBO)
+% --- Executes on selection change in Op2_button.
+function Op2_button_Callback(hObject, eventdata, handles)
+% hObject    handle to Op2_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+    all_fig = findall(groot, 'Type', 'figure');
+    for idx = 1:length(all_fig)
+        fig = all_fig(idx);
+        if(~isempty(strfind(fig.Tag, 'InSI_D_Menu')))
+            delete(fig);
+        end
+    end
+    Demo_Menu();
 
 
 % --- Executes during object creation, after setting all properties.
-function Estbutton_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to Estbutton (see GCBO)
+function Op2_button_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Op2_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
     if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
         set(hObject,'BackgroundColor','white');
     end
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.32);
+
+
+% --- Executes on selection change in Op3_button.
+function Op3_button_Callback(hObject, eventdata, handles)
+% hObject    handle to Op3_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+    all_fig = findall(groot, 'Type', 'figure');
+    for idx = 1:length(all_fig)
+        fig = all_fig(idx);
+        if(~isempty(strfind(fig.Tag, 'InSI_D_Menu')))
+            delete(fig);
+        end
+    end
+    Demo_Menu();
+
+
+% --- Executes during object creation, after setting all properties.
+function Op3_button_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Op3_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.32);
+
+
+% --- Executes on selection change in Op4_button.
+function Op4_button_Callback(hObject, eventdata, handles)
+% hObject    handle to Op4_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+    all_fig = findall(groot, 'Type', 'figure');
+    for idx = 1:length(all_fig)
+        fig = all_fig(idx);
+        if(~isempty(strfind(fig.Tag, 'InSI_D_Menu')))
+            delete(fig);
+        end
+    end
+    Demo_Menu();
+
+
+% --- Executes during object creation, after setting all properties.
+function Op4_button_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Op4_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
+
+    set(hObject, 'FontUnits','normalized');
+    set(hObject, 'FontSize', 0.32);
+
+
+% --- Executes on selection change in Op5_button.
+function Op5_button_Callback(hObject, eventdata, handles)
+% hObject    handle to Op5_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+    all_fig = findall(groot, 'Type', 'figure');
+    for idx = 1:length(all_fig)
+        fig = all_fig(idx);
+        if(~isempty(strfind(fig.Tag, 'InSI_D_Menu')))
+            delete(fig);
+        end
+    end
+    Demo_Menu();
+
+
+% --- Executes during object creation, after setting all properties.
+function Op5_button_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Op5_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+        set(hObject,'BackgroundColor','white');
+    end
+
     set(hObject, 'FontUnits','normalized');
     set(hObject, 'FontSize', 0.32);

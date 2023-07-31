@@ -1,4 +1,4 @@
-function Err = function_main (Op, SNR_i)
+function Err = function_main (Op, SNR_i, ~)
 
 % Modtool algorithm
 

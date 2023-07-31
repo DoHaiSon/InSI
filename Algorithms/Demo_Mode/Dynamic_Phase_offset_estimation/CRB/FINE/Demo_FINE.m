@@ -1,4 +1,4 @@
-function Err = I_FINE (Op, SNR_i, ~)
+function Err = Demo_FINE (Op, SNR_i, ~)
 
 %% Fisher Information Neural Estimation
 %
@@ -53,7 +53,7 @@ if ~Check_Installed_pkgs(OS_support, ls_pkgs)
 end
 
 global main_path;
-file_path = fullfile(main_path, 'Algorithms', 'CRB_Mode', 'Informed', 'FINE', 'I_FINE.py');
+file_path = fullfile(main_path, 'Algorithms', 'Demo_Mode', 'Dynamic_Phase_offset_estimation', 'CRB', 'FINE', 'Demo_FINE.py');
 global InSI_time;
 timestamp_id = num2str(round(posixtime(InSI_time)));
 

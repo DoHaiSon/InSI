@@ -1,4 +1,4 @@
-function [SNR, Err] = SB_Specular (Op, Monte, SNR)
+function [SNR, Err] = SB_Specular (Op, Monte, SNR, ~)
 
 %% Semi-Blind Specular / Parametric
 %

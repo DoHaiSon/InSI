@@ -132,7 +132,7 @@ function methods_Callback(hObject, eventdata, handles)
     set(handles.ref_web, 'Visible', 'off');
     
     default = '                  Select version';
-    vers = load_versions('Non-blind', default, methods{method});
+    vers = load_versions('Algo_Mode', 'Non-blind', default, methods{method});
     set(handles.version, 'String', vers);
     set(handles.version, 'Value', 1);
     set(handles.panelparams, 'Visible', 'off');

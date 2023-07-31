@@ -1,36 +1,36 @@
-function varargout = Algo_Informed_Menu(varargin)
-% ALGO_INFORMED_MENU MATLAB code for Algo_Informed_Menu.fig
-%      ALGO_INFORMED_MENU, by itself, creates a new ALGO_INFORMED_MENU or raises the existing
+function varargout = Demo_Menu(varargin)
+% DEMO_MENU MATLAB code for Demo_Menu.fig
+%      DEMO_MENU, by itself, creates a new DEMO_MENU or raises the existing
 %      singleton*.
 %
-%      H = ALGO_INFORMED_MENU returns the handle to a new ALGO_INFORMED_MENU or the handle to
+%      H = DEMO_MENU returns the handle to a new DEMO_MENU or the handle to
 %      the existing singleton*.
 %
-%      ALGO_INFORMED_MENU('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in ALGO_INFORMED_MENU.M with the given input arguments.
+%      DEMO_MENU('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in DEMO_MENU.M with the given input arguments.
 %
-%      ALGO_INFORMED_MENU('Property','Value',...) creates a new ALGO_INFORMED_MENU or raises the
+%      DEMO_MENU('Property','Value',...) creates a new DEMO_MENU or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before Algo_Informed_Menu_OpeningFcn gets called.  An
+%      applied to the GUI before Demo_Menu_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to Algo_Informed_Menu_OpeningFcn via varargin.
+%      stop.  All inputs are passed to Demo_Menu_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help Algo_Informed_Menu
+% Edit the above text to modify the response to help Demo_Menu
 
-% Last Modified by GUIDE v2.5 29-Jul-2023 17:35:27
+% Last Modified by GUIDE v2.5 31-Jul-2023 17:51:02
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @Algo_Informed_Menu_OpeningFcn, ...
-                   'gui_OutputFcn',  @Algo_Informed_Menu_OutputFcn, ...
+                   'gui_OpeningFcn', @Demo_Menu_OpeningFcn, ...
+                   'gui_OutputFcn',  @Demo_Menu_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -45,16 +45,16 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before Algo_Informed_Menu is made visible.
-function Algo_Informed_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before Demo_Menu is made visible.
+function Demo_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user method (see GUIDATA)
-% varargin   command line arguments to Algo_Informed_Menu (see VARARGIN)
+% varargin   command line arguments to Demo_Menu (see VARARGIN)
 
     global main_path;
-    jFrame=get(handle(handles.InSI_A_I), 'javaframe');
+    jFrame=get(handle(handles.InSI_D_Menu), 'javaframe');
     jicon=javax.swing.ImageIcon(fullfile(main_path,'/Resource/Icon/menu_icon.png'));
     jFrame.setFigureIcon(jicon);
     
@@ -69,18 +69,95 @@ function Algo_Informed_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
     global pre_algo;
     pre_algo = '';
     
-    % Choose default command line output for Algo_Informed_Menu
+    % Choose default command line output for Demo_Menu
     handles.output = hObject;
     
     % Update handles structure
     guidata(hObject, handles);
     
-    % UIWAIT makes Algo_Informed_Menu wait for user response (see UIRESUME)
-    % uiwait(handles.InSI_A_I);
+    % UIWAIT makes Demo_Menu wait for user response (see UIRESUME)
+    % uiwait(handles.InSI_D_Menu);
+
+    
+    %% Load params here
+    handles_main = getappdata(0,'handles_main');
+    stack = dbstack();
+    tree  = [stack.name];
+
+    Op = {};
+    if ~isempty(strfind(tree, 'Op1_button_Callback'))
+        Op_s = get(handles_main.Op1_button, 'String');
+        Op   = Op_s(get(handles_main.Op1_button, 'Value'));
+
+        % CRB or not
+        methods = handles_main.Op1_button.String;
+        method  = methods{1}; 
+    
+        if ~isempty(strfind(method, 'CRB'))
+            set(handles.btngroup, 'Visible', 'off');
+        end
+    end
+    if ~isempty(strfind(tree, 'Op2_button_Callback'))
+        Op_s = get(handles_main.Op2_button, 'String');
+        Op   = Op_s(get(handles_main.Op2_button, 'Value'));
+
+        % CRB or not
+        methods = handles_main.Op2_button.String;
+        method  = methods{1}; 
+    
+        if ~isempty(strfind(method, 'CRB'))
+            set(handles.btngroup, 'Visible', 'off');
+        end
+    end
+    if ~isempty(strfind(tree, 'Op3_button_Callback'))
+        Op_s = get(handles_main.Op3_button, 'String');
+        Op   = Op_s(get(handles_main.Op3_button, 'Value'));
+
+        % CRB or not
+        methods = handles_main.Op3_button.String;
+        method  = methods{1}; 
+    
+        if ~isempty(strfind(method, 'CRB'))
+            set(handles.btngroup, 'Visible', 'off');
+        end
+    end
+    if ~isempty(strfind(tree, 'Op4_button_Callback'))
+        Op_s = get(handles_main.Op4_button, 'String');
+        Op   = Op_s(get(handles_main.Op4_button, 'Value'));
+
+        % CRB or not
+        methods = handles_main.Op4_button.String;
+        method  = methods{1}; 
+    
+        if ~isempty(strfind(method, 'CRB'))
+            set(handles.btngroup, 'Visible', 'off');
+        end
+    end
+    if ~isempty(strfind(tree, 'Op5_button_Callback'))
+        Op_s = get(handles_main.Op5_button, 'String');
+        Op   = Op_s(get(handles_main.Op5_button, 'Value'));
+
+        % CRB or not
+        methods = handles_main.Op5_button.String;
+        method  = methods{1}; 
+    
+        if ~isempty(strfind(method, 'CRB'))
+            set(handles.btngroup, 'Visible', 'off');
+        end
+    end
+
+    algo   = ['Demo_' Op{1}];
+
+    global Demo_Algo;
+    Demo_Algo = algo;
+
+    load_params(hObject, eventdata, handles, 'Demo_Mode', '', algo);
+    
+    set(handles.ref_web, 'Visible', 'on');
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = Algo_Informed_Menu_OutputFcn(hObject, eventdata, handles) 
+function varargout = Demo_Menu_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -90,105 +167,10 @@ function varargout = Algo_Informed_Menu_OutputFcn(hObject, eventdata, handles)
 
 
 % --- Executes during object creation, after setting all properties.
-function methods_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to methods (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-        set(hObject,'BackgroundColor','white');
-    end
-
-    set(hObject, 'FontUnits','normalized');
-    set(hObject, 'FontSize', 0.3851838418642603);
-
-    % Set default menu to escape error when temp of menu is stored
-    default = '                  Select method';
-    set(hObject, 'String', default);
-    methods = load_methods(default, 'Algo_Mode', 'Informed');
-    set(hObject, 'String', methods);
-
-
-% --- Executes on selection change in methods.
-function methods_Callback(hObject, eventdata, handles)
-% hObject    handle to methods (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-    method = get(hObject, 'Value');
-    methods = get(hObject, 'String');
-    if method == 1
-        % Feedback turn off param panel
-        vers = get(handles.version, 'String');
-        if iscell(vers)
-            set(handles.version, 'String', vers{1});
-        end
-        set(handles.version, 'Value', 1);
-        
-        set(handles.panelparams, 'Visible', 'off');
-        set(handles.btngroup, 'Visible', 'off');
-        return;
-    end
-    set(handles.ref_web, 'Visible', 'off');
-    
-    default = '                  Select version';
-    vers = load_versions('Algo_Mode', 'Informed', default, methods{method});
-    set(handles.version, 'String', vers);
-    set(handles.version, 'Value', 1);
-    set(handles.panelparams, 'Visible', 'off');
-    set(handles.btngroup, 'Visible', 'off');
-    
-
-% --- Executes during object creation, after setting all properties.
-function version_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to version (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-    if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-        set(hObject,'BackgroundColor','white');
-    end
-%% TODO: width of algorithms exceed the parent.
-    set(hObject, 'FontUnits','normalized');
-    set(hObject, 'FontSize', 0.5238643060543361);
-
-    default = '                  Select version';
-    set(hObject, 'String', default);
-
-
-% --- Executes on selection change in version.
-function version_Callback(hObject, eventdata, handles)
-% hObject    handle to version (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: contents = cellstr(get(hObject,'String')) returns version contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from version
-    ver = get(hObject, 'Value');
-    vers = get(hObject, 'String');
-    
-    if ver == 1
-        if iscell(vers)
-            set(hObject, 'String', vers);
-        end
-        
-        % Feedback turn off param panel
-        set(handles.panelparams, 'Visible', 'off');
-        set(handles.btngroup, 'Visible', 'off');
-        set(handles.ref_web, 'Visible', 'off');
-        return;
-    end
-    load_params(hObject, eventdata, handles, 'Algo_Mode', 'Informed', vers{ver});
-
-    set(handles.ref_web, 'Visible', 'on');
-
-
-% --- Executes during object creation, after setting all properties.
 function panelparams_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to panelparams (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-    set(hObject, 'Visible', 'off');
 
     set(hObject.Parent, 'units','pixels');
     [x, y, w, h] = scale_InSI(hObject.Parent);
@@ -462,17 +444,10 @@ function apply_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-    % Try catch
-    if get(handles.methods, 'Value') == 1 || get(handles.version, 'Value') == 1
-        return;
-    end
-    
-    % Load all params to function exec
-   
-    vers    = get(handles.version, 'String');
-    algo    = vers{get(handles.version, 'Value')};
-    
-    load_funcs(hObject, eventdata, handles, 'Algo_Mode', 'Informed', algo);
+    global Demo_Algo;
+    algo = Demo_Algo;
+
+    load_funcs(hObject, eventdata, handles, 'Demo_Mode', '', algo);
     
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
@@ -481,15 +456,12 @@ function Op_1_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to Op_1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    vers = get(handles.version, 'String');
-    ver  = get(handles.version, 'Value');
-    algo = vers{ver};
-    if ver == 1
-        % Feedback turn off param panel
-        set(handles.panelparams, 'Visible', 'off');
-        return;
-    end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Informed', algo);
+    
+    global Demo_Algo;
+    algo = Demo_Algo;
+
+    load_reactive(hObject, eventdata, handles, 'Demo_Mode', '', algo);
+
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_2.
@@ -497,15 +469,12 @@ function Op_2_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to Op_2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    vers = get(handles.version, 'String');
-    ver  = get(handles.version, 'Value');
-    algo = vers{ver};
-    if ver == 1
-        % Feedback turn off param panel
-        set(handles.panelparams, 'Visible', 'off');
-        return;
-    end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Informed', algo);
+    
+    global Demo_Algo;
+    algo = Demo_Algo;
+
+    load_reactive(hObject, eventdata, handles, 'Demo_Mode', '', algo);
+
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_5.
@@ -513,15 +482,11 @@ function Op_5_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to Op_5 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    vers = get(handles.version, 'String');
-    ver  = get(handles.version, 'Value');
-    algo = vers{ver};
-    if ver == 1
-        % Feedback turn off param panel
-        set(handles.panelparams, 'Visible', 'off');
-        return;
-    end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Informed', algo);
+    
+    global Demo_Algo;
+    algo = Demo_Algo;
+
+    load_reactive(hObject, eventdata, handles, 'Demo_Mode', '', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_6.
@@ -529,15 +494,11 @@ function Op_6_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to Op_6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    vers = get(handles.version, 'String');
-    ver  = get(handles.version, 'Value');
-    algo = vers{ver};
-    if ver == 1
-        % Feedback turn off param panel
-        set(handles.panelparams, 'Visible', 'off');
-        return;
-    end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Informed', algo);
+    
+    global Demo_Algo;
+    algo = Demo_Algo;
+
+    load_reactive(hObject, eventdata, handles, 'Demo_Mode', '', algo);
 
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
@@ -546,15 +507,11 @@ function Op_9_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to Op_9 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    vers = get(handles.version, 'String');
-    ver  = get(handles.version, 'Value');
-    algo = vers{ver};
-    if ver == 1
-        % Feedback turn off param panel
-        set(handles.panelparams, 'Visible', 'off');
-        return;
-    end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Informed', algo);
+    
+    global Demo_Algo;
+    algo = Demo_Algo;
+
+    load_reactive(hObject, eventdata, handles, 'Demo_Mode', '', algo);
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_10.
@@ -562,15 +519,11 @@ function Op_10_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to Op_10 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    vers = get(handles.version, 'String');
-    ver  = get(handles.version, 'Value');
-    algo = vers{ver};
-    if ver == 1
-        % Feedback turn off param panel
-        set(handles.panelparams, 'Visible', 'off');
-        return;
-    end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Informed', algo);
+    
+    global Demo_Algo;
+    algo = Demo_Algo;
+
+    load_reactive(hObject, eventdata, handles, 'Demo_Mode', '', algo);
 
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
@@ -579,15 +532,11 @@ function Op_7_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to Op_7 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    vers = get(handles.version, 'String');
-    ver  = get(handles.version, 'Value');
-    algo = vers{ver};
-    if ver == 1
-        % Feedback turn off param panel
-        set(handles.panelparams, 'Visible', 'off');
-        return;
-    end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Informed', algo);
+    
+    global Demo_Algo;
+    algo = Demo_Algo;
+
+    load_reactive(hObject, eventdata, handles, 'Demo_Mode', '', algo);
 
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
@@ -596,15 +545,12 @@ function Op_8_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to Op_8 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    vers = get(handles.version, 'String');
-    ver  = get(handles.version, 'Value');
-    algo = vers{ver};
-    if ver == 1
-        % Feedback turn off param panel
-        set(handles.panelparams, 'Visible', 'off');
-        return;
-    end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Informed', algo);
+    
+    global Demo_Algo;
+    algo = Demo_Algo;
+
+    load_reactive(hObject, eventdata, handles, 'Demo_Mode', '', algo);
+
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_3.
@@ -612,15 +558,12 @@ function Op_3_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to Op_3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    vers = get(handles.version, 'String');
-    ver  = get(handles.version, 'Value');
-    algo = vers{ver};
-    if ver == 1
-        % Feedback turn off param panel
-        set(handles.panelparams, 'Visible', 'off');
-        return;
-    end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Informed', algo);
+    
+    global Demo_Algo;
+    algo = Demo_Algo;
+
+    load_reactive(hObject, eventdata, handles, 'Demo_Mode', '', algo);
+
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.
 % --- Otherwise, executes on mouse press in 5 pixel border or over Op_4.
@@ -628,15 +571,11 @@ function Op_4_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to Op_4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    vers = get(handles.version, 'String');
-    ver  = get(handles.version, 'Value');
-    algo = vers{ver};
-    if ver == 1
-        % Feedback turn off param panel
-        set(handles.panelparams, 'Visible', 'off');
-        return;
-    end
-    load_reactive(hObject, eventdata, handles, 'Algo_Mode', 'Informed', algo);
+    
+    global Demo_Algo;
+    algo = Demo_Algo;
+
+    load_reactive(hObject, eventdata, handles, 'Demo_Mode', '', algo);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -668,15 +607,16 @@ function dB_text_CreateFcn(hObject, eventdata, handles)
     set(hObject, 'FontUnits','normalized');
     set(hObject, 'FontSize', 0.7361744753539745);
 
+
 % --- Executes on button press in ref_web.
 function ref_web_Callback(hObject, eventdata, handles)
 % hObject    handle to ref_web (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     
-    vers = get(handles.version, 'String');
-    ver  = get(handles.version, 'Value');
-    algo = vers{ver};
+    global Demo_Algo;
+    algo = Demo_Algo;
+
     msg = load_help(algo);
 
     help_questdlg(msg, algo);

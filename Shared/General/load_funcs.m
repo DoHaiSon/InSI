@@ -11,9 +11,9 @@ function load_funcs(hObject, eventdata, handles, mode, method, algo)
     % 4. mode: (char) - current mode of toolbox 'Algo_Mode': 
     % Algorithm mode; 'CRB_Mode': CRB mode; 'Demo_Mode': Demo 
     % mode
-    % 5. method: (char) - the selected method 'Non-blind': 
-    % None-blind;
-    % 'Semi-blind': Semi-blind; 'Blind': Blind
+    % 5. method: (char) - the selected method 'Non-blind': None-blind;
+    % 'Semi-blind': Semi-blind; 'Blind': Blind;
+    % 'Side-information': Side-information; 'Informed': Informed
     % 6. algo: (char) - the name of selected algorithm
 %
 %% Output: None
@@ -42,7 +42,7 @@ end
 Monte   = str2num(get(handles.Monte, 'String'));
 SNR     = str2num(get(handles.SNR, 'String'));
 
-all_output_types = {'SER', 'BER', 'MSE Sig', 'MSE H'};
+all_output_types = {'SER', 'BER', 'MSE Sig', 'MSE H', 'CRB'};
 
 % Load output panel
 switch (mode)
@@ -56,6 +56,15 @@ switch (mode)
     case 'CRB_Mode'
         Output_type = 1;
     case 'Demo_Mode'
+        for i=1:4
+            if get(eval(strcat('handles.output', num2str(i))), 'Value') == 1 
+                Output_type  = i;
+                break;
+            end
+        end
+        if strcmp(get(handles.btngroup, 'Visible'), 'off')
+            Output_type = 5;
+        end
 end
 
 % Get UIClass and value of params
@@ -92,13 +101,8 @@ try
 
         for SNR_i   = SNR
             tic
-            switch (mode)
-                case 'Algo_Mode'
-                    Err_i = eval(strcat(algo, '(Op, SNR_i, Output_type)'));
-                case 'CRB_Mode'
-                    Err_i = eval(strcat(algo, '(Op, SNR_i)'));
-                case 'Demo_Mode'
-            end
+
+            Err_i = eval(strcat(algo, '(Op, SNR_i, Output_type)'));
 
             ER_SNR{end+1} = Err_i;
 
@@ -144,7 +148,8 @@ try
     waitbar(1, InSI_waitbar, sprintf('Done!'));
     pause(.3);
     delete(InSI_waitbar);
-catch 
+catch ME
+    disp(ME);
     % Close the progress bar
     waitbar(1, InSI_waitbar, sprintf('Done!'));
     pause(.3);
@@ -279,6 +284,7 @@ switch (mode)
     case 'CRB_Mode'
         toolboxws = [toolboxws; {true, name_ws, datestr(runtime, 'HH:MM:SS')}];
     case 'Demo_Mode'
+        toolboxws = [toolboxws; {true, name_ws, all_output_types{Output_type}, datestr(runtime, 'HH:MM:SS')}];
 end
 
 % Modify toolboxws option here

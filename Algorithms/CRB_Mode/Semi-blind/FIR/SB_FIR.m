@@ -1,4 +1,4 @@
-function Err = SB_FIR (Op, SNR_i)
+function Err = SB_FIR (Op, SNR_i, ~)
 
 %% Semi-Blind Finite Impulse Response
 %

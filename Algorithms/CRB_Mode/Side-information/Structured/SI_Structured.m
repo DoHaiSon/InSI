@@ -1,4 +1,4 @@
-function Err = SI_Structured (Op, SNR_i)
+function Err = SI_Structured (Op, SNR_i, ~)
 
 %% CRB for structured channel model
 %

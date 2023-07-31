@@ -1,4 +1,4 @@
-function Err = NB_Misspecified (Op, SNR_i)
+function Err = NB_Misspecified (Op, SNR_i, ~)
 
 %% Misspecified Cramer–Rao bound
 %

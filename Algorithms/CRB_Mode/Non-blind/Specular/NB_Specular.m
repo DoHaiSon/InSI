@@ -1,4 +1,4 @@
-function Err = NB_Specular (Op, SNR_i)
+function Err = NB_Specular (Op, SNR_i, ~)
 
 %% Specular / Parametric
 %

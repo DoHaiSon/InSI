@@ -10,7 +10,8 @@ function load_params(hObject, eventdata, handles, mode, method, algo )
     % 4. mode: (char) - current mode of toolbox 'Algo_Mode': 
     % Algorithm mode; 'CRB_Mode': CRB mode; 'Demo_Mode': Demo mode
     % 5. method: (char) - the selected method 'Non-blind': None-blind;
-    % 'Semi-blind': Semi-blind; 'Blind': Blind
+    % 'Semi-blind': Semi-blind; 'Blind': Blind;
+    % 'Side-information': Side-information; 'Informed': Informed
     % 6. algo: (char) - the name of selected algorithm
 %
 %% Output: None
