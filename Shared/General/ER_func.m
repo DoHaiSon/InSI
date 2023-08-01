@@ -50,7 +50,7 @@ switch Output_type
     case 1  % SER
         switch (called_file(1:index-1))
             case 'B'
-                if (Mod_type ~= 1)
+                if (Mod_type ~= 1 && exist('sig_src', 'var'))
                     est_src  = est_src' * sig_src * est_src;    % remove the inherent scalar indeterminacy related to the blind processing
                 end
             case 'SB'
@@ -79,7 +79,7 @@ switch Output_type
     case 2  % BER
         switch (called_file(1:index-1))
             case 'B'
-                if (Mod_type ~= 1)
+                if (Mod_type ~= 1 && exist('sig_src', 'var'))
                     est_src  = est_src' * sig_src * est_src;    % remove the inherent scalar indeterminacy related to the blind processing
                 end
             case 'SB'
