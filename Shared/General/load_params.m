@@ -175,6 +175,19 @@ switch (mode)
         set(eval(strcat('handles.output', num2str(params.default_output))), 'Value', 1);
     case 'CRB_Mode'
     case 'Demo_Mode'
+        try
+            if length(params.outputs) ~= 4
+               for i=1:4
+                   if any(params.outputs(:) == i)
+                       set(eval(strcat('handles.output', num2str(i))), 'Enable', 'on');
+                   else
+                       set(eval(strcat('handles.output', num2str(i))), 'Enable', 'off');
+                   end
+               end
+            end
+            set(eval(strcat('handles.output', num2str(params.default_output))), 'Value', 1);
+        catch
+        end
 end
 
 end

@@ -1,6 +1,6 @@
-function Err = B_EM_Nonlinear_MIMO(Op, SNR_i, Output_type)
+function Err = SB_EM_Nonlinear_MIMO(Op, SNR_i, Output_type)
 
-%% Blind Expectation-Maximization for Non-linear MIMO communications
+%% Semi-blind Expectation-Maximization for Non-linear MIMO communications
 %
 %% Input:
     % + 1. Ns: number of sample data
@@ -156,7 +156,7 @@ sigcap_pilot = sigp_cap_sans_bruit + noise(:,1:Np); %noisep;
 canauxp  = sig_cap(:,1:Np_init)*pinv(S_mat(:,1:Np_init));
 
 %-------------------------- SB EM -------------------------------
-[probaB, ~, channels_mat_EM_SB, ~] = ...
+[probaSB, ~, channels_mat_EM_SB, ~] = ...
     SB_EM_func(sig_cap.', trans, sigcap_pilot, Sp_mat, canauxp, sigmav2, ...
     predecessors, successors, tableau, N_iter_max, threshold,Nt); % SB-EM
 
@@ -170,7 +170,7 @@ end
 channels_vec_EM_SB = reshape(channels_mat_EM_SB, [],1); % h_{EM-SB} semi-blind
 
 %% Data detection
-est_src = SB_EM_min_symbol_errorMIMO(probaB,alphabet,M,Nt);
+est_src = SB_EM_min_symbol_errorMIMO(probaSB,alphabet,M,Nt);
 
 % Compute SER / BER / MSE channel
 if Output_type ~= 4

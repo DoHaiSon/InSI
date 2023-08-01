@@ -85,68 +85,37 @@ function Demo_Menu_OpeningFcn(hObject, eventdata, handles, varargin)
     tree  = [stack.name];
 
     Op = {};
+    Op_s = {};
     if ~isempty(strfind(tree, 'Op1_button_Callback'))
         Op_s = get(handles_main.Op1_button, 'String');
         Op   = Op_s(get(handles_main.Op1_button, 'Value'));
-
-        % CRB or not
-        methods = handles_main.Op1_button.String;
-        method  = methods{1}; 
-    
-        if ~isempty(strfind(method, 'CRB'))
-            set(handles.btngroup, 'Visible', 'off');
-        end
     end
     if ~isempty(strfind(tree, 'Op2_button_Callback'))
         Op_s = get(handles_main.Op2_button, 'String');
         Op   = Op_s(get(handles_main.Op2_button, 'Value'));
-
-        % CRB or not
-        methods = handles_main.Op2_button.String;
-        method  = methods{1}; 
-    
-        if ~isempty(strfind(method, 'CRB'))
-            set(handles.btngroup, 'Visible', 'off');
-        end
     end
     if ~isempty(strfind(tree, 'Op3_button_Callback'))
         Op_s = get(handles_main.Op3_button, 'String');
         Op   = Op_s(get(handles_main.Op3_button, 'Value'));
-
-        % CRB or not
-        methods = handles_main.Op3_button.String;
-        method  = methods{1}; 
-    
-        if ~isempty(strfind(method, 'CRB'))
-            set(handles.btngroup, 'Visible', 'off');
-        end
     end
     if ~isempty(strfind(tree, 'Op4_button_Callback'))
         Op_s = get(handles_main.Op4_button, 'String');
         Op   = Op_s(get(handles_main.Op4_button, 'Value'));
-
-        % CRB or not
-        methods = handles_main.Op4_button.String;
-        method  = methods{1}; 
-    
-        if ~isempty(strfind(method, 'CRB'))
-            set(handles.btngroup, 'Visible', 'off');
-        end
     end
     if ~isempty(strfind(tree, 'Op5_button_Callback'))
         Op_s = get(handles_main.Op5_button, 'String');
         Op   = Op_s(get(handles_main.Op5_button, 'Value'));
-
-        % CRB or not
-        methods = handles_main.Op5_button.String;
-        method  = methods{1}; 
-    
-        if ~isempty(strfind(method, 'CRB'))
-            set(handles.btngroup, 'Visible', 'off');
-        end
     end
 
-    algo   = ['Demo_' Op{1}];
+    % CRB or not
+    if ~isempty(strfind(Op_s{1}, 'CRB'))
+        set(handles.btngroup, 'Visible', 'off');
+    end
+
+    Option = strsplit(Op_s{1}, ' ');
+    Option = Option{end};
+
+    algo   = ['Demo_' Option '_' Op{1}];
 
     global Demo_Algo;
     Demo_Algo = algo;

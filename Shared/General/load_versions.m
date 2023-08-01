@@ -75,7 +75,13 @@ else
     for i=1:length(sub)
         name = sub(i).name;
         if ~strcmp(name, '.') && ~strcmp(name, '..') && sub(i).isdir
-            algos{end+1} = sub(i).name;
+            % Remove first word
+            tmp = strfind(name, '_');
+            if isempty(tmp)
+                algos{end+1} = sub(i).name;
+            else
+                algos{end+1} = name(tmp + 1: end);
+            end
         end
     end
     vers = algos;

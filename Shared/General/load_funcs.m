@@ -178,8 +178,13 @@ switch mode
         results.figparams.xlabel{end+1} = params.xlabel;
         results.figparams.ylabel{end+1} = params.ylabel;
     otherwise
-        results.figparams.xlabel{end+1} = params.xlabel(Output_type);
-        results.figparams.ylabel{end+1} = params.ylabel(Output_type);
+        try
+            results.figparams.xlabel{end+1} = params.xlabel(Output_type);
+            results.figparams.ylabel{end+1} = params.ylabel(Output_type);
+        catch
+            results.figparams.xlabel{end+1} = params.xlabel;
+            results.figparams.ylabel{end+1} = params.ylabel;
+        end
 end
 results.figparams.gridmode = 'on';
 

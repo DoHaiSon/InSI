@@ -574,6 +574,12 @@ function Op1_button_Callback(hObject, eventdata, handles)
             delete(fig);
         end
     end
+
+    method = get(hObject, 'Value');
+    if method == 1
+        return;
+    end
+
     Demo_Menu();
 
     
@@ -603,6 +609,12 @@ function Op2_button_Callback(hObject, eventdata, handles)
             delete(fig);
         end
     end
+
+    method = get(hObject, 'Value');
+    if method == 1
+        return;
+    end
+
     Demo_Menu();
 
 
@@ -632,6 +644,12 @@ function Op3_button_Callback(hObject, eventdata, handles)
             delete(fig);
         end
     end
+
+    method = get(hObject, 'Value');
+    if method == 1
+        return;
+    end
+
     Demo_Menu();
 
 
@@ -662,6 +680,12 @@ function Op4_button_Callback(hObject, eventdata, handles)
             delete(fig);
         end
     end
+
+    method = get(hObject, 'Value');
+    if method == 1
+        return;
+    end
+
     Demo_Menu();
 
 
@@ -692,6 +716,12 @@ function Op5_button_Callback(hObject, eventdata, handles)
             delete(fig);
         end
     end
+
+    method = get(hObject, 'Value');
+    if method == 1
+        return;
+    end
+    
     Demo_Menu();
 
 

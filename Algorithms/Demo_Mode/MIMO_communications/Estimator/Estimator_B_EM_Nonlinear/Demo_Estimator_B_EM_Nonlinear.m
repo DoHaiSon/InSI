@@ -1,4 +1,4 @@
-function Err = B_EM_Nonlinear_MIMO(Op, SNR_i, Output_type)
+function Err = Demo_Estimator_B_EM_Nonlinear(Op, SNR_i, Output_type)
 
 %% Blind Expectation-Maximization for Non-linear MIMO communications
 %

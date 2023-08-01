@@ -39,6 +39,9 @@ switch (mode)
         end
         leg_parse = leg;
     case 'Demo_Mode'
+        % Remove 'Demo_'
+        leg = leg(6:end);
+
         % Remove charactor "_"
         idx = strfind(leg, '_');
         for i=1:length(idx)

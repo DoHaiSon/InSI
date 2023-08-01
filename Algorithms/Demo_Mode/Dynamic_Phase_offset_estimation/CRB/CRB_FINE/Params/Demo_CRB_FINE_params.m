@@ -1,4 +1,4 @@
-classdef Demo_FINE_params
+classdef Demo_CRB_FINE_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     

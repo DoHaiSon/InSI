@@ -1,6 +1,6 @@
-function Err = B_EM_Nonlinear_MIMO(Op, SNR_i, Output_type)
+function Err = Demo_Estimator_Pilot_based_LS(Op, SNR_i, Output_type)
 
-%% Blind Expectation-Maximization for Non-linear MIMO communications
+%% Least-squares
 %
 %% Input:
     % + 1. Ns: number of sample data
@@ -10,11 +10,9 @@ function Err = B_EM_Nonlinear_MIMO(Op, SNR_i, Output_type)
     % + 5. Ch_type: type of the channel (real, complex,
     % user' input
     % + 6. Mod_type: type of modulation (All)
-    % + 7. Threshold: threshold of EM algorithm
-    % + 8. Np: number of pilot symbols
-    % + 9. N_iter_max: number of maximum iterations EM 
-    % + 10. SNR_i: signal noise ratio
-    % + 11. Output_type: SER / BER / MSE Channel
+    % + 7. Np: number of pilot symbols
+    % + 8. SNR_i: signal noise ratio
+    % + 9. Output_type: SER / BER / MSE Channel
 %
 %% Output:
     % + 1. Err: SER / BER / MSE Channel
@@ -48,10 +46,7 @@ Nr        = Op{3};     % number of receive antennas
 M         = Op{4};     % length of the channel
 Ch_type   = Op{5};     % complex
 Mod_type  = Op{6};     
-threshold = Op{7};     % threshold of EM algorithm
-Np        = Op{8};     % number of pilot symbols 
-N_iter_max= Op{9};     % number of maximum iterations EM 
-Np_init   = Np;
+Np        = Op{7};     % number of pilot symbols 
 
 
 % Generate input signal
@@ -70,26 +65,6 @@ channels_vec = reshape(channels_mat, [], 1); % vectorize channel matrix
 alphabet = unique(sig_src);
 P = length(alphabet);
 average_energy_per_symb = norm(alphabet)^2/P; % or: 2/3*(P-1);
-alphabet = alphabet/sqrt(average_energy_per_symb); % normalization
-
-%% transitions, predecessors, successors
-trans1 = SB_EM_cal_trans(alphabet, Nt*(M+1));
-trans2 = trans1.^2;                % quadratic model
-trans  = [trans1; trans2];
-nbr_etats    = P^(Nt*M); %number of states
-successors   = zeros(nbr_etats,P^Nt);
-predecessors = zeros(nbr_etats,P^Nt);
-tableau = zeros(P^(Nt*(M+1)),2); % tableau(:,1)-->predecesseurs (i) ,tableau(:,2)-->successeurs (j)
-
-for i=1:nbr_etats
-    predecessors(i,:) = SB_EM_PredecessorsMIMO( i ,P, M, Nt );
-    [itransPred,~]    = SB_EM_FindTransitionsPredMIMO(predecessors(i,:),i,M, P, Nt );
-    tableau(itransPred,2) = i; 
-    
-    successors(i,:)   = SB_EM_SuccessorsMIMO( i ,P, M, Nt );
-    [itransSuccess,~] = SB_EM_FindTransitionsSuccessMIMO(i,successors(i,:),M, P, Nt );
-    tableau(itransSuccess,1) = i;
-end
 
 %% Transmitted signal
 S = [];
@@ -121,26 +96,6 @@ end
 %% Received signal
 sig_cap_sans_bruit = channels_mat*S_mat;
 
-% ... pilots
-Sp = [];
-Dp = [];
-
-for i = 1:Nt
-    [sig_src, data] = eval(strcat(modulation{Mod_type}, '(Ns + M)'));
-    Sp = [Sp; sig_src.'];
-    Dp = [Dp; data.'];
-end
-Sp_decim = Dp;
-Sp       = Sp/sqrt(average_energy_per_symb);
-
-Stop1p = toeplitz(Sp(1,M+1:-1:1),Sp(1,M+1:Np+M));
-if Nt==1
-    Sp_mat = [Stop1p; Stop1p.^2];   
-else 
-    Stop2p = toeplitz(Sp(2,M+1:-1:1), Sp(2,M+1:Np+M));
-    Sp_mat = [Stop1p; Stop2p; Stop1p.^2; Stop2p.^2];
-end
-sigp_cap_sans_bruit = channels_mat*Sp_mat;
 
 % --- received signal strength ----------------------------------
 Pr = norm(sig_cap_sans_bruit,'fro').^2/numel(sig_cap_sans_bruit);
@@ -150,27 +105,22 @@ sigmav2 = 10^((10*log10(Pr)-SNR_i)/10); % noise variance for received signal
 noise = sqrt(sigmav2)*(randn(Nr,Ns) + randn(Nr,Ns)*1i)/sqrt(2);
 
 sig_cap = sig_cap_sans_bruit + noise;
-sigcap_pilot = sigp_cap_sans_bruit + noise(:,1:Np); %noisep;
 
 %----------------- pilot-based initialization -------------------
-canauxp  = sig_cap(:,1:Np_init)*pinv(S_mat(:,1:Np_init));
-
-%-------------------------- B EM -------------------------------
-[probaB, ~, channels_mat_EM_B, ~] = ...
-    B_EM_func(sig_cap.', trans, canauxp, sigmav2, predecessors, ...
-    successors, tableau, N_iter_max, threshold, Nt);
+canauxp  = sig_cap(:,1:Np)*pinv(S_mat(:,1:Np));
 
 %% Vectorize estimated channels
-channels_vec_EM_B = reshape(channels_mat_EM_B, [],1); 
+channels_vec_ls = reshape(canauxp, [],1); % h_{LS}
 
 %% Data detection
-est_src = SB_EM_min_symbol_errorMIMO(probaB, alphabet, M, Nt);
+est_src = pinv(canauxp)*sig_cap;
+est_src = est_src(1, :);
 
 % Compute SER / BER / MSE channel
 if Output_type ~= 4
-    Err = ER_func(D_mat(1,:).', est_src, Mod_type, Output_type);
+    Err = ER_func(D_mat(1,:), est_src, Mod_type, Output_type);
 else
-    Err = ER_func(channels_vec.', channels_vec_EM_B, Mod_type, Output_type);
+    Err = ER_func(channels_vec.', channels_vec_ls, Mod_type, Output_type);
 end
 
 end
