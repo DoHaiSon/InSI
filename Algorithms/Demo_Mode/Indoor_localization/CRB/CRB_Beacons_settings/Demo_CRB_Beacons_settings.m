@@ -1,4 +1,4 @@
-function Err = Demo_CRB_Beacons_settings (Op, ~, ~)
+function [xaxis, Err] = Demo_CRB_Beacons_settings (Op, ~, ~)
 
 %% BCRB vs. Beacon settings
 %
@@ -65,7 +65,7 @@ global InSI_time;
 timestamp_id = num2str(round(posixtime(InSI_time)));
 
 
-[status, ~, Err] = Run_py_script(file_path, timestamp_id, Epochs, lr, B1, B2, B3, B4, B5, B6, B7, B8);
+[status, xaxis, Err] = Run_py_script(file_path, timestamp_id, Epochs, lr, B1, B2, B3, B4, B5, B6, B7, B8);
 if status == 1
     return
 end

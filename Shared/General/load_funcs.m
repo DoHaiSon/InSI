@@ -93,6 +93,7 @@ loader('Execute function');
 global InSI_waitbar; 
 
 % The main function
+xaxis = [];
 try
     ER_f = {};
     for Monte_i = 1:Monte
@@ -102,7 +103,11 @@ try
         for SNR_i   = SNR
             tic
 
-            Err_i = eval(strcat(algo, '(Op, SNR_i, Output_type)'));
+            try
+                [xaxis, Err_i] = eval(strcat(algo, '(Op, SNR_i, Output_type)'));
+            catch
+                Err_i = eval(strcat(algo, '(Op, SNR_i, Output_type)'));
+            end
 
             ER_SNR{end+1} = Err_i;
 
@@ -166,7 +171,11 @@ global results;         % Be careful
 
 % Define Figure params
 results.figparams.count = results.figparams.count + 1;
-results.figparams.data(results.figparams.count).x = SNR;
+if isempty(xaxis)
+    results.figparams.data(results.figparams.count).x = SNR;
+else
+    results.figparams.data(results.figparams.count).x = xaxis;
+end
 results.figparams.data(results.figparams.count).y = Err;
 
 % Load figure title
