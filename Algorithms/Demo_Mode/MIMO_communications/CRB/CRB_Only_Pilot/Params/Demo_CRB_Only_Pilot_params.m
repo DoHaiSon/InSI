@@ -12,8 +12,8 @@ classdef Demo_CRB_Only_Pilot_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 1, 2, 2, 1, 1]
-        values = {2, 4, 2, {'Real', 'Complex', 'Input'}, {'Binary', 'QPSK', '4-QAM', '16-QAM', '64-QAM', '128-QAM', '256-QAM'}, 16, 16}
-        default_values = {2, 4, 2, 2, 1, 16, 16}
+        values = {2, 4, 2, {'Real', 'Complex', 'Input'}, {'Binary', 'QPSK', '4-QAM', '16-QAM', '64-QAM', '128-QAM', '256-QAM'}, 10, 100}
+        default_values = {2, 4, 2, 2, 3, 10, 100}
         
         % Default SNR and Monte
         default_Monte = 10

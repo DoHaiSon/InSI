@@ -62,10 +62,6 @@ switch (mode)
                 break;
             end
         end
-        if Output_type == 4
-            Output_type = 1;
-        end
-
         if strcmp(get(handles.btngroup, 'Visible'), 'off')
             Output_type = 5;
         end
@@ -185,13 +181,6 @@ results.figparams.data(results.figparams.count).y = Err;
 % Load figure title
 results.figparams.title{end+1} = load_title(algo);
 
-for i=1:4
-    if get(eval(strcat('handles.output', num2str(i))), 'Value') == 1 
-        Output_type  = i;
-        break;
-    end
-end
-
 switch mode
     case 'CRB_Mode'
         
@@ -265,8 +254,29 @@ if (results.pre_output ~= Output_type && results.pre_output ~= 0)
     results.mode = 3;
 end
 
+if ~strcmp(mode, 'CRB_Mode')
+    for i=1:4
+        if get(eval(strcat('handles.output', num2str(i))), 'Value') == 1 
+            Output_type  = i;
+            break;
+        end
+    end
+    if Output_type == 4
+        Output_type = 1;
+    end
+end
+
 %% Display figure
 dispfig(true);
+
+if ~strcmp(mode, 'CRB_Mode')
+    for i=1:4
+        if get(eval(strcat('handles.output', num2str(i))), 'Value') == 1 
+            Output_type  = i;
+            break;
+        end
+    end
+end
 
 %% Store pre output mode
 results.pre_output = Output_type;
