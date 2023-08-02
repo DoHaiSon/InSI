@@ -51,6 +51,12 @@ B6         = Op{8};    % status on/off of Beacon 6
 B7         = Op{9};    % status on/off of Beacon 7
 B8         = Op{10};    % status on/off of Beacon 8
 
+if ~(B1 || B2 || B3 || B4 || B5 || B6 || B7 || B8)
+    disp('Error: None of beacon is turned on.');
+    Err = [0, 0];
+    xaxis = 0;
+    return
+end
 
 OS_support = {'OS_WINDOWS', 'OS_LINUX'};
 ls_pkgs = {'numpy', 'torch', 'tqdm', 'scipy'};

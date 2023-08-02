@@ -12,8 +12,8 @@ classdef Demo_CRB_Beacons_settings_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 3, 3, 3, 3, 3, 3, 3, 3]
-        values = {200, 0.01, 1, 1, 1, 1, 1, 1, 1, 1}
-        default_values = {200, 0.01, 1, 1, 1, 1, 1, 1, 1, 1}
+        values = {100, 0.01, 1, 1, 1, 1, 1, 1, 1, 1}
+        default_values = {100, 0.01, 1, 1, 1, 1, 1, 1, 1, 1}
         
         % Default SNR and Monte
         default_Monte = 1

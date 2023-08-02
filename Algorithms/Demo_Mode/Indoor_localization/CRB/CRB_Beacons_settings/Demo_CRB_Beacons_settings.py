@@ -186,7 +186,7 @@ def FINE_BCRB(theta, x, mag_delta=0.15, trial=1, mode='max', train_settings=None
     n_theta = np.zeros(d)
     delta_diag = np.zeros(d)
     for m in range(d):
-        log("Diagon #", m + 1, "/", d, flush=True, level=1, debug_level=train_settings['debug'])
+        log('Diagon #', m + 1, '/', d, flush=True, level=1, debug_level=train_settings['debug'])
         delta = np.zeros(d)
         delta[m] = delta_diag[m] = delta_fix[m]
         theta_shifted = np.copy(theta) + np.expand_dims(delta, axis=0)
@@ -201,7 +201,6 @@ def FINE_BCRB(theta, x, mag_delta=0.15, trial=1, mode='max', train_settings=None
     for i in range(d - 1):
         for j in range(i + 1, d):
             log('Entry', i, '-', j, flush=True, level=1, debug_level=train_settings['debug'])
-            print('Entry', i, '-', j)
             delta = np.zeros(d)
             delta[i] = delta_fix[i]
             delta[j] = delta_fix[j]
@@ -223,14 +222,14 @@ if __name__ == "__main__":
     timestamp_id = args[1]
     epochs = int(args[2])
     lr = float(args[3])
-    B1 = bool(args[4])
-    B2 = bool(args[5])
-    B3 = bool(args[6])
-    B4 = bool(args[7])
-    B5 = bool(args[8])
-    B6 = bool(args[9])
-    B7 = bool(args[10])
-    B8 = bool(args[11])
+    B1 = bool(int(args[4]))
+    B2 = bool(int(args[5]))
+    B3 = bool(int(args[6]))
+    B4 = bool(int(args[7]))
+    B5 = bool(int(args[8]))
+    B6 = bool(int(args[9]))
+    B7 = bool(int(args[10]))
+    B8 = bool(int(args[11]))
 
     train_settings = {
         "max_epochs": epochs,
