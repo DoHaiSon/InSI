@@ -41,6 +41,11 @@ stack = dbstack();
 called_file = stack(2).name;
 index = find(ismember(called_file, '_'), 1, 'first');
 
+NMSE_trigger = false;
+if ~isempty(strfind(called_file, 'Estimator'))
+    NMSE_trigger = true;
+end
+
 % Output types: 1: SER
 %               2: BER 
 %               3: MSE Signal 
@@ -131,6 +136,16 @@ switch Output_type
         h      = varargin{1};       % Generated channel
         h_est  = varargin{2};       % Estimated channel
 
+        %% NMSE for new proposed algorithms
+
+        if NMSE_trigger
+            h = h.';
+            ER = 1 - (abs(h'*h_est)^2/(norm(h)*norm(h_est))^2);
+            return
+        end
+
+        %% MSE Channel for old algorithms
+
         if (nargin == 6)
             h      = h(:);
             ER = 10*log10(norm(h-h_est)^2);
@@ -146,6 +161,7 @@ switch Output_type
 
         ER     = sum(abs((h_est - h_tmp).^2));
         ER     = 10*log10(ER);
+
 end
 
 end

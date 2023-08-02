@@ -62,6 +62,10 @@ switch (mode)
                 break;
             end
         end
+        if Output_type == 4
+            Output_type = 1;
+        end
+
         if strcmp(get(handles.btngroup, 'Visible'), 'off')
             Output_type = 5;
         end
@@ -180,6 +184,13 @@ results.figparams.data(results.figparams.count).y = Err;
 
 % Load figure title
 results.figparams.title{end+1} = load_title(algo);
+
+for i=1:4
+    if get(eval(strcat('handles.output', num2str(i))), 'Value') == 1 
+        Output_type  = i;
+        break;
+    end
+end
 
 switch mode
     case 'CRB_Mode'
