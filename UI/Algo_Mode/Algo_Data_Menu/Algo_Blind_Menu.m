@@ -219,6 +219,16 @@ function Op_1_Callback(hObject, eventdata, handles)
 
     input_data(hObject);
 
+    
+    if (strcmp(get(hObject, 'Style'), 'togglebutton'))
+        value = get(hObject, 'Value');
+        if value == 1
+            set(hObject, 'String', 'on');
+        else
+            set(hObject, 'String', 'off');
+        end
+    end
+
 
 % --- Executes during object creation, after setting all properties.
 function Op_2_CreateFcn(hObject, eventdata, handles)
@@ -240,6 +250,16 @@ function Op_2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
     input_data(hObject);
+
+    
+    if (strcmp(get(hObject, 'Style'), 'togglebutton'))
+        value = get(hObject, 'Value');
+        if value == 1
+            set(hObject, 'String', 'on');
+        else
+            set(hObject, 'String', 'off');
+        end
+    end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -263,6 +283,16 @@ function Op_3_Callback(hObject, eventdata, handles)
 
     input_data(hObject);
 
+    
+    if (strcmp(get(hObject, 'Style'), 'togglebutton'))
+        value = get(hObject, 'Value');
+        if value == 1
+            set(hObject, 'String', 'on');
+        else
+            set(hObject, 'String', 'off');
+        end
+    end
+
 
 % --- Executes during object creation, after setting all properties.
 function Op_4_CreateFcn(hObject, eventdata, handles)
@@ -284,6 +314,16 @@ function Op_4_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
     input_data(hObject);
+
+    
+    if (strcmp(get(hObject, 'Style'), 'togglebutton'))
+        value = get(hObject, 'Value');
+        if value == 1
+            set(hObject, 'String', 'on');
+        else
+            set(hObject, 'String', 'off');
+        end
+    end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -307,6 +347,16 @@ function Op_5_Callback(hObject, eventdata, handles)
 
     input_data(hObject);
 
+    
+    if (strcmp(get(hObject, 'Style'), 'togglebutton'))
+        value = get(hObject, 'Value');
+        if value == 1
+            set(hObject, 'String', 'on');
+        else
+            set(hObject, 'String', 'off');
+        end
+    end
+
 
 % --- Executes during object creation, after setting all properties.
 function Op_6_CreateFcn(hObject, eventdata, handles)
@@ -328,6 +378,16 @@ function Op_6_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
     input_data(hObject);
+
+    
+    if (strcmp(get(hObject, 'Style'), 'togglebutton'))
+        value = get(hObject, 'Value');
+        if value == 1
+            set(hObject, 'String', 'on');
+        else
+            set(hObject, 'String', 'off');
+        end
+    end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -351,6 +411,16 @@ function Op_7_Callback(hObject, eventdata, handles)
 
     input_data(hObject);
 
+    
+    if (strcmp(get(hObject, 'Style'), 'togglebutton'))
+        value = get(hObject, 'Value');
+        if value == 1
+            set(hObject, 'String', 'on');
+        else
+            set(hObject, 'String', 'off');
+        end
+    end
+
 
 % --- Executes during object creation, after setting all properties.
 function Op_8_CreateFcn(hObject, eventdata, handles)
@@ -372,6 +442,16 @@ function Op_8_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
     input_data(hObject);
+
+    
+    if (strcmp(get(hObject, 'Style'), 'togglebutton'))
+        value = get(hObject, 'Value');
+        if value == 1
+            set(hObject, 'String', 'on');
+        else
+            set(hObject, 'String', 'off');
+        end
+    end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -395,6 +475,16 @@ function Op_9_Callback(hObject, eventdata, handles)
 
     input_data(hObject);
 
+    
+    if (strcmp(get(hObject, 'Style'), 'togglebutton'))
+        value = get(hObject, 'Value');
+        if value == 1
+            set(hObject, 'String', 'on');
+        else
+            set(hObject, 'String', 'off');
+        end
+    end
+
 
 % --- Executes during object creation, after setting all properties.
 function Op_10_CreateFcn(hObject, eventdata, handles)
@@ -409,12 +499,23 @@ function Op_10_CreateFcn(hObject, eventdata, handles)
     set(hObject, 'FontUnits','normalized');
     set(hObject, 'FontSize', 0.6639292159062649);
 
+
 function Op_10_Callback(hObject, eventdata, handles)
 % hObject    handle to Op_10 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
     input_data(hObject);
+    
+    if (strcmp(get(hObject, 'Style'), 'togglebutton'))
+        value = get(hObject, 'Value');
+        if value == 1
+            set(hObject, 'String', 'on');
+        else
+            set(hObject, 'String', 'off');
+        end
+    end
+
     
 % --- Executes during object creation, after setting all properties.
 function Monte_CreateFcn(hObject, eventdata, handles)

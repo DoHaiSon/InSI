@@ -122,8 +122,12 @@ for i=1:params.num_params
             set(eval(strcat('handles.Op_', num2str(i))), 'Value', params.default_values{i});
         case 3
             set(eval(strcat('handles.Op_', num2str(i))), 'Style', 'togglebutton');
-            set(eval(strcat('handles.Op_', num2str(i))), 'String', 'Toggle');
             set(eval(strcat('handles.Op_', num2str(i))), 'Value', params.default_values{i});
+            if params.default_values{i} == 1
+                set(eval(strcat('handles.Op_', num2str(i))), 'String', 'on');
+            else
+                set(eval(strcat('handles.Op_', num2str(i))), 'String', 'off');
+            end
     end
 end
 
