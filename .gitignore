@@ -1,4 +1,5 @@
 /codegen/*
 *.asv
 *.txt
+*.mat
 __pycache__/

@@ -192,6 +192,14 @@ switch (mode)
             set(eval(strcat('handles.output', num2str(params.default_output))), 'Value', 1);
         catch
         end
+
+        if (strcmp(param_file_name, 'Demo_CRB_Beacons_settings_params'))
+            set(handles.Monte, 'Visible', 'off');
+            set(handles.Monte_text, 'Visible', 'off');
+            set(handles.SNR, 'Visible', 'off');
+            set(handles.SNR_text, 'Visible', 'off');
+            set(handles.dB_text, 'Visible', 'off');
+        end
 end
 
 end
