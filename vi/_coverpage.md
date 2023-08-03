@@ -9,4 +9,4 @@
 <img class="dashboard" src="./assets/img/Intro.png">
 
 [Bắt đầu](README.md)
-[Tải về](https://github.com/DoHaiSon/InSI/archive/refs/heads/master.zip)
+[Tải về](https://github.com/avitech-vnu/InSI/archive/refs/heads/master.zip)

@@ -64,15 +64,15 @@ Figure 3. InSI dashboard.
 
 Corresponding to the Modes, the toolbox will show the user a dashboard as shown in Figure 3. This dashboard is divided into five areas as follows:
 
-1. **Menu bar**: this function bar provides small functions such as figure options, select fonts, font size, or help of toolbox. For example, figure options: the user can switch between holding on all results inside a figure or plotting each result inside an individual figure. If non of hold on or subplot option is selected, the results are replaced by the newer result in a single figure.
+1. **Menu bar**: this menu bar offers several useful functions, including figure options, font selection, font size adjustment, and toolbox help. For instance, under figure options, users have the flexibility to choose between three options, i.e., either they can retain all results within a single figure by using the "combine" feature, or they can plot each result in its individual figure using "single" or "separate" feature. These futures do the same functions as two MATLAB built-in commands, i.e., *hold on* and *subplot*.
     
-2. **Algorithm's model**: this panel is a dynamic update system model based on the algorithm  in use. Moreover, the system model can also interact with the selecting input parameters.
+2. **Algorithm's model**: this dashboard presents a real-time updated image of the system model, which dynamically reflects the algorithm in use. Additionally, the system model allows interactive interactions with the selected input parameters.
     
 3. **InSI workspace**: the results are not only displayed on the figure but also saved in a separate workspace. In addition, the user can also hide/show the lines on the figure from this workspace.
     
-4. **Select model**: the available algorithms/functions is divided into 3 main groups, i.e., Blind/Semi-blind/Non-blind. 
+4. **Select model**: the available algorithms/functions are divided into five groups, i.e., Non-blind (NB), Blind (B), Simi-blind (SB), Side-information (Side-In), and Informed (Inf).
         
-5. **Switch Mode button**: the users can switch between Performance/Algorithm/Demo MODE by this button if they miss in the first step.
+5. **Switch Mode button**: the users can switch between Performance/Algorithm/Demo mode by this button if they are missed in the first step.
 
 
 ## Input parameters interface
@@ -86,22 +86,23 @@ Figure 4. InSI input parameters menu.
 </b>
 </p>
 
-After selecting the Blind/Semi-blind/Non-blind model in the dashboard interface, the corresponding input parameters GUI will appear as illustrated in Figure 4. This GUI is divided into five areas as follows:
+After selecting the NB / B / SB / Side-In / Inf in the Dashboard interface, the corresponding input parameters GUI will appear as illustrated in Figure 4. This GUI is divided into five areas as follows:
 
-1. **Methods**:  the box on top is the name of the algorithm and the box below is the versions corresponding to the selected algorithm.
+1. **Algorithm**: the top box displays the name of the algorithm, while the box below indicates the version corresponding to the selected algorithm. For instance, it could be Gradient (Grad) version of CMA algorithm.
     
 2. **Parameters**: based on the algorithm and version, pre-defined parameters are displayed in the "Params area". These parameters can appear as a drop-list for the user to select or a box for the user to enter from the keyboard. When the user selects/modifies the value boxes, the dashboard GUI interacts to illustrate that parameter on the algorithm's model. The maximum number of the input parameters is 10.
     
-3. **Output types**: the user can choose the type of output (i.e., Symbol error rate (SER), Bit error rate (BER), Mean Square Error Signal (MSE Sig), and Mean Square Error Channel (MSE H)).
+3. **Output types**: the user can choose the type of algorithm's output, i.e., Bit error rate (BER), Symbol error rate (SER), Mean square error signal (MSE Sig), and Mean square error channel (MSE Ch).
     
-4. **Execute button**: this button collects all parameters in the Input parameters interface and sends them to the back-end algorithm for processing.
+4. **Execute button**: the function of execute button is to collect all parameters in the Input parameters area and transmit them to the back-end algorithm for further processing.
 
-5. **Help button**: this button opens the help document of the selected algorithm.
+5. **Help button**: this button opens the document of the selected algorithm. The help dialog box not only displays the contents similar to the help command but also provides users with the option to directly access the original paper of the algorithm.
 
 ## Output interface
 
-<p style="text-align-last: center">
-<img src="./assets/img/InSI_output.png" width=40%>
+<p float="left" style="text-align-last: center">
+  <img src="./assets/img/InSI_output.png" width=40%/>
+  <img src="./assets/img/InSI_output_subplot.png" style="margin-left:10%" width=44%/>
 </p>
 <p style="text-align-last: center">
 <b>
@@ -122,6 +123,6 @@ Figure 6. InSI modtool.
 </b>
 </p>
 
-InSI\_modtool is our small utility to create user-defined algorithms. This utility is divided into two steps as shown in Figure 6. At the first step as shown in the left hand side figure, user selects the mode, model, and defines algorithm name. After that, the user defines one by one of parameters in the second step as shown in the right hand side figure. The output of this utility is a folder containing the template of algorithm code, system model, and parameters file.
+InSI\_modtool is a utility we have developed to enable users to create their own custom algorithms. This utility is structured into two distinct steps, illustrated in Figure 6. In the first step, as depicted in the left-hand side figure, users select the mode, model, output types, and define the algorithm's name. Following this, in the second step, as shown in the right-hand side figure, users can sequentially define the required parameters. The output of this utility is a folder containing the template of the algorithm's code, system model, and parameters file.
 
 [help]: https://www.mathworks.com/help/matlab/matlab_prog/add-help-for-your-program.html
