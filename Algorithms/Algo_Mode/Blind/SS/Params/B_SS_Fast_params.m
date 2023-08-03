@@ -1,4 +1,4 @@
-classdef B_Fast_SS_params
+classdef B_SS_Fast_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     

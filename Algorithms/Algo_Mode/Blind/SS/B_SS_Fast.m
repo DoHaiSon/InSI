@@ -1,4 +1,4 @@
-function Err = B_Fast_SS(Op, SNR_i, Output_type)
+function Err = B_SS_Fast(Op, SNR_i, Output_type)
 
 %% Fast Subspace
 %
