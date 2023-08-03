@@ -150,10 +150,6 @@ def DivergenceApproximate(x_pool, y_pool, batch_size=None, get_model=None, sr=1,
     return max(-np.min(estimates), 0.0)
 
 
-
-from matplotlib import pyplot as plt
-# from FINE import *
-
 def log(*args, level=0, debug_level=0, **kwargs):
     if level <= debug_level:
         print(*args, **kwargs)
@@ -167,6 +163,7 @@ def aggregate(data, mode):
         return np.mean(data)
     else:
         raise RuntimeError("Not supported aggregation mode")
+
 
 def FINE_BCRB(theta, x, mag_delta=0.15, trial=1, mode='max', train_settings=None, return_BIM=False):
     if train_settings is None:
