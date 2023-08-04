@@ -12,8 +12,8 @@ classdef SB_Misspecified_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 1, 1, 1, 1]
-        values = {3, 2, 5, 4, 2}
-        default_values = {3, 2, 5, 4, 2}
+        values = {2, 3, 5, 4, 2}
+        default_values = {2, 3, 5, 4, 2}
         
         % Default SNR and Monte
         default_Monte = 10

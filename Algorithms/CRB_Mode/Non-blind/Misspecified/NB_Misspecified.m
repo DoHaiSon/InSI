@@ -1,6 +1,6 @@
 function Err = NB_Misspecified (Op, SNR_i, ~)
 
-%% Misspecified Cramer–Rao bound
+%% Misspecified CRB
 %
 %% Input:
     % + 1. N_t: number of transmit antennas

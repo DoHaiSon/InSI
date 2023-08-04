@@ -45,7 +45,7 @@ FL  = F(:,1:L);
 
 %% Signal Generation
 % we use the Zadoff-Chu sequences
-U = 1:2:7;
+U = 1:2:100;
 ZC_p = [];
 for u = 1 : Nt
     for k = 1 : K

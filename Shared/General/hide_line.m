@@ -28,7 +28,7 @@ plot_op = [InSI_ws{:, 1}];
 global results;
 fig =  results.fig;
 
-if (results.mode == 1)
+if (results.mode == 1)      %% Single mode
     pre_plot_op = results.figparams.fig_visible;
     if (sum(plot_op + pre_plot_op) ~= 1)
         plot_op = ~(plot_op == pre_plot_op);
@@ -38,7 +38,7 @@ if (results.mode == 1)
     end
 end
 
-if (results.mode == 2)
+if (results.mode == 2)      %% Combine mode
     ws_output = {InSI_ws{:, 3}};
 
     tmp = {};
@@ -48,7 +48,10 @@ if (results.mode == 2)
         end
     end
 
-    if length(InSI_ws) ~= 3
+    % Check CRB mode or not
+    size_InSI_ws = size(InSI_ws);
+
+    if size_InSI_ws(2) ~= 3
         if (length(unique(tmp)) ~= 1 && ~isempty(unique(tmp)))
             msgbox('Combine figure mode not available in multi output types.');
             for i=1:length(results.figparams.fig_visible)
