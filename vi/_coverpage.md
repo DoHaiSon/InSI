@@ -8,5 +8,5 @@
 
 <img class="dashboard" src="./assets/img/Intro.png">
 
-[Bắt đầu](README.md)
+[Bắt đầu](vi/README.md)
 [Tải về](https://github.com/avitech-vnu/InSI/archive/refs/heads/master.zip)

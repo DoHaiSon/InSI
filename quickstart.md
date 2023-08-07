@@ -34,4 +34,4 @@ $|git clone https://github.com/avitech-vnu/InSI --depth 1
 <img src="./assets/img/Intro.png" width=70%>
 </p>
 
-- According to the approach, the algorithms are divided into five groups, i.e., Non-blind (NB), Blind (B), Simi-blind (SB), Side-information (Side-In), and Informed (Inf). Users then select the model / algorithm and its parameters to execute the simulations. The output is shown up in a standard figure of MATLAB.
+- According to the approach, the algorithms are divided into five groups, i.e., Non-blind (NB), Blind (B), Simi-blind (SB), Side-information (Side-In), and Informed (Inf). Users then select the model / algorithm and its parameters to execute the simulations. The output is shown up in a standard figure of MatLab.

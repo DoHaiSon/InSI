@@ -36,11 +36,11 @@ Figure 1. InSI architecture.
 
 Based on the above specifications, we separated the toolbox architecture into four layers as shown in figure 1.
 
-- **GUI**: when the toolbox is initialized, the user can choose the Mode, i.e., Algorithms, CRB, or Demo. Each Mode corresponds to the dashboard, input parameters, and output interface.
+- **GUI**: when InSI is initialized, users can choose the mode, i.e., Algorithms, Performance, or Demo. Each mode corresponds to the dashboard, input parameters, and output interface. Additionally, InSI\_modtool is our small utility in GUI to create user-defined algorithms.
     
-- **Data**: this layer is a bridge between GUI (user) and Algorithms (back-end). The GUI collects input parameters from UI, then combines them into a pre-defined data structure and sends them to the back-end algorithm. After execution, the output of algorithm functions are values of "x" and "y" axes and they are stored in the data layer. Next, the GUI process "Figure options" from the user. It then gets data from the data layer, and finally displays the result figures.
+- **Data**: this layer is a bridge between GUI (user) and Algorithms (back-end). InSI operates by gathering input variables from the GUI and consolidating them into a predefined data structure, which is then transmitted to the back-end algorithm for processing. After execution, the output of algorithm functions are values of "x" and "y" axis, which are stored in the data layer. Subsequently, the GUI handles "Figure options" specified by the user, retrieves data from the data layer, and ultimately presents the result figures to the user.
     
-- **Algorithms**: Figure 2 presents a dictionary tree of the toolbox. Every algorithm of three Modes is stored in the "Algorithms" folder. They are divided by Mode, model, and each of them is attached with a parameters file. For example, in Figure 2, the function of the CMA algorithm is named "B\_CMA\_adap" stored in the folder Blind Model and Algo Mode. This means this function is a blind channel estimation method, and its version is "adap" which stands for adaptive.
+- **Algorithms**: Figure 2 presents a dictionary tree of InSI. All algorithms of the three modes are stored in the "Algorithms" folder. They are divided by mode and model; each is attached with a parameters file. For example, in Figure 2, the function of the blind approach of fast subspace algorithm is named "B\_SS\_Fast" stored in the folder Blind group and Algo mode. This means this function is a blind channel estimation method, and its version is "Fast", which stands to separate from other subspace algorithm versions.
 
 <p style="text-align-last: center">
 <img src="./assets/img/InSI_dict.png" width=35%>
@@ -64,7 +64,7 @@ Figure 3. InSI dashboard.
 
 Corresponding to the Modes, the toolbox will show the user a dashboard as shown in Figure 3. This dashboard is divided into five areas as follows:
 
-1. **Menu bar**: this menu bar offers several useful functions, including figure options, font selection, font size adjustment, and toolbox help. For instance, under figure options, users have the flexibility to choose between three options, i.e., either they can retain all results within a single figure by using the "combine" feature, or they can plot each result in its individual figure using "single" or "separate" feature. These futures do the same functions as two MATLAB built-in commands, i.e., *hold on* and *subplot*.
+1. **Menu bar**: this menu bar offers several useful functions, including figure options, font selection, font size adjustment, and toolbox help. For instance, under figure options, users have the flexibility to choose between three options, i.e., either they can retain all results within a single figure by using the "combine" feature, or they can plot each result in its individual figure using "single" or "separate" feature. These futures do the same functions as two MatLab built-in commands, i.e., *hold on* and *subplot*.
     
 2. **Algorithm's model**: this dashboard presents a real-time updated image of the system model, which dynamically reflects the algorithm in use. Additionally, the system model allows interactive interactions with the selected input parameters.
     
@@ -72,7 +72,7 @@ Corresponding to the Modes, the toolbox will show the user a dashboard as shown 
     
 4. **Select model**: the available algorithms/functions are divided into five groups, i.e., Non-blind (NB), Blind (B), Simi-blind (SB), Side-information (Side-In), and Informed (Inf).
         
-5. **Switch Mode button**: the users can switch between Performance/Algorithm/Demo mode by this button if they are missed in the first step.
+5. **Switch Mode button**: the users can switch between Performance/Algorithms/Demo mode by this button if they are missed in the first step.
 
 
 ## Input parameters interface

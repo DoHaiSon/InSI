@@ -1,6 +1,6 @@
-# InSI Toolbox Development
+# InSI Development
 
-Welcome to the development page of the InSI toolbox for MatLab! This page provides insights into the ongoing development, updates, and contributions to the toolbox, as well as information for developers who wish to contribute to the project.
+Welcome to the development page of the InSI for MatLab! This page provides insights into the ongoing development, updates, and contributions to the toolbox, as well as information for developers who wish to contribute to the project.
 
 ## How to Contribute
 
@@ -18,7 +18,7 @@ We welcome contributions from the community to improve the functionality, add ne
 
 ## Getting Started with Development
 
-To start contributing to the InSI toolbox, follow these steps:
+To start contributing to the InSI, follow these steps:
 
 1. **Fork the Repository**: Fork the InSI toolbox repository to your GitHub account by clicking the "Fork" button at the top right corner of the [repository page](https://github.com/DoHaiSon/InSI).
 
@@ -43,7 +43,7 @@ InSI>|success| git commit -m "Add my new feature"
 InSI>|success| git push origin my-feature-branch
 ```
 
-7. **Submit a Pull Request**: Finally, submit a pull request from your branch to the main InSI toolbox repository. We will review your changes and provide feedback.
+7. **Submit a Pull Request**: Finally, submit a pull request from your branch to the main InSI repository. We will review your changes and provide feedback.
 
 ## Community and Communication
 
