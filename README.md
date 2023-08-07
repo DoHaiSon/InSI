@@ -37,6 +37,15 @@ This work was supported by the **National Foundation for Science and Technology 
   <img src="https://raw.githubusercontent.com/DoHaiSon/InSI/docs/assets/img/Viettel_VMC.png" width=20% style="margin-left:20%"/>
 </p>
 
-<div class='footer'><div style='display: flex'><div style='flex: 25%; padding: 25px'><a href='https://uet.vnu.edu.vn' target='_blank'><img src='https://raw.githubusercontent.com/DoHaiSon/InSI/docs/assets/img/VNU_UET.png' style='width:10%'></a></div><div style='flex: 25%; padding: 25px'><a href='https://www.univ-orleans.fr/en' target='_blank'><img src='https://raw.githubusercontent.com/DoHaiSon/InSI/docs/assets/img/Orleans.png' style='width:10%'></a></div><div style='flex: 25%; padding: 25px'><a href='https://avitech.uet.vnu.edu.vn/' target='_blank'><img src='https://raw.githubusercontent.com/DoHaiSon/InSI/docs/assets/img/avitech.png' style='width:10%'></a></div><div class='column'><a href='https://www.univ-orleans.fr/en/prisme' target='_blank'><img src='https://raw.githubusercontent.com/DoHaiSon/InSI/docs/assets/img/PRISME.png' style='width:10%'></a></div></div></div>
+## InSI © 2023.
+
+<p style="float: 'left';">
+    <div style="display: flex;">
+            <a href="https://uet.vnu.edu.vn" target="_blank"><img src="https://raw.githubusercontent.com/DoHaiSon/InSI/docs/assets/img/VNU_UET.png" style="width: 10%;" /></a>
+            <a href="https://www.univ-orleans.fr/en" target="_blank"><img src="https://raw.githubusercontent.com/DoHaiSon/InSI/docs/assets/img/Orleans.png" style="width: 10%;" /></a>
+            <a href="https://avitech.uet.vnu.edu.vn/" target="_blank"><img src="https://raw.githubusercontent.com/DoHaiSon/InSI/docs/assets/img/avitech.png" style="width: 10%;" /></a>
+            <a href="https://www.univ-orleans.fr/en/prisme" target="_blank"><img src="https://raw.githubusercontent.com/DoHaiSon/InSI/docs/assets/img/PRISME.png" style="width: 10%;" /></a>
+    </div>
+</p>
 
 [matlab]: http://www.mathworks.com/products/matlab/
