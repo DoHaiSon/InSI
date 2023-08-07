@@ -1,6 +1,6 @@
 function Err = SB_FIR (Op, SNR_i, ~)
 
-%% Semi-Blind Finite Impulse Response
+%% Semi-blind Finite Impulse Response
 %
 %% Input:
     % + 1. Nt: number of transmit antennas

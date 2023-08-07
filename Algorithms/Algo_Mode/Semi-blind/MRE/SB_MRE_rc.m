@@ -1,6 +1,6 @@
 function Err = SB_MRE_rc(Op, SNR_i, Output_type)
 
-%% Semi-Blind Mutually Referenced Filters reduce cost
+%% Semi-blind Mutually Referenced Filters reduce cost
 %
 %% Input:
     % + 1. num_sq: number of sample data

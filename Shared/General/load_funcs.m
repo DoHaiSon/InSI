@@ -198,7 +198,7 @@ end
 results.figparams.gridmode = 'on';
 
 % Random marker
-all_marks = {'o','+','*','.','x','s','d','^','v','>','<','p','h'};
+all_marks = {'o','+','*','x','s','d','^','v','>','<','p','h'};
 results.figparams.marker{end + 1} = ['-' all_marks{randi(length(all_marks))}];
 results.Output_type = Output_type;
 try

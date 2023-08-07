@@ -1,6 +1,6 @@
 function Err = SB_Misspecified (Op, SNR_i, ~)
 
-%% Semi-Blind Misspecified CRB
+%% Semi-blind Misspecified CRB
 %
 %% Input:
     % + 1. N_t: number of transmit antennas

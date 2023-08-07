@@ -1,6 +1,6 @@
 function Err = SB_MRE(Op, SNR_i, Output_type)
 
-%% Semi-Blind Mutually Referenced Filters
+%% Semi-blind Mutually Referenced Filters
 %
 %% Input:
     % + 1. num_sq: number of sample data

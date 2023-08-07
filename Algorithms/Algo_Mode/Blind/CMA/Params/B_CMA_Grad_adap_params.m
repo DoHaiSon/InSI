@@ -13,7 +13,7 @@ classdef B_CMA_Grad_adap_params
         %                        button      = 3
         params_type = [1, 1, 1, 2, 2, 1, 1]
         values = {10000,  4, 4, {'Real', 'Complex', 'Input'}, {'Binary', 'QPSK', '4-QAM'}, 0.01, 20}
-        default_values = {10000, 4, 4, 2, 3, 0.01, 20}
+        default_values = {10000, 4, 4, 2, 2, 0.01, 20}
         
         % Default SNR and Monte
         default_Monte = 10

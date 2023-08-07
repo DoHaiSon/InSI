@@ -1,6 +1,6 @@
 function [SNR, Err] = SB_Specular (Op, Monte, SNR, ~)
 
-%% Semi-Blind Specular / Parametric
+%% Semi-blind Specular / Parametric
 %
 %% Input:
     % + 1. Nt: number of transmit antennas
