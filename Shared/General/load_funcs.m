@@ -319,6 +319,9 @@ switch (mode)
     case 'CRB_Mode'
         toolboxws = [toolboxws; {true, name_ws, datestr(runtime, 'HH:MM:SS')}];
     case 'Demo_Mode'
+        if strcmp(get(handles.btngroup, 'Visible'), 'off')
+            Output_type = 5;
+        end
         toolboxws = [toolboxws; {true, name_ws, all_output_types{Output_type}, datestr(runtime, 'HH:MM:SS')}];
 end
 
