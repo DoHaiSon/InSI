@@ -1,4 +1,4 @@
-classdef Demo_CRB_FINE_params
+classdef Demo_Estimator_Naive_MLE_params
     %Params Summary of this class goes here
     %   Detailed explanation goes here
     
@@ -24,16 +24,15 @@ classdef Demo_CRB_FINE_params
         %                      BER Sig = 2
         %                      MSE Sig = 3
         %                      MSE H   = 4
-%         outputs = [1]
-%         default_output = 1
-        n_outputs = 3
+        outputs = [3]
+        default_output = 3
         
         % Figure
         sys_model = 'CRB_B_FINE.png'
-        title     = {'B-FINE'}
+        title     = {'Naive MLE'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
-        ylabel    = {'SER', 'BER', 'MSE Signal (dB)', 'MSE Channel (dB)', 'CRB'}
-        legends   = {'FINE CRB', 'BCRB', 'ABCRB'}
+        ylabel    = {'SER', 'BER', 'MSE Signal', 'MSE Channel (dB)', 'CRB'}
+        legends   = {'Naive MLE'}
         trigger   = false 
         position
         linewidth = 1

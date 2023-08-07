@@ -12,8 +12,8 @@ classdef NB_Misspecified_params
         %                        popup_menu  = 2
         %                        button      = 3
         params_type = [1, 1, 1, 1, 1, 1]
-        values = {2, 3, 5, 4, 2}
-        default_values = {2, 3, 5, 4, 2}
+        values = {2, 4, 5, 4, 2}
+        default_values = {2, 4, 5, 4, 2}
         
         % Default SNR and Monte
         default_Monte = 10
@@ -22,7 +22,8 @@ classdef NB_Misspecified_params
         % Output
         % Type of the outputs: SER Sig = 1
         %                      BER Sig = 2
-        %                      MSE Cha = 3
+        %                      MSE Sig = 3
+        %                      MSE H   = 4
 %         outputs = [1]
 %         default_output = 1
         

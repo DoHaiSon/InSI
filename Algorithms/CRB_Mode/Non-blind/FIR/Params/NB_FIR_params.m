@@ -22,7 +22,8 @@ classdef NB_FIR_params
         % Output
         % Type of the outputs: SER Sig = 1
         %                      BER Sig = 2
-        %                      MSE Cha = 3
+        %                      MSE Sig = 3
+        %                      MSE H   = 4
 %         outputs = [1]
 %         default_output = 1
         
