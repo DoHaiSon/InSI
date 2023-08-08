@@ -1,0 +1,1 @@
+### Beacons settings

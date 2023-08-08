@@ -1,5 +1,5 @@
 #
-# InSI specifications
+> # **InSI specifications**
 
 Supporting both professional and particular users, this toolbox, thus, is designed for research and development as well as teaching. We target at its easy use and extensive capabilities as follows:
 
@@ -21,7 +21,7 @@ Supporting both professional and particular users, this toolbox, thus, is design
 
 - **MatLab support**: we try to use common built-in functions to support older versions of MatLab as much as possible. Most functions are selected to work with MatLab from the R2006 version. However, we recommend using MatLab versions higher than 2014.
 
-# InSI Graphical User Interface (GUI)
+> # **InSI Graphical User Interface (GUI)**
 
 ## Application architecture
 

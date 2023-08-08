@@ -1,0 +1,1 @@
+### Mô hình kênh truyền có cấu trúc

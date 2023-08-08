@@ -1,2 +1,0 @@
-### Giải thuật Zero forcing 
-

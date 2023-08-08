@@ -17,25 +17,23 @@
 }
 \\ \\
 \State \% Random source: 
-\State $0 \le $~data($N$)~$ \le 3$  
+\State $0 \le $ data($N$) $ \le 3$  
 \State \% Generate symbols: 
 \State $s \leftarrow $ Mod\_type(data) 
 \State \% Generate input signal: 
-\State $X \leftarrow h^T * s + n$ 
+\State $X \leftarrow h^T * s + n$  
 \State \% init CMA estimator 
-\State $W \leftarrow [0, 0, ..., 1, ..., 0]$
+\State $W \leftarrow [0, 0, \ldots, 1, \ldots, 0]$
 \State CM $\leftarrow$ abs($X$(1))
 \For{$k = L:N$}
-    \State $X_k=[X(k) X(k-1) \cdots X(k-L+1)]^{T}$ 
-    \State $Y_k=X_k^T W$ 
-    
-    \State $\tilde{\epsilon} = [|Y_k|^2 - \text{CM}] \cdot Y_k$  
-    \State $W=W-\mu \tilde{\epsilon} X^{*}_k$ 
-    \State $Y = [Y; Y_k]$
+    \State $X_k \leftarrow [X(k), X(k-1), \cdots, X(k-L+1)]^{T}$ 
+    \State $Y_k \leftarrow X_k^T W$  
+    \State $\epsilon \leftarrow [|Y_k|^2 - \text{CM}] \cdot Y_k$  
+    \State $W \leftarrow W-\mu \epsilon X^{*}_k$  
+    \State $Y \leftarrow [Y; Y_k]$
 \EndFor
-
-\State Y\_demod = Demod($Y$)    
-\State padding\_data = data($L$:end) 
+\State Y\_demod $\leftarrow$ Demod($Y$)    
+\State padding\_data $\leftarrow$ data($L$:end)  
 \State Err $\leftarrow$ SER / BER / MSE Sig
 \State \Return Err
 \end{algorithmic}

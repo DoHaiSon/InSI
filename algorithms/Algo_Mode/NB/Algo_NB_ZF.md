@@ -1,4 +1,4 @@
-### Zero forcing algorithm
+### ZF for MIMO communications
 
 $$ 
 E = mc^2

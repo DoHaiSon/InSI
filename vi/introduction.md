@@ -1,5 +1,5 @@
 #
-# Các thông số của InSI
+> # **Các thông số của InSI**
 
 Hỗ trợ cả người dùng chuyên nghiệp và cá nhân, toolbox này được thiết kế cho nghiên cứu và phát triển cũng như giảng dạy. Chúng tôi hướng tới việc dễ sử dụng và khả năng mở rộng bao gồm:
 
@@ -22,7 +22,7 @@ Hỗ trợ cả người dùng chuyên nghiệp và cá nhân, toolbox này đư
 
 - **Hỗ trợ MatLab**: chúng tôi cố gắng sử dụng các hàm tích hợp thông thường để hỗ trợ các phiên bản MatLab cũ càng nhiều càng tốt. Hầu hết các hàm được lựa chọn để hoạt động với MatLab từ phiên bản R2006. Tuy nhiên, chúng tôi đề xuất sử dụng các phiên bản MatLab cao hơn năm 2014.
 
-# Giao diện người dùng đồ họa InSI (GUI)
+> # **Giao diện đồ họa người dùng của InSI (GUI)**
 
 ## Kiến trúc ứng dụng
 

@@ -1,0 +1,1 @@
+### Xác định số lượng và vị trí các beacons

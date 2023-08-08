@@ -1,0 +1,1 @@
+### Mô hình kênh đáp ứng xung hữu hạn (FIR)
