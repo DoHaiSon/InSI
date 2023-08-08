@@ -5,7 +5,7 @@ Một thuật toán lọc kỹ thuật số thích nghi có khả năng bù đ�
 [Giải thuật Constant modulus](../../../../pseudo/Algo_B_CMA_grad.md ':include :type=code algorithm')
 
 <p style="text-align-last: center">
-<img src="../../assets/img/Outputs/InSI_Algo_B_CMA.png">
+<img src="./assets/img/Outputs/InSI_Algo_B_CMA.png">
 </p>
 <p style="text-align-last: center">
 <b>
