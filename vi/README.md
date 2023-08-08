@@ -38,6 +38,6 @@ Công trình này được hỗ trợ bởi **Quỹ Phát triển khoa học và
   <img src="./assets/img/Viettel_VMC.png" class="logo" style="margin-left:10%"/>
 </p>
 
-> Trang web tài liệu được cung cấp bởi [docsify](https://docsify.js.org/)
+> Trang web này được xây dựng dựa trên mã nguồn mở [docsify](https://docsify.js.org/)
 
 [matlab]: http://www.mathworks.com/products/matlab/
