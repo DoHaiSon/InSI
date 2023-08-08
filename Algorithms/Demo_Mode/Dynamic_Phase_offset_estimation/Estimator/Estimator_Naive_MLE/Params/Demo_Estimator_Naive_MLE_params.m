@@ -24,14 +24,14 @@ classdef Demo_Estimator_Naive_MLE_params
         %                      BER Sig = 2
         %                      MSE Sig = 3
         %                      MSE H   = 4
-        outputs = [3]
-        default_output = 3
+        outputs = [4]
+        default_output = 4
         
         % Figure
         sys_model = 'CRB_B_FINE.png'
         title     = {'Naive MLE'}
         xlabel    = {'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)', 'SNR (dB)'}
-        ylabel    = {'SER', 'BER', 'MSE Signal', 'MSE Channel (dB)', 'CRB'}
+        ylabel    = {'SER', 'BER', 'MSE Signal', 'MSE Channel', 'CRB'}
         legends   = {'Naive MLE'}
         trigger   = false 
         position
