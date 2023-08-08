@@ -29,7 +29,7 @@ $$
 
 Algorithm 1 shows the pseudo code of CRB for FIR channel model. Then, Figure 1 represents an example of NB\_FIR on InSI toolbox.
 
-[Finite Impulse Response channel model](../../../../pseudo/CRB_NB_FIR.md ':include :type=code algorithm')
+[Finite Impulse Response channel model](../../../pseudo/CRB_NB_FIR.md ':include :type=code algorithm')
 
 <p style="text-align-last: center">
 <img src="./assets/img/Outputs/InSI_NB_FIR.png">
