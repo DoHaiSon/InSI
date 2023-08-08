@@ -3,7 +3,7 @@
 
 ## Non-blind
 
-- [Zero forcing (ZF)](algorithms/NB_ZF.md)
+- [Zero forcing (ZF)](algorithms/Algo_Mode/NB/Algo_NB_ZF.md)
 
 
 - MMSE
@@ -11,7 +11,7 @@
 
 ## Blind
 
-- CMA
+- [Constant modulus algorithm (CMA)](algorithms/Algo_Mode/B/Algo_B_CMA_grad.md)
 
 - MRE
 

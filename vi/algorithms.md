@@ -3,13 +3,13 @@
 
 ## Không mù
 
-- [Zero forcing (ZF)](vi/algorithms/NB_ZF.md)
+- [Zero forcing (ZF)](vi/algorithms/Algo_Mode/NB/Algo_NB_ZF.md)
 
 - MMSE
 
 ## Mù
 
-- CMA
+- [Constant modulus algorithm (CMA)](vi/algorithms/Algo_Mode/B/Algo_B_CMA_grad.md)
 
 - MRE
 
