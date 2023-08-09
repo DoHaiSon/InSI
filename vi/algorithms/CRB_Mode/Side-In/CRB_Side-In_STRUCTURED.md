@@ -8,7 +8,7 @@ Trong truyền thông, để khôi phục các tín hiệu nguồn một cách c
 </p>
 <p style="text-align-last: center">
 <b>
-Figure 1. Các cấu hình ăng-ten được quan tâm: (a), Mảng thẳng cách đều (ULA); (b), Mảng trụ đồng nhất (UCyA).
+Hình 1. Các cấu hình ăng-ten được quan tâm: (a), Mảng thẳng cách đều (ULA); (b), Mảng trụ đồng nhất (UCyA).
 </b>
 </p>
 
@@ -21,7 +21,7 @@ Trong phần này [Son2023], chúng tôi phân tích ranh giới hiệu suất �
 </p>
 <p style="text-align-last: center">
 <b>
-Figure 1. Đánh giá hiệu năng: Mô hình kênh truyền có cấu trúc.
+Hình 2. Đánh giá hiệu năng: Mô hình kênh truyền có cấu trúc.
 </b>
 </p>
 

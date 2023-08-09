@@ -21,7 +21,7 @@ In this section [Son2023], we analyze the SB channel estimation performance boun
 </p>
 <p style="text-align-last: center">
 <b>
-Figure 1. Performance analysis: Structured channel model.
+Figure 2. Performance analysis: Structured channel model.
 </b>
 </p>
 
