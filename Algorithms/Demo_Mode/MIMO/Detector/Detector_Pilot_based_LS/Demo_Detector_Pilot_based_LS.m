@@ -8,7 +8,7 @@ function Err = Demo_Detector_Pilot_based_LS(Op, SNR_i, Output_type)
     % + 3. Nr: number of receive antennas
     % + 4. M: length of the channel
     % + 5. Ch_type: type of the channel (real, complex,
-    % user' input
+    % user's input)
     % + 6. Mod_type: type of modulation (All)
     % + 7. Np: number of pilot symbols
     % + 8. SNR_i: signal noise ratio

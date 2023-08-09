@@ -8,7 +8,7 @@ function Err = Demo_Estimator_B_EM_Nonlinear(Op, SNR_i, Output_type)
     % + 3. Nr: number of receive antennas
     % + 4. M: length of the channel
     % + 5. Ch_type: type of the channel (real, complex,
-    % user' input
+    % user's input)
     % + 6. Mod_type: type of modulation (All)
     % + 7. Threshold: threshold of EM algorithm
     % + 8. Np: number of pilot symbols

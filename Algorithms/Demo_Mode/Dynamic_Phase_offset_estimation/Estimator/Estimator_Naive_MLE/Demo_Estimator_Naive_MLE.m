@@ -3,7 +3,7 @@ function Err = Demo_Estimator_Naive_MLE (Op, SNR_i, ~)
 %% Naive Maximum Likelihood
 %
 %% Input:
-    % + 1. K: number of Gaussian distribution's dimensionals
+    % + 1. K: block length
     % + 2. data_size: number of sample data
     % + 3. Mod_type: type of modulation (All)
     % + 4. sigma_w: noise variance

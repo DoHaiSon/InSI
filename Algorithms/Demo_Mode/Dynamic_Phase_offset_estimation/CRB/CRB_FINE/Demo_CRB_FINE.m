@@ -3,7 +3,7 @@ function Err = Demo_CRB_FINE (Op, SNR_i, ~)
 %% Fisher Information Neural Estimation
 %
 %% Input:
-    % + 1. K: number of Gaussian distribution's dimensionals
+    % + 1. K: block length
     % + 2. data_size: number of sample data
     % + 3. Mod_type: type of modulation (All)
     % + 4. sigma_w: noise variance

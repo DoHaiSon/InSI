@@ -8,7 +8,7 @@ function Err = B_SS_Fast(Op, SNR_i, Output_type)
     % + 3. Nr: number of RX antennas
     % + 4. N: number of channel's paths 
     % + 5. K: number of OFDM sub carriers
-    % + 6. ChType: type of the channel (real, complex, user's
+    % + 6. Ch_type: type of the channel (real, complex, user's
     % input)
     % + 7. Mod: type of modulation (All)
     % + 8. SNR_i: signal noise ratio

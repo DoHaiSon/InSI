@@ -8,7 +8,7 @@ function Err = NB_MMSE(Op, SNR_i, Output_type)
     % + 3. Nr: number of receive antennas
     % + 4. ChL: length of the channel
     % + 5. Ch_type: type of the channel (real, complex,
-    % user's input
+    % user's input)
     % + 6. Mod_type: type of modulation (All)
     % + 7. SNR_i: signal noise ratio
     % + 8. Output_type: SER / BER / MSE Signal
