@@ -51,7 +51,18 @@ if (results.mode == 2)      %% Combine mode
     % Check CRB mode or not
     size_InSI_ws = size(InSI_ws);
 
-    if size_InSI_ws(2) ~= 3
+    % Check if Demo mode or not
+    demo_trigger = false;
+    try
+        names = InSI_ws{:, 2};
+        if ~isempty(strfind(names, 'Demo'))
+            demo_trigger = true;
+        end
+    catch
+        demo_trigger = false;
+    end
+
+    if size_InSI_ws(2) ~= 3 && ~demo_trigger
         if (length(unique(tmp)) ~= 1 && ~isempty(unique(tmp)))
             msgbox('Combine figure mode not available in multi output types.');
             for i=1:length(results.figparams.fig_visible)

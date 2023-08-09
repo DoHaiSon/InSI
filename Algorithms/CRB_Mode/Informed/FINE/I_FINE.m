@@ -7,8 +7,8 @@ function Err = I_FINE (Op, SNR_i, ~)
     % + 2. data_size: number of sample data
     % + 3. Mod_type: type of modulation (All)
     % + 4. sigma_w: noise variance
-    % + 5. Epochs: number of receive antennas
-    % + 6. lr: length of the channel
+    % + 5. Epochs: number of training epochs
+    % + 6. lr: learning rate
     % + 7. SNR_i: signal noise ratio
 %
 %% Output:

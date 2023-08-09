@@ -15,7 +15,7 @@ function Err = B_SS_Fast(Op, SNR_i, Output_type)
     % + 9. Output_type: MSE Channel
 %
 %% Output:
-    % + 1. Err: Error rate
+    % + 1. Err: MSE Channel
 %
 %% Algorithm:
     % Step 1: Initialize variables

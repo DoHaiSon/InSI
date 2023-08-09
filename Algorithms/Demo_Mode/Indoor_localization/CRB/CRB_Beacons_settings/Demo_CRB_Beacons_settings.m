@@ -3,8 +3,8 @@ function [xaxis, Err] = Demo_CRB_Beacons_settings (Op, ~, ~)
 %% BCRB vs. Beacon settings
 %
 %% Input:
-    % + 1. Epochs: number of receive antennas
-    % + 2. lr: length of the channel
+    % + 1. Epochs: number of training epochs
+    % + 2. lr: learning rate
     % + 3. B1: status on/off of Beacon 1
     % + 4. B2: status on/off of Beacon 2
     % + 5. B3: status on/off of Beacon 3
