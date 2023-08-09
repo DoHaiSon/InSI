@@ -16,21 +16,18 @@
     1. Err: SER / BER / MSE Signal 
 }
 \\ \\
-\State \% Random source: 
-\State $0 \le $ data($N$) $ \le 3$  
-\State \% Generate symbols: 
-\State $s \leftarrow $ Mod\_type(data) 
-\State \% Generate input signal: 
-\State $X \leftarrow h^T * s + n$  
-\State \% init CMA estimator 
-\State $W \leftarrow [0, 0, \ldots, 1, \ldots, 0]$
-\State CM $\leftarrow$ abs($X$(1))
+\State Random source: $0 \le $~data($N$)~$ \le $ Mod\_type   
+\State Generate symbols:  $\mathbf{s} \leftarrow $ Mod\_type(data) 
+\State Generate channel: $\mathbf{h} \leftarrow \text{Generate\_channel(Num\_Ch, ChL, Ch\_type)}$
+\State Generate input signal: $\mathbf{x} \leftarrow \mathbf{h}^T * \mathbf{s} + \mathbf{n}$  
+\State Initialize CMA equalizer: $\mathbf{w} \leftarrow [0, 0, \ldots, 1, \ldots, 0]$
+\State Compute modulus: CM $\leftarrow$ abs($\mathbf{x}$(1))
 \For{$k = L:N$}
-    \State $X_k \leftarrow [X(k), X(k-1), \cdots, X(k-L+1)]^{T}$ 
-    \State $Y_k \leftarrow X_k^T W$  
-    \State $\epsilon \leftarrow [|Y_k|^2 - \text{CM}] \cdot Y_k$  
-    \State $W \leftarrow W-\mu \epsilon X^{*}_k$  
-    \State $Y \leftarrow [Y; Y_k]$
+    \State $\mathbf{x}_k \leftarrow [\mathbf{x}(k), \mathbf{x}(k-1), \cdots, \mathbf{x}(k-L+1)]^{T}$  
+    \State $\mathbf{y}_k \leftarrow \mathbf{x}_k^T \mathbf{w}$  
+    \State $\epsilon \leftarrow [|\mathbf{y}_k|^2 - \text{CM}] \cdot \mathbf{y}_k$  
+    \State $\mathbf{w} \leftarrow \mathbf{w}-\mu \epsilon \mathbf{x}^{*}_k$  
+    \State $\mathbf{y} \leftarrow [\mathbf{y}; \mathbf{y}_k]$
 \EndFor
 \State Y\_demod $\leftarrow$ Demod($Y$)    
 \State padding\_data $\leftarrow$ data($L$:end)  

@@ -18,7 +18,7 @@ Xem hướng dẫn [Bắt đầu nhanh](vi/quickstart.md) để biết thêm chi
 
 - **Chế độ Thuật toán**: dựa trên phân tích hiệu suất trong Chế độ Hiệu suất, một tập hợp các thuật toán hiệu quả được giới thiệu để đạt được mức hiệu suất cao.
 
-- **Chế độ Demo**: một "bằng chứng" để minh họa và xác nhận kết quả thu được cho các hệ thống truyền thông: Ước lượng kênh MIMO-OFDM, Ước lượng lệch pha động, Vị trí trong nhà, v.v.
+- **Chế độ Demo**: một "bằng chứng" để minh họa và xác nhận kết quả thu được cho các hệ thống truyền thông: Ước lượng kênh MIMO-OFDM, Ước lượng lệch pha động, Định vị trong nhà, v.v.
 
 ## Hỗ trợ
 
