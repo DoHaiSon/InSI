@@ -4,20 +4,20 @@ classdef Demo_Estimator_Naive_MLE_params
     
     properties
         % Parameters
-        num_params = 6
-        params = {'Block length', 'Data size', 'Modulation', 'Noise variance', 'Epoch', 'Learning rate'}
-        notations = {'K', 'L', 'Mod', 'sigma_w', 'Epochs', 'lr'}
+        num_params = 4
+        params = {'Block length', 'Data size', 'Modulation', 'Noise variance'}
+        notations = {'K', 'L', 'Mod', 'sigma_w'}
         tooltips = {}
         % Type of the UIControl: edit_text   = 1
         %                        popup_menu  = 2
         %                        button      = 3
-        params_type = [1, 1, 2, 1, 1, 1]
-        values = {2, 50000, {'Binary'}, 0.1, 300, 0.01}
-        default_values = {2, 50000, 1, 0.1, 300, 0.01}
+        params_type = [1, 1, 2, 1]
+        values = {2, 50000, {'Binary'}, 0.1}
+        default_values = {2, 50000, 1, 0.1}
         
         % Default SNR and Monte
         default_Monte = 1
-        default_SNR = '-10:5:20'
+        default_SNR = '5:5:25'
 
         % Output
         % Type of the outputs: SER Sig = 1

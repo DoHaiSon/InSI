@@ -17,7 +17,7 @@ classdef Demo_CRB_FINE_params
         
         % Default SNR and Monte
         default_Monte = 1
-        default_SNR = '-10:5:20'
+        default_SNR = '5:5:25'
 
         % Output
         % Type of the outputs: SER Sig = 1

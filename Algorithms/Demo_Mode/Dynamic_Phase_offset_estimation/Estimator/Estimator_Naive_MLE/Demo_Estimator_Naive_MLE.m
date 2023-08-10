@@ -7,12 +7,10 @@ function Err = Demo_Estimator_Naive_MLE (Op, SNR_i, ~)
     % + 2. data_size: number of sample data
     % + 3. Mod_type: type of modulation (All)
     % + 4. sigma_w: noise variance
-    % + 5. Epochs: number of training epochs
-    % + 6. lr: learning rate
-    % + 7. SNR_i: signal noise ratio
+    % + 5. SNR_i: signal noise ratio
 %
 %% Output:
-    % + 1. Err: CRB
+    % + 1. Err: MSE H
 %
 %% Algorithm:
     % Step 1: Initialize variables
@@ -41,8 +39,6 @@ K          = Op{1};    % K-dimensionals
 data_size  = Op{2};    % Data size
 Mod_type   = Op{3};
 sigma_w    = Op{4};    % sigma_w
-Epochs     = Op{5};    % max epochs
-lr         = Op{6};    % learning-rate 
 
 
 OS_support = {'OS_WINDOWS', 'OS_LINUX'};
@@ -59,7 +55,7 @@ timestamp_id = num2str(round(posixtime(InSI_time)));
 
 modulation = {'Bin', 'QPSK', 'QAM4', 'QAM16'};
 
-[status, ~, Err] = Run_py_script(file_path, timestamp_id, K, data_size, Mod_type, sigma_w, Epochs, lr, SNR_i);
+[status, ~, Err] = Run_py_script(file_path, timestamp_id, K, data_size, Mod_type, sigma_w, SNR_i);
 if status == 1
     return
 end

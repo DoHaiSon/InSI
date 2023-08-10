@@ -260,28 +260,28 @@ if __name__ == "__main__":
     data_size = int(float(args[3]))
     mod = int(args[4])
     sigma_w = float(args[5])
-    epochs = int(args[6])
-    lr = float(args[7])
-    SNR = float(args[8])
+    # epochs = int(args[6])
+    # lr = float(args[7])
+    SNR = float(args[6])
     alphabet = np.array([-1, 1])
 
-    train_settings = {
-        "max_epochs": epochs,
-        "batch_size": 1e5,
-        "sr": 2,
-        "lr": lr,
-        "minor": 1e-5,
-        "get_model": None,
-        "debug": False
-    }
+    # train_settings = {
+    #     "max_epochs": epochs,
+    #     "batch_size": 1e5,
+    #     "sr": 2,
+    #     "lr": lr,
+    #     "minor": 1e-5,
+    #     "get_model": None,
+    #     "debug": False
+    # }
 
-    FINE_settings = {
-        'mag_delta': 0.05,
-        'trial': 1,
-        'mode': 'median',
-        'train_settings': train_settings,
-        'return_BIM': False
-    }
+    # FINE_settings = {
+    #     'mag_delta': 0.05,
+    #     'trial': 1,
+    #     'mode': 'median',
+    #     'train_settings': train_settings,
+    #     'return_BIM': False
+    # }
 
     sigma_n = 1 / np.sqrt(10 ** (SNR / 10))
     sigma_n_square = sigma_n ** 2
