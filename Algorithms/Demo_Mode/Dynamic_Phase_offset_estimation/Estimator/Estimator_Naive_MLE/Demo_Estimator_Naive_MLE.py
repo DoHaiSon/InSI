@@ -315,7 +315,7 @@ if __name__ == "__main__":
         theta[k, :] += theta[k - 1, :]
     
     # Evaluate receive signal
-    y = a * np.exp(-1j * theta) + n
+    y = a * np.exp(1j * theta) + n
     
     # Naive ML estimator
     theta_est = naive_ml_dynamic_phase_offset(y.T, alphabet)
