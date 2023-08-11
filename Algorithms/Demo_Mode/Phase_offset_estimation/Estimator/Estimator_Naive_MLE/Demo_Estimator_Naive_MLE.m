@@ -49,7 +49,7 @@ if ~Check_Installed_pkgs(OS_support, ls_pkgs)
 end
 
 global main_path;
-file_path = fullfile(main_path, 'Algorithms', 'Demo_Mode', 'Dynamic_Phase_offset_estimation', 'Estimator', 'Estimator_Naive_MLE', 'Demo_Estimator_Naive_MLE.py');
+file_path = fullfile(main_path, 'Algorithms', 'Demo_Mode', 'Phase_offset_estimation', 'Estimator', 'Estimator_Naive_MLE', 'Demo_Estimator_Naive_MLE.py');
 global InSI_time;
 timestamp_id = num2str(round(posixtime(InSI_time)));
 
