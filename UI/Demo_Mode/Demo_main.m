@@ -245,8 +245,20 @@ function board_CreateFcn(hObject, eventdata, handles)
     %copy plotted subplots to the gui  
     copyobj(ax, board);
     close(hfig) % close the temporary figure
-
     
+    global Text_handles;
+    try
+        F = findall(0, 'type', 'Text');
+        for i = 1:length(F)
+            if strcmp(F(i).String, 'Demonstrations')
+                Text_handles = F(i);
+            end
+        end
+    catch
+        return
+    end
+
+
 % --- Executes during object creation, after setting all properties.
 function toolbox_ws_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to toolbox_ws (see GCBO)
@@ -540,6 +552,24 @@ function SMbutton_Callback(hObject, eventdata, handles)
     for i_o = length(funcs) + 1:5
         eval(strcat('set(handles.Op', num2str(i_o), '_button, ''Visible'', ''off'') '));
     end
+
+    %% Release  system model according to selected system model
+    cont = '';
+    switch system_models{system_model}
+        case 'Indoor_localization'
+            cont = {'Fisher information neural estimation based wireless communication' 'system planning for warehouse robot localization'};
+        case 'Massive_SIMO'
+            cont = {'On the Gaussian Cramér-Rao Bound for' 'Blind Single-Input Multiple-Output System Identification:' 'Fast and Asymptotic Computations'};
+        case 'MIMO'
+            cont = {'Maximum likelihood based identification' 'for nonlinear multichannel communications systems'};
+        case 'MIMO-OFDM'
+            cont = {'Fast Subspace-based Blind and Semi-Blind' 'Channel Estimation for MIMO-OFDM Systems'};
+        case 'Phase_offset_estimation'
+            cont = {'Fisher information neural estimation' 'based CRB computation for dynamical phase offset estimation'};
+        otherwise
+            cont = 'Demonstrations';
+    end
+    release_dashboard(handles.board, cont);
 
 
 % --- Executes during object creation, after setting all properties.

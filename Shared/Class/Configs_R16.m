@@ -4,6 +4,8 @@ classdef Configs_R16
     
     properties
         UI_container_Menu = 'Label'
+        default_title_font_size = 0.15 % Demonstrations
+        
         max_params = 10
         max_title_dashboard = 45
         max_Op_text = 17
