@@ -1,1 +1,1 @@
-### Semi-blind Mutually Referenced Filters
+### Semi-blind Mutually Referenced Filters reduced cost
