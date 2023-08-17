@@ -4,11 +4,11 @@ The Zero Forcing (ZF) [Kay1993] channel model serves as a linear equalization me
 
 **Algorithm 1** shows the pseudo code of ZF and MMSE algorithms for MIMO communications. Then, **Figure 1** represents a comparison of SER using the two above algorithms in InSI toolbox.
 
-[](../../../../pseudo/Algo_NB_ZF.md ':include :type=code algorithm')
+[](../../../pseudo/Algo_NB_ZF.md ':include :type=code algorithm')
 
 
 <p style="text-align-last: center">
-<img src="../../../assets/img/Outputs/InSI_Algo_NB_ZF.png">
+<img src="./assets/img/Outputs/InSI_Algo_NB_ZF.png">
 </p>
 <p style="text-align-last: center">
 <b>

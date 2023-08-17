@@ -7,7 +7,7 @@ Phương pháp Sai Số Trung Bình Tối Thiểu (MMSE) [Kay1993] là một k�
 [quicksort](../../../../pseudo/Algo_NB_ZF.md ':include :type=code algorithm')
 
 <p style="text-align-last: center">
-<img src="../../../assets/img/Outputs/InSI_Algo_NB_ZF.png">
+<img src="./assets/img/Outputs/InSI_Algo_NB_ZF.png">
 </p>
 <p style="text-align-last: center">
 <b>
