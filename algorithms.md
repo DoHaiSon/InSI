@@ -5,7 +5,7 @@
 
 - [Finite Impulse Response (FIR) channel model](algorithms/CRB_Mode/NB/CRB_NB_FIR.md)
 
-- [Misspecified model](algorithms/CRB_Mode/SB/CRB_NB_MISSPECIFIED.md)
+- [Misspecified model](algorithms/CRB_Mode/SB/CRB_SB_MISSPECIFIED.md)
 
 - Specular channel model
 
