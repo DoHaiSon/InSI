@@ -9,7 +9,7 @@ Trong nghiên cứu [Rekik2023], các tác giả giải quyết thách thức v�
 </p>
 <p style="text-align-last: center">
 <b>
-Figure 1. Nhận dạng hệ thống: Giải thuật ước lượng kênh truyền nhanh sử dụng không gian con tín hiệu.
+Hình 1. Nhận dạng hệ thống: Giải thuật ước lượng kênh truyền nhanh sử dụng không gian con tín hiệu.
 </b>
 </p>
 
