@@ -1,54 +1,54 @@
 #
-> # **Các kỹ thuật phân tích hiệu năng hệ thống sử dụng đường bao Cramer-Rao**
+> # **Performance mode**
 
-## Mô hình sử dụng tín hiệu Pilot (NB)
+## Non-blind (NB)
 
-- [Mô hình kênh đáp ứng xung hữu hạn (FIR)](vi/algorithms/CRB_Mode/NB/CRB_NB_FIR.md)
+- [Finite Impulse Response (FIR) channel model](vi/algorithms/CRB_Mode/NB/CRB_NB_FIR.md)
 
-- [Mô hình Misspecified](vi/algorithms/CRB_Mode/NB/CRB_NB_MISSPECIFIED.md)
+- [Misspecified model](vi/algorithms/CRB_Mode/SB/CRB_NB_MISSPECIFIED.md)
 
-- [Mô hình kênh Specular](vi/algorithms/CRB_Mode/NB/CRB_NB_SPECULAR.md)
+- Specular channel model
 
-## Mô hình xử lý mù (B)
+## Blind (B)
 
-- [Ước lượng nhanh chóng Gaussian CRB cho các hệ thống xử lý mù SIMO](vi/algorithms/CRB_Mode/B/CRB_Fast_GCRB_SIMO.md)
+- [Fast computation of the Gaussian CRB for blind SIMO system identification](vi/algorithms/CRB_Mode/B/CRB_Fast_GCRB_SIMO.md)
 
-## Mô hình xử lý bán mù (SB)
+## Semi-blind (SB)
 
-- [Mô hình kênh đáp ứng xung hữu hạn (FIR)](vi/algorithms/CRB_Mode/SB/CRB_SB_FIR.md)
+- Finite Impulse Response (FIR) channel model
 
-- [Mô hình Misspecified](vi/algorithms/CRB_Mode/SB/CRB_SB_MISSPECIFIED.md)
+- [Misspecified model](vi/algorithms/CRB_Mode/SB/CRB_SB_MISSPECIFIED.md)
 
-- [Mô hình kênh Specular](vi/algorithms/CRB_Mode/SB/CRB_SB_SPECULAR.md)
+- Specular channel model
 
-## Mô hình xử lý sử dụng thông tin bên lề (Side-In)
+## Side-information (Side-In)
 
-- [Mô hình kênh truyền có cấu trúc](vi/algorithms/CRB_Mode/Side-In/CRB_Side-In_STRUCTURED.md)
+- Structured channel model
 
-## Mô hình xử lý sử dụng tri thức mới (Inf)
+## Informed (Inf)
 
-- [Ước lượng thông tin Fisher sử dụng mạng Nơ-ron](vi/algorithms/CRB_Mode/Inf/CRB_Inf_FINE.md)
+- [Fisher Information Neural Estimation](vi/algorithms/CRB_Mode/Inf/CRB_Inf_FINE.md)
 
 
-> # **Các giải thuật ước lượng kênh truyền**
+> # **Algorithms mode**
 
-## Kỹ thuật nhận dạng hệ thống sử dụng tín hiệu Pilot (NB) 
+## Non-blind (NB) 
 
 - Zero forcing (ZF)
 
-    - [ZF cho các hệ MIMO](vi/algorithms/Algo_Mode/NB/Algo_NB_ZF.md)
+    - [ZF for MIMO communications](vi/algorithms/Algo_Mode/NB/Algo_NB_ZF.md)
 
-    - [ZF cho các hệ OFDM](vi/algorithms/Algo_Mode/NB/Algo_NB_ZF-OFDM.md)
+    - [ZF for OFDM](vi/algorithms/Algo_Mode/NB/Algo_NB_ZF-OFDM.md)
 
 - Minimum Mean Square Error (MMSE)
 
-    - [MMSE cho các hệ MIMO](vi/algorithms/Algo_Mode/NB/Algo_NB_MMSE.md)
+    - [MMSE for MIMO communications](vi/algorithms/Algo_Mode/NB/Algo_NB_MMSE.md)
 
-    - [MMSE cho các hệ OFDM](vi/algorithms/Algo_Mode/NB/Algo_NB_MMSE-OFDM.md)
+    - [MMSE for OFDM](vi/algorithms/Algo_Mode/NB/Algo_NB_MMSE-OFDM.md)
 
-## Kỹ thuật nhận dạng hệ thống mù (B)
+## Blind (B)
 
-- Giải thuật Constant modulus (CMA)
+- Constant modulus algorithm (CMA)
 
     - CMA Analytical
 
@@ -64,7 +64,7 @@
 
 - Cross-relations (CR)
 
-    - [CR](vi/algorithms/Algo_Mode/B/Algo_B_CR.md)
+    - CR
 
     - CR Minimum
 
@@ -72,9 +72,9 @@
 
     - CR Unbiased
 
-- Không gian con kênh truyền (CS)
+- Channel subspace (CS)
 
-    - [CS](vi/algorithms/Algo_Mode/B/Algo_B_CS.md)
+    - CS
 
     - CS LSFBL
 
@@ -88,83 +88,88 @@
 
     - CS SMNS
 
-- [Expectation-Maximization (EM) cho kênh truyền MIMO phi tuyến tính](vi/algorithms/Algo_Mode/B/Algo_B_EM_Non-linear_MIMO.md)
+- [Expectation-Maximization (EM) for Non-linear MIMO communications](vi/algorithms/Algo_Mode/B/Algo_B_EM_Non-linear_MIMO.md)
 
-- [Thông tin Fisher (FI)](vi/algorithms/Algo_Mode/B/Algo_B_FI.md)
+- [Fisher Information (FI)](vi/algorithms/Algo_Mode/B/Algo_B_FI.md)
 
-- [GRDA](vi/algorithms/Algo_Mode/B/Algo_B_GRDA.md)
+- GRDA
     
-- [Linear Prediction (LP)](vi/algorithms/Algo_Mode/B/Algo_B_LP.md)
+- Linear Prediction (LP)
 
-- [Least Squares Smoothing (LSS)](vi/algorithms/Algo_Mode/B/Algo_B_LSS.md)
+- Least Squares Smoothing (LSS)
 
 - Mutually Referenced Filters (MRE)
 
     - MRE Linear
 
-    - [MRE Quadratic](vi/algorithms/Algo_Mode/B/Algo_B_MRE.md)
+    - MRE Quadratic
 
     - MRE Adaptive
 
-- [OP](vi/algorithms/Algo_Mode/B/Algo_B_OP.md)
+- OP
 
-- Không gian con tín hiệu (SS)
+- Singal subspace (SS)
 
-    - [SS](vi/algorithms/Algo_Mode/B/Algo_B_SS.md)
+    - SS
 
     - [SS Fast](vi/algorithms/Algo_Mode/B/Algo_B_SS_Fast.md)
 
-- [Two-step Maximum Likelihood (TSML)](vi/algorithms/Algo_Mode/B/Algo_B_TSML.md)
+- Two-step Maximum Likelihood (TSML)
 
-## Kỹ thuật nhận dạng hệ thống bán mù (SB)
+## Semi-blind (SB)
 
 - Semi-blind Mutually Referenced Filters (SB-MRE)
 
     - [SB-MRE](vi/algorithms/Algo_Mode/SB/Algo_SB_MRE.md)
 
-    - [SB-MRE\_rc](vi/algorithms/Algo_Mode/SB/Algo_SB_MRE_rc.md)
+    - SB-MRE\_rc
 
-- [Expectation-Maximization (EM) cho kênh truyền MIMO phi tuyến tính](vi/algorithms/Algo_Mode/SB/Algo_SB_EM_Non-linear_MIMO.md)
+- [Expectation-Maximization (EM) for Non-linear MIMO communications](vi/algorithms/Algo_Mode/SB/Algo_SB_EM_Non-linear_MIMO.md)
 
-## Kỹ thuật nhận dạng hệ thống sử dụng thông tin bên lề (Side-In)
+## Side-information (Side-In)
 
-- [Iterative Sequential Deep-neural Network cho mô hình kênh truyền có cấu trúc](vi/algorithms/Algo_Mode/Side-In/Algo_Side-In_ISDNN.md)
+- [Iterative Sequential Deep-neural Network for structured channel model](vi/algorithms/Algo_Mode/Side-In/Algo_Side-In_ISDNN.md)
 
-## Kỹ thuật nhận dạng hệ thống sử dụng tri thức mới (Inf)
+## Informed (Inf)
 
-- [Iterative Sequential Deep-neural Network cho mô hình kênh truyền không sử dụng cấu trúc](vi/algorithms/Algo_Mode/Inf/Algo_Inf_ISDNN.md)
+- [Iterative Sequential Deep-neural Network for unstructured channel model](vi/algorithms/Algo_Mode/Inf/Algo_Inf_ISDNN.md)
 
 
-> # **Các mô hình thử nghiệm**
+> # **Demo mode**
 
-## Các hệ thống truyền thông MIMO
+## MIMO communications
 
 - CRB
-    - Pilot-based
+    - [Pilot-based](vi/algorithms/CRB_Mode/NB/CRB_NB_FIR.md)
     - Semi-blind
-- Bộ ước lượng
-    - Least-squares (LS)
-    - B-EM
-    - SB-EM
-- Bộ nhận dạng
-    - Least-squares (LS)
-    - B-EM
-    - SB-EM
+- Estimators
+    - [Least-squares (LS)](vi/algorithms/Algo_Mode/NB/Algo_NB_ZF.md)
+    - [B-EM](vi/algorithms/Algo_Mode/B/Algo_B_EM_Non-linear_MIMO.md)
+    - [SB-EM](vi/algorithms/Algo_Mode/B/Algo_B_EM_Non-linear_MIMO.md)
+- Detectors
+    - [Least-squares (LS)](vi/algorithms/Algo_Mode/NB/Algo_NB_ZF.md)
+    - [B-EM](vi/algorithms/Algo_Mode/B/Algo_B_EM_Non-linear_MIMO.md)
+    - [SB-EM](vi/algorithms/Algo_Mode/B/Algo_B_EM_Non-linear_MIMO.md)
 
-## Các hệ thống truyền thông SIMO-OFDM
-
-- CRB
-    - [Ước lượng nhanh chóng Gaussian CRB cho các hệ thống xử lý mù SIMO](vi/algorithms/CRB_Mode/B/CRB_Fast_GCRB_SIMO.md)
-
-## Định vị trong nhà
+## Massive SIMO communications
 
 - CRB
-    - [Xác định số lượng và vị trí các beacons](vi/algorithms/Demo_Mode/Indoor_Localization/CRB_Indoor_Localization_Beacons.md)
+    - [Fast computation of the Gaussian CRB for blind SIMO system identification](vi/algorithms/CRB_Mode/B/CRB_Fast_GCRB_SIMO.md)
 
-## Ước lượng theo dõi pha động
+## MIMO-OFDM communications
+
+- Estimator 
+    - [Fast subspace](vi/algorithms/Algo_Mode/B/Algo_B_SS_Fast.md)
+
+## Indoor localization
 
 - CRB
-    - [Ước lượng thông tin Fisher sử dụng mạng Nơ-ron](vi/algorithms/CRB_Mode/Inf/CRB_Inf_FINE.md)
+    - [Beacons settings](vi/algorithms/Demo_Mode/Indoor_Localization/CRB_Indoor_Localization_Beacons.md)
 
-- Bộ ước lượng
-    - [Naive Maximum Likelihood](vi/algorithms/Demo_Mode/DPTE/Demo_Naive_MLE.md)
+## Dynamic phase tracking estimation
+
+- CRB
+    - [Fisher Information Neural Estimation](vi/algorithms/CRB_Mode/Inf/CRB_Inf_FINE.md)
+
+- Estimator
+    - [Naive Maximum Likelihood](vi/algorithms/Demo_Mode/DPTE/Demo_DPTE_Naive_MLE.md)

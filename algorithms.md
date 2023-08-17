@@ -5,9 +5,9 @@
 
 - [Finite Impulse Response (FIR) channel model](algorithms/CRB_Mode/NB/CRB_NB_FIR.md)
 
-- [Misspecified model](algorithms/CRB_Mode/NB/CRB_NB_MISSPECIFIED.md)
+- [Misspecified model](algorithms/CRB_Mode/SB/CRB_NB_MISSPECIFIED.md)
 
-- [Specular channel model](algorithms/CRB_Mode/NB/CRB_NB_SPECULAR.md)
+- Specular channel model
 
 ## Blind (B)
 
@@ -15,15 +15,15 @@
 
 ## Semi-blind (SB)
 
-- [Finite Impulse Response (FIR) channel model](algorithms/CRB_Mode/SB/CRB_SB_FIR.md)
+- Finite Impulse Response (FIR) channel model
 
 - [Misspecified model](algorithms/CRB_Mode/SB/CRB_SB_MISSPECIFIED.md)
 
-- [Specular channel model](algorithms/CRB_Mode/SB/CRB_SB_SPECULAR.md)
+- Specular channel model
 
 ## Side-information (Side-In)
 
-- [Structured channel model](algorithms/CRB_Mode/Side-In/CRB_Side-In_STRUCTURED.md)
+- Structured channel model
 
 ## Informed (Inf)
 
@@ -64,7 +64,7 @@
 
 - Cross-relations (CR)
 
-    - [CR](algorithms/Algo_Mode/B/Algo_B_CR.md)
+    - CR
 
     - CR Minimum
 
@@ -74,7 +74,7 @@
 
 - Channel subspace (CS)
 
-    - [CS](algorithms/Algo_Mode/B/Algo_B_CS.md)
+    - CS
 
     - CS LSFBL
 
@@ -92,29 +92,29 @@
 
 - [Fisher Information (FI)](algorithms/Algo_Mode/B/Algo_B_FI.md)
 
-- [GRDA](algorithms/Algo_Mode/B/Algo_B_GRDA.md)
+- GRDA
     
-- [Linear Prediction (LP)](algorithms/Algo_Mode/B/Algo_B_LP.md)
+- Linear Prediction (LP)
 
-- [Least Squares Smoothing (LSS)](algorithms/Algo_Mode/B/Algo_B_LSS.md)
+- Least Squares Smoothing (LSS)
 
 - Mutually Referenced Filters (MRE)
 
     - MRE Linear
 
-    - [MRE Quadratic](algorithms/Algo_Mode/B/Algo_B_MRE.md)
+    - MRE Quadratic
 
     - MRE Adaptive
 
-- [OP](algorithms/Algo_Mode/B/Algo_B_OP.md)
+- OP
 
 - Singal subspace (SS)
 
-    - [SS](algorithms/Algo_Mode/B/Algo_B_SS.md)
+    - SS
 
     - [SS Fast](algorithms/Algo_Mode/B/Algo_B_SS_Fast.md)
 
-- [Two-step Maximum Likelihood (TSML)](algorithms/Algo_Mode/B/Algo_B_TSML.md)
+- Two-step Maximum Likelihood (TSML)
 
 ## Semi-blind (SB)
 
@@ -122,7 +122,7 @@
 
     - [SB-MRE](algorithms/Algo_Mode/SB/Algo_SB_MRE.md)
 
-    - [SB-MRE\_rc](algorithms/Algo_Mode/SB/Algo_SB_MRE_rc.md)
+    - SB-MRE\_rc
 
 - [Expectation-Maximization (EM) for Non-linear MIMO communications](algorithms/Algo_Mode/SB/Algo_SB_EM_Non-linear_MIMO.md)
 
@@ -140,21 +140,26 @@
 ## MIMO communications
 
 - CRB
-    - Pilot-based
+    - [Pilot-based](algorithms/CRB_Mode/NB/CRB_NB_FIR.md)
     - Semi-blind
 - Estimators
-    - Least-squares (LS)
-    - B-EM
-    - SB-EM
+    - [Least-squares (LS)](algorithms/Algo_Mode/NB/Algo_NB_ZF.md)
+    - [B-EM](algorithms/Algo_Mode/B/Algo_B_EM_Non-linear_MIMO.md)
+    - [SB-EM](algorithms/Algo_Mode/B/Algo_B_EM_Non-linear_MIMO.md)
 - Detectors
-    - Least-squares (LS)
-    - B-EM
-    - SB-EM
+    - [Least-squares (LS)](algorithms/Algo_Mode/NB/Algo_NB_ZF.md)
+    - [B-EM](algorithms/Algo_Mode/B/Algo_B_EM_Non-linear_MIMO.md)
+    - [SB-EM](algorithms/Algo_Mode/B/Algo_B_EM_Non-linear_MIMO.md)
 
-## SIMO-OFDM communications
+## Massive SIMO communications
 
 - CRB
     - [Fast computation of the Gaussian CRB for blind SIMO system identification](algorithms/CRB_Mode/B/CRB_Fast_GCRB_SIMO.md)
+
+## MIMO-OFDM communications
+
+- Estimator 
+    - [Fast subspace](algorithms/Algo_Mode/B/Algo_B_SS_Fast.md)
 
 ## Indoor localization
 
@@ -167,4 +172,4 @@
     - [Fisher Information Neural Estimation](algorithms/CRB_Mode/Inf/CRB_Inf_FINE.md)
 
 - Estimator
-    - [Naive Maximum Likelihood](algorithms/Demo_Mode/DPTE/Demo_Naive_MLE.md)
+    - [Naive Maximum Likelihood](algorithms/Demo_Mode/DPTE/Demo_DPTE_Naive_MLE.md)
