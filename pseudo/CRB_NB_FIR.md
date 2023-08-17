@@ -18,11 +18,16 @@
 \State FL $\leftarrow$ F(:,1:$L$)
 \State N\_total $\leftarrow$ 4
 \State N\_pilot $\leftarrow$ 2
+
 \State sigmav2 $\leftarrow 10^{(-\text{SNR\_i}/10)}$
 \State X\_nga $\leftarrow$ eye(Nr) $\otimes$ X
-\State Iop $\leftarrow$ X\_nga$^H$ * X\_nga / sigmav2
-\State Iop\_f $\leftarrow$ N\_total * Iop
-\State Err $\leftarrow$ abs(trace(Iop\_f$^\#$))
+
+\State Compute FIM per pilot symbol: FIM\_p $\leftarrow$ X\_nga$^H$ * X\_nga / sigmav2
+
+\State Compute full FIM: FIM $\leftarrow$ N\_total * FIM\_p
+ 
+\State Compute CRB: Err $\leftarrow$ abs(trace(FIM$^{-1}$))
+\\
 \State \Return Err
 \end{algorithmic}
 \end{algorithm}

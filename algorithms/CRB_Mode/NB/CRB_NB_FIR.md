@@ -27,7 +27,7 @@ $$
     \mathbf{J}_{\boldsymbol{\Theta} \boldsymbol{\Theta}}^{p_{i}}=\frac{\mathbf{x}(i)^{H} \mathbf{x}(i)}{\sigma_{\mathbf{v}}^{2}}
 $$
 
-Algorithm 1 shows the pseudo code of CRB for FIR channel model. Then, Figure 1 represents an example of NB\_FIR on InSI toolbox.
+**Algorithm 1** shows the pseudo code of CRB for FIR channel model. Then, **Figure 1** represents an example of NB\_FIR in InSI toolbox.
 
 [Finite Impulse Response channel model](../../../pseudo/CRB_NB_FIR.md ':include :type=code algorithm')
 

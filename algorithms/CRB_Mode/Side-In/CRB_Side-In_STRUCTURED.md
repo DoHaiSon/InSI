@@ -12,7 +12,7 @@ Figure 1. Geometric antenna structures: (a), Uniform Linear Array (ULA); (b), Un
 </b>
 </p>
 
-In this section [Son2023], we analyze the SB channel estimation performance bound in 3D-massive MIMO array geometries. For the SB method, besides the pilots part, the data symbols are assumed to be i.i.d and known statistical. The performances of systems are measured by CRB [Ladaycia2017] for two antenna array structures, i.e., Uniform Linear Array (ULA) and Uniform Cylindrical Array (UCyA) as shown in Figure 1. From the simulation results, the UCyA outperforms the traditional ULA array regarding SNR and the number of elements in arrays. Algorithm 1 shows the pseudo code of CRB for structured channel model. Then, Figure 2 represents a comparison of CRB for the structured channel model using ULA and UCyA antenna configurations on InSI toolbox.
+In this section [Son2023], we analyze the SB channel estimation performance bound in 3D-massive MIMO array geometries. For the SB method, besides the pilots part, the data symbols are assumed to be i.i.d and known statistical. The performances of systems are measured by CRB [Ladaycia2017] for two antenna array structures, i.e., Uniform Linear Array (ULA) and Uniform Cylindrical Array (UCyA) as shown in **Figure 1**. From the simulation results, the UCyA outperforms the traditional ULA array regarding SNR and the number of elements in arrays. **Algorithm 1** shows the pseudo code of CRB for structured channel model. Then, **Figure 2** represents a comparison of CRB for the structured channel model using ULA and UCyA antenna configurations in InSI toolbox.
 
 [CRB for structured channel model](../../../pseudo/CRB_SI_Structured.md ':include :type=code algorithm')
 

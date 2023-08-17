@@ -27,7 +27,7 @@ $$
     \mathbf{J}_{\boldsymbol{\Theta} \boldsymbol{\Theta}}^{p_{i}}=\frac{\mathbf{x}(i)^{H} \mathbf{x}(i)}{\sigma_{\mathbf{v}}^{2}}
 $$
 
-Thuật toán 1 hiển thị mã giả cho mô hình kênh FIR. Sau đó, Hình 1 mô tả một ví dụ về NB\_FIR trên công cụ InSI.
+**Algorithm 1** là mã giả cho mô hình kênh FIR. Sau đó, **Hình 1** mô tả một ví dụ về NB\_FIR trên công cụ InSI.
 
 [Mô hình kênh Finite Impulse Response](../../../../pseudo/CRB_NB_FIR.md ':include :type=code algorithm')
 
@@ -36,7 +36,7 @@ Thuật toán 1 hiển thị mã giả cho mô hình kênh FIR. Sau đó, Hình 
 </p>
 <p style="text-align-last: center">
 <b>
-Hình 1. Đánh giá hiệu năng: Mô hình kênh Finite Impulse Response.
+Hình 1. Đánh giá hiệu năng: Mô hình kênh đáp ứng xung hữu hạn.
 </b>
 </p>
 

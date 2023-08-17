@@ -12,7 +12,7 @@ Hình 1. Các cấu hình ăng-ten được quan tâm: (a), Mảng thẳng cách
 </b>
 </p>
 
-Trong phần này [Son2023], chúng tôi phân tích ranh giới hiệu suất ước tính kênh bán mù trong các hình học mảng MIMO ba chiều. Đối với phương pháp bán mù, ngoài phần ký hiệu định vị, các ký hiệu dữ liệu được cho là độc lập và có thống kê biết trước. Hiệu suất của hệ thống được đo bằng CRB [Ladaycia2017] cho hai cấu trúc mảng ăng-ten, tức là Mảng Tuyến Tính Đồng Đều (ULA) và Mảng Trụ Đồng Đều (UCyA) như được thể hiện trong Hình 1. Từ kết quả mô phỏng, Mảng UCyA vượt trội hơn so với mảng ULA truyền thống liên quan đến SNR và số lượng phần tử trong mảng. Thuật toán 1 hiển thị mã giả cho mô hình kênh cấu trúc. Sau đó, Hình 2 thể hiện so sánh của CRB cho mô hình kênh cấu trúc sử dụng cấu hình ăng-ten ULA và UCyA trên công cụ InSI.
+Trong phần này [Son2023], chúng tôi phân tích ranh giới hiệu suất ước tính kênh bán mù trong các hình học mảng MIMO ba chiều. Đối với phương pháp bán mù, ngoài phần ký hiệu định vị, các ký hiệu dữ liệu được cho là độc lập và có thống kê biết trước. Hiệu suất của hệ thống được đo bằng CRB [Ladaycia2017] cho hai cấu trúc mảng ăng-ten, tức là Mảng Tuyến Tính Đồng Đều (ULA) và Mảng Trụ Đồng Đều (UCyA) như được thể hiện trong **Hình 1**. Từ kết quả mô phỏng, Mảng UCyA vượt trội hơn so với mảng ULA truyền thống liên quan đến SNR và số lượng phần tử trong mảng. **Algorithm 1** hiển thị mã giả cho mô hình kênh cấu trúc. Sau đó, **Hình 2** thể hiện so sánh của CRB cho mô hình kênh cấu trúc sử dụng cấu hình ăng-ten ULA và UCyA trên công cụ InSI.
 
 [CRB for structured channel model](../../../../pseudo/CRB_SI_Structured.md ':include :type=code algorithm')
 

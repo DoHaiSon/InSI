@@ -1,5 +1,5 @@
 \begin{algorithm}
-\caption{Constant modulus algorithm}
+\caption{Algorithms mode: Constant modulus algorithm}
 \begin{algorithmic}
 \Require{ \\
     1. $N$: number of samples \\
@@ -16,7 +16,7 @@
     1. Err: SER / BER / MSE Signal 
 }
 \\ \\
-\State Random source: $0 \le $~data($N$)~$ \le $ Mod\_type   
+\State Random source: $0 \le $ data($N$) $ \le $ Mod\_type   
 \State Generate symbols:  $\mathbf{s} \leftarrow $ Mod\_type(data) 
 \State Generate channel: $\mathbf{h} \leftarrow \text{Generate\_channel(Num\_Ch, ChL, Ch\_type)}$
 \State Generate input signal: $\mathbf{x} \leftarrow \mathbf{h}^T * \mathbf{s} + \mathbf{n}$  
@@ -29,9 +29,9 @@
     \State $\mathbf{w} \leftarrow \mathbf{w}-\mu \epsilon \mathbf{x}^{*}_k$  
     \State $\mathbf{y} \leftarrow [\mathbf{y}; \mathbf{y}_k]$
 \EndFor
-\State Y\_demod $\leftarrow$ Demod($Y$)    
+\State $\mathbf{y}$\_demod $\leftarrow$ Demod($\mathbf{y}$)    
 \State padding\_data $\leftarrow$ data($L$:end)  
-\State Err $\leftarrow$ SER / BER / MSE Sig
+\State Compute SER / BER / MSE Sig: Err $\leftarrow$ Err\_func(y\_demod, padding\_data, Output\_type)
 \State \Return Err
 \end{algorithmic}
 \end{algorithm}
