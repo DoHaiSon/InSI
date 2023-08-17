@@ -9,7 +9,7 @@ In [Thanh2021], we derive performance lower bounds for semi-blind channel estima
 </p>
 <p style="text-align-last: center">
 <b>
-Figure 1. InSI Algorithms mode: CRB for Misspecified model.
+Figure 1. Performance analysis: CRB for Misspecified model.
 </b>
 </p>
 

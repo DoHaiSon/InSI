@@ -9,7 +9,7 @@ In [Mohamed2020], the authors explore blind system identification in single-inpu
 </p>
 <p style="text-align-last: center">
 <b>
-Figure 1. InSI Algorithms mode: Fast computation of the GCRB for blind SIMO system identification.
+Figure 1. Performance analysis: FINE.
 </b>
 </p>
 
