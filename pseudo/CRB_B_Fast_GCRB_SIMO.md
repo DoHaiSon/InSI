@@ -12,7 +12,14 @@
 }
 \\
 \State Generate the system for each output $i = 1,\cdots, Nr$: $x_i[n]=\sum_{l=0}^L h_i[l] s[n-l]+w_i[n], \quad n=0, \ldots, N-1$
-\State Generate channel in the form of Sylvester matrix: $\mathbf{H}_i$
+\State Generate channel in the form of Sylvester matrix: \\  \\
+$\mathbf{H}_i \leftarrow \left[\begin{array}{ccccc}
+h_i[0] & & & & 0 \\
+\vdots & \ddots & & & \\
+h_i[L] & & h_i(0) & & \\
+& \ddots & & \ddots & \\
+0 & & h_i[L] & \cdots & h_i[0]
+\end{array}\right]_{N \times N}$ \\ \\
 \State Variance of $\mathbf{s}$: sigma2\_s $\leftarrow 1$
 \State Variance of $\mathbf{w}$: sigma2\_noise $\leftarrow \text{sigma2\_s}/10^{(\text{SNR\_i}/10)}$
 \State Compute approximate FIM: h\_i $\leftarrow$ H\_columns(:, i)$^T$

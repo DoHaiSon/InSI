@@ -1,1 +1,1 @@
-### Misspecified model
+### Specular model
