@@ -126,6 +126,8 @@
 
 - [Expectation-Maximization (EM) for Non-linear MIMO communications](vi/algorithms/Algo_Mode/SB/Algo_SB_EM_Non-linear_MIMO.md)
 
+- Semi-blind Fast Subspace (SB-SS Fast)
+
 ## Side-information (Side-In)
 
 - [Iterative Sequential Deep-neural Network for structured channel model](vi/algorithms/Algo_Mode/Side-In/Algo_Side-In_ISDNN.md)
@@ -159,7 +161,9 @@
 ## MIMO-OFDM communications
 
 - Estimator 
-    - [Fast subspace](vi/algorithms/Algo_Mode/B/Algo_B_SS_Fast.md)
+    - [Blind Fast subspace](vi/algorithms/Algo_Mode/B/Algo_B_SS_Fast.md)
+
+    - Semi-blind Fast subspace
 
 ## Indoor localization
 
