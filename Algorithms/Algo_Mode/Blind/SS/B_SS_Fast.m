@@ -29,8 +29,8 @@ function Err = B_SS_Fast(Op, SNR_i, Output_type)
     % Step 6: Return 
 %
 % Ref: Ouahbi Rekik, Bui Minh Tuan, Karim Abed-Meraim, and Nguyen
-% Linh Trung, "Fast Subspace-based Blind Channel Identification 
-% for MIMO-OFDM Communications Systems," 2023.
+% Linh Trung, "Fast Subspace-based Blind and Semi-Blind Channel 
+% Estimation for MIMO-OFDM Systems," 2023.
 %
 %% Require R2006A
 
