@@ -559,7 +559,7 @@ function SMbutton_Callback(hObject, eventdata, handles)
         case 'Indoor_localization'
             cont = {'Fisher information neural estimation based wireless communication' 'system planning for warehouse robot localization'};
         case 'Massive_SIMO'
-            cont = {'On the Gaussian Cramér-Rao Bound for' 'Blind Single-Input Multiple-Output System Identification:' 'Fast and Asymptotic Computations'};
+            cont = {'On the Gaussian Cramer-Rao Bound for' 'Blind Single-Input Multiple-Output System Identification:' 'Fast and Asymptotic Computations'};
         case 'MIMO'
             cont = {'Maximum likelihood based identification' 'for nonlinear multichannel communications systems'};
         case 'MIMO-OFDM'
@@ -569,7 +569,7 @@ function SMbutton_Callback(hObject, eventdata, handles)
         otherwise
             cont = 'Demonstrations';
     end
-    release_dashboard(handles.board, cont);
+    release_dashboard(handles, cont);
 
 
 % --- Executes during object creation, after setting all properties.
